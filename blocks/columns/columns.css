@@ -407,7 +407,6 @@
 
 
 .columns.columns7 > div {
-  /* Center the block horizontally, add side margin for visual balance */
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -416,8 +415,6 @@
   justify-content: center;
   gap: 0;
   width: 100%;
-
-  /* Remove unwanted centering/vertical spacing */
   min-height: 420px;
   background: var(--background-color, #fff);
 }
@@ -437,7 +434,6 @@
   }
 }
 
-/* LEFT COLUMN: IMAGE */
 .columns.columns7 > div > .columns-img-col {
   flex: 0 1 46%;
   max-width: 46%;
@@ -483,7 +479,6 @@
   }
 }
 
-/* RIGHT COLUMN: CONTENT */
 .columns.columns7 > div > div:not(.columns-img-col) {
   flex: 1 1 54%;
   max-width: 54%;
@@ -506,15 +501,12 @@
   }
 }
 
-/* Each content block (icon+heading+paragraph) as a flex row for icon/heading alignment */
 .columns.columns7 > div > div:not(.columns-img-col) p > picture {
   display: inline-block;
   vertical-align: middle;
   margin-right: 12px;
   width: 22px;
   height: 22px;
-
-  /* Shrink icon to match visual design */
 }
 
 .columns.columns7 > div > div:not(.columns-img-col) p > picture img {
@@ -525,7 +517,6 @@
   vertical-align: middle;
 }
 
-/* Headings and icon on one line for each block */
 .columns.columns7 > div > div:not(.columns-img-col) p + h3 {
   display: inline-block;
   vertical-align: middle;
@@ -534,7 +525,6 @@
   margin-bottom: 0;
 }
 
-/* HEADINGS */
 .columns.columns7 > div > div:not(.columns-img-col) h3 {
   color: #d50072;
   font-size: 1.35rem;
@@ -545,13 +535,11 @@
   font-family: var(--heading-font-family, "Inter", sans-serif);
 }
 
-/* Restore strong color in headings */
 .columns.columns7 > div > div:not(.columns-img-col) h3 strong {
   color: inherit;
   font-weight: inherit;
 }
 
-/* BODY TEXT */
 .columns.columns7 > div > div:not(.columns-img-col) h3 + p,
 .columns.columns7 > div > div:not(.columns-img-col) p:not(:first-child, :has(picture)) {
   color: #333;
@@ -560,7 +548,6 @@
   line-height: 1.5;
 }
 
-/* Remove top margin on first content block, more breathing room after last */
 .columns.columns7 > div > div:not(.columns-img-col) > p:first-child {
   margin-top: 0;
 }
@@ -569,22 +556,164 @@
   margin-bottom: 0;
 }
 
-/* Group icon + heading + body text as a block with margin after */
 .columns.columns7 > div > div:not(.columns-img-col) h3 + p {
   margin-top: 0;
   margin-bottom: 20px;
 }
 
-/* Keep consistent spacing between blocks */
 .columns.columns7 > div > div:not(.columns-img-col) p + h3 + p {
   margin-bottom: 20px;
 }
 
-/* Ensure text is left-aligned */
-
-/* Remove any unwanted background/margins from block itself */
 .columns.columns7 {
   background: transparent;
   margin: 0;
   padding: 0;
+}
+
+
+.columns.columns8 {
+  background: #515258;
+  padding: 28px 0 20px;
+  font-family: Inter, sans-serif;
+  color: #f2f2f2;
+
+  /* Ensure visibility and rendering */
+  display: block;
+  visibility: visible;
+}
+
+.columns.columns8 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (width <= 1100px) {
+  .columns.columns8 > div {
+    gap: 48px;
+  }
+}
+
+@media (width <= 900px) {
+  .columns.columns8 > div {
+    flex-direction: column;
+    gap: 32px;
+    max-width: none;
+  }
+}
+
+.columns.columns8 > div > div {
+  min-width: 160px;
+  max-width: 210px;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.columns.columns8 ul,
+.columns.columns8 ul ul {
+  margin: 0;
+  padding: 0;
+}
+
+.columns.columns8 ul,
+.columns.columns8 li {
+  list-style: none;
+}
+
+.columns.columns8 > div > div > ul > li {
+  color: #d1d1d1;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.columns.columns8 > div > div > ul > li > ul {
+  margin-top: 0;
+}
+
+.columns.columns8 > div > div > ul > li > ul > li {
+  color: #f2f2f2;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+  margin-bottom: 5px;
+  line-height: 1.75;
+}
+
+.columns.columns8 > div > div > ul > li > ul > li:last-child {
+  margin-bottom: 0;
+}
+
+.columns.columns8 a {
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: inherit;
+  font-weight: inherit;
+  transition: color 0.2s;
+}
+
+.columns.columns8 a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* --- SOCIAL ICONS COLUMN FIXES --- */
+.columns.columns8 .columns-img-col > ul > li > ul {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-top: 10px;
+  padding-left: 0;
+  align-items: center;
+}
+
+.columns.columns8 .columns-img-col > ul > li > ul > li {
+  margin-bottom: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.columns.columns8 .columns-img-col picture,
+.columns.columns8 .columns-img-col img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  filter: brightness(5);
+  margin: 0;
+  padding: 0;
+}
+
+@media (width <= 600px) {
+  .columns.columns8 {
+    padding: 14px 0 12px;
+  }
+
+  .columns.columns8 > div > div {
+    max-width: unset;
+    min-width: 0;
+    flex-basis: auto;
+  }
+
+  .columns.columns8 .columns-img-col > ul > li > ul {
+    gap: 8px;
+  }
+}
+
+/* Restore block visibility if accidentally hidden elsewhere */
+.columns.columns8[style*="display:none"],
+.columns.columns8[style*="visibility:hidden"] {
+  display: block !important;
+  visibility: visible !important;
 }
