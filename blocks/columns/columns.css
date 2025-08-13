@@ -790,9 +790,6 @@
 
 
 .columns.columns14 {
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -802,111 +799,106 @@
 .columns.columns14 > div {
   display: flex;
   flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  gap: 32px;
   width: 100%;
-  gap: 40px;
   box-sizing: border-box;
 }
 
-/* Ensure both cards are left-aligned and top-aligned */
 .columns.columns14 > div > div {
   flex: 1 1 0;
   min-width: 0;
-  min-height: 340px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start !important; /* Ensure left alignment even if inherited styles interfere */
+  align-items: flex-start;
   justify-content: flex-start;
   box-sizing: border-box;
-  text-align: left !important;
+  text-align: left;
+  border-radius: 14px;
+  padding: 36px 36px 28px;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 8%);
+  background: transparent;
+  overflow: visible;
 }
 
-/* Left card: gradient */
-.columns.columns14 > div > div:nth-child(1) {
-  background: linear-gradient(135deg, #eb222b 0%, #3a187b 100%);
-  padding: 54px 40px 40px 54px;
+.columns.columns14 > div > div:first-child {
+  background: linear-gradient(135deg, #e60012 0%, #511a86 100%);
+  color: #fff;
 }
 
-/* Right card: light grey */
-.columns.columns14 > div > div:nth-child(2) {
-  background: #f3f2f4;
-  padding: 54px 40px 40px 54px;
+.columns.columns14 > div > div:last-child {
+  background: #f4f4f6;
+  color: #511a86;
 }
 
-/* Headings */
 .columns.columns14 > div > div h2 {
   font-family: var(--heading-font-family);
   font-size: 2rem;
   font-weight: 400;
-  margin: 0 0 6px; /* Reduce space between heading and link for a tighter grouping */
-  text-align: left;
-  line-height: 1.2;
+  margin: 0 0 12px;
+  line-height: 1.15;
+  color: inherit;
 }
 
-/* Heading link colors */
-.columns.columns14 > div > div:nth-child(1) h2 a {
+.columns.columns14 > div > div:first-child h2,
+.columns.columns14 > div > div:first-child h2 a {
   color: #fff;
-  font-weight: 400;
 }
 
-.columns.columns14 > div > div:nth-child(2) h2 a {
-  color: #551ca8;
-  font-weight: 400;
+.columns.columns14 > div > div:last-child h2,
+.columns.columns14 > div > div:last-child h2 a {
+  color: #511a86;
 }
 
-/* Button container */
 .columns.columns14 .button-container {
-  text-align: left;
   margin: 0;
   padding: 0;
+  text-align: left;
 }
 
-/* Link styles - look like text, smaller font */
-.columns.columns14 .button-container .button {
+.columns.columns14 > div > div:first-child .button-container .button {
+  color: #fff;
   background: none;
   border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.4;
+  padding: 0;
+  margin-top: 0;
+  border-radius: 0;
+  box-shadow: none;
   text-align: left;
-  display: inline;
-  cursor: pointer;
-  text-decoration: none;
-  margin: 0;
-  min-width: 0;
-  max-width: 100%;
-  white-space: normal;
-  box-sizing: border-box;
+  line-height: 1.35;
 }
 
-/* Specific colors for each card's link */
-.columns.columns14 > div > div:nth-child(1) .button-container .button {
-  color: #e6e6e6;
+.columns.columns14 > div > div:last-child .button-container .button {
+  color: #e60012;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0;
+  margin-top: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: left;
+  line-height: 1.35;
 }
 
-.columns.columns14 > div > div:nth-child(2) .button-container .button {
-  color: #eb222b;
-}
-
-/* Link hover/focus styles */
 .columns.columns14 .button-container .button:hover,
 .columns.columns14 .button-container .button:focus {
   text-decoration: underline;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* Responsive: stack cards vertically on smaller screens */
 @media (width <= 900px) {
-  .columns.columns14,
   .columns.columns14 > div {
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 
   .columns.columns14 > div > div {
-    min-height: 0;
-    padding: 32px 16px;
+    padding: 18px 10px;
+    border-radius: 12px;
   }
 }
