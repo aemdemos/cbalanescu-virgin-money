@@ -1,8 +1,8 @@
+/* stylelint-disable no-descending-specificity */
 .accordion details {
   border: 1px solid #dadada;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 .accordion details + details {
   margin-top: 24px;
 }
@@ -58,4 +58,133 @@
 .accordion details[open] .accordion-item-body {
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
+}
+
+
+.accordion.accordion13 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #444;
+  background: #fff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Row borders */
+.accordion.accordion13 details {
+  border: none;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  outline: none;
+  position: relative;
+}
+
+.accordion.accordion13 details:last-child {
+  border-bottom: none;
+}
+
+/* Summary row layout and alignment */
+.accordion.accordion13 summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 24px;
+  min-height: 38px;
+  background: none;
+  box-shadow: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Remove default marker */
+.accordion.accordion13 summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Chevron: perfectly centered, bold, right-aligned */
+.accordion.accordion13 summary::after {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid #e60000;
+  border-bottom: 2px solid #e60000;
+  border-top: none;
+  border-left: none;
+  box-sizing: border-box;
+  transition: transform 0.2s;
+  background: transparent;
+}
+
+.accordion.accordion13 details[open] summary::after {
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+/* FAQ text container: flex, no extra margin/padding, ensure wrapping */
+.accordion.accordion13 .button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* FAQ text: left aligned, no button look, perfectly centered vertically */
+.accordion.accordion13 .button {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  color: #444;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  line-height: 1.6;
+  border: none;
+  display: block;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: normal;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* Remove link/hover color and underline from FAQ labels */
+.accordion.accordion13 .button:hover,
+.accordion.accordion13 .button:focus,
+.accordion.accordion13 .button:active,
+.accordion.accordion13 .button:visited {
+  color: #444;
+  background: none;
+  text-decoration: underline;
+}
+
+/* FAQ body text and lists styling */
+.accordion.accordion13 .accordion-item-body {
+  padding: 0 24px 10px;
+  background: #fff;
+  font-size: 13px;
+  color: #444;
+}
+
+.accordion.accordion13 .accordion-item-body ul {
+  margin: 8px 0 8px 16px;
+  padding-left: 16px;
+}
+
+.accordion.accordion13 .accordion-item-body li {
+  font-size: 13px;
+  color: #444;
 }
