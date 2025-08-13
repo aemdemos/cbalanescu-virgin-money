@@ -1212,7 +1212,6 @@
   box-sizing: border-box;
 }
 
-/* --- COLUMN LAYOUT --- */
 .columns.columns29 .columns > div {
   display: flex;
   flex-direction: column;
@@ -1227,13 +1226,12 @@
 @media (width >= 900px) {
   .columns.columns29 .columns > div {
     flex-direction: row;
-    align-items: center; /* Vertically center columns */
+    align-items: center;
     gap: 56px;
     padding: 0 32px;
   }
 }
 
-/* --- LEFT COLUMN (TEXT) --- */
 .columns.columns29 .columns > div > div:first-child {
   flex: 0 1 470px;
   min-width: 250px;
@@ -1243,7 +1241,6 @@
   justify-content: center;
 }
 
-/* --- RIGHT COLUMN (IMAGE) --- */
 .columns.columns29 .columns-img-col {
   flex: 1 1 0;
   min-width: 320px;
@@ -1264,7 +1261,6 @@
   box-shadow: none;
 }
 
-/* --- HEADLINE --- */
 .columns.columns29 h4 {
   color: #404041;
   font-size: 2rem;
@@ -1274,7 +1270,6 @@
   line-height: 1.2;
 }
 
-/* --- BODY TEXT --- */
 .columns.columns29 p, 
 .columns.columns29 ul, 
 .columns.columns29 li {
@@ -1287,7 +1282,6 @@
   margin-bottom: 10px;
 }
 
-/* --- BUTTON --- */
 .columns.columns29 .button-container {
   margin-top: 24px;
 }
@@ -1333,7 +1327,6 @@
   background-image: url("data:image/svg+xml,%3Csvg fill='none' stroke='%23fff' stroke-width='3' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M7 6l5 4-5 4'/%3E%3C/svg%3E");
 }
 
-/* --- BULLET LIST --- */
 .columns.columns29 ul {
   list-style: none;
   padding-left: 0;
@@ -1353,7 +1346,6 @@
   margin-bottom: 0;
 }
 
-/* Red dot bullet for list items */
 .columns.columns29 ul li::before {
   width: 8px;
   height: 8px;
@@ -1369,7 +1361,6 @@
   margin: 0;
 }
 
-/* --- RESPONSIVE --- */
 @media (width <= 899px) {
   .columns.columns29 {
     padding: 32px 0;
@@ -1389,4 +1380,142 @@
   .columns.columns29 .columns > div > div:first-child {
     max-width: 100%;
   }
+}
+
+
+.columns.columns32 {
+  /* Ensure the outermost block uses flex for horizontal layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 32px 0;
+  width: 100%;
+}
+
+@media (width <= 899px) {
+  .columns.columns32 {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 24px 0;
+  }
+}
+
+.columns.columns32 > div {
+  /* The inner row, ensure columns are side by side and vertically centered */
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* vertical centering for cols */
+  gap: 24px;
+  width: 100%;
+}
+
+@media (width <= 899px) {
+  .columns.columns32 > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+}
+
+/* LEFT COLUMN (ICON BLOCK) */
+.columns.columns32 .columns-img-col {
+  background: #f5f5f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 120px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  flex: 0 0 160px;
+  margin: 0;
+}
+
+@media (width <= 899px) {
+  .columns.columns32 .columns-img-col {
+    width: 100%;
+    max-width: 240px;
+    min-width: 0;
+    height: 100px;
+    margin: 0 auto;
+  }
+}
+
+/* Icon size in block */
+.columns.columns32 .columns-img-col img,
+.columns.columns32 .columns-img-col picture {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* RIGHT COLUMN (TEXTS & BUTTON) */
+.columns.columns32 .columns-img-col + div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 0;
+  max-width: none;
+  min-width: 0;
+}
+
+@media (width <= 899px) {
+  .columns.columns32 .columns-img-col + div {
+    max-width: 100%;
+  }
+}
+
+/* Heading: font, color and spacing */
+.columns.columns32 .columns-img-col + div h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #232323;
+  margin: 0 0 10px;
+}
+
+/* Body Text */
+.columns.columns32 .columns-img-col + div p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+/* Button container: tightly under paragraph, left aligned */
+.columns.columns32 .columns-img-col + div .button-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Button: compact, correct colors, override global pill shape */
+.columns.columns32 .button.primary {
+  background: #fff;
+  color: #E6021D;
+  border: 1px solid #E6021D;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 4px;
+  padding: 10px 24px;
+  margin: 0;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, color 0.2s;
+}
+
+.columns.columns32 .button.primary:hover,
+.columns.columns32 .button.primary:focus {
+  background: #E6021D;
+  color: #fff;
+  border-color: #E6021D;
+  text-decoration: none;
+}
+
+/* Remove pill style from global button in this block */
+.columns.columns32 .button,
+.columns.columns32 button {
+  border-radius: 4px;
 }
