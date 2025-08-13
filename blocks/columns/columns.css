@@ -902,3 +902,154 @@
     border-radius: 12px;
   }
 }
+
+
+/* Main two-column layout: icon left, content right */
+.columns.columns25 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; /* Ensures both columns match height */
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 320px; /* Ensures icon and content are visually connected */
+  box-sizing: border-box;
+}
+
+/* Left column: red block, icon centered both ways and fills full height */
+.columns.columns25 .columns-img-col {
+  background: #e60000;
+  width: 240px;
+  min-width: 220px;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
+  /* Full height to visually match the FAQ content */
+  height: auto;
+}
+
+/* Make sure the icon stays vertically centered */
+.columns.columns25 .columns-img-col picture,
+.columns.columns25 .columns-img-col img {
+  margin: auto;
+  max-width: 100px;
+  max-height: 100px;
+  display: block;
+}
+
+/* Right column: FAQ content, vertical stack */
+.columns.columns25 > div > div:not(.columns-img-col) {
+  flex: 1 1 0%;
+  background: #fff;
+  padding: 56px 56px 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  color: #232323;
+  min-width: 0;
+  line-height: 1.7;
+  max-width: 100%;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns25 > div {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: unset;
+    max-width: none;
+  }
+
+  .columns.columns25 .columns-img-col {
+    width: 100%;
+    min-width: 0;
+    height: 140px;
+    max-width: none;
+    padding: 16px 0;
+    justify-content: center;
+  }
+
+  .columns.columns25 > div > div:not(.columns-img-col) {
+    padding: 28px 16px 32px;
+    font-size: 16px;
+  }
+}
+
+/* FAQ List Styles */
+.columns.columns25 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+}
+
+.columns.columns25 ul li {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 20px 0 12px;
+  color: #232323;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.columns.columns25 ul li:last-child {
+  border-bottom: none;
+}
+
+/* FAQ Link Styles */
+.columns.columns25 ul li a {
+  color: #e60000;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.columns.columns25 ul li a:hover {
+  color: #b00000;
+  text-decoration: underline;
+}
+
+/* Headings inside FAQ column */
+.columns.columns25 h5,
+.columns.columns25 h6 {
+  margin-top: 36px;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #e60000;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.columns.columns25 h6 {
+  font-size: 17px;
+}
+
+/* "See more" link style */
+.columns.columns25 #see-more {
+  margin-top: 36px;
+}
+
+.columns.columns25 #see-more a {
+  color: #e60000;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: underline;
+  display: inline-block;
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+}
+
+.columns.columns25 #see-more a:hover {
+  color: #b00000;
+  text-decoration: none;
+}
+
+/* General strong styling in FAQ column */
+.columns.columns25 strong {
+  font-weight: bold;
+  color: inherit;
+}
