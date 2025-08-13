@@ -168,110 +168,6 @@
 }
 
 
-.hero.hero24 {
-  background: #f5f5f7;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 240px;
-  padding: 76px 0 48px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.hero.hero24 > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.hero.hero24 > div:first-child {
-  display: none;
-}
-
-.hero.hero24 > div:last-child {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 420px;
-  gap: 0;
-}
-
-.hero.hero24 h2,
-.hero.hero24 h2 strong {
-  color: #5a1174;
-  font-size: 2.5rem;
-  font-weight: 800;
-  text-align: center;
-  margin: 0;
-  line-height: 1.08;
-  max-width: 420px;
-  letter-spacing: -0.5px;
-  padding-bottom: 8px;
-}
-
-.hero.hero24 p:not(.button-container) {
-  color: #3c3c3c;
-  font-size: 0.82rem;
-  font-weight: 400;
-  text-align: center;
-  margin: 0 0 10px;
-  max-width: 255px;
-  line-height: 1.5;
-}
-
-.hero.hero24 .button-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 0;
-  padding-top: 8px;
-}
-
-.hero.hero24 .button {
-  min-width: 150px;
-  height: 40px;
-  padding: 0 24px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #d80027 0%, #a400b8 100%);
-  color: #fff;
-  font-size: 1.07rem;
-  font-weight: 500;
-  cursor: pointer;
-  text-align: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: none;
-  margin: 0;
-  line-height: 1.15;
-}
-
-@media (width <= 600px) {
-  .hero.hero24 {
-    padding: 34px 0 16px;
-  }
-
-  .hero.hero24 > div:last-child,
-  .hero.hero24 h2,
-  .hero.hero24 p:not(.button-container) {
-    max-width: 94vw;
-    font-size: 0.95rem;
-  }
-
-  .hero.hero24 p:not(.button-container) {
-    max-width: 89vw;
-    font-size: 0.93rem;
-  }
-}
-
-
 .hero.hero26 {
   background: #f7f7f9;
   display: flex;
@@ -397,5 +293,124 @@
 
   .hero.hero26 {
     padding: 16px 0 10px;
+  }
+}
+
+
+.hero.hero24 {
+  background: #f5f5f6;
+  width: 100vw;
+  min-height: 160px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 65px 0 52px;
+}
+
+/* Hide empty inner div */
+.hero.hero24 > div:first-child {
+  display: none;
+}
+
+/* Main content column, centered */
+.hero.hero24 > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Heading: bolder, larger, perfect two-line balance, tighter below */
+.hero.hero24 h2,
+.hero.hero24 h2 strong {
+  color: #609;
+  font-size: 2.45rem;
+  font-weight: 800;
+  line-height: 1.11;
+  text-align: center;
+  margin: 0 0 18px;
+  max-width: 710px;
+  letter-spacing: 0;
+  padding: 0;
+  word-break: break-word;
+}
+
+/* Subtitle: narrower for ideal line length, more space below */
+.hero.hero24 p:not(.button-container) {
+  color: #444;
+  font-size: 1.04rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 auto 54px;
+  max-width: 425px;
+  line-height: 1.48;
+  padding: 0;
+}
+
+/* Button container: good vertical gap above button */
+.hero.hero24 .button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  margin-top: 0;
+}
+
+/* Button: wider, taller, bold font, more padding */
+.hero.hero24 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 225px;
+  height: 52px;
+  padding: 0 44px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #eb001b 0%, #6610f2 100%);
+  color: #fff;
+  font-size: 1.22rem;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 2px 8px rgb(102 16 242 / 8%);
+  margin: 0;
+  line-height: 1.22;
+  text-align: center;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+/* Remove any default bottom margins */
+.hero.hero24 .button,
+.hero.hero24 .button-container {
+  margin-bottom: 0;
+}
+
+/* Responsive tweaks for mobile/tablet */
+@media (width <= 700px) {
+  .hero.hero24 {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .hero.hero24 h2,
+  .hero.hero24 h2 strong {
+    font-size: 1.16rem;
+    max-width: 96vw;
+    margin-bottom: 12px;
+  }
+
+  .hero.hero24 p:not(.button-container) {
+    font-size: 0.97rem;
+    max-width: 90vw;
+    margin-bottom: 25px;
+  }
+
+  .hero.hero24 .button {
+    min-width: 112px;
+    height: 36px;
+    padding: 0 16px;
+    font-size: 0.97rem;
+    border-radius: 7px;
   }
 }
