@@ -825,7 +825,6 @@
   padding: 0;
 }
 
-/* Two cards side by side */
 .cards.cards23 > ul {
   display: flex;
   flex-direction: row;
@@ -837,12 +836,10 @@
   list-style: none;
 }
 
-/* Hide additional cards */
 .cards.cards23 > ul > li:nth-child(n+3) {
   display: none;
 }
 
-/* Card styling */
 .cards.cards23 > ul > li {
   display: flex;
   flex-direction: column;
@@ -858,7 +855,6 @@
   overflow: hidden;
 }
 
-/* Card image styling */
 .cards.cards23 .cards-card-image {
   width: 100%;
   overflow: hidden;
@@ -877,7 +873,6 @@
   display: block;
 }
 
-/* Card body layout */
 .cards.cards23 .cards-card-body {
   display: flex;
   flex-direction: column;
@@ -885,7 +880,6 @@
   flex: 1 1 auto;
 }
 
-/* Title styling */
 .cards.cards23 .cards-card-body > p:first-child strong {
   display: block;
   color: #481268;
@@ -894,8 +888,6 @@
   margin: 0 0 10px;
   line-height: 1.2;
 }
-
-/* ========== RATES IN A ROW ========== */
 
 .cards.cards23 .cards-card-body > p:nth-child(2),
 .cards.cards23 .cards-card-body > p:nth-child(3) {
@@ -913,7 +905,6 @@
   box-sizing: border-box;
 }
 
-/* Arrange rates in a flex row using their parent if both rates exist */
 .cards.cards23 .cards-card-body > p:nth-child(2) {
   margin-bottom: 0;
   margin-right: 24px;
@@ -923,9 +914,6 @@
   margin-bottom: 0;
 }
 
-/* Trick: Use a flex row on .cards-card-body, but only for rates */
-
-/* Clear floats after the rates so the next p starts below */
 .cards.cards23 .cards-card-body > p:nth-child(4) {
   clear: both;
   color: #222;
@@ -935,7 +923,6 @@
   font-weight: 400;
 }
 
-/* Bulleted list */
 .cards.cards23 .cards-card-body ul {
   color: #222;
   font-size: 0.98rem;
@@ -955,7 +942,6 @@
   vertical-align: super;
 }
 
-/* Responsive stacking for small screens */
 @media (width <= 900px) {
   .cards.cards23 > ul {
     flex-direction: column;
@@ -981,5 +967,177 @@
     width: 100%;
     display: block;
     margin-right: 0;
+  }
+}
+
+
+/* Card image area: always visible, with placeholder if missing background-image */
+.cards.cards38 .cards-card-body:first-child {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  min-height: 180px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-bottom: none;
+
+  /* fallback visual placeholder if no image is set */
+  background-color: #f2f2f2;
+}
+
+/* Example: assign background-images for each card (replace with real URLs or remove if set elsewhere) */
+.cards.cards38 > ul > li:nth-child(1) .cards-card-body:first-child {
+  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=410&q=80');
+}
+
+.cards.cards38 > ul > li:nth-child(2) .cards-card-body:first-child {
+  background-image: url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=410&q=80');
+}
+
+.cards.cards38 > ul > li:nth-child(3) .cards-card-body:first-child {
+  background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=410&q=80');
+}
+
+/* Content area: vertical padding to keep content tight below image, not bottom-heavy */
+.cards.cards38 .cards-card-body:last-child {
+  padding: 20px 28px 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  background: #fff;
+}
+
+/* Heading */
+.cards.cards38 .cards-card-body:last-child h2 {
+  font-size: 20px;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  color: #720088;
+  line-height: 1.2;
+  margin: 0 0 7px;
+  letter-spacing: 0;
+}
+
+/* Subtitle - lighter and more spaced */
+.cards.cards38 .cards-card-body:last-child p strong {
+  display: block;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 400;
+  color: #757575;
+  letter-spacing: 0.19em;
+  margin-bottom: 7px;
+  margin-top: 0;
+}
+
+/* Paragraph - more compact margin */
+.cards.cards38 .cards-card-body:last-child p {
+  color: #333;
+  font-size: 15px;
+  margin: 0 0 7px;
+  font-family: var(--body-font-family);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.cards.cards38 .cards-card-body:last-child p:nth-last-child(2) {
+  margin-bottom: 6px;
+}
+
+/* Button row - less vertical space, tighter gap */
+.cards.cards38 .cards-card-body:last-child p:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 13px;
+  margin-bottom: 0;
+}
+
+/* Buttons - do not wrap, auto-size, text centered */
+.cards.cards38 .cards-card-body:last-child p:last-child a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  width: auto;
+  min-width: 0;
+  padding: 0 22px;
+  height: 42px;
+  line-height: 42px;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  box-sizing: border-box;
+  background: none;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  outline: none;
+}
+
+/* Filled gradient for Apply now */
+.cards.cards38 .cards-card-body:last-child p:last-child a:first-child {
+  background: linear-gradient(90deg, #d70040 0%, #a8008c 100%);
+  color: #fff;
+  border: none;
+}
+
+.cards.cards38 .cards-card-body:last-child p:last-child a:first-child:hover,
+.cards.cards38 .cards-card-body:last-child p:last-child a:first-child:focus {
+  filter: brightness(0.95);
+}
+
+/* Outlined purple for Learn more */
+.cards.cards38 .cards-card-body:last-child p:last-child a:last-child {
+  background: #fff;
+  color: #a8008c;
+  border: 2px solid #a8008c;
+  box-sizing: border-box;
+}
+
+.cards.cards38 .cards-card-body:last-child p:last-child a:last-child:hover,
+.cards.cards38 .cards-card-body:last-child p:last-child a:last-child:focus {
+  background: #f9f5fa;
+}
+
+/* Remove default underline for these buttons */
+
+/* General spacing improvements for element stacking */
+.cards.cards38 .cards-card-body:last-child h2 + p,
+.cards.cards38 .cards-card-body:last-child p strong + p {
+  margin-top: 0;
+}
+
+/* Responsive adjustments */
+@media (width <= 900px) {
+  .cards.cards38 > ul {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cards.cards38 > ul > li {
+    max-width: 100%;
+  }
+
+  .cards.cards38 .cards-card-body:first-child {
+    min-height: 140px;
+  }
+
+  .cards.cards38 .cards-card-body:last-child {
+    padding: 14px 10px 10px;
+  }
+
+  .cards.cards38 .cards-card-body:last-child p:last-child {
+    gap: 10px;
+  }
+
+  .cards.cards38 .cards-card-body:last-child p:last-child a {
+    padding: 0 16px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
   }
 }
