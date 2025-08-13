@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .table.block {
   width: 100%;
   overflow-x: auto;
@@ -50,18 +51,247 @@
   margin-top: 0.25em;
 }
 
-/* no header variant */
 .table.block.no-header table tbody tr {
   border-top: 1px solid;
 }
 
-/* striped variant */
 .table.block.striped tbody tr:nth-child(odd) {
   background-color: var(--overlay-background-color);
 }
 
-/* bordered variant */
 .table.block.bordered table th,
 .table.block.bordered table td {
   border: 1px solid;
+}
+
+
+.table .block table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 14px;
+  color: #4d4d4d;
+  background: #fff;
+  display: table;
+}
+
+/* --- COLUMN SIZING: Tightest yet for first column --- */
+.table .block thead th:first-child,
+.table .block tbody td:first-child {
+  min-width: 60px;
+  max-width: 75px;
+  width: 7%;
+  box-sizing: border-box;
+}
+
+.table .block thead th:not(:first-child),
+.table .block tbody td:not(:first-child) {
+  width: auto;
+}
+
+/* --- HEADER ROW STYLE --- */
+.table .block thead th {
+  background: #a50049;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  padding: 4px 6px;
+  border: 1px solid #e7e7e7;
+  vertical-align: middle;
+  letter-spacing: 0.01em;
+  box-sizing: border-box;
+}
+
+.table .block thead th:first-child {
+  background: #f9f7fa;
+  color: #a50049;
+  text-align: left;
+  font-size: 15px;
+  border-right: 1px solid #e7e7e7;
+}
+
+/* --- BODY ROWS & CELLS --- */
+.table .block tbody td {
+  background: #fff;
+  color: #4d4d4d;
+  font-size: 14px;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #e7e7e7;
+  padding: 4px 6px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.table .block tbody td:first-child {
+  background: #f9f7fa;
+  color: #a50049;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: left;
+  vertical-align: top;
+  padding: 4px 6px;
+  box-sizing: border-box;
+}
+
+/* --- BULLETED LISTS --- */
+.table .block ul {
+  margin: 0 0 4px;
+  padding-left: 16px;
+}
+
+.table .block ul li {
+  margin-bottom: 2px;
+  color: #4d4d4d;
+  font-size: 12px;
+  line-height: 1.1;
+}
+
+/* --- LINKS --- */
+.table .block a,
+.table .block a:any-link {
+  color: #a50049;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.table .block a.button,
+.table .block .button {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* --- SUPERSCRIPTS --- */
+.table .block sup {
+  font-size: 10px;
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* --- BUTTONS --- */
+.table .block .button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+/* Primary button style (first button in group) */
+.table .block .button-container .button:first-child {
+  background: #a50049;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 72px;
+  padding: 4px 12px;
+  margin: 0 0 2px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: none;
+  line-height: 1.1;
+  transition: background 0.2s, color 0.2s;
+}
+
+.table .block .button-container .button:first-child:hover,
+.table .block .button-container .button:first-child:focus {
+  background: #c50356;
+}
+
+/* Secondary button style (second button in group) */
+.table .block .button-container .button:last-child {
+  background: #fff;
+  color: #a50049;
+  border-radius: 4px;
+  border: 2px solid #a50049;
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 72px;
+  padding: 4px 12px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: none;
+  line-height: 1.1;
+  transition: background 0.2s, color 0.2s;
+}
+
+.table .block .button-container .button:last-child:hover,
+.table .block .button-container .button:last-child:focus {
+  background: #f9f7fa;
+}
+
+/* --- TABLE GRID LINES & SPACING --- */
+.table .block th,
+.table .block td {
+  border: 1px solid #e7e7e7;
+  margin: 0;
+  vertical-align: top;
+  box-sizing: border-box;
+}
+
+/* --- REMOVE STRIPES --- */
+.table .block.striped tbody tr:nth-child(odd) {
+  background: inherit;
+}
+
+/* --- BOLD TEXT IN CELLS --- */
+.table .block tbody strong {
+  font-weight: 700;
+}
+
+/* --- RESPONSIVE TABLE WRAPPER --- */
+@media (width <= 900px) {
+  .table .block table {
+    font-size: 13px;
+    min-width: 520px;
+  }
+
+  .table .block thead th,
+  .table .block tbody td,
+  .table .block tbody td:first-child {
+    padding: 2px 3px;
+    min-width: 35px;
+  }
+
+  .table .block thead th:first-child,
+  .table .block tbody td:first-child {
+    min-width: 35px;
+    max-width: 50px;
+  }
+
+  .table .block ul li {
+    font-size: 11px;
+    line-height: 1.05;
+  }
+}
+
+@media (width <= 600px) {
+  .table .block table {
+    font-size: 11px;
+    min-width: 320px;
+  }
+
+  .table .block thead th,
+  .table .block tbody td,
+  .table .block tbody td:first-child {
+    padding: 1px;
+    min-width: 18px;
+  }
+
+  .table .block thead th:first-child,
+  .table .block tbody td:first-child {
+    min-width: 18px;
+    max-width: 30px;
+  }
+
+  .table .block ul li {
+    font-size: 10px;
+    line-height: 1;
+  }
 }
