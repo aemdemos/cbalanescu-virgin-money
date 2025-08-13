@@ -1514,15 +1514,12 @@
 .columns.columns33 {
   display: flex;
   flex-direction: row;
-  align-items: stretch; /* Fill vertical space, let left col center itself */
+  align-items: stretch;
   gap: 2.2rem;
   width: 100%;
   background: #fff;
-
-  /* Remove min-height from previous versions */
 }
 
-/* Responsive: stack columns on small screens */
 @media (width <= 900px) {
   .columns.columns33 {
     flex-direction: column;
@@ -1531,7 +1528,6 @@
   }
 }
 
-/* Left column (heading): wider for 2-line wrap, center content vertically */
 .columns.columns33 > div:first-child {
   display: flex;
   flex-direction: column;
@@ -1540,11 +1536,8 @@
   max-width: 440px;
   min-width: 340px;
   padding-right: 0.5rem;
-
-  /* Center in the available vertical space */
 }
 
-/* Right column (criteria): expand to fill remaining space */
 .columns.columns33 > div:last-child {
   display: flex;
   flex-direction: column;
@@ -1552,7 +1545,6 @@
   flex: 1 1 0%;
 }
 
-/* Heading */
 .columns.columns33 h2 {
   color: #609;
   font-size: 2.05rem;
@@ -1563,7 +1555,6 @@
   padding: 0;
 }
 
-/* Intro + list */
 .columns.columns33 p {
   font-size: 1rem;
   font-weight: bold;
@@ -1589,7 +1580,6 @@
   overflow-wrap: anywhere;
 }
 
-/* Custom bullet using a circle before each li (no content property) */
 .columns.columns33 ul li::before {
   display: inline-block;
   vertical-align: middle;
@@ -1606,12 +1596,10 @@
   top: 0.68em;
 }
 
-/* Hide default list marker */
 .columns.columns33 ul li::marker {
   display: none;
 }
 
-/* Font/spacing tweaks for mobile */
 @media (width <= 600px) {
   .columns.columns33 > div:first-child {
     max-width: none;
@@ -1627,5 +1615,111 @@
   .columns.columns33 p,
   .columns.columns33 ul li {
     font-size: 0.97rem;
+  }
+}
+
+
+.columns.columns34 {
+  background: #fff;
+  padding: 36px 0;
+}
+
+/* Two-column flex layout for main row */
+.columns.columns34 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Left column: vertical stack, constrained line length */
+.columns.columns34 > div > div:first-child {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* Heading styles */
+.columns.columns34 h2 {
+  color: #561094;
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin: 0 0 0.7em;
+  line-height: 1.13;
+  font-family: var(--heading-font-family);
+  word-break: break-word;
+  letter-spacing: -0.01em;
+}
+
+/* Paragraph styles */
+.columns.columns34 p {
+  color: #222;
+  font-size: 0.82rem;
+  margin: 0;
+  line-height: 1.45;
+  font-family: var(--body-font-family);
+  word-break: break-word;
+}
+
+/* Superscript/footnote */
+.columns.columns34 sup {
+  font-size: 0.65em;
+  color: #888;
+  vertical-align: super;
+}
+
+/* Right column (images/awards) */
+.columns.columns34 .columns-img-col {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: 2px;
+  min-width: 0;
+}
+
+/* Image sizing */
+.columns.columns34 .columns-img-col img {
+  max-width: 198px;
+  height: auto;
+  display: block;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Responsive stacking for mobile */
+@media (width <= 900px) {
+  .columns.columns34 {
+    padding: 20px 0;
+  }
+
+  .columns.columns34 > div {
+    flex-direction: column;
+    gap: 28px;
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
+  .columns.columns34 > div > div:first-child {
+    max-width: 100%;
+  }
+
+  .columns.columns34 .columns-img-col {
+    margin-top: 12px;
+    justify-content: flex-start;
+  }
+
+  .columns.columns34 .columns-img-col img {
+    max-width: 140px;
   }
 }
