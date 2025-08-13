@@ -76,7 +76,6 @@
   display: table;
 }
 
-/* --- COLUMN SIZING: Tightest yet for first column --- */
 .table .block thead th:first-child,
 .table .block tbody td:first-child {
   min-width: 60px;
@@ -90,7 +89,6 @@
   width: auto;
 }
 
-/* --- HEADER ROW STYLE --- */
 .table .block thead th {
   background: #a50049;
   color: #fff;
@@ -112,7 +110,6 @@
   border-right: 1px solid #e7e7e7;
 }
 
-/* --- BODY ROWS & CELLS --- */
 .table .block tbody td {
   background: #fff;
   color: #4d4d4d;
@@ -137,7 +134,6 @@
   box-sizing: border-box;
 }
 
-/* --- BULLETED LISTS --- */
 .table .block ul {
   margin: 0 0 4px;
   padding-left: 16px;
@@ -150,7 +146,6 @@
   line-height: 1.1;
 }
 
-/* --- LINKS --- */
 .table .block a,
 .table .block a:any-link {
   color: #a50049;
@@ -164,14 +159,12 @@
   font-weight: 700;
 }
 
-/* --- SUPERSCRIPTS --- */
 .table .block sup {
   font-size: 10px;
   vertical-align: super;
   line-height: 0;
 }
 
-/* --- BUTTONS --- */
 .table .block .button-container {
   display: flex;
   flex-direction: column;
@@ -181,7 +174,6 @@
   padding: 0;
 }
 
-/* Primary button style (first button in group) */
 .table .block .button-container .button:first-child {
   background: #a50049;
   color: #fff;
@@ -204,7 +196,6 @@
   background: #c50356;
 }
 
-/* Secondary button style (second button in group) */
 .table .block .button-container .button:last-child {
   background: #fff;
   color: #a50049;
@@ -226,7 +217,6 @@
   background: #f9f7fa;
 }
 
-/* --- TABLE GRID LINES & SPACING --- */
 .table .block th,
 .table .block td {
   border: 1px solid #e7e7e7;
@@ -235,17 +225,14 @@
   box-sizing: border-box;
 }
 
-/* --- REMOVE STRIPES --- */
 .table .block.striped tbody tr:nth-child(odd) {
   background: inherit;
 }
 
-/* --- BOLD TEXT IN CELLS --- */
 .table .block tbody strong {
   font-weight: 700;
 }
 
-/* --- RESPONSIVE TABLE WRAPPER --- */
 @media (width <= 900px) {
   .table .block table {
     font-size: 13px;
@@ -294,4 +281,253 @@
     font-size: 10px;
     line-height: 1;
   }
+}
+
+
+.table {
+  max-width: 100vw;
+  margin: 0 auto;
+  background: #fff;
+  font-family: Inter, Arial, sans-serif;
+  overflow-x: auto;
+}
+
+.table table {
+  width: auto;
+  min-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+}
+
+/* Header row */
+.table th {
+  background: #A1064F;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+  text-align: center;
+  border: 1px solid #D8D8D8;
+  box-sizing: border-box;
+  vertical-align: top;
+  padding: 24px 18px;
+  letter-spacing: 0.01em;
+  min-width: 120px;
+}
+
+.table th:first-child {
+  background: #F4F2F7;
+  color: #7C6990;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 800;
+  padding-left: 18px;
+  min-width: 84px;
+  max-width: 120px;
+  width: 100px;
+}
+
+/* Data cells */
+.table td {
+  background: #fff;
+  color: #222;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  border: 1px solid #D8D8D8;
+  box-sizing: border-box;
+  padding: 24px 18px;
+  vertical-align: top;
+  min-width: 120px;
+}
+
+.table td:first-child {
+  background: #F4F2F7;
+  color: #7C6990;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: left;
+  vertical-align: top;
+  padding-left: 18px;
+  min-width: 84px;
+  max-width: 120px;
+  width: 100px;
+}
+
+/* Bulleted lists */
+.table ul {
+  margin: 0 0 16px 18px;
+  padding: 0;
+  list-style: disc inside;
+}
+
+.table li {
+  margin-bottom: 12px;
+  color: #222;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.table sup {
+  font-size: 10px;
+  vertical-align: top;
+}
+
+.table strong {
+  font-weight: 900;
+}
+
+/* Buttons - block, full width, bold, generous vertical gap */
+.table .button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  padding: 0;
+  width: 100%;
+}
+
+.table .button-container .button {
+  display: block;
+  border-radius: 4px;
+  font-weight: 900;
+  font-size: 16px;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  height: 44px;
+  line-height: 44px;
+  padding: 0 24px 0 18px;
+  text-align: left;
+  margin-bottom: 0;
+  border: 2px solid #A1064F;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table .button-container .button:first-child {
+  background: #A1064F;
+  color: #fff;
+  border: 2px solid #A1064F;
+}
+
+.table .button-container .button:last-child {
+  background: #fff;
+  color: #A1064F;
+  border: 2px solid #A1064F;
+}
+
+.table .button-container .button:hover,
+.table .button-container .button:focus {
+  filter: brightness(0.90);
+}
+
+/* Magenta links */
+.table a {
+  color: #A1064F;
+  text-decoration: none;
+  font-weight: 700;
+  transition: text-decoration 0.15s;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive tweaks for smaller screens */
+@media (width <= 900px) {
+  .table table {
+    min-width: 600px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 13px;
+    padding: 12px 8px;
+    min-width: 60px;
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    padding-left: 8px;
+    min-width: 50px;
+    max-width: 80px;
+    width: 60px;
+  }
+
+  .table ul {
+    margin-left: 8px;
+  }
+
+  .table li {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .table .button-container {
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+
+  .table .button-container .button {
+    font-size: 12px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 8px 0 5px;
+  }
+}
+
+@media (width <= 600px) {
+  .table table {
+    min-width: 340px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 11px;
+    padding: 6px 2px;
+    min-width: 30px;
+  }
+
+  .table th:first-child,
+  .table td:first-child {
+    padding-left: 4px;
+    min-width: 24px;
+    max-width: 30px;
+    width: 30px;
+  }
+
+  .table ul {
+    margin-left: 4px;
+  }
+
+  .table li {
+    font-size: 11px;
+    margin-bottom: 3px;
+  }
+
+  .table .button-container {
+    gap: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  .table .button-container .button {
+    font-size: 10px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 2px;
+  }
+}
+
+/* Remove any extra margin above/below lists to avoid crowding buttons */
+.table td > ul:last-child {
+  margin-bottom: 0;
 }
