@@ -549,7 +549,6 @@
   background: none;
 }
 
-/* Use Grid for columns, decrease gap for tighter layout */
 .cards.cards17 > ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(340px, 1fr));
@@ -566,7 +565,6 @@
   }
 }
 
-/* Card container: slightly narrower for better proportion */
 .cards.cards17 > ul > li {
   display: flex;
   flex-direction: column;
@@ -580,7 +578,6 @@
   border: none;
 }
 
-/* Red header area: height increased to visually balance with original */
 .cards.cards17 > ul > li > .cards-card-body:first-child {
   background: #e30613;
   height: 134px;
@@ -595,7 +592,6 @@
   overflow: visible;
 }
 
-/* Bubble effect (shape only): larger and lower for closer match */
 .cards.cards17 > ul > li > .cards-card-body:first-child::after {
   display: block;
   position: absolute;
@@ -622,7 +618,6 @@
   transform: translate(-50%, 0);
 }
 
-/* Card body content: reduced bottom padding for less whitespace */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) {
   background: #fff;
   padding: 22px 18px 2px;
@@ -637,7 +632,6 @@
   min-height: 110px;
 }
 
-/* Heading: slightly tighter margin */
 .cards.cards17 h3 {
   color: #400095;
   font-size: 20px;
@@ -648,7 +642,6 @@
   line-height: 1.15;
 }
 
-/* Paragraphs & lists: minimal spacing */
 .cards.cards17 p,
 .cards.cards17 ul li {
   color: #333;
@@ -676,7 +669,6 @@
   color: #333;
 }
 
-/* Button row: reduced gap and top margin, closer to last text */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) > p:last-child {
   display: flex;
   flex-direction: row;
@@ -689,7 +681,6 @@
   padding: 0;
 }
 
-/* Button styles (as before, but slightly reduced for compact look) */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) > p:last-child > a {
   text-decoration: none;
   box-shadow: none;
@@ -726,7 +717,6 @@
   border-color: #c00410;
 }
 
-/* Superscript font size adjustment */
 .cards.cards17 sup {
   font-size: 11px;
   vertical-align: super;
@@ -745,4 +735,89 @@
   .cards.cards17 > ul > li > .cards-card-body:nth-child(2) {
     padding: 8px 2vw 1px;
   }
+}
+
+
+.cards.cards21 {
+  background: #fff;
+  padding: 0;
+}
+
+/* Grid for three cards, tighter gap for closer match */
+.cards.cards21 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  align-items: start;
+}
+
+@media (width <= 900px) {
+  .cards.cards21 > ul {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+/* Card: vertical stack, let content size naturally */
+.cards.cards21 > ul > li {
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Image: slightly taller aspect ratio, minimal space below */
+.cards.cards21 .cards-card-image {
+  margin: 0;
+  line-height: 0;
+}
+
+.cards.cards21 .cards-card-image picture,
+.cards.cards21 .cards-card-image img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Text: left-aligned, purple, reduced margin and lighter font-weight */
+.cards.cards21 .cards-card-body {
+  margin: 0;
+  padding: 0;
+}
+
+.cards.cards21 .cards-card-body .button {
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  color: #6a1b9a;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  line-height: 1.3;
+  display: block;
+  max-width: 100%;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+/* Remove extra spacing in button container */
+.cards.cards21 .cards-card-body .button-container {
+  margin: 0;
+  padding: 0;
 }
