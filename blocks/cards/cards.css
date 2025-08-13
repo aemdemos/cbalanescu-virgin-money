@@ -1127,62 +1127,67 @@
 
 
 .cards.cards43 {
-  padding: 32px 0 0;
   background: #fff;
+  padding: 32px 0;
 }
 
+/* Grid layout: closer spacing and correct max-width for columns */
 .cards.cards43 > ul {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   justify-content: center;
-  align-items: stretch;
+  align-items: start;
   width: 100%;
-  max-width: 1440px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
-@media (width <= 1100px) {
+@media (width <= 900px) {
   .cards.cards43 > ul {
     grid-template-columns: 1fr;
-    max-width: 600px;
-    gap: 18px;
+    max-width: 350px;
+    gap: 16px;
   }
 }
 
+/* Card: slightly wider, more vertical padding for balance */
 .cards.cards43 > ul > li {
+  background: #f7f7f9;
+  border: none;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #F7F7F9;
-  border: none;
-  border-radius: 14px;
-  padding: 20px 32px 14px;
+  padding: 32px 22px;
   box-sizing: border-box;
   min-width: 0;
   width: 100%;
-  max-width: 500px;
+  max-width: 330px;
+  margin: 0;
 }
 
+/* Icon/image: ensure visibility, spacing and prominence */
 .cards.cards43 .cards-card-image {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-bottom: 10px;
   width: 100%;
+  margin-bottom: 18px;
+  min-height: 56px;
 }
 
 .cards.cards43 .cards-card-image img {
-  max-height: 44px;
-  width: auto;
-  aspect-ratio: unset;
-  object-fit: contain;
-  margin: 0 auto;
   display: block;
+  max-height: 56px;
+  width: auto;
+  margin: 0 auto;
+  object-fit: contain;
 }
 
+/* Card body: stacked, centered */
 .cards.cards43 .cards-card-body {
   display: flex;
   flex-direction: column;
@@ -1192,44 +1197,52 @@
   margin: 0;
 }
 
+/* Headline: heavier and larger, more margin below */
 .cards.cards43 .cards-card-body h5 {
-  font-size: 28px;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #111;
-  margin: 0 0 10px;
+  color: #212121;
+  margin: 0 0 14px;
   letter-spacing: -0.01em;
+  line-height: 1.22;
 }
 
+/* Body text: heavier, slightly tighter, more margin below */
 .cards.cards43 .cards-card-body p {
-  font-size: 15px;
-  color: #6C757D;
-  font-weight: 400;
-  margin: 0 0 12px;
-  line-height: 1.5;
+  font-size: 1.06rem;
+  color: #666;
+  font-weight: 500;
+  line-height: 1.54;
+  margin: 0 0 14px;
 }
 
-.cards.cards43 .cards-card-body p:last-child {
-  margin-bottom: 0;
+/* Superscript: subtle, small */
+.cards.cards43 .cards-card-body sup {
+  font-size: 0.65em;
+  vertical-align: super;
+  color: #888;
 }
 
+/* Button container: matching original vertical separation */
 .cards.cards43 .cards-card-body .button-container {
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
+/* CTA/link style: bold, slightly larger, brand color, flat */
 .cards.cards43 .cards-card-body .button.primary {
-  color: #E60000;
+  color: #e60000;
   background: none;
   border: none;
-  font-size: 17px;
+  font-size: 1.12rem;
   font-weight: 700;
   text-decoration: none;
   padding: 0;
+  margin: 0;
   box-shadow: none;
-  cursor: pointer;
   border-radius: 0;
+  cursor: pointer;
   display: inline;
   max-width: none;
-  margin: 0;
   white-space: normal;
   line-height: 1.3;
   transition: text-decoration 0.2s, color 0.2s;
@@ -1238,5 +1251,10 @@
 .cards.cards43 .cards-card-body .button.primary:hover,
 .cards.cards43 .cards-card-body .button.primary:focus {
   text-decoration: underline;
-  color: #b30000;
+  color: #b40000;
+}
+
+/* Remove extra margin from last paragraph if present */
+.cards.cards43 .cards-card-body p:last-child {
+  margin-bottom: 0;
 }
