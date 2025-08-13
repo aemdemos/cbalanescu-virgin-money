@@ -156,3 +156,155 @@
 .cards.cards1 > ul > li > *:not(:last-child) {
   margin-bottom: 0;
 }
+
+
+.cards.cards5 {
+  max-width: none;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cards.cards5 ul {
+  margin: 0;
+  padding: 0 1vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (width <= 900px) {
+  .cards.cards5 ul {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0 2vw;
+  }
+}
+
+/* Card */
+.cards.cards5 ul > li {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2.5px 10px rgb(40 30 50 / 9%);
+  display: flex;
+  flex-direction: column;
+  min-height: 110px;
+  overflow: hidden;
+  border: none;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Top red area (image placeholder) */
+.cards.cards5 ul > li > .cards-card-body:first-child {
+  background: #E3001B;
+  min-height: 90px;
+  border-radius: 18px 18px 0 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide 'null' text */
+.cards.cards5 ul > li > .cards-card-body:first-child p {
+  color: transparent;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Card content area */
+.cards.cards5 ul > li > .cards-card-body:nth-child(2) {
+  padding: 1rem 0.8rem 0.1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+/* Title styling */
+.cards.cards5 ul > li h3 {
+  color: #6A1B9A;
+  font-size: 1.32rem;
+  font-weight: 900;
+  margin: 0 0 0.2em;
+  line-height: 1.1;
+}
+
+/* Description styling */
+.cards.cards5 ul > li p:not(.button-container) {
+  color: #222;
+  font-size: 1.06rem;
+  line-height: 1.48;
+  margin: 0 0 0.55em;
+}
+
+/* Button container (tight left alignment) */
+.cards.cards5 ul > li .button-container {
+  margin-top: auto;
+  margin-bottom: 0.03rem;
+  text-align: left;
+  padding-left: 0;
+  width: 100%;
+}
+
+/* Button overrides: outline, left, larger, flush */
+.cards.cards5 ul > li .button-container a.button {
+  border: 1.5px solid #E3001B;
+  background: #fff;
+  color: #E3001B;
+  border-radius: 32px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.64em 1.44em;
+  line-height: 1.12;
+  text-align: left;
+  margin: 0;
+  box-shadow: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cards.cards5 ul > li .button-container a.button:hover,
+.cards.cards5 ul > li .button-container a.button:focus {
+  background: #FDE5EA;
+  color: #E3001B;
+  border-color: #E3001B;
+}
+
+.cards.cards5 ul > li > .cards-card-body:nth-child(2) > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive tweaks for compact stacking */
+@media (width <= 600px) {
+  .cards.cards5 ul {
+    gap: 8px;
+    padding: 0 1vw;
+  }
+
+  .cards.cards5 ul > li {
+    border-radius: 10px;
+    min-height: 80px;
+  }
+
+  .cards.cards5 ul > li > .cards-card-body:first-child {
+    border-radius: 10px 10px 0 0;
+    min-height: 46px;
+  }
+
+  .cards.cards5 ul > li > .cards-card-body:nth-child(2) {
+    padding: 0.5rem 0.5rem 0.04rem;
+  }
+}
