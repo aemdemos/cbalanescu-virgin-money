@@ -275,7 +275,6 @@
   padding-bottom: 40px;
 }
 
-/* Left column: Headline */
 .columns.columns4 > div > div:first-child {
   flex: 0 1 34%;
   min-width: 220px;
@@ -295,7 +294,6 @@
   letter-spacing: -0.01em;
 }
 
-/* Right column: vertical stack and compact contact blocks */
 .columns.columns4 > div > div:last-child {
   flex: 1 1 66%;
   display: flex;
@@ -306,7 +304,6 @@
   min-width: 340px;
 }
 
-/* --- Inline icon + heading using grid hack --- */
 .columns.columns4 > div > div:last-child > p:has(picture) {
   display: grid;
   grid-template-columns: 22px 1fr;
@@ -316,7 +313,6 @@
   column-gap: 12px;
 }
 
-/* Hide margin above and below the picture-containing p */
 .columns.columns4 > div > div:last-child > p:has(picture) + h3 {
   grid-column: 2/3;
   grid-row: 1/2;
@@ -344,7 +340,6 @@
   margin: 0;
 }
 
-/* Contact description text (next p after h3) */
 .columns.columns4 > div > div:last-child > h3 + p {
   color: #444;
   font-size: 0.98rem;
@@ -353,7 +348,6 @@
   padding: 0;
 }
 
-/* Red highlights in contact text */
 .columns.columns4 > div > div:last-child a {
   color: #e60032;
   font-weight: 500;
@@ -366,7 +360,6 @@
   text-decoration: underline;
 }
 
-/* Remove extra margin/padding from contact block children */
 .columns.columns4 > div > div:last-child > p {
   margin: 0;
   padding: 0;
@@ -377,7 +370,6 @@
   padding: 0;
 }
 
-/* Responsive: stack columns vertically on small screens */
 @media (width <= 900px) {
   .columns.columns4 > div {
     flex-direction: column;
@@ -404,7 +396,6 @@
   }
 }
 
-/* Remove vertical whitespace from grid/flex context and block children */
 .columns.columns4,
 .columns.columns4 > div,
 .columns.columns4 > div > div {
@@ -412,4 +403,188 @@
   min-width: 0;
   box-sizing: border-box;
   background: none;
+}
+
+
+.columns.columns7 > div {
+  /* Center the block horizontally, add side margin for visual balance */
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+
+  /* Remove unwanted centering/vertical spacing */
+  min-height: 420px;
+  background: var(--background-color, #fff);
+}
+
+@media (width <= 1200px) {
+  .columns.columns7 > div {
+    max-width: 96vw;
+  }
+}
+
+@media (width <= 900px) {
+  .columns.columns7 > div {
+    flex-direction: column;
+    min-height: unset;
+    margin: 0;
+    max-width: 100vw;
+  }
+}
+
+/* LEFT COLUMN: IMAGE */
+.columns.columns7 > div > .columns-img-col {
+  flex: 0 1 46%;
+  max-width: 46%;
+  min-width: 320px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  background: #fff;
+  padding: 0;
+  min-height: 420px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.columns.columns7 > div > .columns-img-col picture,
+.columns.columns7 > div > .columns-img-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+@media (width <= 900px) {
+  .columns.columns7 > div > .columns-img-col {
+    flex: none;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 200px;
+    height: auto;
+    padding: 0;
+    margin-bottom: 18px;
+    justify-content: center;
+  }
+
+  .columns.columns7 > div > .columns-img-col picture,
+  .columns.columns7 > div > .columns-img-col img {
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* RIGHT COLUMN: CONTENT */
+.columns.columns7 > div > div:not(.columns-img-col) {
+  flex: 1 1 54%;
+  max-width: 54%;
+  min-width: 320px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 48px 36px 40px 32px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+@media (width <= 900px) {
+  .columns.columns7 > div > div:not(.columns-img-col) {
+    flex: none;
+    max-width: 100%;
+    min-width: 0;
+    padding: 24px 8vw 32px;
+  }
+}
+
+/* Each content block (icon+heading+paragraph) as a flex row for icon/heading alignment */
+.columns.columns7 > div > div:not(.columns-img-col) p > picture {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 12px;
+  width: 22px;
+  height: 22px;
+
+  /* Shrink icon to match visual design */
+}
+
+.columns.columns7 > div > div:not(.columns-img-col) p > picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Headings and icon on one line for each block */
+.columns.columns7 > div > div:not(.columns-img-col) p + h3 {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* HEADINGS */
+.columns.columns7 > div > div:not(.columns-img-col) h3 {
+  color: #d50072;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0 0 2px;
+  vertical-align: middle;
+  line-height: 1.22;
+  font-family: var(--heading-font-family, "Inter", sans-serif);
+}
+
+/* Restore strong color in headings */
+.columns.columns7 > div > div:not(.columns-img-col) h3 strong {
+  color: inherit;
+  font-weight: inherit;
+}
+
+/* BODY TEXT */
+.columns.columns7 > div > div:not(.columns-img-col) h3 + p,
+.columns.columns7 > div > div:not(.columns-img-col) p:not(:first-child, :has(picture)) {
+  color: #333;
+  font-size: 1rem;
+  margin: 3px 0 16px;
+  line-height: 1.5;
+}
+
+/* Remove top margin on first content block, more breathing room after last */
+.columns.columns7 > div > div:not(.columns-img-col) > p:first-child {
+  margin-top: 0;
+}
+
+.columns.columns7 > div > div:not(.columns-img-col) > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Group icon + heading + body text as a block with margin after */
+.columns.columns7 > div > div:not(.columns-img-col) h3 + p {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+/* Keep consistent spacing between blocks */
+.columns.columns7 > div > div:not(.columns-img-col) p + h3 + p {
+  margin-bottom: 20px;
+}
+
+/* Ensure text is left-aligned */
+
+/* Remove any unwanted background/margins from block itself */
+.columns.columns7 {
+  background: transparent;
+  margin: 0;
+  padding: 0;
 }
