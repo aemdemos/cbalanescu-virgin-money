@@ -577,8 +577,6 @@
   padding: 28px 0 20px;
   font-family: Inter, sans-serif;
   color: #f2f2f2;
-
-  /* Ensure visibility and rendering */
   display: block;
   visibility: visible;
 }
@@ -667,7 +665,6 @@
   text-decoration: underline;
 }
 
-/* --- SOCIAL ICONS COLUMN FIXES --- */
 .columns.columns8 .columns-img-col > ul > li > ul {
   display: flex;
   flex-direction: row;
@@ -711,9 +708,92 @@
   }
 }
 
-/* Restore block visibility if accidentally hidden elsewhere */
 .columns.columns8[style*="display:none"],
 .columns.columns8[style*="visibility:hidden"] {
   display: block !important;
   visibility: visible !important;
+}
+
+
+/* Layout must be applied to the correct flex parent: the direct child of the block */
+.columns.columns11.block.columns-3-cols > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 950px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns11.block.columns-3-cols > div {
+    flex-direction: column;
+    gap: 16px;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* Each column: vertical stack, left-align, compact width */
+.columns.columns11.block.columns-3-cols > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 140px;
+  max-width: 230px;
+}
+
+/* Headings: purple, small, bold, little margin */
+.columns.columns11.block.columns-3-cols h3 {
+  color: #7952b3;
+  font-size: 13px;
+  font-family: Inter, sans-serif;
+  font-weight: bold;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+/* Remove bullets, reset list margin/padding */
+.columns.columns11.block.columns-3-cols ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* List item: arrow + link, compact row */
+.columns.columns11.block.columns-3-cols li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 4px;
+  padding-left: 0;
+}
+
+/* Arrow icon using SVG bg, smaller and closer to text */
+.columns.columns11.block.columns-3-cols li::before {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 3px;
+  background: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 2L7 5L3 8' stroke='%23ed6c6d' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center left;
+  vertical-align: middle;
+  content: "";
+}
+
+/* Links: small, pink, regular weight */
+.columns.columns11.block.columns-3-cols a {
+  color: #ed6c6d;
+  font-size: 12px;
+  font-family: Inter, sans-serif;
+  font-weight: normal;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+/* Remove bold from strong inside links */
+.columns.columns11.block.columns-3-cols strong {
+  font-weight: normal;
 }
