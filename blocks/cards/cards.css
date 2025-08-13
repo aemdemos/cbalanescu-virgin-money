@@ -184,7 +184,6 @@
   }
 }
 
-/* Card */
 .cards.cards5 ul > li {
   background: #fff;
   border-radius: 18px;
@@ -199,7 +198,6 @@
   box-sizing: border-box;
 }
 
-/* Top red area (image placeholder) */
 .cards.cards5 ul > li > .cards-card-body:first-child {
   background: #E3001B;
   min-height: 90px;
@@ -211,7 +209,6 @@
   justify-content: center;
 }
 
-/* Hide 'null' text */
 .cards.cards5 ul > li > .cards-card-body:first-child p {
   color: transparent;
   font-size: 0;
@@ -219,7 +216,6 @@
   padding: 0;
 }
 
-/* Card content area */
 .cards.cards5 ul > li > .cards-card-body:nth-child(2) {
   padding: 1rem 0.8rem 0.1rem;
   display: flex;
@@ -229,7 +225,6 @@
   box-sizing: border-box;
 }
 
-/* Title styling */
 .cards.cards5 ul > li h3 {
   color: #6A1B9A;
   font-size: 1.32rem;
@@ -238,7 +233,6 @@
   line-height: 1.1;
 }
 
-/* Description styling */
 .cards.cards5 ul > li p:not(.button-container) {
   color: #222;
   font-size: 1.06rem;
@@ -246,7 +240,6 @@
   margin: 0 0 0.55em;
 }
 
-/* Button container (tight left alignment) */
 .cards.cards5 ul > li .button-container {
   margin-top: auto;
   margin-bottom: 0.03rem;
@@ -255,7 +248,6 @@
   width: 100%;
 }
 
-/* Button overrides: outline, left, larger, flush */
 .cards.cards5 ul > li .button-container a.button {
   border: 1.5px solid #E3001B;
   background: #fff;
@@ -287,7 +279,6 @@
   margin-bottom: 0;
 }
 
-/* Responsive tweaks for compact stacking */
 @media (width <= 600px) {
   .cards.cards5 ul {
     gap: 8px;
@@ -306,5 +297,129 @@
 
   .cards.cards5 ul > li > .cards-card-body:nth-child(2) {
     padding: 0.5rem 0.5rem 0.04rem;
+  }
+}
+
+
+.cards.cards6 > ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.cards.cards6 > ul > li {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Top-align content */
+  background: #fff;
+  border: none;
+  border-right: 1px solid #eee;
+  padding: 40px 32px 32px; /* More top than bottom padding for top-aligned look */
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.cards.cards6 > ul > li:last-child {
+  border-right: none;
+}
+
+.cards.cards6 .cards-card-image {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.cards.cards6 .cards-card-image img,
+.cards.cards6 .cards-card-image picture img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.cards.cards6 .cards-card-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+.cards.cards6 .cards-card-body p {
+  margin: 0 0 18px;
+  color: #222;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  max-width: 380px;
+}
+
+.cards.cards6 .cards-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.cards.cards6 .cards-card-body .button-container {
+  margin-top: 28px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cards.cards6 .cards-card-body .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 185px;
+  height: 48px;
+  background: linear-gradient(90deg, #D6006E 0%, #6C1D7C 100%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  padding: 0 32px;
+  box-shadow: 0 2px 8px 0 rgb(214 0 110 / 5%);
+  margin: 0;
+}
+
+.cards.cards6 .cards-card-body .button:hover, 
+.cards.cards6 .cards-card-body .button:focus {
+  filter: brightness(1.07);
+  background: linear-gradient(90deg, #c1005f 0%, #561464 100%);
+}
+
+.cards.cards6 .cards-card-body sup {
+  font-size: 11px;
+  vertical-align: top;
+  margin-left: 1px;
+}
+
+@media (width <= 900px) {
+  .cards.cards6 > ul {
+    flex-direction: column;
+    max-width: 98vw;
+  }
+
+  .cards.cards6 > ul > li {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding: 32px 10px;
+  }
+
+  .cards.cards6 > ul > li:last-child {
+    border-bottom: none;
   }
 }
