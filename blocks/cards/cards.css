@@ -318,11 +318,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Top-align content */
+  justify-content: flex-start;
   background: #fff;
   border: none;
   border-right: 1px solid #eee;
-  padding: 40px 32px 32px; /* More top than bottom padding for top-aligned look */
+  padding: 40px 32px 32px;
   min-width: 0;
   box-sizing: border-box;
 }
@@ -421,5 +421,132 @@
 
   .cards.cards6 > ul > li:last-child {
     border-bottom: none;
+  }
+}
+
+
+.cards.cards10 {
+  padding: 18px 0 10px;
+  background: none;
+  box-shadow: none;
+}
+
+/* Grid: edge-to-edge, minimal column gap for density */
+.cards.cards10 > ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 18px 8px; /* vertical, horizontal gap (smaller horz gap for tighter columns) */
+  align-items: start;
+  justify-content: stretch;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background: none;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each card: flex row and tight vertical alignment */
+.cards.cards10 > ul > li {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  min-width: 0;
+}
+
+/* Icon container: top align, keep tight width, ensure visibility */
+.cards.cards10 .cards-card-image {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 24px;
+  min-width: 24px;
+  max-width: 24px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+/* Icon: small, exactly top-aligned with text, ensure visible */
+.cards.cards10 .cards-card-image img {
+  display: block;
+  width: 22px;
+  height: 22px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  vertical-align: top;
+  position: relative;
+  top: 0;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Card body: stack title and description, no extra spacing */
+.cards.cards10 .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  background: none;
+  justify-content: flex-start;
+}
+
+.cards.cards10 .cards-card-body p {
+  margin: 0;
+  padding: 0;
+  background: none;
+  line-height: 1.35;
+}
+
+/* Title: bolder, purple, slightly larger, tightly top-aligned, a touch closer to icon */
+.cards.cards10 .cards-card-body p:first-child {
+  color: #7d2497;
+  font-weight: 800;
+  font-size: 17px;
+  font-family: 'Open Sans', Arial, sans-serif;
+  margin-bottom: 2px;
+  margin-top: 0;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+/* Description: dark gray, normal weight, smaller */
+.cards.cards10 .cards-card-body p:not(:first-child) {
+  color: #444;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'Open Sans', Arial, sans-serif;
+  line-height: 1.35;
+}
+
+/* Superscript: smaller and tightly top aligned */
+.cards.cards10 .cards-card-body sup {
+  font-size: 10px;
+  vertical-align: super;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media (width <= 700px) {
+  .cards.cards10 > ul {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 14px 0;
+    width: 100%;
+    max-width: 100%;
   }
 }
