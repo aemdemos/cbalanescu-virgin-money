@@ -369,7 +369,6 @@
   border: none;
 }
 
-/* SUMMARY ROW: Flex row, compact height, no extra padding */
 .accordion.accordion28 details summary {
   display: flex;
   flex-direction: row;
@@ -385,7 +384,6 @@
   overflow: visible;
 }
 
-/* LEFT LABEL: Truncated, tight right padding, vertically centered */
 .accordion.accordion28 details summary p {
   flex: 1 1 0;
   min-width: 0;
@@ -403,7 +401,6 @@
   align-items: center;
 }
 
-/* RIGHT SELECT/CHEVRON AREA: compact, vertical divider, caret centered */
 .accordion.accordion28 details summary::after {
   display: flex;
   align-items: center;
@@ -422,17 +419,14 @@
   background-image: url("data:image/svg+xml;utf8,<svg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 4.5L6 7.5L9 4.5' stroke='%23e3b1b1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
 }
 
-/* Caret up when open */
 .accordion.accordion28 details[open] summary::after {
   background-image: url("data:image/svg+xml;utf8,<svg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 7.5L6 4.5L9 7.5' stroke='%23e3b1b1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
 }
 
-/* VISUAL ROW SEPARATOR: Subtle horizontal line between rows */
 .accordion.accordion28 details:not(:last-child) summary {
   border-bottom: 1px solid #e5e5e5;
 }
 
-/* RESPONSIVE: Stack vertically on small screens, maintain compact right area */
 @media (width <= 600px) {
   .accordion.accordion28 details summary {
     flex-direction: column;
@@ -456,5 +450,106 @@
     margin-left: 0;
     justify-content: flex-end;
     padding: 0;
+  }
+}
+
+
+.accordion.accordion47 {
+  background: #fff;
+}
+
+.accordion.accordion47 details {
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+.accordion.accordion47 details:last-child {
+  border-bottom: none;
+}
+
+.accordion.accordion47 summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  min-height: 44px;
+  line-height: 44px;
+  padding-left: 24px;
+  padding-right: 48px;
+  font-size: 14px;
+  color: #757575;
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  background: #fff;
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  border: none;
+  outline: none;
+  transition: background 0.2s;
+}
+
+/* Remove default marker */
+.accordion.accordion47 summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Proper text alignment */
+.accordion.accordion47 summary > p {
+  margin: 0;
+  font-size: 14px;
+  color: #757575;
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  line-height: 44px;
+  flex: 1 1 auto;
+}
+
+/* Chevron absolutely positioned w/ optical centering tweak */
+.accordion.accordion47 summary::after {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid #ed1b2e;
+  border-bottom: 2px solid #ed1b2e;
+  border-top: none;
+  border-left: none;
+  box-sizing: border-box;
+  background: transparent;
+  transform: translateY(-57%) rotate(45deg); /* Optical centering tweak */
+  transition: transform 0.2s;
+  display: block;
+}
+
+/* Chevron rotation for open state */
+.accordion.accordion47 details[open] summary::after {
+  transform: translateY(-57%) rotate(135deg);
+}
+
+/* Accordion body content styling */
+.accordion.accordion47 .accordion-item-body {
+  padding: 16px 24px;
+  background: #fff;
+  font-size: 14px;
+  color: #444;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* Responsive padding */
+@media (width <= 600px) {
+  .accordion.accordion47 summary,
+  .accordion.accordion47 .accordion-item-body {
+    padding-left: 12px;
+    padding-right: 36px;
+  }
+
+  .accordion.accordion47 summary::after {
+    right: 12px;
   }
 }
