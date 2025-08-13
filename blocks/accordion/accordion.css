@@ -259,7 +259,6 @@
   visibility: visible;
 }
 
-/* Accordion item container and border */
 .accordion.accordion16 details {
   border: none;
   border-bottom: 1px solid #eaeaea;
@@ -272,7 +271,6 @@
   border-bottom: none;
 }
 
-/* Summary row: refined padding, compact height, align items center */
 .accordion.accordion16 summary.accordion-item-label {
   display: flex;
   flex-direction: row;
@@ -292,13 +290,11 @@
   box-sizing: border-box;
 }
 
-/* Remove default details/summary marker */
 .accordion.accordion16 summary.accordion-item-label::-webkit-details-marker,
 .accordion.accordion16 summary.accordion-item-label::marker {
   display: none;
 }
 
-/* Question text: visually compact, slightly lighter weight */
 .accordion.accordion16 summary.accordion-item-label > p {
   color: #444;
   font-size: 13px;
@@ -315,7 +311,6 @@
   min-width: 0;
 }
 
-/* Chevron: smaller, flush right, centered */
 .accordion.accordion16 summary.accordion-item-label::after {
   display: inline-flex;
   align-items: center;
@@ -334,12 +329,10 @@
   vertical-align: middle;
 }
 
-/* Chevron rotates when open */
 .accordion.accordion16 details[open] > summary.accordion-item-label::after {
   transform: rotate(135deg);
 }
 
-/* Accordion content */
 .accordion.accordion16 .accordion-item-body {
   padding: 0 7px;
   color: #424242;
@@ -350,22 +343,144 @@
   margin: 0;
 }
 
-/* Remove margin between accordion items */
 .accordion.accordion16 details + details {
   margin-top: 0;
 }
 
-/* Hide outline for summary for visual cleanliness */
 .accordion.accordion16 summary.accordion-item-label:focus {
   outline: none;
   background: #fff;
 }
 
-/* Responsive fine-tuning: keep minimal padding */
 @media (width <= 600px) {
   .accordion.accordion16 summary.accordion-item-label,
   .accordion.accordion16 .accordion-item-body {
     padding-left: 4px;
     padding-right: 1px;
+  }
+}
+
+
+.accordion.accordion28 details {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+.accordion.accordion28 details + details {
+  margin-top: 8px;
+}
+
+.accordion.accordion28 details summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 40px;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6E3A7F;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+}
+
+/* Left side: label text */
+.accordion.accordion28 details summary p {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* Right side: chevron area, simulated as a flex child block */
+.accordion.accordion28 details summary::after {
+  content: "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 40px;
+  margin: 0;
+  border-left: 1px solid #eee;
+  background: #fafafa;
+  position: relative;
+}
+
+/* Chevron inside right block */
+
+.accordion.accordion28 details summary::after::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid #E57373;
+  border-bottom: 2px solid #E57373;
+  border-radius: 2px;
+  box-sizing: border-box;
+  transform: rotate(45deg);
+  margin: auto;
+}
+
+.accordion.accordion28 details[open] summary::after::before {
+  transform: rotate(-135deg);
+}
+
+/* Row hover/focus */
+.accordion.accordion28 details summary:focus,
+.accordion.accordion28 details summary:hover {
+  background: #fafafa;
+}
+
+.accordion.accordion28 details[open] summary {
+  background: #fafafa;
+}
+
+/* Accordion body */
+.accordion.accordion28 details .accordion-item-body {
+  padding: 0 16px 16px;
+  background: #fff;
+  border-top: none;
+}
+
+.accordion.accordion28 details[open] .accordion-item-body {
+  background: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+/* Remove default marker */
+.accordion.accordion28 details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Responsive stacking for narrow screens */
+@media (width <= 600px) {
+  .accordion.accordion28 details summary {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 48px;
+    max-width: 100%;
+  }
+
+  .accordion.accordion28 details summary p {
+    width: 100%;
+    padding: 8px 0 0;
+    margin-bottom: 4px;
+    border-right: none;
+  }
+
+  .accordion.accordion28 details summary::after {
+    width: 100%;
+    border-left: none;
+    margin-left: 0;
+    justify-content: flex-end;
   }
 }
