@@ -1,0 +1,317 @@
+{
+  "fragments": [
+    {
+      "name": "nav",
+      "path": "/nav",
+      "totalBoxes": 1,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-00-ec260e70fd0d109a7b00561467202bbb97cfb965",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]"
+        }
+      ],
+      "styles": {
+        "height": 49,
+        "background": "rgb(242, 242, 244) none repeat scroll 0% 0% / auto padding-box border-box"
+      }
+    },
+    {
+      "name": "footer",
+      "path": "/footer",
+      "totalBoxes": 1,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-24-576870337abf0aa323a1fe75a33f2b359b589104",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/p[1]"
+        }
+      ],
+      "styles": {
+        "background": "rgb(72, 74, 80) none repeat scroll 0% 0% / auto padding-box border-box"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Search",
+      "cluster": 1,
+      "source": "Search",
+      "target": "Search",
+      "key": "search1",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-01-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]",
+          "section": "section-2"
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 2,
+      "source": "Hero",
+      "target": "Hero (hero2)",
+      "key": "hero2",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-02-ea54bf226ef01e6d196f53ad0513830e4fde246f",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[1]/a[1]/div[1]",
+          "section": "section-3"
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 3,
+      "source": "Hero",
+      "target": "Hero (hero3)",
+      "key": "hero3",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-03-84b8ab78befb4f6e000d876f31eaef4a7366c41f",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[1]/a[1]/div[2]",
+          "section": "section-1"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 4,
+      "source": "Columns",
+      "target": "Columns (columns4)",
+      "key": "columns4",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-05-5a5a984f030529fdbfeaf37405c4086fa764b745",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[2]"
+        },
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-06-4e5ba50f13dcd01f499c0b414c28e5eb7793f187",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[3]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 5,
+      "source": "Columns",
+      "target": "Columns (columns5)",
+      "key": "columns5",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-08-f5317f8edc9a8bb93d312fea46ce553be11a9a16",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[5]"
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 6,
+      "source": "Cards",
+      "target": "Cards (cards6)",
+      "key": "cards6",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-12-894dc28143d1fd22ef932c798490bb26406b5659",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[9]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 7,
+      "source": "Columns",
+      "target": "Columns (columns7)",
+      "key": "columns7",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-16-e6db56ee11e20c4a358cbbc2290f288900a24bf3",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[13]"
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 8,
+      "source": "Cards",
+      "target": "Cards (cards8)",
+      "key": "cards8",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-19-e4a5939996a810a8b7c3ae9ed5e9e600ea995ce7",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/section[1]/div[2]"
+        }
+      ]
+    },
+    {
+      "name": "unknown",
+      "cluster": 9,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-20-bb92ec86005d79a6ffbdeb26334978be3d2b9063",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/section[1]/div[3]"
+        }
+      ]
+    },
+    {
+      "name": "Accordion",
+      "cluster": 10,
+      "source": "Accordion",
+      "target": "Accordion",
+      "key": "accordion10",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-22-aee36071c13daeb98337ff6e88b9276c2837f768",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/section[1]",
+          "section": "section-1"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 11,
+      "source": "Columns",
+      "target": "Columns (columns11)",
+      "key": "columns11",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-23-16866aa8219f9dcf5aea51b466a22f474e07d972",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/nav[1]",
+          "section": "section-4"
+        }
+      ]
+    }
+  ],
+  "outliers": [
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-00-ec260e70fd0d109a7b00561467202bbb97cfb965",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]",
+      "section": "section-1"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-04-2f2e1379ec4f9234feb8228fa714ef8b7c64bf35",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[1]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-07-a705ea6bebcb9577209677e9f55e8d63feb8d929",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[4]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-09-82145ff9c1d4d3a2ce8e283f6a7dd14bf7f5281c",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[6]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-10-341d87392e60a46d0153196ee6c8c90147f4990c",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[7]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-11-86931024628a5795bf742fe521ed1384a7cfd0a3",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[8]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-13-0bc6f081059e8d076f369f3735bfefa03b126886",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[10]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-14-0539a4fb472e4e61c39baa6da9ea5f1222cee8a3",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[11]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-15-7d9a2251c6d15a61b6fe7ed7bb3c6b7263502f98",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[12]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-17-e1aa688d085b4ea4e9d801acec577b9a4bdd87b5",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[14]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-18-10812581a2a098d36643c1690337d6cf5078c5ca",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[15]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-21-c38136c2a1c3bd074a73be0691f28ae3a646292f",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+      "section": "section-1"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-24-576870337abf0aa323a1fe75a33f2b359b589104",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/p[1]",
+      "section": "section-4"
+    }
+  ],
+  "sections": [
+    {
+      "name": "section-1",
+      "background": "rgb(242, 242, 244) none repeat scroll 0% 0% / auto padding-box border-box",
+      "count": 4
+    },
+    {
+      "name": "section-2",
+      "background": "rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box",
+      "count": 1
+    },
+    {
+      "name": "section-3",
+      "background": "rgba(0, 0, 0, 0) url(\"https://virginmoney.com.au/content/dam/virginmoney/megabanners/home-page-bank-and-save-red.png\") no-repeat scroll 100% 50% / cover padding-box border-box",
+      "count": 1
+    },
+    {
+      "name": "section-4",
+      "background": "rgb(72, 74, 80) none repeat scroll 0% 0% / auto padding-box border-box",
+      "count": 2
+    }
+  ]
+}
