@@ -1,0 +1,962 @@
+{
+  "fragments": [
+    {
+      "name": "nav",
+      "path": "/nav",
+      "totalBoxes": 1,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-00-ec260e70fd0d109a7b00561467202bbb97cfb965",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div",
+              "differences": [
+                {
+                  "change_type": "deletion",
+                  "text": "We've announced changes to our lending interest rates following the RBA's rate cut. Learn more"
+                }
+              ],
+              "dissimilarity_score": 1.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ],
+      "styles": {
+        "height": 49,
+        "background": "rgb(242, 242, 244) none repeat scroll 0% 0% / auto padding-box border-box"
+      }
+    },
+    {
+      "name": "footer",
+      "path": "/footer",
+      "totalBoxes": 1,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-24-576870337abf0aa323a1fe75a33f2b359b589104",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/p[1]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__footer__div__p",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "\u00a9 2025 Virgin Money (Australia) Pty Limited ABN 75 103 478 897 | Registered Address: Level 3, 100 Skyring Terrace, Newstead, Queensland 4006."
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ],
+      "styles": {
+        "background": "rgb(72, 74, 80) none repeat scroll 0% 0% / auto padding-box border-box"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Search",
+      "cluster": 1,
+      "source": "Search",
+      "target": "Search",
+      "key": "search1",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-01-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]",
+          "section": "section-2",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__header",
+              "differences": [
+                {
+                  "change_type": "deletion",
+                  "text": "Toggle navigation Bank & Save Our accounts Everyday Go Account Boost Saver Grow Saver App features Our new mobile app Spend tracker Savings goals Digital wallet Lock Saver Contact us Transaction disputes Availability of Payment Services Government payments Rates & fees FAQs Forms & important information Credit Cards Compare our credit cards High Flyer Credit Card Flyer Credit Card Anytime Rewards Credit Card Low Rate Credit Card No Annual Fee Credit Card Balance Transfer Credit Card Help me choose a credit card Apply now Tools & Calculators Upload documents online Balance Transfer Calculator Velocity Points Calculator Rewards & Benefits Velocity Rewards Flight benefits Insurance & protection Visa benefits Using your card Set up & activate your card Using your online account Making account changes Payments Transacting overseas Transaction disputes Using your Mobile App Rates & fees Forms & important information Credit Card Support Contact Us Manage your application Complaints FAQs Home Loans Lite Home Loan Loaded Home Loan Tools and calculators How much can I borrow? Mortgage repayment calculator Key Facts Sheet View all our calculators Help and Support Manage Your Home Loan FAQs Forms and Important Information Contact Us Closing My Home Loan Home Loan Refinance Rates and Fees Get In Touch Reward Me Rates & Fees Insurance Home Insurance Complaints Get a quote Home and Contents Insurance Home Building Insurance Contents Insurance Manage your policy Making a claim Important documents Contact us FAQs Car Insurance Get a quote Compare our Car Insurance Manage your policy Making a claim Important documents Complaints Contact us FAQs Income Protection Compare Income Protection Making a claim Code of Practice Contact us Complaints Important Documents FAQs Life Insurance Compare Life Insurance Making a claim Code of Practice Contact us Complaints Important Documents FAQs Superannuation Individuals Fees Investment options Product dashboard Insurance options Performance Managing super Employers Choosing your default fund Superstream Setting up your employees Information for your employees Apply now Understanding super Choosing a super fund Building your super Making super contributions Super contribution caps Consolidate your super How your super is invested How does super work in Australia? What is the Super Guarantee Contribution? Superannuation & tax Jargon unplugged Tools & calculators Fee comparison tool Salary sacrifice calculator Retirement income calculator Forms & key information Forms Key documents News Contact us Complaints FAQs Velocity rewards Rewards Earn Redeem Forms & Important Information FAQs Help Losing a loved one Contact us FAQs Changes to our ADI licence System status Online security Open banking Privacy and security Fraud and Scam Assistance Credit Reporting Accessibility Rapport Financial Difficulty Assistance Manage your application or policy Interest Rate Hub Remediation Funds Owed Using the Virgin Money app at tax time Natural Disaster Support Complaints and Feedback LOGIN Bank & Save Credit Cards Home Loans Choose your Home Loan type Reward Home Loans This login relates only to Virgin Money Reward Me Home Loan and Companion Account customers. Go Go Go Go Superannuation Login as a: Customer Employer Go Go Go Go Car Insurance Home and Contents Insurance Manage Data Sharing Search Login"
+                }
+              ],
+              "dissimilarity_score": 1.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 2,
+      "source": "Hero",
+      "target": "Hero (hero2)",
+      "key": "hero2",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-02-ea54bf226ef01e6d196f53ad0513830e4fde246f",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[1]/a[1]/div[1]",
+          "section": "section-3",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__section__a__div",
+              "differences": [
+                {
+                  "change_type": "deletion",
+                  "text": "VIrgin Money Go Account Bundled with a Boost Saver Account"
+                }
+              ],
+              "dissimilarity_score": 1.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 3,
+      "source": "Hero",
+      "target": "Hero (hero3)",
+      "key": "hero3",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-03-84b8ab78befb4f6e000d876f31eaef4a7366c41f",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[1]/a[1]/div[2]",
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__section__a__div_2",
+              "differences": [
+                {
+                  "change_type": "deletion",
+                  "text": "Virgin Money Australia Bank & Save Get rewarded for everyday banking, saving and spending, and earn Virgin Money Points on every purchase, direct debit and BPAY payment 1 when you open an Virgin Money Go Account and linked Boost Saver. That\u2019s more like it. Find out more"
+                }
+              ],
+              "dissimilarity_score": 1.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 4,
+      "source": "Columns",
+      "target": "Columns (columns4)",
+      "key": "columns4",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-05-5a5a984f030529fdbfeaf37405c4086fa764b745",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[2]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__div__div__main__div_2",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Credit Cards Compare credit cards Rewards & benefits Tools & calculators Insurance Home insurance Car insurance Life insurance Superannuation Individual super Employer super Fee comparison tool"
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        },
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-06-4e5ba50f13dcd01f499c0b414c28e5eb7793f187",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[3]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__div__div__main__div_3",
+              "differences": [
+                {
+                  "change_type": "deletion",
+                  "text": "Bank & Save"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Credit"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Transactions"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Cards"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Boost"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Compare"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Saver"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "credit"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Grow"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "cards"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Saver"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Rewards & benefits"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Home"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Tools & calculators"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "loans"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Insurance"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Compare"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Home"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "home"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "insurance"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "loans"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Car"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Refinance"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "insurance"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Interest"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Life"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "rates & fees"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "insurance Superannuation"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Help & support"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Individual"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Contact"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "super"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "us"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Employer"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "Rate"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "super"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "change"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "Fee"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "hub"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "comparison"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "FAQs"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "tool"
+                }
+              ],
+              "dissimilarity_score": 0.95
+            }
+          ],
+          "similarity_score": 0.050000000000000044
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 5,
+      "source": "Columns",
+      "target": "Columns (columns5)",
+      "key": "columns5",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-08-f5317f8edc9a8bb93d312fea46ce553be11a9a16",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[5]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__div__div__main__div_5",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Your 5K Bonus Points bank-warming gift If receiving gifts is your love language, you\u2019re going to be very happy here. When you open a new Virgin Money Go Account with a linked Boost Saver, we\u2019ll welcome you with 5,000 bonus Virgin Money Points! 14 That equals a $20 gift voucher from one of our many retail partners, including JB HiFi, Amazon, Woolworths & Bunnings. Simply make (at least) one settled debit card purchase, direct debit or BPAY payment in the first 30 days. Offer ends 31/01/26. New customers only. Open an account"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 6,
+      "source": "Cards",
+      "target": "Cards (cards6)",
+      "key": "cards6",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-12-894dc28143d1fd22ef932c798490bb26406b5659",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[9]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__div__div__main__div_9",
+              "differences": [
+                {
+                  "change_type": "insertion",
+                  "text": "null "
+                },
+                {
+                  "change_type": "equal",
+                  "text": "FAQs Got a question? There\u2019s a good chance you\u2019ll find the answer here. Get the answers you need"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": " null"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " RBA rate changes Stay up to date with all things interest rate related, including tips and tools to plan for rate rises. Find the latest information here"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": " null"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " Contact us All of our contact info by product so you can get directly to the right help. Find the details you need "
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "null "
+                },
+                {
+                  "change_type": "equal",
+                  "text": "Financial assistance If your financial circumstances have changed or you\u2019re having difficulty managing your financial commitments, we can help. Read more about how we can support you "
+                },
+                {
+                  "change_type": "insertion",
+                  "text": "null "
+                },
+                {
+                  "change_type": "equal",
+                  "text": "Blog Your one-stop destination for all money-related lifestyle content. Read the latest articles here"
+                },
+                {
+                  "change_type": "insertion",
+                  "text": " null"
+                },
+                {
+                  "change_type": "equal",
+                  "text": " Complaints and Feedback If at any time you\u2019re not satisfied with our products, services, staff or our complaint handling process, we want you to tell us. Get in touch"
+                }
+              ],
+              "dissimilarity_score": 0.09
+            }
+          ],
+          "similarity_score": 0.91
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 7,
+      "source": "Columns",
+      "target": "Columns (columns7)",
+      "key": "columns7",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-16-e6db56ee11e20c4a358cbbc2290f288900a24bf3",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[13]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__div__div__main__div_13",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Bank on the fly Our easy-to-use app brings your Virgin Money everyday accounts, savings accounts and credit cards into your own hands, wherever you are. Download the app today."
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 8,
+      "source": "Cards",
+      "target": "Cards (cards8)",
+      "key": "cards8",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-19-e4a5939996a810a8b7c3ae9ed5e9e600ea995ce7",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/section[1]/div[2]",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__div__div__main__section__div_2",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Your guide to investing in property Keep the change! 10 small changes for a big difference to your budget How to identify unknown transactions"
+                }
+              ],
+              "dissimilarity_score": 0.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ]
+    },
+    {
+      "name": "unknown",
+      "cluster": 9,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-20-bb92ec86005d79a6ffbdeb26334978be3d2b9063",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/section[1]/div[3]"
+        }
+      ]
+    },
+    {
+      "name": "Accordion",
+      "cluster": 10,
+      "source": "Accordion",
+      "target": "Accordion",
+      "key": "accordion10",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-22-aee36071c13daeb98337ff6e88b9276c2837f768",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/section[1]",
+          "section": "section-1",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__div_4__section_2__div__div__div__div__section",
+              "differences": [
+                {
+                  "change_type": "equal",
+                  "text": "Things you need to know You will earn 8 Virgin Money Points for any settled debit card purchases (not pending), direct debits and BPAY payments from your Virgin Money Go Account. For customers who open a Virgin Money Go Account jointly with another person, the points will be split and evenly allocated to both joint account holders of that account. For further information refer to our Virgin Money Rewards terms and conditions . The Virgin Money Boost Saver variable Base interest rate plus Bonus interest rate is made up of: \u2022 Base interest rate of 0.05% p.a. and \u2022 Bonus interest rate of 5.00% p.a. if Monthly Criteria is met in the previous calendar month. The Bonus interest rate applies up to a combined balance of $250,000 on all your Boost Saver held in the same name as your Virgin Money Go Account. Monthly Criteria will be met when both the following conditions are met: \u2022Deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 Make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14-17 years of age. For more information, visit the Rates & Fees section. The Virgin Money Boost Saver Highest Variable Interest Rate is made up of: \u2022 Base Interest Rate of 0.05% p.a.; \u2022 Bonus Interest Rate of 5.00% p.a. if Monthly Criteria is met in the previous month; and \u2022 Notice Interest Rate of 0.30% p.a. if the Lock Saver Feature is enabled. 32 days\u2019 advance notice period applies to access funds when the Lock Saver Feature is enabled. The Bonus Rate applies up to a combined total balance of $250,000 across all Boost Savers that are held in the same name. Monthly Criteria will be met when both the following conditions are met: \u2022 deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments on your Go Account that settle in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14 -17 years of age. For more information, visit the Rates & Fees section. Offer of 10,000 Velocity Frequent Flyer Points (Velocity Points) is available to eligible customers who purchase a new combined Virgin Home and Contents Insurance policy and have not previously received points for that same policy (not available for renewals). This offer is valid for new policy purchases from 1 March 2022 \u2013 26 March 2024 and is subject to change or removal at the discretion of Virgin Money. Offer is not valid to customers who purchased through Compare the Market, Choosi, iSelect, Finder, Canstar, Infochoice, Mozo or the Virgin Money app. A valid Velocity membership number must be provided at the time of application. If you\u2019re not a Velocity member you can join Velocity for free . Maximum of 10,000 Velocity Points per policy. In order to receive the Points, the policy holder\u2019s name must match the Velocity name and account number provided. Eligible policy holders will be entitled to up to 2 x 5,000 Velocity Points subject to the following conditions: the policy holder will be entitled to 5,000 Velocity Points if the insurance is held for at least 65 days (credited to the eligible Velocity Account up to 90 days after the policy has been purchased); the policy holder will be entitled to the remaining 5,000 Bonus Velocity points if the policy is still active 6 months after purchase (credited to the eligible Velocity Account up to 10 months after the policy was purchased). The Velocity Membership Terms and Conditions apply . This offer cannot be used in conjunction with any other Virgin Money Home and Contents Insurance offers, is not redeemable for cash and is not transferrable. Discount applies to the first year's premium paid for new Virgin Home and or Contents Insurance initiated online on or after 30 March 2017. The 30% discount applies to Combined Home & Contents Insurance, 15% discount applies to Home Insurance only or Contents Insurance only. We reserve the right to change the offer without notice. Base rate premiums subject to change. The discount does not apply to any renewal offer of insurance. Discount applies only to the insurance portion of the premium before any fees, charges or levies that may apply. This may impact the full extent of the discount. Up to 100,000 bonus Velocity Points offer is available to new approved Virgin Australia Velocity Flyer Card account holders who apply by 30 June 2022. 25,000 bonus Velocity Points will be awarded for every month $1,500 or more is spent on Eligible Transactions for the first 4 months from card approval. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, BPAY payments, purchases of foreign currency and travellers cheques, transactions made in operating a business, fees and charges such as interest and ATM charges and government related transactions. Government related transactions include transactions with government or semi-government entities, or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). See Velocity Rewards Program for High Flyer and Flyer Cardholders Terms and Conditions for full details and definition. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page or by calling 1300 771 634 and indicating that you would like the Flyer Card 100,000 Velocity Points offer. Points will be credited to the Primary Cardholders Velocity Account up to 60 days after the qualifying purchases. Velocity membership Terms and Conditions apply . This offer can't be used in conjunction with other Virgin Australia Velocity Flyer Point promotions or offers. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). Your total balance transfers may not exceed 80% of your credit limit. The balance transfer interest rate applies to balances transferred with this offer for the period shown, from the date the balance transfer is processed. At the end of the balance transfer period, the interest rate on any outstanding transferred balance will revert to the interest rate for cash advances, currently 21.69% p.a. for the Virgin Money Low Rate Card. Interest rates are variable and subject to change. The interest rates are current as at 1 September 2022. This offer is valid until 30 November 2022. Please note that unless advertised otherwise, you are not entitled to any interest free days whilst you have a balance transfer. This means that all spend will be charged interest at the applicable ongoing purchase rate. If we approve your credit card application, the Balance Transfer offer will be available for up to 90 days from the date your application is approved. Velocity Points are not issued on balance transfers. View more information about balance transfers . Welcome Offer Criteria: The Virgin Money Go Account comes bundled with the Virgin Money Boost Saver. New Virgin Money Go Account customers will receive 5,000 Bonus Virgin Money Points when they make one (1) debit card purchase, direct debit or BPAY payment from their Virgin Money Go Account in the first 30 days from account opening. Debit card purchases must settle in the first 30 days from account opening (not pending). Cash withdrawals, deposits, refunds, reversals or credits to the Virgin Money Go Account, Pay Someone payments and internal transfers are excluded. For customers who open a Virgin Money Go Account jointly with another person, the Bonus Points will be split and evenly allocated to both joint account holders of that account once the Welcome Offer Criteria have been met. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. A new customer is any person who does not currently or has not previously held a Virgin Money Go Account or Virgin Money Grow Saver. Offer ends 31 July 2025. For further information on the Virgin Money Rewards Program refer to our terms and conditions ."
+                }
+              ],
+              "dissimilarity_score": -0.0
+            }
+          ],
+          "similarity_score": 0.0
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 11,
+      "source": "Columns",
+      "target": "Columns (columns11)",
+      "key": "columns11",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-23-16866aa8219f9dcf5aea51b466a22f474e07d972",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/nav[1]",
+          "section": "section-4",
+          "differences": [
+            {
+              "element_id": "html__body__div__div__footer__div__nav",
+              "differences": [
+                {
+                  "change_type": "deletion",
+                  "text": "VIRGIN MONEY AUSTRALIA "
+                },
+                {
+                  "change_type": "equal",
+                  "text": "About Virgin Money Australia Virgin Money Rewards News Partners Careers "
+                },
+                {
+                  "change_type": "deletion",
+                  "text": "HELP & SUPPORT "
+                },
+                {
+                  "change_type": "equal",
+                  "text": "Contact us FAQs System status Important information Privacy Accessibility"
+                },
+                {
+                  "change_type": "deletion",
+                  "text": " Connect With Us"
+                }
+              ],
+              "dissimilarity_score": 0.12
+            }
+          ],
+          "similarity_score": 0.88
+        }
+      ]
+    }
+  ],
+  "outliers": [
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-00-ec260e70fd0d109a7b00561467202bbb97cfb965",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[1]",
+      "section": "section-1",
+      "differences": [
+        {
+          "element_id": "html__body__div__div__div",
+          "differences": [
+            {
+              "change_type": "deletion",
+              "text": "We've announced changes to our lending interest rates following the RBA's rate cut. Learn more"
+            }
+          ],
+          "dissimilarity_score": 1.0
+        }
+      ],
+      "similarity_score": 0.0
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-04-2f2e1379ec4f9234feb8228fa714ef8b7c64bf35",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[1]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-07-a705ea6bebcb9577209677e9f55e8d63feb8d929",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[4]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-09-82145ff9c1d4d3a2ce8e283f6a7dd14bf7f5281c",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[6]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-10-341d87392e60a46d0153196ee6c8c90147f4990c",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[7]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-11-86931024628a5795bf742fe521ed1384a7cfd0a3",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[8]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-13-0bc6f081059e8d076f369f3735bfefa03b126886",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[10]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-14-0539a4fb472e4e61c39baa6da9ea5f1222cee8a3",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[11]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-15-7d9a2251c6d15a61b6fe7ed7bb3c6b7263502f98",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[12]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-17-e1aa688d085b4ea4e9d801acec577b9a4bdd87b5",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[14]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-18-10812581a2a098d36643c1690337d6cf5078c5ca",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/div[1]/div[1]/main[1]/div[15]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-21-c38136c2a1c3bd074a73be0691f28ae3a646292f",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+      "section": "section-1"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-24-576870337abf0aa323a1fe75a33f2b359b589104",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/p[1]",
+      "section": "section-4",
+      "differences": [
+        {
+          "element_id": "html__body__div__div__footer__div__p",
+          "differences": [
+            {
+              "change_type": "equal",
+              "text": "\u00a9 2025 Virgin Money (Australia) Pty Limited ABN 75 103 478 897 | Registered Address: Level 3, 100 Skyring Terrace, Newstead, Queensland 4006."
+            }
+          ],
+          "dissimilarity_score": -0.0
+        }
+      ],
+      "similarity_score": 0.0
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://virginmoney.com.au/",
+      "differences": [
+        {
+          "change_type": "deletion",
+          "text": "Jump to main navigation Jump to main content "
+        },
+        {
+          "change_type": "equal",
+          "text": "We've announced changes to our lending interest rates following the RBA's rate cut. Learn more "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Toggle navigation Bank & Save Our accounts Everyday Go Account Boost Saver Grow Saver App features Our new mobile app Spend tracker Savings goals Digital wallet Lock Saver Contact us Transaction disputes Availability of Payment Services Government payments Rates & fees FAQs Forms & important information Credit Cards Compare our credit cards High Flyer Credit Card Flyer Credit Card Anytime Rewards Credit Card Low Rate Credit Card No Annual Fee Credit Card Balance Transfer Credit Card Help me choose a credit card Apply now Tools & Calculators Upload documents online Balance Transfer Calculator Velocity Points Calculator Rewards & Benefits Velocity Rewards Flight benefits Insurance & protection Visa benefits Using your card Set up & activate your card Using your online account Making account changes Payments Transacting overseas Transaction disputes Using your Mobile App Rates & fees Forms & important information Credit Card Support Contact Us Manage your application Complaints FAQs Home Loans Lite Home Loan Loaded Home Loan Tools and calculators How much can I borrow? Mortgage repayment calculator Key Facts Sheet View all our calculators Help and Support Manage Your Home Loan FAQs Forms and Important Information Contact Us Closing My Home Loan Home Loan Refinance Rates and Fees Get In Touch Reward Me Rates & Fees Insurance Home Insurance Complaints Get a quote Home and Contents Insurance Home Building Insurance Contents Insurance Manage your policy Making a claim Important documents Contact us FAQs Car Insurance Get a quote Compare our Car Insurance Manage your policy Making a claim Important documents Complaints Contact us FAQs Income Protection Compare Income Protection Making a claim Code of Practice Contact us Complaints Important Documents FAQs Life Insurance Compare Life Insurance Making a claim Code of Practice Contact us Complaints Important Documents FAQs Superannuation Individuals Fees Investment options Product dashboard Insurance options Performance Managing super Employers Choosing your default fund Superstream Setting up your employees Information for your employees Apply now Understanding super Choosing a super fund Building your super Making super contributions Super contribution caps Consolidate your super How your super is invested How does super work in Australia? What is the Super Guarantee Contribution? Superannuation & tax Jargon unplugged Tools & calculators Fee comparison tool Salary sacrifice calculator Retirement income calculator Forms & key information Forms Key documents News Contact us Complaints FAQs Velocity rewards Rewards Earn Redeem Forms & Important Information FAQs Help Losing a loved one Contact us FAQs Changes"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Jump"
+        },
+        {
+          "change_type": "equal",
+          "text": " to "
+        },
+        {
+          "change_type": "deletion",
+          "text": "our ADI licence System status"
+        },
+        {
+          "change_type": "insertion",
+          "text": "main"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Online"
+        },
+        {
+          "change_type": "insertion",
+          "text": "navigation"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "security Open banking Privacy and security Fraud and Scam Assistance Credit Reporting Accessibility Rapport Financial Difficulty Assistance Manage your application or policy Interest Rate Hub Remediation Funds Owed Using the Virgin Money app at tax time Natural Disaster Support Complaints and Feedback LOGIN Bank & Save Credit Cards Home Loans Choose your Home Loan type Reward Home Loans This login relates only"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Jump"
+        },
+        {
+          "change_type": "equal",
+          "text": " to "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Virgin Money Reward Me Home Loan and Companion Account customers. Go Go Go Go Superannuation Login as a: Customer Employer Go Go Go Go Car Insurance"
+        },
+        {
+          "change_type": "insertion",
+          "text": "main"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Home and Contents Insurance Manage Data Sharing Search Login"
+        },
+        {
+          "change_type": "insertion",
+          "text": "content"
+        },
+        {
+          "change_type": "equal",
+          "text": " Search Type a minimum of three characters then press UP or DOWN on the keyboard to navigate the autocompleted search results Search button Search for \u2018 \u2019 Close navigation Bank & Save Credit Cards Home Loans Reward Home Loans Superannuation Customer Employer Car Insurance Home and Contents Insurance Manage Data Sharing Home Close navigation Bank & Save Bank & Save child pages Our accounts Our accounts child pages Everyday Go Account Boost Saver Grow Saver App features App features child pages Our new mobile app Spend tracker Savings goals Digital wallet Lock Saver Contact us Contact us child pages Transaction disputes Availability of Payment Services Government payments Rates & fees Rates & fees child pages FAQs FAQs child pages Forms & important information Forms & important information child pages Credit Cards Credit Cards child pages Compare our credit cards Compare our credit cards child pages High Flyer Credit Card Flyer Credit Card Anytime Rewards Credit Card Low Rate Credit Card No Annual Fee Credit Card Balance Transfer Credit Card Help me choose a credit card Apply now Tools & Calculators Tools & Calculators child pages Upload documents online Balance Transfer Calculator Velocity Points Calculator Rewards & Benefits Rewards & Benefits child pages Velocity Rewards Flight benefits Insurance & protection Visa benefits Using your card Using your card child pages Set up & activate your card Using your online account Making account changes Payments Transacting overseas Transaction disputes Using your Mobile App Rates & fees Rates & fees child pages Forms & important information Forms & important information child pages Credit Card Support Contact Us Contact Us child pages Manage your application Complaints FAQs FAQs child pages Home Loans Home Loans child pages Lite Home Loan Lite Home Loan child pages Loaded Home Loan Loaded Home Loan child pages Tools and calculators Tools and calculators child pages How much can I borrow? Mortgage repayment calculator Key Facts Sheet View all our calculators Help and Support Help and Support child pages Manage Your Home Loan FAQs Forms and Important Information Contact Us Closing My Home Loan Home Loan Refinance Home Loan Refinance child pages Rates and Fees Rates and Fees child pages Get In Touch Get In Touch child pages Reward Me Rates & Fees Reward Me Rates & Fees child pages Insurance Insurance child pages Home Insurance Home Insurance child pages Complaints Get a quote Home and Contents Insurance Home Building Insurance Contents Insurance Manage your policy Making a claim Important documents Contact us FAQs Car Insurance Car Insurance child pages Get a quote Compare our Car Insurance Manage your policy Making a claim Important documents Complaints Contact us FAQs Income Protection Income Protection child pages Compare Income Protection Making a claim Code of Practice Contact us Complaints Important Documents FAQs Life Insurance Life Insurance child pages Compare Life Insurance Making a claim Code of Practice Contact us Complaints Important Documents FAQs Superannuation Superannuation child pages Individuals Individuals child pages Fees Investment options Product dashboard Insurance options Performance Managing super Employers Employers child pages Choosing your default fund Superstream Setting up your employees Information for your employees Apply now Understanding super Understanding super child pages Choosing a super fund Building your super Making super contributions Super contribution caps Consolidate your super How your super is invested How does super work in Australia? What is the Super Guarantee Contribution? Superannuation & tax Jargon unplugged Tools & calculators Tools & calculators child pages Fee comparison tool Salary sacrifice calculator Retirement income calculator Forms & key information Forms & key information child pages Forms Key documents News Contact us Contact us child pages Complaints FAQs FAQs child pages Velocity rewards Velocity rewards child pages Rewards Rewards child pages Earn Earn child pages Redeem Redeem child pages Forms & Important Information Forms & Important Information child pages FAQs FAQs child pages Help Help child pages Losing a loved one Losing a loved one child pages Contact us Contact us child pages FAQs FAQs child pages Changes to our ADI licence System status System status child pages Online security Online security child pages Open banking Privacy and security Privacy and security child pages Fraud and Scam Assistance Credit Reporting Accessibility Accessibility child pages Rapport Rapport child pages Financial Difficulty Assistance Financial Difficulty Assistance child pages Manage your application or policy Manage your application or policy child pages Interest Rate Hub Interest Rate Hub child pages Remediation Funds Owed Remediation Funds Owed child pages Using the Virgin Money app at tax time Using the Virgin Money app at tax time child pages Natural Disaster Support Natural Disaster Support child pages Complaints and Feedback Complaints and Feedback child pages "
+        },
+        {
+          "change_type": "deletion",
+          "text": "VIrgin Money Go Account Bundled with a Boost Saver Account Virgin Money Australia Bank & Save Get rewarded for everyday banking, saving and spending, and earn Virgin Money Points on every purchase, direct debit and BPAY payment 1 when you open an Virgin Money Go Account and linked Boost Saver. That\u2019s more like it. Find out more "
+        },
+        {
+          "change_type": "equal",
+          "text": "Banking and beyond Credit Cards Compare credit cards Rewards & benefits Tools & calculators Insurance Home insurance Car insurance Life insurance Superannuation Individual super Employer super Fee comparison tool Bank & Save Transactions Boost Saver Grow Saver Home loans Compare home loans Refinance Interest rates & fees Help & support Contact us Rate change hub FAQs Your 5K Bonus Points bank-warming gift If receiving gifts is your love language, you\u2019re going to be very happy here. When you open a new Virgin Money Go Account with a linked Boost Saver, we\u2019ll welcome you with 5,000 bonus Virgin Money Points! 14 That equals a $20 gift voucher from one of our many retail partners, including JB HiFi, Amazon, Woolworths & Bunnings. Simply make (at least) one settled debit card purchase, direct debit or BPAY payment in the first 30 days. Offer ends 31/01/26. New customers only. Open an account The Directory "
+        },
+        {
+          "change_type": "insertion",
+          "text": "null "
+        },
+        {
+          "change_type": "equal",
+          "text": "FAQs Got a question? There\u2019s a good chance you\u2019ll find the answer here. Get the answers you need"
+        },
+        {
+          "change_type": "insertion",
+          "text": " null"
+        },
+        {
+          "change_type": "equal",
+          "text": " RBA rate changes Stay up to date with all things interest rate related, including tips and tools to plan for rate rises. Find the latest information here"
+        },
+        {
+          "change_type": "insertion",
+          "text": " null"
+        },
+        {
+          "change_type": "equal",
+          "text": " Contact us All of our contact info by product so you can get directly to the right help. Find the details you need "
+        },
+        {
+          "change_type": "insertion",
+          "text": "null "
+        },
+        {
+          "change_type": "equal",
+          "text": "Financial assistance If your financial circumstances have changed or you\u2019re having difficulty managing your financial commitments, we can help. Read more about how we can support you "
+        },
+        {
+          "change_type": "insertion",
+          "text": "null "
+        },
+        {
+          "change_type": "equal",
+          "text": "Blog Your one-stop destination for all money-related lifestyle content. Read the latest articles here"
+        },
+        {
+          "change_type": "insertion",
+          "text": " null"
+        },
+        {
+          "change_type": "equal",
+          "text": " Complaints and Feedback If at any time you\u2019re not satisfied with our products, services, staff or our complaint handling process, we want you to tell us. Get in touch Bank on the fly Our easy-to-use app brings your Virgin Money everyday accounts, savings accounts and credit cards into your own hands, wherever you are. Download the app today. Read our most recent blogs Your guide to investing in property Keep the change! 10 small changes for a big difference to your budget How to identify unknown transactions Read more Important stuff Tooltip This information is of a general nature only and does not take into account your personal financial situation, needs or objectives. Before switching providers we recommend you compare all policy features and find out if cancellation fees apply. Exclusions and conditions apply. New approved customers only. Find information on our terms and conditions or about Virgin Money Target Market Determinations . As we don\u2019t know your personal needs and objectives we can\u2019t advise if this insurance will suit you. Consider your needs and our Key Fact Sheets , Product Disclosure Statements , Target Market Determination and Financial Services Guide before deciding whether to buy our product. Prepared by Virgin Money Australia, a division of Bank of Queensland Limited ABN 32 009 656 740 Australian Credit Licence AFSL 244616, the issuer of the transaction and savings accounts. Information provided is of general nature only and does not take into account your personal financial situation, needs or objectives. As we don\u2019t know your financial needs, we can\u2019t advise whether the products will suit you and prior to making any decision you should obtain and consider the relevant terms and conditions of each product before making any decision about whether to acquire or continue to hold it. For full terms and conditions, including information on eligibility criteria and fees and charges click here . Virgin Money Australia, a division of Bank of Queensland Limited ABN 32 009 656 740, Australian Credit Licence 244616 (\u201cBOQ\u201d), promotes and distributes the Virgin Money Credit Cards (\"Credit Cards\"). National Australia Bank Limited ABN 12 004 044 937 Australian Credit Licence 230686 (\u201cNAB\u201d) is the credit provider and issuer of the Credit Cards. NAB has acquired the business relating to these products from Citigroup Pty Limited (ABN 88 004 325 080, AFSL and Australian Credit Licence 238098) (\u201cCiti\u201d) and has appointed Citi to assist to administer the Credit Cards. Our/us/we means NAB unless the context otherwise requires it. BOQ does not and will not guarantee or otherwise support NAB\u2019s obligations under the contracts or agreements connected with the Credit Cards. Prepared by Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869 (\u2018Virgin Money\u2019). Virgin Money Super is a plan in the Mercer Super Trust ABN 19 905 422 981. Virgin Money Super is issued by Mercer Superannuation (Australia) Limited (MSAL) ABN 79 004 717 533 AFSL 235906 as trustee of the Mercer Super Trust. For more information about Virgin Money Super, please refer to the PDS which is available free of charge on our website or by calling the Customer Care team on 1300 652 770. Home Loans: Virgin Money (Australia) Pty Limited ABN 75 103 478 897 promotes and distributes the companion account and the home loans as the authorised representative and credit representative of the issuer and credit provider, Bank of Queensland Limited ABN 32 009 656 740, Australian Credit Licence/AFSL 244 616 (the 'Lender'). The Lender's standard credit assessment criteria apply. See fees and charges that may be payable. Interest rates quoted are indicative only, and are subject to change without notice. Lifebroker comparison service: Virgin Money (Australia) Pty Limited ABN 75 103 478 897, authorised representative No 280884 of Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869 ( Virgin Money ) has partnered with Lifebroker Pty Ltd (AFS Licence number: 400209) to help you compare a range of Life and Income Protection Insurance policies. Virgin Money earns a commission from Lifebroker for each customer that purchases a policy through the website or contact centre. Lifebroker do not compare all life insurers or policies in the market. For more information about the services provided by Virgin Money (Australia) in relation to the Lifebroker comparison service, please see the Financial Services Guide Existing Virgin Life Insurance and Virgin Income Protection policyholders: From the 1st April 2021, TAL Life Limited ABN 70 050 109 450 AFSL 237848 of Level 16, 363 George Street, Sydney NSW 2000 (TAL Life) will no longer be issuing new Virgin Life Insurance and Virgin Income Protection benefits and Hallmark General Insurance Company Ltd ABN 82 008 477 647 AFSL 243478 of Level 5, 66 St Georges Terrace, Perth, WA, 6000 (Hallmark General Insurance) will no longer be issuing the Involuntary Unemployment Cover which is a benefit available within Virgin Income Protection. Existing policies and claims will continue to be administered under agreement with the insurers, TAL Life and for Involuntary Unemployment Cover, Hallmark General Insurance. Virgin Income Protection and Virgin Life Insurance are promoted by Virgin Money (Australia) Pty Limited ABN 75 103 478 897, authorised representative No 280884 of Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869, and distributed by TAL Direct Pty Limited ABN 39 084 666 017 AFSL 243260 (TAL Direct). TAL Direct has been authorised under an arrangement with the insurers to enter into, vary or cancel insurance cover on behalf of the insurers as if it were the insurers. For information about the services provided Virgin Money (Australia) and TAL Direct in relation to Virgin Life Insurance and Virgin Income Protection, please see the Financial Services Guide . Promoter: Virgin Car Insurance and Virgin Home and Contents Insurance are promoted by Virgin Money (Australia) Pty Limited (\u201cVirgin Money\u201d) as the Authorised Representative No. 280884 of Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869. Car, Home and Contents: Auto & General Services Pty Ltd (ABN 61 003 617 909; AFSL 241411) arranges the insurance on behalf of the product issuer, Auto & General Insurance Company Limited (ABN 42 111 586 353; AFSL 285571). Virgin Money receives a commission which is a percentage of your premium \u2013 ask us for more details before we provide you with any services on this product. 14. Welcome Offer Criteria: The Virgin Money Go Account comes bundled with the Virgin Money Boost Saver. New Virgin Money Go Account customers will receive 5,000 Bonus Virgin Money Points when they make one (1) debit card purchase, direct debit or BPAY payment from their Virgin Money Go Account in the first 30 days from account opening. Debit card purchases must settle in the first 30 days from account opening (not pending). Cash withdrawals, deposits, refunds, reversals or credits to the Virgin Money Go Account, Pay Someone payments and internal transfers are excluded. For customers who open a Virgin Money Go Account jointly with another person, the Bonus Points will be split and evenly allocated to both joint account holders of that account once the Welcome Offer Criteria have been met. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. A new customer is any person who does not currently or has not previously held a Virgin Money Go Account or Virgin Money Grow Saver. Offer ends 31 July 2025. For further information on the Virgin Money Rewards Program refer to our terms and conditions . Things you need to know You will earn 8 Virgin Money Points for any settled debit card purchases (not pending), direct debits and BPAY payments from your Virgin Money Go Account. For customers who open a Virgin Money Go Account jointly with another person, the points will be split and evenly allocated to both joint account holders of that account. For further information refer to our Virgin Money Rewards terms and conditions . The Virgin Money Boost Saver variable Base interest rate plus Bonus interest rate is made up of: \u2022 Base interest rate of 0.05% p.a. and \u2022 Bonus interest rate of 5.00% p.a. if Monthly Criteria is met in the previous calendar month. The Bonus interest rate applies up to a combined balance of $250,000 on all your Boost Saver held in the same name as your Virgin Money Go Account. Monthly Criteria will be met when both the following conditions are met: \u2022Deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 Make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14-17 years of age. For more information, visit the Rates & Fees section. The Virgin Money Boost Saver Highest Variable Interest Rate is made up of: \u2022 Base Interest Rate of 0.05% p.a.; \u2022 Bonus Interest Rate of 5.00% p.a. if Monthly Criteria is met in the previous month; and \u2022 Notice Interest Rate of 0.30% p.a. if the Lock Saver Feature is enabled. 32 days\u2019 advance notice period applies to access funds when the Lock Saver Feature is enabled. The Bonus Rate applies up to a combined total balance of $250,000 across all Boost Savers that are held in the same name. Monthly Criteria will be met when both the following conditions are met: \u2022 deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments on your Go Account that settle in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14 -17 years of age. For more information, visit the Rates & Fees section. Offer of 10,000 Velocity Frequent Flyer Points (Velocity Points) is available to eligible customers who purchase a new combined Virgin Home and Contents Insurance policy and have not previously received points for that same policy (not available for renewals). This offer is valid for new policy purchases from 1 March 2022 \u2013 26 March 2024 and is subject to change or removal at the discretion of Virgin Money. Offer is not valid to customers who purchased through Compare the Market, Choosi, iSelect, Finder, Canstar, Infochoice, Mozo or the Virgin Money app. A valid Velocity membership number must be provided at the time of application. If you\u2019re not a Velocity member you can join Velocity for free . Maximum of 10,000 Velocity Points per policy. In order to receive the Points, the policy holder\u2019s name must match the Velocity name and account number provided. Eligible policy holders will be entitled to up to 2 x 5,000 Velocity Points subject to the following conditions: the policy holder will be entitled to 5,000 Velocity Points if the insurance is held for at least 65 days (credited to the eligible Velocity Account up to 90 days after the policy has been purchased); the policy holder will be entitled to the remaining 5,000 Bonus Velocity points if the policy is still active 6 months after purchase (credited to the eligible Velocity Account up to 10 months after the policy was purchased). The Velocity Membership Terms and Conditions apply . This offer cannot be used in conjunction with any other Virgin Money Home and Contents Insurance offers, is not redeemable for cash and is not transferrable. Discount applies to the first year's premium paid for new Virgin Home and or Contents Insurance initiated online on or after 30 March 2017. The 30% discount applies to Combined Home & Contents Insurance, 15% discount applies to Home Insurance only or Contents Insurance only. We reserve the right to change the offer without notice. Base rate premiums subject to change. The discount does not apply to any renewal offer of insurance. Discount applies only to the insurance portion of the premium before any fees, charges or levies that may apply. This may impact the full extent of the discount. Up to 100,000 bonus Velocity Points offer is available to new approved Virgin Australia Velocity Flyer Card account holders who apply by 30 June 2022. 25,000 bonus Velocity Points will be awarded for every month $1,500 or more is spent on Eligible Transactions for the first 4 months from card approval. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, BPAY payments, purchases of foreign currency and travellers cheques, transactions made in operating a business, fees and charges such as interest and ATM charges and government related transactions. Government related transactions include transactions with government or semi-government entities, or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). See Velocity Rewards Program for High Flyer and Flyer Cardholders Terms and Conditions for full details and definition. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page or by calling 1300 771 634 and indicating that you would like the Flyer Card 100,000 Velocity Points offer. Points will be credited to the Primary Cardholders Velocity Account up to 60 days after the qualifying purchases. Velocity membership Terms and Conditions apply . This offer can't be used in conjunction with other Virgin Australia Velocity Flyer Point promotions or offers. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). Your total balance transfers may not exceed 80% of your credit limit. The balance transfer interest rate applies to balances transferred with this offer for the period shown, from the date the balance transfer is processed. At the end of the balance transfer period, the interest rate on any outstanding transferred balance will revert to the interest rate for cash advances, currently 21.69% p.a. for the Virgin Money Low Rate Card. Interest rates are variable and subject to change. The interest rates are current as at 1 September 2022. This offer is valid until 30 November 2022. Please note that unless advertised otherwise, you are not entitled to any interest free days whilst you have a balance transfer. This means that all spend will be charged interest at the applicable ongoing purchase rate. If we approve your credit card application, the Balance Transfer offer will be available for up to 90 days from the date your application is approved. Velocity Points are not issued on balance transfers. View more information about balance transfers . Welcome Offer Criteria: The Virgin Money Go Account comes bundled with the Virgin Money Boost Saver. New Virgin Money Go Account customers will receive 5,000 Bonus Virgin Money Points when they make one (1) debit card purchase, direct debit or BPAY payment from their Virgin Money Go Account in the first 30 days from account opening. Debit card purchases must settle in the first 30 days from account opening (not pending). Cash withdrawals, deposits, refunds, reversals or credits to the Virgin Money Go Account, Pay Someone payments and internal transfers are excluded. For customers who open a Virgin Money Go Account jointly with another person, the Bonus Points will be split and evenly allocated to both joint account holders of that account once the Welcome Offer Criteria have been met. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. A new customer is any person who does not currently or has not previously held a Virgin Money Go Account or Virgin Money Grow Saver. Offer ends 31 July 2025. For further information on the Virgin Money Rewards Program refer to our terms and conditions . Site footer "
+        },
+        {
+          "change_type": "deletion",
+          "text": "VIRGIN MONEY AUSTRALIA "
+        },
+        {
+          "change_type": "equal",
+          "text": "About Virgin Money Australia Virgin Money Rewards News Partners Careers "
+        },
+        {
+          "change_type": "deletion",
+          "text": "HELP & SUPPORT "
+        },
+        {
+          "change_type": "equal",
+          "text": "Contact us FAQs System status Important information Privacy Accessibility"
+        },
+        {
+          "change_type": "deletion",
+          "text": " Connect With Us"
+        },
+        {
+          "change_type": "equal",
+          "text": " \u00a9 2025 Virgin Money (Australia) Pty Limited ABN 75 103 478 897 | Registered Address: Level 3, 100 Skyring Terrace, Newstead, Queensland 4006."
+        }
+      ],
+      "similarity_score": 0.9912541896987391
+    }
+  ]
+}
