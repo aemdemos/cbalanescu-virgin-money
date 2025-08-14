@@ -1,8 +1,11 @@
+/* stylelint-disable no-descending-specificity */
 .accordion details {
-  border: 1px solid #dadada;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 .accordion details + details {
   margin-top: 24px;
 }
@@ -58,4 +61,102 @@
 .accordion details[open] .accordion-item-body {
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
+}
+
+
+.accordion details > summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  height: 32px;
+  padding: 0 16px;
+  background: #F5F5F7;
+  border-bottom: 1px solid #E0E0E0;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+  list-style: none;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.accordion details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Ensure the button-container does not introduce misalignment */
+.accordion details > summary .button-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+/* Remove default p margin if present */
+.accordion details > summary p.button-container {
+  margin: 0;
+  padding: 0;
+}
+
+/* Override .button styles for flat inline text appearance */
+.accordion details > summary .button-container > .button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: #616161;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: inherit;
+  line-height: 1.25;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  max-width: none;
+  vertical-align: middle;
+  background-color: transparent;
+}
+
+/* Chevron styling and vertical centering */
+.accordion details > summary::after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  border-color: #B71C1C;
+  transform: rotate(45deg);
+  margin-left: 0;
+  margin-right: 0;
+  background: none;
+  position: static;
+}
+
+.accordion details[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.accordion .accordion-item-body {
+  padding: 0 16px;
+  background: #F5F5F7;
+  margin: 0;
+}
+
+@media (width <= 600px) {
+  .accordion details > summary,
+  .accordion .accordion-item-body {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
