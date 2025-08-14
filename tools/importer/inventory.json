@@ -36,11 +36,8 @@
   ],
   "blocks": [
     {
-      "name": "Search",
+      "name": "unknown",
       "cluster": 1,
-      "source": "Search",
-      "target": "Search",
-      "key": "search1",
       "instances": [
         {
           "url": "https://virginmoney.com.au/",
