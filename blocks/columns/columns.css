@@ -2,9 +2,9 @@
 .columns > div {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
   width: 100%;
   max-width: 850px;
   margin-left: auto;
@@ -25,6 +25,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  align-self: stretch;
 }
 
 .columns > div > .columns-img-col {
@@ -488,17 +489,16 @@
 .columns {
   background: #fff;
   font-family: Inter, sans-serif;
-  padding: 32px 0 22px;
-
-  /* subtle box shadow to help separation if dark parent */
-  box-shadow: 0 1px 8px 0 rgb(60 60 60 / 2%);
+  padding: 64px 56px;
+  box-shadow: 0 6px 32px 0 rgb(60 60 60 / 10%);
+  border-radius: 20px;
+  max-width: 1100px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Main columns row: side by side, top aligned, precise gap, left aligned */
-
-/* Each column: vertical stack, don't shrink too much, left aligned */
-
-/* Remove bullets/margin, full width for lists */
 .columns ul {
   list-style: none;
   padding: 0;
@@ -506,25 +506,26 @@
   width: 100%;
 }
 
-/* List items: visually stacked, left aligned, slightly tighter spacing */
 .columns li {
   margin: 0 0 7px;
   padding: 0;
   text-align: left;
 }
 
-/* First link in each list as column heading */
 .columns > div > div > ul > li:first-child > a {
-  color: #7B36A3;
-  font-weight: 600;
-  font-size: 15px;
-  margin-bottom: 9px;
+  color: #800080;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 31px;
   pointer-events: none;
   cursor: default;
-  line-height: 1.15;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-align: left;
+  display: block;
+  font-family: Inter, sans-serif;
 }
 
-/* All other links in lists: consistent style */
 .columns > div > div > ul > li:not(:first-child) > a {
   color: #F06363;
   font-size: 13px;
@@ -535,7 +536,6 @@
   letter-spacing: 0.01em;
 }
 
-/* Social links column: left-aligned, stacked, visually like list items */
 .columns > div > div:last-child p {
   margin: 0;
   padding: 0;
@@ -543,27 +543,25 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 7px;
+  gap: 17px;
 }
 
-/* Social links: match list item link style */
 .columns > div > div:last-child p > a {
-  color: #F06363;
-  font-size: 13px;
+  color: #888;
+  font-size: 1.06rem;
   font-weight: 400;
-  line-height: 1.32;
+  line-height: 1.45;
   margin: 0;
   padding: 0;
   display: inline-block;
+  transition: color 0.2s;
 }
 
-/* Link hover appearance */
 .columns a:hover {
   color: #7B36A3;
   text-decoration: underline;
 }
 
-/* Responsive: stack columns vertically and adjust gaps for small screens */
 @media (width <= 900px) {
   .columns > div {
     flex-direction: column;
@@ -577,5 +575,148 @@
 
   .columns > div > div:last-child p {
     gap: 5px;
+  }
+}
+
+@media (width <= 900px) {
+  .columns {
+    padding: 24px 8px;
+    margin: 16px 0;
+  }
+
+  .columns > div {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+  }
+}
+
+/* -- Left Column: Simulated image block -- */
+.columns > div > div:first-child {
+  background: #fff;
+  border-radius: 24px;
+  min-width: 370px;
+  max-width: 510px;
+  min-height: 390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  box-shadow: 0 4px 24px 0 rgb(60 60 60 / 9%);
+  margin-right: 0;
+  margin-left: 0;
+  padding: 52px 44px 44px;
+  flex: 0 0 44%;
+}
+
+/* Center the first column's content vertically */
+.columns > div > div:first-child ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+/* -- Right Column: "content" block -- */
+.columns > div > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 36px;
+  min-width: 390px;
+  max-width: 600px;
+  padding: 0 8px;
+  flex: 0 0 56%;
+}
+
+/* -- Third Column: Social/minimized -- */
+.columns > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 90px;
+  max-width: 140px;
+  opacity: 0.22;
+  font-size: 0.95rem;
+  color: #888;
+  padding-top: 24px;
+  flex: 0 0 6%;
+}
+
+/* -- Typography/Hierarchy: heading, simulated paragraph, note, "button" -- */
+
+/* Heading: first link in each column */
+
+/* Second column body links hierarchy */
+.columns > div > div:nth-child(2) > ul > li:nth-child(2) > a {
+  color: #454545;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 21px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  opacity: 1;
+}
+
+.columns > div > div:nth-child(2) > ul > li:nth-child(3) > a {
+  color: #454545;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  margin-bottom: 19px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  opacity: 0.84;
+}
+
+.columns > div > div:nth-child(2) > ul > li:nth-child(n+4) > a {
+  color: #888;
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  letter-spacing: 0.02em;
+  text-align: left;
+  opacity: 0.68;
+}
+
+/* First column body links: normal text */
+.columns > div > div:first-child > ul > li:not(:first-child) > a {
+  color: #454545;
+  font-size: 1.13rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 17px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  opacity: 0.96;
+}
+
+/* Remove list bullets and spacing */
+.columns ul, .columns li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Social links: style last column distinctly */
+
+.columns > div > div:last-child p > a:hover {
+  color: #d0021b;
+  opacity: 1;
+}
+
+/* Ensure vertical alignment of columns */
+
+/* Add top margin to the block for more vertical centering */
+@media (width >= 900px) {
+  .columns {
+    margin-top: 80px;
+    margin-bottom: 80px;
   }
 }
