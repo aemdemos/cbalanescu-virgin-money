@@ -31,3 +31,107 @@
     order: unset;
   }
 }
+
+
+.columns.columns4 {
+  background: #fff;
+  padding: 8px 0;
+  max-width: 675px;
+  margin-left: 0;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Layout: Flex row for columns, tightly grouped to the left */
+.columns.columns4 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns4 {
+    max-width: 100%;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .columns.columns4 > div {
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.columns.columns4 > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+/* Headings: purple, left-align, compact spacing */
+.columns.columns4 h3 {
+  color: #7C3F99;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0 0 8px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: left;
+  align-self: flex-start;
+}
+
+/* Remove default list bullets/padding; tight vertical spacing */
+.columns.columns4 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.columns4 li {
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove bold from links */
+.columns.columns4 strong {
+  font-weight: 400;
+}
+
+/* Links: red, small, left align, arrow space */
+.columns.columns4 a {
+  color: #E57373;
+  font-size: 11px;
+  font-weight: 400;
+  text-decoration: none;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 16px;
+  position: relative;
+  transition: color 0.2s;
+  text-align: left;
+}
+
+/* Arrow using SVG background (not content) */
+.columns.columns4 a::before {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 2L7 5L3 8' stroke='%23E57373' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center center no-repeat;
+  background-size: 10px 10px;
+  content: "";
+}
