@@ -1,50 +1,55 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row as per block name
+  // Block header row
   const headerRow = ['Cards (cards6)'];
-  const rows = [];
-  // Find all cards in order
+  const cells = [headerRow];
+
+  // Find all cards
+  // Each .sl-item contains 2 section.cm-content-tile, total 6 cards
   const cardSections = element.querySelectorAll('section.cm-content-tile');
   cardSections.forEach((section) => {
-    // Left cell: card image (img only)
-    let imgCell = null;
-    const img = section.querySelector('.image img');
-    if (img) imgCell = img;
-    // Right cell: all text content (title, description, cta)
-    const textCellContent = [];
-    const content = section.querySelector('.content');
-    if (content) {
-      // Title (h3.header)
-      const title = content.querySelector('.header');
-      if (title && title.textContent.trim()) textCellContent.push(title);
-      // Description (first non-empty p:not(.subheading) that does not only contain a link)
-      const paragraphs = Array.from(content.querySelectorAll('p'));
-      // Find description paragraph
-      let foundDescription = false;
-      for (const p of paragraphs) {
-        if (p.classList.contains('subheading')) continue;
-        // If this p has a link and nothing else, it's probably just the CTA, skip for description
-        if (p.querySelector('a') && p.textContent.trim() === p.querySelector('a').textContent.trim()) continue;
-        if (p.textContent.trim() !== '' && !foundDescription) {
-          textCellContent.push(p);
-          foundDescription = true;
-        }
-      }
-      // CTA: last <p> that has a link
-      for (let i = paragraphs.length - 1; i >= 0; i--) {
-        const p = paragraphs[i];
-        if (p.querySelector('a')) {
-          textCellContent.push(p);
-          break;
-        }
+    // First cell: image
+    let imageCell = null;
+    const imgEl = section.querySelector('.image img');
+    if (imgEl) imageCell = imgEl;
+
+    // Second cell: text content
+    const contentDiv = section.querySelector('.content');
+    const cellItems = [];
+
+    // Title: <h3 class="header"><b>Title</b></h3>
+    const titleEl = contentDiv.querySelector('.header');
+    if (titleEl) cellItems.push(titleEl);
+    // Description: first <p> with non-empty text, excluding subheading and CTA
+    // Subheading p is always empty here, so skip it
+    let descEl = null;
+    const ps = contentDiv.querySelectorAll('p');
+    for (let p of ps) {
+      // If p contains a link, it's probably CTA, skip for desc
+      if (p.querySelector('a')) continue;
+      if (p.textContent.trim().length > 0) {
+        descEl = p;
+        break;
       }
     }
-    rows.push([imgCell, textCellContent]);
+    if (descEl) cellItems.push(descEl);
+    // CTA: first <p> that contains an <a>
+    let ctaEl = null;
+    for (let p of ps) {
+      if (p.querySelector('a')) {
+        ctaEl = p;
+        break;
+      }
+    }
+    if (ctaEl) cellItems.push(ctaEl);
+
+    cells.push([
+      imageCell,
+      cellItems
+    ]);
   });
-  // Compose table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    ...rows
-  ], document);
-  element.replaceWith(table);
+
+  // Create and replace block
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

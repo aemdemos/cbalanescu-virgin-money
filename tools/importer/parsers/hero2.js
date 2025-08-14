@@ -1,66 +1,46 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row as in the example
+  // Header row as per block name
   const headerRow = ['Hero (hero2)'];
 
-  // 2. Extract background image, using the correct alt from .vh span if present
+  // 2nd row: Background image extraction
   let imageEl = null;
+  let altText = '';
+
+  // Find the div with background-image
   const bgDiv = element.querySelector('.intrinsic-el');
   if (bgDiv && bgDiv.style.backgroundImage) {
-    const match = bgDiv.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/i);
-    let imgUrl = match && match[1] ? match[1] : '';
-    if (imgUrl) {
-      // Convert to absolute URL if needed
-      if (imgUrl.startsWith('/')) {
-        const a = document.createElement('a');
-        a.href = imgUrl;
-        imgUrl = a.href;
-      }
-      let alt = '';
-      const altSpan = bgDiv.querySelector('span');
-      if (altSpan) {
-        alt = altSpan.textContent.trim();
-      }
+    const match = bgDiv.style.backgroundImage.match(/url\((['"]?)(.*?)\1\)/);
+    if (match && match[2]) {
       imageEl = document.createElement('img');
-      imageEl.src = imgUrl;
-      if (alt) imageEl.alt = alt;
+      imageEl.src = match[2];
+      // Use visually hidden span as alt if present
+      const altSpan = bgDiv.querySelector('span.vh');
+      if (altSpan) {
+        altText = altSpan.textContent.trim();
+        imageEl.alt = altText;
+      }
     }
   }
 
-  // 3. Extract all visible text content from the block
-  // For this specific HTML, relevant text is in the .vh span, which is also used for the image alt
-  // But in case of future blocks, collect unique visible text nodes (excluding ones already used as alt)
-  // We'll only include text that is not the same as the image alt
-  let textContentArr = [];
-  const allTextNodes = element.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span');
-  let altText = imageEl && imageEl.alt ? imageEl.alt : '';
-  allTextNodes.forEach((node) => {
-    const txt = node.textContent && node.textContent.trim();
-    // Only add unique text, and skip if same as image alt
-    if (txt && txt !== altText && !textContentArr.includes(txt)) {
-      textContentArr.push(txt);
-    }
-  });
-  // Fallback: If nothing found, but .vh existed, and we haven't pushed it, add it
-  if (textContentArr.length === 0 && altText) {
-    textContentArr.push(altText);
-  }
-  // For this block, join by line breaks
-  let textCell = '';
-  if (textContentArr.length > 0) {
-    // Use <br> for line breaks as it will be rendered as expected
-    textCell = document.createElement('div');
-    textCell.innerHTML = textContentArr.join('<br>');
+  // 3rd row: Textual content
+  // Gather all text nodes inside the block except for alt text
+  // In this HTML, all text is in the visually hidden span
+  // Preserve semantic meaning by outputting it in a paragraph, only if present
+  let textContentCell = '';
+  if (altText) {
+    const p = document.createElement('p');
+    p.textContent = altText;
+    textContentCell = p;
   }
 
-  // 4. Compose the rows: 1 col, 3 rows
   const rows = [
-    headerRow,
-    [imageEl ? imageEl : ''],
-    [textCell ? textCell : '']
+    headerRow,            // Row 1: Header
+    [imageEl ? imageEl : ''], // Row 2: Image or blank
+    [textContentCell]     // Row 3: Text content or blank
   ];
 
-  // 5. Create table and replace
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  // Create table and replace element
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

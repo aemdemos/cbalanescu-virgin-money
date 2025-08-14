@@ -1,26 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Define the table header matching the example
+  // Define the table header, matching the block name/variant
   const headerRow = ['Columns (columns5)'];
 
-  // Get the list of columns
+  // Find sl-list and its children (the two columns)
   const slList = element.querySelector('.sl-list');
-  if (!slList) return;
-  const items = Array.from(slList.querySelectorAll(':scope > .sl-item'));
-  if (items.length < 2) return;
+  let leftCell = null;
+  let rightCell = null;
 
-  // Column 1: image block (reference the entire .sl-item for resilience)
-  const leftCell = items[0];
-  // Column 2: rich text and link block (reference the entire .sl-item for resilience)
-  const rightCell = items[1];
+  if (slList) {
+    const items = slList.querySelectorAll(':scope > .sl-item');
+    // Left: image section (reference the section, not just img)
+    leftCell = items[0]?.querySelector('section.cm-image') || items[0];
+    // Right: rich text content (reference the container div)
+    rightCell = items[1]?.querySelector('.cm-rich-text') || items[1];
+  }
 
-  // Compose the table rows
+  // Handle edge cases: fallback if structure is missing
+  if (!leftCell && element.children.length > 0) {
+    leftCell = element.children[0];
+  }
+  if (!rightCell && element.children.length > 1) {
+    rightCell = element.children[1];
+  }
+
+  // Compose the cells array according to the columns block structure
   const cells = [
     headerRow,
     [leftCell, rightCell]
   ];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Create the block table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Replace the original block
+  element.replaceWith(table);
 }

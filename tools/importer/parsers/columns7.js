@@ -1,49 +1,41 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block header as per requirement
+  // Header row for the block
   const headerRow = ['Columns (columns7)'];
 
-  // Find the container holding the columns (should be .sl-list)
+  // Get .sl-list inside the element
   const slList = element.querySelector('.sl-list');
   let columns = [];
-
   if (slList) {
     // Each .sl-item is a column
-    const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
-    slItems.forEach((slItem) => {
-      // For each column, try to capture the immediate major content
-      // Left column: image
-      const imageSection = slItem.querySelector('.cm-image');
-      if (imageSection) {
-        columns.push(imageSection);
+    columns = Array.from(slList.querySelectorAll(':scope > .sl-item')).map((slItem) => {
+      // Each .sl-item contains a main content block
+      // Use all children of .sl-item for robustness
+      const children = Array.from(slItem.children);
+      // If only one child, use it directly, else group into a fragment
+      if (children.length === 1) {
+        return children[0];
+      } else if (children.length > 1) {
+        // Use a fragment for grouping
+        const frag = document.createDocumentFragment();
+        children.forEach(child => frag.appendChild(child));
+        return frag;
       } else {
-        // Right column: rich text and app store buttons
-        const richContent = slItem.querySelector('.cm-rich-text');
-        if (richContent) {
-          columns.push(richContent);
-        } else {
-          // fallback, use the whole sl-item
-          columns.push(slItem);
-        }
+        // Edge case: empty .sl-item
+        return document.createTextNode('');
       }
     });
-  }
-
-  // Fallback if columns could not be detected
-  if (columns.length < 2) {
-    // Try immediate children divs as fallback
+  } else {
+    // Fallback: treat direct children as columns if .sl-list not present
     columns = Array.from(element.querySelectorAll(':scope > div'));
   }
 
-  // Ensure each column is not empty, fallback to a blank div if needed
-  columns = columns.map(col => col ? col : document.createElement('div'));
+  // Add header and content row
+  const cells = [headerRow, columns];
 
-  // Table structure as per block spec: header row, then a row containing all columns
-  const cells = [
-    headerRow,
-    columns
-  ];
+  // Create the block table
+  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
 
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Replace the original element
+  element.replaceWith(blockTable);
 }

@@ -1,34 +1,56 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row: matches the block name exactly as required
+  // 1. Table header row
   const headerRow = ['Hero (hero3)'];
 
-  // There is no background image in the provided HTML, so provide an empty cell
+  // 2. Image row: no background image in the supplied HTML, so cell is blank
   const imageRow = [''];
 
-  // For the content row, gather the key parts
-  const contentElements = [];
+  // 3. Content row: Combine all content, referencing existing elements
+  // Get headline (h1), subtitle, main descriptive paragraph, and CTA (button-like span)
+  const content = [];
 
-  // Title: use the .header h1
-  const title = element.querySelector('h1.header');
-  if (title) contentElements.push(title);
+  // Headline: find first h1, reference its existing child (for any inline formatting)
+  const h1 = element.querySelector('h1');
+  if (h1 && h1.textContent.trim()) {
+    content.push(h1);
+  }
 
-  // Subtitle: .subtitle span
-  const subtitle = element.querySelector('.subtitle');
-  if (subtitle) contentElements.push(subtitle);
+  // Subtitle: find span.subtitle
+  const subtitle = element.querySelector('span.subtitle');
+  if (subtitle && subtitle.textContent.trim()) {
+    content.push(subtitle);
+  }
 
-  // Paragraph: pick the paragraph with a font-size style
-  const mainParagraph = element.querySelector('p[style*="font-size"]');
-  if (mainParagraph) contentElements.push(mainParagraph);
+  // Description: find the main paragraph (non-empty, not just whitespace)
+  // There may be empty paragraphs, so filter accordingly
+  const paragraphs = Array.from(element.querySelectorAll('p')).filter(p => p.textContent.trim().length > 0);
+  // Exclude paragraphs fully inside h1/header or containing only the CTA
+  paragraphs.forEach((p) => {
+    // Exclude paragraphs that are children of h1 or that duplicate the CTA
+    if (!h1 || !h1.contains(p)) {
+      // Avoid paragraphs containing only the cta span
+      if (!p.querySelector('span.cta')) {
+        content.push(p);
+      }
+    }
+  });
 
-  // CTA: .cta span
-  const cta = element.querySelector('.cta');
-  if (cta) contentElements.push(cta);
+  // CTA: find span.cta (reference as inline element)
+  const cta = element.querySelector('span.cta');
+  if (cta && cta.textContent.trim()) {
+    content.push(cta);
+  }
 
-  // Compose the rows
-  const cells = [headerRow, imageRow, [contentElements]];
+  // Compose the row: combine all content into a single cell (as required)
+  const contentRow = [content];
 
-  // Create and replace
+  // Compose the full table
+  const cells = [
+    headerRow,
+    imageRow,
+    contentRow
+  ];
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }
