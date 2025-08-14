@@ -1,0 +1,18 @@
+{
+  "originUrl": "https://virginmoney.com.au",
+  "aborted": false,
+  "urls": [
+    {
+      "url": "https://virginmoney.com.au/",
+      "source": "MANUAL",
+      "targetPath": "/",
+      "id": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562"
+    }
+  ],
+  "crawlOptions": {
+    "strategy": "manual",
+    "strategiesAttempted": [
+      "MANUAL"
+    ]
+  }
+}
