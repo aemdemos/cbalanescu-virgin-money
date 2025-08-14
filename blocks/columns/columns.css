@@ -1,7 +1,14 @@
 /* stylelint-disable no-descending-specificity */
 .columns > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 34px;
+  width: 100%;
+  max-width: 850px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .columns img {
@@ -10,6 +17,14 @@
 
 .columns > div > div {
   order: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 170px;
+  flex: 1 1 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .columns > div > .columns-img-col {
@@ -403,7 +418,6 @@
   min-width: 0;
 }
 
-/* Remove default list styles and tighten vertical spacing */
 .columns.columns11 ul {
   list-style: none;
   margin: 0;
@@ -433,7 +447,6 @@
   text-decoration: underline;
 }
 
-/* Always style the last column as an icon row for maximum robustness */
 .columns.columns11 > div > div:last-child {
   align-items: flex-start;
 }
@@ -459,7 +472,6 @@
   filter: grayscale(1) brightness(3.3);
 }
 
-/* Responsive stacking on small screens */
 @media (width <= 900px) {
   .columns.columns11 > div {
     flex-direction: column;
@@ -469,5 +481,101 @@
 
   .columns.columns11 {
     padding: 24px 0;
+  }
+}
+
+
+.columns {
+  background: #fff;
+  font-family: Inter, sans-serif;
+  padding: 32px 0 22px;
+
+  /* subtle box shadow to help separation if dark parent */
+  box-shadow: 0 1px 8px 0 rgb(60 60 60 / 2%);
+}
+
+/* Main columns row: side by side, top aligned, precise gap, left aligned */
+
+/* Each column: vertical stack, don't shrink too much, left aligned */
+
+/* Remove bullets/margin, full width for lists */
+.columns ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* List items: visually stacked, left aligned, slightly tighter spacing */
+.columns li {
+  margin: 0 0 7px;
+  padding: 0;
+  text-align: left;
+}
+
+/* First link in each list as column heading */
+.columns > div > div > ul > li:first-child > a {
+  color: #7B36A3;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 9px;
+  pointer-events: none;
+  cursor: default;
+  line-height: 1.15;
+}
+
+/* All other links in lists: consistent style */
+.columns > div > div > ul > li:not(:first-child) > a {
+  color: #F06363;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.32;
+  text-align: left;
+  margin-bottom: 0;
+  letter-spacing: 0.01em;
+}
+
+/* Social links column: left-aligned, stacked, visually like list items */
+.columns > div > div:last-child p {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+/* Social links: match list item link style */
+.columns > div > div:last-child p > a {
+  color: #F06363;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.32;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+/* Link hover appearance */
+.columns a:hover {
+  color: #7B36A3;
+  text-decoration: underline;
+}
+
+/* Responsive: stack columns vertically and adjust gaps for small screens */
+@media (width <= 900px) {
+  .columns > div {
+    flex-direction: column;
+    gap: 15px;
+    max-width: 100%;
+  }
+
+  .columns > div > div {
+    min-width: unset;
+  }
+
+  .columns > div > div:last-child p {
+    gap: 5px;
   }
 }
