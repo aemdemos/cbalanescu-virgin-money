@@ -135,7 +135,6 @@
   background: #fff;
 }
 
-/* Flex layout for the row: two columns, top-aligned */
 .columns.columns5 > div {
   display: flex;
   flex-direction: row;
@@ -145,7 +144,6 @@
   margin: 0;
 }
 
-/* Image column: no fixed height, allow image to size naturally */
 .columns.columns5 .columns-img-col {
   flex: 1 1 50%;
   display: flex;
@@ -157,7 +155,6 @@
   margin: 0;
 }
 
-/* Make image fill parent container, but do not constrain height */
 .columns.columns5 .columns-img-col picture,
 .columns.columns5 .columns-img-col img {
   width: 100%;
@@ -168,7 +165,6 @@
   padding: 0;
 }
 
-/* Text column: flush to image, left-aligned, no extra margin/padding */
 .columns.columns5 > div > div:not(.columns-img-col) {
   flex: 1 1 50%;
   display: flex;
@@ -180,7 +176,6 @@
   padding: 0;
 }
 
-/* Remove top margin and padding from heading, larger for visual impact */
 .columns.columns5 h2,
 .columns.columns5 h2 strong {
   color: #72008a;
@@ -192,7 +187,6 @@
   margin-bottom: 16px;
 }
 
-/* Body text: compact, tight line height, minimal margin */
 .columns.columns5 p {
   font-size: 1.13rem;
   color: #333;
@@ -201,14 +195,12 @@
   line-height: 1.5;
 }
 
-/* Disclaimer: lighter, smaller, close to button */
 .columns.columns5 p:last-of-type {
   color: #888;
   font-size: 0.97rem;
   margin-bottom: 6px;
 }
 
-/* Button: left-aligned, minimal space above/below, prominent style */
 .columns.columns5 .button-container {
   margin-top: 0;
   margin-bottom: 0;
@@ -236,7 +228,6 @@
   background-color: #b8001b;
 }
 
-/* Responsive: stack, remove side padding and height constraints */
 @media (width <= 900px) {
   .columns.columns5 > div {
     flex-direction: column;
@@ -253,5 +244,146 @@
   .columns.columns5 > div > div:not(.columns-img-col) {
     max-width: 100%;
     padding: 0 12px;
+  }
+}
+
+
+.columns.columns7 {
+  background: #fff;
+  padding: 2.5rem 0;
+}
+
+/* Top-level: Make sure .columns.columns7 > div lays out columns side-by-side */
+.columns.columns7 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4rem;
+  width: 100%;
+  min-height: 520px;
+}
+
+/* Left column: phone image */
+.columns.columns7 .columns-img-col {
+  flex: 0 1 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 260px;
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Ensure phone image fills the column proportionally */
+.columns.columns7 .columns-img-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Right column: text and buttons */
+.columns.columns7 > div > div:not(.columns-img-col) {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 340px;
+  max-width: 530px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Heading styling: left aligned, correct color and sizing */
+.columns.columns7 #bank-on-the-fly {
+  color: #5e2590;
+  font-size: 2.1rem;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 1rem;
+  font-family: var(--heading-font-family);
+  line-height: 1.2;
+  width: 100%;
+}
+
+/* Paragraph styling: left aligned, color, and divider line */
+.columns.columns7 #bank-on-the-fly + p {
+  color: #333;
+  font-size: 1rem;
+  text-align: left;
+  margin-bottom: 0.7rem;
+  font-family: var(--body-font-family);
+  line-height: 1.6;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 1.4rem;
+}
+
+/* Link styling: underline, dark color */
+.columns.columns7 #bank-on-the-fly + p a {
+  color: #333;
+  text-decoration: underline;
+}
+
+/* Buttons table: left aligned, fit-content background, proper padding */
+.columns.columns7 > div > div:not(.columns-img-col) table {
+  background: #f6f6f6;
+  margin: 1.4rem 0 0;
+  border-radius: 10px;
+  padding: 0.7rem 1.3rem;
+  display: block;
+  width: fit-content;
+  min-width: 320px;
+  max-width: 480px;
+  border-collapse: separate;
+  box-sizing: border-box;
+}
+
+/* Table cells: spacing between buttons */
+.columns.columns7 > div > div:not(.columns-img-col) td {
+  padding: 0 0.9rem;
+  vertical-align: middle;
+}
+
+/* Ensure app button images have consistent height and spacing */
+.columns.columns7 > div > div:not(.columns-img-col) img[alt*="App store"],
+.columns.columns7 > div > div:not(.columns-img-col) img[alt*="Google Play"] {
+  height: 2.7rem;
+  width: auto;
+  display: block;
+}
+
+/* Responsive adjustments for mobile/tablet */
+@media (width <= 900px) {
+  .columns.columns7 > div {
+    flex-direction: column;
+    gap: 2rem;
+    min-height: unset;
+  }
+
+  .columns.columns7 .columns-img-col,
+  .columns.columns7 > div > div:not(.columns-img-col) {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    align-items: center;
+  }
+
+  .columns.columns7 #bank-on-the-fly,
+  .columns.columns7 #bank-on-the-fly + p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    max-width: 100%;
+  }
+
+  .columns.columns7 > div > div:not(.columns-img-col) table {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 180px;
+    max-width: 95vw;
   }
 }
