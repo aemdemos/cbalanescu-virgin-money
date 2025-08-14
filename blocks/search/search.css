@@ -1,9 +1,13 @@
-/* search box */
+/* stylelint-disable no-descending-specificity */
 .search .search-box {
-  display: grid;
+  display: flex;
   grid-template-columns: auto 1fr;
-  gap: 1ch;
+  gap: 6px;
   align-items: center;
+  flex-direction: row;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .search .search-box input {
@@ -24,7 +28,6 @@
   border: 1px solid var(--text-color);
 }
 
-/* search results */
 .search ul.search-results {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(278px, 1fr));
@@ -79,7 +82,6 @@
   object-fit: cover;
 }
 
-/* no results */
 .search ul.search-results.no-results {
   display: block;
   margin-left: 34px;
@@ -89,7 +91,6 @@
   border: none;
 }
 
-/* minimal variant */
 .search.minimal ul.search-results {
   display: block;
   padding-left: 34px;
@@ -109,7 +110,6 @@
   color: var(--link-color);
 }
 
-/* stylelint-disable no-descending-specificity */
 .search.minimal ul.search-results > li > a {
   background-color: unset;
 }
@@ -134,4 +134,122 @@
   height: 24px;
   width: 24px;
   border-radius: 50%;
+}
+
+
+.search {
+  display: flex;
+  align-items: center;
+  height: var(--nav-height);
+  min-height: var(--nav-height);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background: transparent;
+  gap: 0;
+}
+
+/* Ensure .search-box is visible and uses all available height for vertical centering */
+
+/* Icon: correct size and color, perfectly centered with input */
+.search .icon-search {
+  display: flex;
+  align-items: center;
+  height: 16px;
+}
+
+.search .icon-search img {
+  width: 16px;
+  height: 16px;
+  display: block;
+  filter: invert(21%) sepia(77%) saturate(7491%) hue-rotate(349deg) brightness(94%) contrast(107%);
+  margin: 0;
+}
+
+/* Input: bring underline close, use flex alignment/middle, minimize vertical space */
+.search .search-input,
+.search .search-box input[type="search"] {
+  width: 180px;
+  max-width: 220px;
+  min-width: 140px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #484a4f;
+  background: transparent;
+  padding: 0 8px 0 0; /* no top/bottom padding */
+  border: none;
+  border-bottom: 1px solid #ececec;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  margin: 0;
+  line-height: 1.2;
+  vertical-align: middle;
+  height: 24px;
+  box-sizing: border-box;
+}
+
+/* Place the input underline very close to the text */
+.search .search-input::placeholder,
+.search .search-box input[type="search"]::placeholder {
+  color: #ccc;
+  opacity: 1;
+}
+
+/* Underline highlight on focus, matches brand */
+.search .search-input:focus,
+.search .search-box input[type="search"]:focus {
+  border-bottom: 1.5px solid #d0112b;
+}
+
+/* Results: visually separated, but side by side with input if present */
+.search .search-results {
+  margin-left: 18px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(72 74 79 / 7%);
+  border-radius: 4px;
+  font-size: 14px;
+  color: #484a4f;
+  min-width: 200px;
+  max-width: 350px;
+  padding: 8px 0;
+  list-style: none;
+  border: none;
+  align-self: center;
+}
+
+.search .search-results:empty {
+  display: none;
+}
+
+/* Responsive: stack vertically and fill space on small screens */
+@media (width <= 600px) {
+  .search {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: unset;
+    height: auto;
+    padding: 0 8px;
+  }
+
+  .search .search-box {
+    width: 100%;
+    margin-bottom: 8px;
+    height: auto;
+  }
+
+  .search .search-input,
+  .search .search-box input[type="search"] {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: 32px;
+  }
+
+  .search .search-results {
+    margin-left: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }
