@@ -1,82 +1,89 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The block name matches the example: 'Cards (cards23)'
+  // Header row as in example
   const headerRow = ['Cards (cards23)'];
+  const cells = [headerRow];
 
-  // Utility to extract card rows from a tab
-  function getCards(tabEl) {
-    const cards = [];
-    const slList = tabEl.querySelector('.sl-list');
-    if (!slList) return cards;
-    slList.querySelectorAll('.sl-item').forEach(item => {
-      const tile = item.querySelector('section.cm-product-tile');
-      if (!tile) return;
-      // Image: use the <img> element directly from the DOM
-      const image = tile.querySelector('.image img');
-      // Text cell: gather content
-      const textCell = [];
-      // Title: strong (not heading to avoid making new elements)
-      const titleEl = tile.querySelector('.product-name');
-      if (titleEl && titleEl.textContent.trim()) {
-        const titleStrong = document.createElement('strong');
-        titleStrong.textContent = titleEl.textContent.trim();
-        textCell.push(titleStrong);
-      }
-      // Key rates: each rate as a div
-      const keyRates = tile.querySelector('.product-key-rates');
-      if (keyRates) {
-        keyRates.querySelectorAll('.product-key-rate-item').forEach(kr => {
-          const rateVal = kr.querySelector('.key-value-text');
-          const rateDesc = kr.querySelector('.key-bottom-text');
-          let line = '';
-          if (rateVal) {
-            line += rateVal.textContent.trim();
-          }
-          if (rateDesc) {
-            line += ' ' + rateDesc.textContent.trim();
-          }
-          if (line) {
-            const div = document.createElement('div');
-            div.textContent = line;
-            textCell.push(div);
-          }
-        });
-      }
-      // Description paragraph
-      const desc = tile.querySelector('.content-secondary .product-description');
-      if (desc && desc.textContent.trim()) {
-        const descP = document.createElement('p');
-        descP.textContent = desc.textContent.trim();
-        textCell.push(descP);
-      }
-      // Feature list (bullet points)
-      const ul = tile.querySelector('.content-secondary ul');
-      if (ul && ul.children.length > 0) {
-        textCell.push(ul);
-      }
-      // CTA links (keep the original <a> elements)
-      const ctaContainer = tile.querySelector('.content-secondary p');
-      if (ctaContainer) {
-        ctaContainer.querySelectorAll('a').forEach(a => {
-          textCell.push(a);
-        });
-      }
-      // Compose card row: [image, text content]
-      cards.push([image, textCell]);
-    });
-    return cards;
-  }
+  // Find all product cards in both tabs
+  const sections = element.querySelectorAll('.cm-product-tile');
+  sections.forEach(section => {
+    // -------- Image cell --------
+    const img = section.querySelector('.image img');
 
-  // Process all tabs, active and inactive
-  const tabContainers = element.querySelectorAll('.tabs > .tab');
-  const allCards = [];
-  tabContainers.forEach(tab => {
-    const cards = getCards(tab);
-    cards.forEach(row => allCards.push(row));
+    // -------- Text cell --------
+    const textContent = [];
+
+    // Title
+    const title = section.querySelector('.product-name');
+    if (title) {
+      const strong = document.createElement('strong');
+      strong.innerHTML = title.innerHTML;
+      textContent.push(strong);
+      textContent.push(document.createElement('br'));
+    }
+
+    // Key Rate(s)
+    const rateBox = section.querySelector('.product-key-rates');
+    if (rateBox) {
+      const keyRates = rateBox.querySelectorAll('.product-key-rate-item');
+      keyRates.forEach(rate => {
+        // Rate value
+        const value = rate.querySelector('.key-value-text');
+        if (value) {
+          const span = document.createElement('span');
+          span.innerHTML = value.innerHTML;
+          textContent.push(span);
+        }
+        // Label (can be inside <p> or just text)
+        const bottom = rate.querySelector('.key-bottom-text');
+        if (bottom) {
+          textContent.push(document.createTextNode(' '));
+          // Use small to mimic example (less visual weight)
+          const small = document.createElement('small');
+          small.innerHTML = bottom.innerHTML;
+          textContent.push(small);
+        }
+        textContent.push(document.createElement('br'));
+      });
+    }
+
+    // Description paragraph
+    const desc = section.querySelector('.product-description');
+    if (desc && desc.textContent.trim()) {
+      textContent.push(document.createElement('br'));
+      textContent.push(desc);
+    }
+
+    // Feature list (the first UL, not product-features)
+    const features = Array.from(section.querySelectorAll('ul')).find(ul => !ul.classList.contains('product-features') && ul.children.length);
+    if (features) {
+      textContent.push(document.createElement('br'));
+      textContent.push(features);
+    }
+
+    // CTAs: Find <a> inside .content-secondary with .cta
+    const ctaLinks = Array.from(section.querySelectorAll('.content-secondary a'));
+    if (ctaLinks.length > 0) {
+      textContent.push(document.createElement('br'));
+      ctaLinks.forEach((a, i) => {
+        textContent.push(a);
+        // Add space between if more than one
+        if (i < ctaLinks.length - 1) textContent.push(document.createTextNode(' '));
+      });
+    }
+
+    // Clean trailing <br>
+    while (textContent.length && textContent[textContent.length-1].tagName === 'BR') {
+      textContent.pop();
+    }
+
+    cells.push([
+      img,
+      textContent
+    ]);
   });
 
-  // Final block construction
-  const table = [headerRow, ...allCards];
-  const block = WebImporter.DOMUtils.createTable(table, document);
-  element.replaceWith(block);
+  // Replace element
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

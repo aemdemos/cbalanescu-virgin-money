@@ -1,28 +1,32 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row for the block
+  // Table header row exactly as specified
   const headerRow = ['Columns (columns33)'];
 
-  // The structure is: .column-container > .sl > .sl-list > .sl-item > .cm
-  // We want the immediate .sl-item children of .sl-list
+  // Find main columns by locating .sl-list direct children (.sl-item)
   const slList = element.querySelector('.sl-list');
-  let columns = [];
+  let row = [];
 
   if (slList) {
-    // Each .sl-item should have the content for each column
-    columns = Array.from(slList.children).map((slItem) => {
-      // Find the first direct child with class .cm (content module)
-      const content = slItem.querySelector('.cm');
-      return content ? content : document.createTextNode('');
+    const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+    row = slItems.map((item) => {
+      // Find the .cm.cm-rich-text inside each item
+      const content = item.querySelector('.cm.cm-rich-text');
+      // If found, reference the full .cm (contains heading, lists, etc.)
+      return content || item;
     });
-  }
-  
-  // If no columns found, don't do anything
-  if (columns.length === 0) {
-    return;
+  } else {
+    // Fallback if structure changes
+    const directDivs = Array.from(element.querySelectorAll(':scope > div'));
+    row = directDivs.length ? directDivs : [element];
   }
 
-  const cells = [headerRow, columns];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // If columns are empty, fall back safely
+  if (row.length === 0) {
+    row = [element];
+  }
+
+  const cells = [headerRow, row];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

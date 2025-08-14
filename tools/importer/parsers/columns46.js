@@ -1,51 +1,52 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header matches example
-  const headerRow = ['Columns (columns46)'];
+  // Find the rates block
+  const rates = element.querySelector('.cc01-rates .product-key-rates');
+  if (!rates) return;
 
-  // Locate the rates block and column items
-  const ratesBlock = element.querySelector('.cc01-rates');
-  if (!ratesBlock) return;
-  const keyRates = ratesBlock.querySelector('.product-key-rates');
-  if (!keyRates) return;
+  // Get all immediate children that represent columns
+  const columnItems = Array.from(rates.children).filter(
+    (el) => el.classList.contains('product-key-rate-item')
+  );
 
-  // Collect all column items
-  const items = Array.from(keyRates.querySelectorAll('.product-key-rate-item'));
-
-  // Compose each column cell
-  const columns = items.map(item => {
-    const children = [];
-
-    // Image
+  // Each column: preserve content and semantic structure
+  const columns = columnItems.map((item) => {
+    // We'll keep image, heading, and all text
+    // Compose a wrapper div for the column
+    const colDiv = document.createElement('div');
+    // Find the image (should be present)
     const img = item.querySelector('img');
-    if (img) children.push(img);
-
-    // Title: "Call us", "In-app chat", "Operating hours"
-    const valueText = item.querySelector('.key-value-text');
-    if (valueText) {
-      // Typically a <span>, but let's preserve its content
-      children.push(valueText);
+    if (img) colDiv.appendChild(img);
+    // Find the main heading text (usually in .key-value-text > span)
+    const keyValue = item.querySelector('.key-value-text');
+    if (keyValue) {
+      const heading = document.createElement('div');
+      heading.style.fontWeight = 'bold';
+      heading.style.color = '#c4001d';
+      heading.style.fontSize = '1.125em';
+      heading.append(...keyValue.childNodes);
+      colDiv.appendChild(heading);
     }
-
-    // Main text (may be <div>, <p>, <b>, <br> etc)
-    const topText = item.querySelector('.key-top-text');
-    if (topText) {
-      // Use the block as-is for resilience
-      children.push(topText);
+    // Find the main detail text (in .key-top-text)
+    const keyTop = item.querySelector('.key-top-text');
+    if (keyTop) {
+      // Move all children (preserving <b>, <a>, <br>, etc)
+      const detail = document.createElement('div');
+      while (keyTop.firstChild) {
+        detail.appendChild(keyTop.firstChild);
+      }
+      colDiv.appendChild(detail);
     }
-
-    return children;
+    return colDiv;
   });
 
-  // If no columns found, abort early
-  if (columns.length === 0) return;
+  // Table construction: header row matches example
+  const cells = [
+    ['Columns (columns46)'],
+    columns,
+  ];
 
-  // Build the table structure
-  const tableData = [headerRow, columns];
-
-  // Create the block table referencing source elements
-  const block = WebImporter.DOMUtils.createTable(tableData, document);
-
-  // Replace the original element with the block table
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Replace the original element
+  element.replaceWith(table);
 }

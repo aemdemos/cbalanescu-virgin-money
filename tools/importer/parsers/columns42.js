@@ -1,34 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the columns container
+  // Header row matching block name exactly
+  const headerRow = ['Columns (columns42)'];
+
+  // Find the .sl-list container (the columns wrapper)
   const slList = element.querySelector('.sl-list');
   if (!slList) return;
-  // Get all columns (sl-item)
-  const slItems = slList.querySelectorAll(':scope > .sl-item');
-  // For each column, gather all its section contents
-  const columns = Array.from(slItems).map((item) => {
-    // Each section is a content block in the column
-    const sections = item.querySelectorAll(':scope > section.cm-icon-title');
-    // For each section, move header and content into a wrapper div
-    const sectionWrappers = Array.from(sections).map((section) => {
-      const wrapper = document.createElement('div');
-      const header = section.querySelector('.header');
-      const content = section.querySelector('.content');
-      // If header exists, append it
-      if (header) wrapper.appendChild(header);
-      // If content exists, append it
-      if (content) wrapper.appendChild(content);
-      return wrapper;
+
+  // Get all direct children that are columns (.sl-item)
+  const columnElements = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+
+  // For each column, gather its sections into a fragment
+  const columnContents = columnElements.map(col => {
+    const sections = Array.from(col.querySelectorAll(':scope > section'));
+    const frag = document.createDocumentFragment();
+    sections.forEach((section, idx) => {
+      // Insert a <br> between sections for separation, only if not the first
+      if (idx > 0) frag.appendChild(document.createElement('br'));
+      frag.appendChild(section);
     });
-    // Put all section wrappers in one column cell
-    // If only one section, use direct element
-    return sectionWrappers.length === 1 ? sectionWrappers[0] : sectionWrappers;
+    return frag;
   });
-  // Table header as per instructions
-  const headerRow = ['Columns (columns42)'];
-  // Table content row: each column in one cell
-  const tableRows = [headerRow, columns];
-  // Create and replace with the table
-  const table = WebImporter.DOMUtils.createTable(tableRows, document);
+
+  // Only add columns if there's actual content
+  if (columnContents.length === 0) return;
+
+  // Create the table structure
+  const cells = [
+    headerRow,
+    columnContents
+  ];
+
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

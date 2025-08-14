@@ -1,29 +1,30 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header, per requirements
+  // The header row must be a single cell (one column), per requirements
   const headerRow = ['Columns (columns51)'];
 
-  // Find the list of columns (direct children of .sl-list)
+  // Find columns
+  let columns = [];
   const slList = element.querySelector('.sl-list');
-  let items = [];
   if (slList) {
-    items = Array.from(slList.children);
+    columns = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+  } else {
+    columns = Array.from(element.querySelectorAll(':scope > .sl-item'));
   }
-
-  // Each column in the block corresponds to an .sl-item child
-  const contentRow = items.map(item => {
-    // Per guidelines, just reference the immediate child (should be div.cm-rich-text or section.cm-icon-title)
-    if (item.children.length === 1) {
-      return item.firstElementChild;
-    }
-    // If for some reason, extra structure, return the .sl-item itself
-    return item;
+  if (columns.length === 0) {
+    columns = Array.from(element.children);
+  }
+  // For each column, grab the main relevant content
+  const rowCells = columns.map(col => {
+    const section = col.querySelector(':scope > section');
+    if (section) return section;
+    const richText = col.querySelector(':scope > div.cm-rich-text, :scope > div.cm.cm-rich-text');
+    if (richText) return richText;
+    return col.firstElementChild || col;
   });
 
-  // Compose the table
-  const cells = [headerRow, contentRow];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original element with the new block table
-  element.replaceWith(block);
+  // The table must have one header row (single cell), then one row with n data columns
+  const cells = [headerRow, rowCells];
+  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(blockTable);
 }

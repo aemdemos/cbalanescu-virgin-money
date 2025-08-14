@@ -1,42 +1,52 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Prepare table rows
-  const rows = [];
-  // Header row, matching the required format exactly
-  rows.push(['Accordion (accordion13)']);
-
-  // Find the accordion list
+  // Get the accordion items
   const ul = element.querySelector('ul.accordion-list');
-  if (!ul) return;
-  // Each accordion item is an <li>
-  const liNodes = Array.from(ul.children).filter((li) => li.tagName === 'LI');
+  const items = ul ? Array.from(ul.children) : [];
 
-  liNodes.forEach((li) => {
-    // Title cell: first <a> tag with class 'accordion-item'.
-    const a = li.querySelector('a.accordion-item');
-    let titleCell = null;
-    if (a) {
-      // Remove any child <div> with class 'ec' (the dropdown arrow)
-      const ec = a.querySelector('div.ec');
-      if (ec) ec.remove();
-      titleCell = a;
+  // Header row as in the example
+  const rows = [['Accordion (accordion13)']];
+
+  items.forEach(li => {
+    // Title: <a class="accordion-item"> ... </a>
+    const link = li.querySelector('a.accordion-item');
+    let titleCell = '';
+    if (link) {
+      // Copy the link's text content, excluding any child nodes that are not text (such as the trailing <div.ec>)
+      // We'll construct a span with only the text up to the first <div> child
+      let titleText = '';
+      link.childNodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          titleText += node.textContent;
+        }
+      });
+      const titleSpan = document.createElement('span');
+      titleSpan.textContent = titleText.trim();
+      titleCell = titleSpan;
     }
-
-    // Content cell: the <div> with class 'expandcollapse-content'
+    // Content: <div class="expandcollapse-content"> ... </div>
     const contentDiv = li.querySelector('div.expandcollapse-content');
-    let contentCell = null;
+    let contentCell = '';
     if (contentDiv) {
-      contentCell = contentDiv;
+      // Find the first child with .cm-rich-text if exists, otherwise fallback to all direct child nodes
+      const richContent = contentDiv.querySelector('.cm-rich-text');
+      if (richContent) {
+        contentCell = richContent;
+      } else {
+        // Fallback: include all children (robustness for edge cases)
+        const elements = Array.from(contentDiv.children);
+        if (elements.length > 0) {
+          contentCell = elements;
+        } else {
+          // fallback to text
+          contentCell = contentDiv.textContent.trim();
+        }
+      }
     }
-
-    // Only push row if both cells exist (robustness)
-    if (titleCell && contentCell) {
-      rows.push([titleCell, contentCell]);
-    }
+    rows.push([titleCell, contentCell]);
   });
 
-  // Create block table
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-  // Replace the original element
-  element.replaceWith(table);
+  // Build and replace with the accordion table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(block);
 }

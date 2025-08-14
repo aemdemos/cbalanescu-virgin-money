@@ -1,70 +1,58 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row
+  // Table header as in the spec
   const headerRow = ['Columns (columns40)'];
 
-  // Find the two sl-item columns
+  // Try to extract the two columns from the HTML structure
+  // The structure is:
+  // div.column-container > div.sl > div.sl-list.has-2-items > div.sl-item (2x)
   const slList = element.querySelector('.sl-list');
-  const slItems = slList ? slList.querySelectorAll(':scope > .sl-item') : [];
+  let col1, col2;
 
-  // Edge case: if there are < 2 columns, fallback to empty
-  let col1Content = null;
-  let col2Content = null;
+  if (slList) {
+    const items = slList.querySelectorAll(':scope > .sl-item');
+    // Defensive: only proceed if there are exactly 2 items (2 columns)
+    if (items.length === 2) {
+      // Column 1: the image (as a node)
+      // Prefer the <img> inside the first .sl-item
+      const img = items[0].querySelector('img');
+      col1 = img ? img : items[0]; // fallback: whole sl-item if img missing
 
-  if (slItems.length > 0) {
-    // First column (usually image)
-    const imgSection = slItems[0].querySelector('.cm-image');
-    if (imgSection) {
-      // Find any img inside .cm-image
-      const img = imgSection.querySelector('img');
-      if (img) col1Content = img;
-      else col1Content = imgSection; // fallback: section itself
-    } else {
-      col1Content = slItems[0]; // fallback: whole column
-    }
-  }
-
-  if (slItems.length > 1) {
-    // Second column: rich text and app store buttons
-    const richContent = slItems[1].querySelector('.cm-rich-text');
-    if (richContent) {
-      // Compose a fragment to include all relevant content
-      const frag = document.createDocumentFragment();
-      // Get heading(s) and paragraphs in order
-      Array.from(richContent.children).forEach((child) => {
-        if (
-          child.tagName === 'P' && child.textContent.trim() === ''
-        ) {
-          // skip empty p
-        } else {
-          frag.appendChild(child);
-        }
-      });
-      // Also add any responsive-table (app store links)
-      const tableWrap = richContent.querySelector('.responsive-table');
-      if (tableWrap) {
-        frag.appendChild(tableWrap);
+      // Column 2: heading, text, and buttons (as nodes)
+      // Extract content nodes in order, ignoring empty <p> and <small>
+      const rich = items[1].querySelector('.cm-rich-text');
+      let col2Content = [];
+      if (rich) {
+        // Heading
+        const heading = rich.querySelector('h2');
+        if (heading) col2Content.push(heading);
+        // Paragraphs (ignore empty)
+        const paragraphs = Array.from(rich.querySelectorAll('p')).filter(p => p.textContent.trim().length > 0);
+        col2Content.push(...paragraphs);
+        // Table with app store links (responsive-table)
+        const table = rich.querySelector('.responsive-table table');
+        if (table) col2Content.push(table);
+      } else {
+        // fallback: use entire sl-item if .cm-rich-text not found
+        col2Content = [items[1]];
       }
-      col2Content = frag.childNodes.length ? Array.from(frag.childNodes) : richContent;
+      col2 = col2Content;
     } else {
-      col2Content = slItems[1]; // fallback: whole column
+      // fallback: not expected, but support as single column
+      col1 = element;
+      col2 = [];
     }
+  } else {
+    // fallback: not expected, treat all as single column
+    col1 = element;
+    col2 = [];
   }
 
-  // Compose the columns row
-  const columnsRow = [col1Content, col2Content];
-
-  // Ensure both columns exist as required
-  if (columnsRow.length < 2) {
-    // add placeholders if needed
-    while (columnsRow.length < 2) columnsRow.push('');
-  }
-
+  // Compose the final cells array: header, then a single row of two columns
   const cells = [
     headerRow,
-    columnsRow
+    [col1, col2]
   ];
-
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

@@ -1,39 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header as per requirements
+  // cards43 block header
   const headerRow = ['Cards (cards43)'];
-  const rows = [headerRow];
 
-  // Each sl-item is a card
-  const cardEls = element.querySelectorAll('.sl-list > .sl-item');
-  cardEls.forEach((card) => {
-    // First cell: the image/icon (mandatory)
-    // Second cell: all text content (heading, description, CTA)
-    const rich = card.querySelector('.cm-rich-text');
-    if (!rich) return;
+  // Select all card elements (immediate .sl-item children)
+  const cardNodes = Array.from(element.querySelectorAll('.sl-list > .sl-item'));
+  const rows = cardNodes.map(cardNode => {
+    // Find the card content root
+    const rich = cardNode.querySelector('.cm-rich-text');
+    // Image: find first img in the card
+    const img = rich ? rich.querySelector('img') : null;
+    // Title: the h5
+    const title = rich ? rich.querySelector('h5') : null;
+    // Find all p tags
+    const ps = rich ? Array.from(rich.querySelectorAll('p')) : [];
+    // Find the paragraph containing the img (skip for description/call-to-action)
+    const imgP = ps.find(p => p.querySelector('img'));
+    // Find the paragraph containing a link (potentially CTA)
+    const ctaP = ps.find(p => p.querySelector('a'));
+    // Description: p that's not the image or CTA p (if any)
+    const descP = ps.find(p => p !== imgP && p !== ctaP);
 
-    // Find image (first <img> inside rich)
-    const imgP = rich.querySelector('p img') ? rich.querySelector('p img').closest('p') : null;
-    const img = imgP ? imgP.querySelector('img') : null;
+    // Compose the text cell in order: title, description, CTA
+    const textCell = [];
+    if (title) textCell.push(title);
+    if (descP) textCell.push(descP);
+    if (ctaP) textCell.push(ctaP);
 
-    // For text, collect all but the image paragraph
-    const cells = Array.from(rich.children);
-    // Find the <p> with the image and exclude it
-    let imgIndex = -1;
-    cells.forEach((el, idx) => {
-      if (el.querySelector && el.querySelector('img')) imgIndex = idx;
-    });
-    const textContent = document.createElement('div');
-    cells.forEach((el, idx) => {
-      if (idx !== imgIndex) textContent.appendChild(el);
-    });
-
-    // Only include if there is an image and text content
-    if (img && textContent.childNodes.length) {
-      rows.push([img, textContent]);
-    }
+    // Place image in first cell, text in second
+    return [img, textCell];
   });
 
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  const cells = [headerRow, ...rows];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+
   element.replaceWith(table);
 }

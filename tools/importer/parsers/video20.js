@@ -1,47 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header matches the example exactly
+  // Table header - must exactly match example
   const headerRow = ['Video'];
 
-  // Find the main div with background-image and get the image URL
-  const bgDiv = element.querySelector('.intrinsic-el.img');
-  let imgEl = null;
-  if (bgDiv) {
-    const bgStyle = bgDiv.style.backgroundImage;
-    const urlMatch = bgStyle.match(/url\((['"]?)(.*?)\1\)/);
-    if (urlMatch && urlMatch[2]) {
-      imgEl = document.createElement('img');
-      imgEl.src = urlMatch[2].trim();
+  const cellContent = [];
+
+  // Extract background image as poster
+  const imgDiv = element.querySelector('.intrinsic-el.img');
+  if (imgDiv && imgDiv.style && imgDiv.style.backgroundImage) {
+    const match = imgDiv.style.backgroundImage.match(/url\(("|')?(.*?)("|')?\)/);
+    if (match && match[2]) {
+      const src = match[2].trim();
+      if (src) {
+        const posterImg = document.createElement('img');
+        posterImg.src = src;
+        posterImg.alt = '';
+        cellContent.push(posterImg);
+      }
     }
   }
 
-  // Collect all text content from all descendants (for accessibility and semantic preservation)
-  const textContent = [];
-  element.querySelectorAll('*').forEach((el) => {
-    // Only include non-empty text and avoid duplicate blank content
-    if (el.childNodes.length) {
-      el.childNodes.forEach(node => {
-        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-          textContent.push(node.textContent.trim());
-        }
-      });
-    }
-  });
+  // Include ALL textContent from the original element
+  // Only add if non-empty and not whitespace
+  const text = (element.textContent || '').trim();
+  if (text) {
+    cellContent.push(document.createTextNode(text));
+  }
 
-  // Combine image and text content for the cell
-  const cellContent = [];
-  if (imgEl) cellContent.push(imgEl);
-  // Combine all text into one string, if any
-  if (textContent.length) cellContent.push(textContent.join(' '));
-  if (cellContent.length === 0) cellContent.push('');
+  // If no content found, ensure there's at least an empty string
+  if (cellContent.length === 0) {
+    cellContent.push('');
+  }
 
-  // Structure matches the example: 1 header, 1 content row
-  const cells = [
-    headerRow,
-    [cellContent.length === 1 ? cellContent[0] : cellContent]
-  ];
-
-  // Create the block table and replace the original element
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  const rows = [headerRow, [cellContent]];
+  const block = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(block);
 }

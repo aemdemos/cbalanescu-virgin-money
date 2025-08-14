@@ -1,48 +1,23 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find all card sections (cards inside tiles)
-  function getCardSections(el) {
-    // Only select direct descendants of .cm-content-tile
-    return Array.from(el.querySelectorAll('.cm-content-tile'));
-  }
+  // Header row for the block, as in the example
+  const headerRow = ['Cards (cards5)'];
 
-  // Build header row
-  const rows = [['Cards (cards5)']];
+  // Find all card sections: .cm.cm-content-tile
+  const cardSections = Array.from(element.querySelectorAll('section.cm.cm-content-tile'));
 
-  // Find all card sections
-  const cardSections = getCardSections(element);
-
-  cardSections.forEach((section) => {
-    // Get image element (keep reference)
-    const img = section.querySelector('img');
-
-    // Find content div
-    const content = section.querySelector('.content');
-    let textContent = [];
-    if (content) {
-      // Title: h3.header or .header or b
-      const cardHeading = content.querySelector('.header, h3, b');
-      if (cardHeading) textContent.push(cardHeading);
-
-      // Subheading, if present and not empty
-      const subHeading = content.querySelector('.subheading');
-      if (subHeading && subHeading.textContent.trim()) textContent.push(subHeading);
-
-      // Description: the first p that does NOT contain a link
-      const descP = Array.from(content.querySelectorAll('p')).find(p => !p.querySelector('a') && p.textContent.trim());
-      if (descP) textContent.push(descP);
-
-      // CTA: first <a>
-      const ctaLink = content.querySelector('a');
-      if (ctaLink) textContent.push(ctaLink);
-    }
-    rows.push([
-      img,
-      textContent
-    ]);
+  // Build rows for each card
+  const rows = cardSections.map(card => {
+    // Image cell: find .image img
+    const imgEl = card.querySelector('.image img');
+    // Text cell: use the .content div directly
+    const contentDiv = card.querySelector('.content');
+    // If either is missing, substitute null to keep table shape but avoid errors
+    return [imgEl || '', contentDiv || ''];
   });
 
-  // Replace element with created table
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  // Compose the block table
+  const cells = [headerRow, ...rows];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

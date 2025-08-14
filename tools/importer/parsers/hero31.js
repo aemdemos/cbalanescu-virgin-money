@@ -1,53 +1,66 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row as in the example, exactly one column
+  // Header row: block name exactly from the example
   const headerRow = ['Hero (hero31)'];
 
-  // Background image row
-  let imageEl = null;
+  // Extract background image as <img>, with alt text if available
+  let bgImgEl = '';
   const bgDiv = element.querySelector('.intrinsic-el.img');
   if (bgDiv && bgDiv.style.backgroundImage) {
-    const match = bgDiv.style.backgroundImage.match(/url\(["']?([^"')]+)["']?\)/);
-    if (match && match[1]) {
-      imageEl = document.createElement('img');
-      imageEl.src = match[1];
-      // Use alt from .vh span inside bgDiv, if present
-      const altSpan = bgDiv.querySelector('.vh');
-      imageEl.alt = altSpan ? altSpan.textContent.trim() : '';
+    const urlMatch = bgDiv.style.backgroundImage.match(/url\((['"]?)(.*?)\1\)/);
+    if (urlMatch && urlMatch[2]) {
+      const src = urlMatch[2];
+      let alt = '';
+      const altSpan = bgDiv.querySelector('span');
+      if (altSpan) {
+        alt = altSpan.textContent.trim();
+      }
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = alt || '';
+      bgImgEl = img;
     }
   }
-  const imageRow = [imageEl ? imageEl : ''];
+  const imgRow = [bgImgEl ? bgImgEl : ''];
 
-  // Content row: get all child nodes, preserving semantic meaning and all text
-  let contentCell = [];
-  const a = element.querySelector('a');
-  if (a) {
-    const content = a.querySelector('.content');
-    if (content) {
-      const nodes = Array.from(content.childNodes).filter(n => {
-        // Omit empty text nodes
-        return n.nodeType !== Node.TEXT_NODE || (n.textContent && n.textContent.trim());
-      });
-      // For CTA, if we find a span.cta, replace it with a link referencing the parent a's href
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('cta')) {
-          const ctaLink = document.createElement('a');
-          ctaLink.href = a.href;
-          ctaLink.textContent = node.textContent;
-          contentCell.push(ctaLink);
+  // Gather all content from .content as-is, preserving all text and structure
+  const contentDiv = element.querySelector('.content');
+  let contentItems = [];
+  if (contentDiv) {
+    // For CTA span, convert to link with href from parent <a>. Others: include as-is.
+    Array.from(contentDiv.childNodes).forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        if (node.textContent.trim()) {
+          contentItems.push(document.createTextNode(node.textContent));
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.classList.contains('cta')) {
+          // Find nearest <a> ancestor (should be top-level a)
+          let linkEl = element.querySelector('a');
+          if (linkEl && linkEl.href) {
+            const ctaLink = document.createElement('a');
+            ctaLink.href = linkEl.href;
+            ctaLink.textContent = node.textContent.trim();
+            contentItems.push(ctaLink);
+          } else {
+            contentItems.push(node);
+          }
         } else {
-          contentCell.push(node);
+          contentItems.push(node);
         }
       }
-    }
+    });
   }
-  // If no content was found, push empty string
-  if (contentCell.length === 0) contentCell = [''];
-  const contentRow = [contentCell];
+  const contentRow = [contentItems.length ? contentItems : ''];
 
-  // Compose the table
-  const cells = [headerRow, imageRow, contentRow];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Compose final table structure
+  const cells = [
+    headerRow,
+    imgRow,
+    contentRow,
+  ];
+
+  // Create the table and replace the original element
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

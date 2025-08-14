@@ -1,59 +1,54 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header row: must match the example exactly
+  // Header row: block name, single column
   const headerRow = ['Hero (hero41)'];
 
-  // 2. Image row: find background image, use as <img> with alt if possible
-  let imageRow = [''];
-  const imgDiv = element.querySelector('.intrinsic-el.img');
-  if (imgDiv) {
-    const style = imgDiv.style.backgroundImage;
-    if (style) {
-      const urlMatch = style.match(/url\(["']?(.*?)["']?\)/);
-      if (urlMatch && urlMatch[1]) {
-        const img = document.createElement('img');
-        img.src = urlMatch[1];
-        // Use visually hidden span for alt text
-        const altSpan = imgDiv.querySelector('span');
-        img.alt = altSpan ? altSpan.textContent.trim() : '';
-        imageRow = [img];
+  // Row 2: Background image (as <img>, extracting url and alt from source)
+  let imageCell = '';
+  const bgDiv = element.querySelector('.intrinsic-el.img');
+  if (bgDiv && bgDiv.style.backgroundImage) {
+    const bgUrlMatch = bgDiv.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/);
+    if (bgUrlMatch && bgUrlMatch[1]) {
+      const img = document.createElement('img');
+      img.src = bgUrlMatch[1];
+      const altSpan = bgDiv.querySelector('span.vh');
+      if (altSpan) {
+        img.alt = altSpan.textContent.trim();
       }
+      imageCell = img;
     }
   }
 
-  // 3. Content row: gather all content as per source HTML, maintain semantic meaning
-  let contentRow = [''];
+  // Row 3: Structured content below image (include all text/element children in order)
   const contentDiv = element.querySelector('.content');
+  let contentCell = '';
   if (contentDiv) {
     const parts = [];
-    // Find header (could contain HTML tags), preserve structure
-    const header = contentDiv.querySelector('.header');
-    if (header) parts.push(header);
-    // Find subtitle if it contains meaningful content
-    const subtitle = contentDiv.querySelector('.subtitle');
-    if (subtitle && subtitle.textContent.trim()) {
-      parts.push(subtitle);
-    }
-    // All <p> direct children of contentDiv not inside .header
-    contentDiv.querySelectorAll('p').forEach(p => {
-      if (!header || !header.contains(p)) parts.push(p);
+    Array.from(contentDiv.childNodes).forEach((node) => {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        // Only include elements with non-empty text
+        if (node.textContent && node.textContent.trim()) {
+          parts.push(node);
+        }
+      } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+        // For raw text (shouldn't occur here, but safety)
+        const p = document.createElement('p');
+        p.textContent = node.textContent.trim();
+        parts.push(p);
+      }
     });
-    // If for some reason no parts, include leftover text in contentDiv as fallback
-    if (parts.length === 0 && contentDiv.textContent.trim()) {
-      parts.push(document.createTextNode(contentDiv.textContent.trim()));
-    }
-    // Only if parts has members use it, otherwise leave empty
-    if (parts.length > 0) {
-      contentRow = [parts];
+    if (parts.length) {
+      contentCell = parts;
     }
   }
 
-  // Compose and replace
+  // Compose table structure as per block guideline
   const cells = [
     headerRow,
-    imageRow,
-    contentRow
+    [imageCell],
+    [contentCell]
   ];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

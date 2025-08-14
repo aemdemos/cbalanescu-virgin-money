@@ -1,44 +1,64 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the actual table inside the block
+  // Find the main table inside the element
   const table = element.querySelector('table');
   if (!table) return;
 
-  // The output cells: first row is always ['Table']
-  const cells = [['Table']];
-
-  // Extract the table rows
-  // We want each row of the source table (including header row for columns)
-  // The source table's header row is the second row in the output
+  // Get table headers (the product/column names) from thead, skipping the first (label) column
   const thead = table.querySelector('thead');
+  let productHeaders = [];
   if (thead) {
-    const headerRow = thead.querySelector('tr');
-    if (headerRow) {
-      // Collect all th elements (including the first, which is the row label cell)
-      const ths = Array.from(headerRow.querySelectorAll('th'));
-      const headerCells = ths.map(th => {
-        // Use all childNodes to retain bolding or formatting
-        return th.childNodes.length > 0 ? Array.from(th.childNodes) : th.textContent;
-      });
-      cells.push(headerCells);
+    const ths = thead.querySelectorAll('tr:first-child th');
+    for (let i = 1; i < ths.length; i++) {
+      // Use the HTML to preserve any formatting, like <b>
+      productHeaders.push(ths[i].innerHTML.trim() || '');
     }
   }
 
-  // Add all tbody rows
+  // Prepare the cells for the output block table
+  const cells = [];
+  // First row: single cell with block name
+  cells.push(['Table']);
+  // Second row: first column is empty (for row labels), then product headers
+  cells.push(['', ...productHeaders]);
+
+  // Now add the data rows
   const tbody = table.querySelector('tbody');
   if (tbody) {
-    const trs = Array.from(tbody.querySelectorAll('tr'));
+    const trs = tbody.querySelectorAll('tr');
     trs.forEach(tr => {
-      const tds = Array.from(tr.children);
-      // For each cell, retain formatting and structure
-      const rowCells = tds.map(td => {
-        return td.childNodes.length > 0 ? Array.from(td.childNodes) : td.textContent;
+      // The first cell is the row label (from the th, if present)
+      let rowLabel = '';
+      const th = tr.querySelector('th');
+      if (th) {
+        rowLabel = th.innerHTML.trim();
+      }
+      // All td cells (columns)
+      const tds = tr.querySelectorAll('td');
+      const rowCells = [rowLabel];
+      tds.forEach(td => {
+        // If cell has multiple child nodes, collect all (preserve elements)
+        if (td.childNodes.length > 1) {
+          const arr = [];
+          td.childNodes.forEach(node => {
+            if (node.nodeType === 3 && node.textContent.trim() !== '') {
+              arr.push(document.createTextNode(node.textContent));
+            } else if (node.nodeType === 1) {
+              arr.push(node);
+            }
+          });
+          rowCells.push(arr.length === 1 ? arr[0] : arr);
+        } else if (td.childNodes.length === 1) {
+          rowCells.push(td.childNodes[0]);
+        } else {
+          rowCells.push(td.textContent.trim());
+        }
       });
       cells.push(rowCells);
     });
   }
 
-  // Create the block table
+  // Create the block table and replace element
   const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

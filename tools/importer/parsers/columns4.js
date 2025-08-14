@@ -1,51 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Find the main column container. If not found, fallback to element itself.
-  let container = element.querySelector('.column-container');
-  if (!container) container = element;
+  // The main column container holds the structure
+  const columnContainer = element.querySelector('.column-container');
+  if (!columnContainer) return;
 
-  // 2. Find the block with the two columns (one with heading, one with contacts)
-  let sl = container.querySelector('.sl.has-top-border');
-  if (!sl) sl = container;
+  // The main inner section that holds the visual columns
+  const sl = columnContainer.querySelector('.sl.has-top-border');
+  if (!sl) return;
 
-  // 3. The list holding the two columns
+  // The sl-list arranges items into columns: first is left, second is right
   const slList = sl.querySelector('.sl-list');
-  if (!slList) return;
+  if (!slList || slList.children.length < 2) return;
 
-  // 4. Find all top-level column items
-  const slItems = slList.querySelectorAll(':scope > .sl-item');
-  if (slItems.length < 2) return;
+  // LEFT column
+  const leftCol = slList.children[0]; // .sl-item with .cm-rich-text
+  let leftCellContent = null;
+  // Look for .cm-rich-text module
+  const richText = leftCol.querySelector('.cm-rich-text');
+  leftCellContent = richText ? richText : leftCol;
 
-  // Left column: the first .sl-item contains the heading
-  let leftCol = slItems[0].querySelector('.cm-rich-text') || slItems[0];
-  // Defensive: if no heading, fallback to slItems[0] itself
-  if (!leftCol) leftCol = slItems[0];
-
-  // Right column: the second .sl-item contains multiple help sections
-  let rightCol = slItems[1];
-  let rightCellContent = [];
-  // Gather all .cm-icon-title sections. If none found, rightCol itself
-  const helpSections = Array.from(rightCol.querySelectorAll(':scope > section.cm.cm-icon-title'));
-  if (helpSections.length > 0) {
-    helpSections.forEach((section, idx) => {
-      if (idx > 0) rightCellContent.push(document.createElement('br'));
-      rightCellContent.push(section);
-    });
+  // RIGHT column
+  const rightCol = slList.children[1];
+  // Gather all .cm-icon-title sections (each is one contact method)
+  const iconSections = rightCol.querySelectorAll('.cm-icon-title');
+  let rightCellContent;
+  if (iconSections.length) {
+    // Put all icon-title sections (as references) into a wrapper div
+    rightCellContent = document.createElement('div');
+    iconSections.forEach(section => rightCellContent.appendChild(section));
   } else {
-    rightCellContent = [rightCol];
+    // Fallback: use all children if sections aren't found
+    rightCellContent = rightCol;
   }
 
-  // 5. Header row exactly: Columns (columns4)
+  // Table header EXACTLY as specified
   const headerRow = ['Columns (columns4)'];
-  // 6. Data row: two columns, as per structure
-  const dataRow = [leftCol, rightCellContent];
-
-  // 7. Create the table using WebImporter.DOMUtils.createTable
-  const table = WebImporter.DOMUtils.createTable([
+  const cells = [
     headerRow,
-    dataRow
-  ], document);
+    [leftCellContent, rightCellContent]
+  ];
 
-  // 8. Replace the original element with the new table
-  element.replaceWith(table);
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

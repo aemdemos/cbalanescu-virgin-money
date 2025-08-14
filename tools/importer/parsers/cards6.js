@@ -1,49 +1,52 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header from the spec
+  // Header row as shown in the example
   const headerRow = ['Cards (cards6)'];
-  const cells = [headerRow];
+  const rows = [headerRow];
 
-  // Grab all direct card items
+  // Find all card items within the element
   const cardItems = element.querySelectorAll('.product-key-rate-item');
+
   cardItems.forEach((item) => {
-    // First cell is the image/icon (reference existing element)
-    const img = item.querySelector('img');
+    // First cell: image or icon (reference existing element if present)
+    const img = item.querySelector('img') || '';
 
-    // Second cell is all text content, which may include title, description, CTA, and superscripts
-    const textParts = [];
+    // Second cell: full text content including all children and text nodes
+    const textCellContent = [];
 
-    // Title: from .key-value-text > span (preserve semantics; strong for heading)
+    // Title: from .key-value-text span (if present)
     const keyValueText = item.querySelector('.key-value-text span');
     if (keyValueText && keyValueText.textContent.trim()) {
       const strong = document.createElement('strong');
       strong.textContent = keyValueText.textContent.trim();
-      textParts.push(strong);
+      textCellContent.push(strong);
     }
 
-    // Description + CTA: in .key-top-text (may be plain text or contain <p> and <a>)
-    const keyTopText = item.querySelector('.key-top-text');
-    if (keyTopText) {
-      // Push each <p> or text node separately
-      Array.from(keyTopText.childNodes).forEach((node) => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          // Reference existing <p>, <a>, <sup>, etc.
-          textParts.push(node);
-        } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-          const span = document.createElement('span');
-          span.textContent = node.textContent.trim();
-          textParts.push(span);
+    // Description and CTAs: from .key-top-text, preserving all HTML structure
+    const descContainer = item.querySelector('.key-top-text');
+    if (descContainer) {
+      // Include all child nodes, preserving structure (e.g., <p>, <a>, <sup>, etc.)
+      Array.from(descContainer.childNodes).forEach((node) => {
+        // If it's a text node and not just whitespace, wrap in <p>
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (node.textContent.trim()) {
+            const p = document.createElement('p');
+            p.textContent = node.textContent.trim();
+            textCellContent.push(p);
+          }
+        } else {
+          textCellContent.push(node);
         }
       });
     }
 
-    cells.push([
-      img,
-      textParts
-    ]);
+    // Add the card row if there is at least one cell with content
+    if (img || textCellContent.length) {
+      rows.push([img, textCellContent]);
+    }
   });
 
-  // Create the block table and replace original
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Create and replace with the new block table
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

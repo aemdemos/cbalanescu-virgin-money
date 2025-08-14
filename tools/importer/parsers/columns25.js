@@ -3,52 +3,82 @@ export default function parse(element, { document }) {
   // Header row for the block
   const headerRow = ['Columns (columns25)'];
 
-  // We'll extract the two columns: icon on the left, accordion on the right
-  // The structure is:
-  // element > div.column-container > div.sl > div.sl-list > div.sl-item (x2)
-  // First sl-item: contains .cm-content-panel-container (the icon)
-  // Second sl-item: contains .cm-accordion (the accordion)
+  // Identify the two columns in the source HTML
+  // First column: icon panel
+  // Second column: accordion list
+  let iconContent = [];
+  let accordionContent = [];
 
-  let leftCell = null;
-  let rightCell = null;
+  // Get all .sl-item (should be two)
+  const slItems = element.querySelectorAll(':scope > .sl > .sl-list > .sl-item');
 
-  // Get all immediate .sl-item children (should be two based on structure)
-  const slItems = element.querySelectorAll(':scope > div > div > div.sl-list > div.sl-item');
-  // Defensive: fallback to just .sl-item if the above doesn't work
-  let items = Array.from(slItems);
-  if (items.length === 0) {
-    items = Array.from(element.querySelectorAll('.sl-item'));
+  // --- First column (icon) ---
+  if (slItems[0]) {
+    // Find the .cm-content-panel-container inside
+    const panel = slItems[0].querySelector('.cm-content-panel-container');
+    if (panel) {
+      // Use the rich text content inside the panel for the icon
+      const rich = panel.querySelector('.cm-rich-text');
+      if (rich) {
+        // Reference the actual rich element, not clone
+        iconContent.push(rich);
+      }
+    }
   }
 
-  // Loop through columns, assign left and right cells
-  items.forEach((item) => {
-    if (!leftCell) {
-      const panel = item.querySelector('.cm-content-panel-container');
-      if (panel) {
-        leftCell = panel;
-        return;
+  // --- Second column (accordion list) ---
+  if (slItems[1]) {
+    // Accordion section
+    const accordionSection = slItems[1].querySelector('.cm-accordion');
+    if (accordionSection) {
+      // The ul.accordion-list contains all FAQ items
+      const ul = accordionSection.querySelector('ul.accordion-list');
+      if (ul) {
+        // For each FAQ <li>
+        const lis = ul.querySelectorAll(':scope > li');
+        lis.forEach(li => {
+          // The question link
+          const questionLink = li.querySelector('a.accordion-item');
+          if (questionLink) {
+            // Reference the link element itself
+            accordionContent.push(questionLink);
+          }
+          // The answer block
+          const answerDiv = li.querySelector('.expandcollapse-content');
+          if (answerDiv) {
+            // Reference its rich text content if available, else entire div
+            const richText = answerDiv.querySelector('.cm-rich-text');
+            if (richText) {
+              accordionContent.push(richText);
+            } else {
+              accordionContent.push(answerDiv);
+            }
+          }
+        });
+        // After all FAQ items, check for a 'See more' link (outside li, inside ul)
+        // In this structure, it's a div.cm-rich-text after the <ul>
+        let seeMoreDiv = null;
+        let next = ul.nextElementSibling;
+        while (next) {
+          if (next.classList && next.classList.contains('cm-rich-text')) {
+            seeMoreDiv = next;
+            break;
+          }
+          next = next.nextElementSibling;
+        }
+        if (seeMoreDiv) {
+          accordionContent.push(seeMoreDiv);
+        }
       }
     }
-    if (!rightCell) {
-      const acc = item.querySelector('.cm-accordion');
-      if (acc) {
-        rightCell = acc;
-        return;
-      }
-    }
-  });
-  // If any cell is missing, create an empty div for that cell
-  if (!leftCell) leftCell = document.createElement('div');
-  if (!rightCell) rightCell = document.createElement('div');
+  }
 
-  // Compose the rows: header + columns
-  const rows = [
-    headerRow,
-    [leftCell, rightCell],
-  ];
+  // If icon panel or accordion are empty, leave cell blank
+  const row = [iconContent.length > 0 ? iconContent : '', accordionContent.length > 0 ? accordionContent : ''];
 
-  // Create the table block
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  // Replace the original element with the table
-  element.replaceWith(block);
+  // Build the block table
+  const cells = [headerRow, row];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  element.replaceWith(table);
 }

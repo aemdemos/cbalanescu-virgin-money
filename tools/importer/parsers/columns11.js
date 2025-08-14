@@ -1,22 +1,24 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Check for required structure
+  // Ensure we have the sl-list (source for columns)
   const slList = element.querySelector('.sl-list');
-  if (!slList) return;
-  const slItems = Array.from(slList.children);
-  if (!slItems.length) return;
+  const slItems = slList ? Array.from(slList.children) : [];
+  // Defensive: if no columns, do nothing
+  if (slItems.length === 0) return;
 
-  // Header must match example: 'Columns (columns11)'
+  // Header row exactly matching block name
   const headerRow = ['Columns (columns11)'];
 
-  // Each column is the <section> inside a .sl-item
-  const columnsRow = slItems.map(item => {
-    // Only reference the section if it exists
-    const section = item.querySelector('section');
-    return section ? section : item;
+  // Each column: reference the section directly for all content (heading, list)
+  const columnCells = slItems.map(item => {
+    const section = item.querySelector('section.cm');
+    return section || item;
   });
 
-  const cells = [headerRow, columnsRow];
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(blockTable);
+  // Table structure: header row, then columns row
+  const cells = [headerRow, columnCells];
+
+  // Create block table and replace original element
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

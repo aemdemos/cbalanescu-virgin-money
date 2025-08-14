@@ -1,31 +1,42 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find all immediate .sl-item children (columns)
+  // Header row exactly as required
+  const headerRow = ['Columns (columns37)'];
+
+  // Get the column content blocks
+  // HTML structure:
+  // div.column-container > div.sl > div.sl-list > div.sl-item (heading)
+  //                                    > div.sl-item (links)
   const slList = element.querySelector('.sl-list');
-  let columns = [];
+  let leftCol = null;
+  let rightCol = null;
+
   if (slList) {
-    columns = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+    const slItems = slList.querySelectorAll(':scope > .sl-item');
+    // Defensive: check for the two items
+    if (slItems.length >= 2) {
+      // First column: heading (rich text)
+      leftCol = slItems[0].querySelector('.cm-rich-text') || slItems[0];
+      // Second column: links (section)
+      rightCol = slItems[1].querySelector('section') || slItems[1];
+    } else {
+      // Fallback: treat the whole element as one cell
+      leftCol = element;
+      rightCol = document.createElement('div');
+    }
+  } else {
+    // Fallback: treat the whole element as one cell
+    leftCol = element;
+    rightCol = document.createElement('div');
   }
 
-  // Second row: one cell per column, referencing the main content
-  const secondRow = columns.map(col => {
-    const richText = col.querySelector('.cm-rich-text');
-    if (richText) return richText;
-    const paragraph = col.querySelector('.cq-dd-paragraph');
-    if (paragraph) {
-      const sectionLinks = paragraph.querySelector('section.cm-links-related');
-      if (sectionLinks) return sectionLinks;
-      return paragraph;
-    }
-    return col;
-  });
+  // Construct the rows with references to real elements
+  const cells = [
+    headerRow,
+    [leftCol, rightCol]
+  ];
 
-  // Header row: exactly one cell, but match the number of columns so it can span all columns
-  // By placing undefined for remaining columns, DOMUtils will create empty <th> cells, but most block systems treat the first cell as the block name, rest ignored
-  // But for semantic accuracy, create one cell and fill the rest with empty string
-  const headerRow = ['Columns (columns37)', ...Array(secondRow.length - 1).fill('')];
-
-  const tableData = [headerRow, secondRow];
-  const block = WebImporter.DOMUtils.createTable(tableData, document);
-  element.replaceWith(block);
+  // Create the table and replace
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

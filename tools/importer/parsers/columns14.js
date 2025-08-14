@@ -1,25 +1,21 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the sl-list (columns container)
+  // Get the columns from the block
   const slList = element.querySelector('.sl-list');
   if (!slList) return;
-  // Get all immediate column items
-  const items = slList.querySelectorAll(':scope > .sl-item');
-  const cells = [];
-  items.forEach(item => {
-    // Each .sl-item > .cq-dd-paragraph > section.cm
-    const section = item.querySelector('section.cm');
-    if (section) {
-      cells.push(section);
-    } else {
-      cells.push(item); // fallback
-    }
+  const items = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+  // Extract the main presentational element for each column
+  const columns = items.map(item => {
+    const section = item.querySelector('section');
+    if (section) return section;
+    const paragraph = item.querySelector('.cq-dd-paragraph');
+    if (paragraph) return paragraph;
+    return item;
   });
-  // Table rows: header row with ONE cell, then a row with columns
-  const tableRows = [
-    ['Columns (columns14)'], // single header cell
-    cells // one cell per column
-  ];
+  // Header row: exactly one column (NOT one cell per content column)
+  const headerRow = ['Columns (columns14)'];
+  // Data row: one cell per content column
+  const tableRows = [headerRow, columns];
   const table = WebImporter.DOMUtils.createTable(tableRows, document);
   element.replaceWith(table);
 }

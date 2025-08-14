@@ -1,60 +1,46 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header row
-  const cells = [['Hero (hero9)']];
+  // Table header row as per instructions
+  const headerRow = ['Hero (hero9)'];
 
-  // 2nd row: background image
-  let bgImgCell = null;
-  const bgDiv = element.querySelector('.intrinsic-el.img');
-  if (bgDiv && bgDiv.style && bgDiv.style.backgroundImage) {
-    const m = bgDiv.style.backgroundImage.match(/url\(["']?([^"')]+)["']?\)/);
-    if (m && m[1]) {
+  // --- Background Image Extraction ---
+  let bgImgCell = '';
+  // Find the element containing the background-image style.
+  // Accept both with and without absolute URLs
+  const bgDiv = element.querySelector('[style*="background-image"]');
+  if (bgDiv) {
+    const style = bgDiv.getAttribute('style') || '';
+    const match = style.match(/background-image:\s*url\(['"]?([^'")]+)['"]?\)/);
+    if (match && match[1]) {
+      let src = match[1];
+      // If not absolute, prepend domain
+      if (!/^https?:/.test(src)) {
+        src = `https://www.virginmoney.com${src}`;
+      }
       const img = document.createElement('img');
-      img.src = m[1];
-      img.width = 750;
-      img.height = 415;
-      img.loading = 'lazy';
+      img.src = src;
+      img.alt = '';
       bgImgCell = img;
     }
   }
-  cells.push([bgImgCell]);
 
-  // 3rd row: title, subtitle, paragraph, CTA
+  // --- Content Extraction ---
+  // Reference the main content container
   const contentDiv = element.querySelector('.content');
-  const contentArr = [];
+  let contentCell = '';
   if (contentDiv) {
-    // Heading (styled as heading)
-    const header = contentDiv.querySelector('.header');
-    if (header) {
-      // header may contain <p><span>...</span></p>
-      // Use innerHTML so styles/bold are preserved
-      const h1 = document.createElement('h1');
-      h1.innerHTML = header.innerHTML;
-      contentArr.push(h1);
-    }
-    // Subtitle
-    const subtitle = contentDiv.querySelector('.subtitle');
-    if (subtitle && subtitle.textContent.trim()) {
-      contentArr.push(subtitle);
-    }
-    // Paragraphs
-    // The first <p> in header is part of heading, so skip it from further paragraphs
-    const headerP = header && header.querySelector('p');
-    const paragraphs = contentDiv.querySelectorAll('p');
-    paragraphs.forEach(p => {
-      if (!headerP || p !== headerP) {
-        contentArr.push(p);
-      }
-    });
-    // CTA links (if any)
-    const links = contentDiv.querySelectorAll('a');
-    links.forEach(a => {
-      contentArr.push(a);
-    });
+    // To ensure resiliency and preserve formatting, reference the whole div
+    contentCell = contentDiv;
   }
-  cells.push([contentArr]);
 
-  // Create and replace
+  // --- Table Construction ---
+  // Always 1 column, 3 rows
+  const cells = [
+    headerRow,
+    [bgImgCell],
+    [contentCell]
+  ];
+
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

@@ -1,40 +1,44 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header row exactly as required
+  // Block header must match example
   const headerRow = ['Hero (hero24)'];
 
-  // 2. Background image row (none present)
-  //   In this HTML there is no image, so cell is empty string
-  const bgRow = [''];
+  // Find the .cm-content-panel-container block as it has the background styling
+  // For this HTML, the background is just a color, not an image, so the Background Image row is blank
+  const backgroundRow = [''];
 
-  // 3. Content row: must contain all text and links, preserving structure
-  // Get the rich-text container that has the heading, paragraph, and link
-  // This is the deepest .cm-rich-text block. Find it safely.
-  let contentPanel = null;
-  // Get all divs inside this element (which itself is a wrapper)
-  const innerDivs = element.querySelectorAll(':scope > div');
-  for (const div of innerDivs) {
-    // Find the rich-text module inside these
-    const richText = div.querySelector('.cm-rich-text');
-    if (richText) {
-      contentPanel = richText;
-      break;
+  // Find the rich text content div (contains heading, paragraph, CTA)
+  // Reference the actual element, don't clone, to preserve formatting and structure
+  let richTextDiv = null;
+  const richTextCandidates = element.querySelectorAll('.cm-rich-text');
+  if (richTextCandidates.length > 0) {
+    richTextDiv = richTextCandidates[0];
+  } else {
+    // fallback for edge cases: use the first div inside the panel-container
+    const container = element.querySelector('.cm-content-panel-container');
+    if (container) {
+      const firstDiv = container.querySelector('div');
+      if (firstDiv) richTextDiv = firstDiv;
+    } else {
+      // fallback to first div in element
+      const firstDiv = element.querySelector('div');
+      if (firstDiv) richTextDiv = firstDiv;
     }
   }
-  // If not found, fallback to the first child div (defensive, though structure should always contain richText)
-  if (!contentPanel && innerDivs.length > 0) {
-    contentPanel = innerDivs[0];
-  }
 
-  // If nothing found, fallback to empty string as a safeguard
-  const contentRow = [contentPanel || ''];
+  // If we couldn't find anything, use an empty string
+  const contentRow = [richTextDiv || ''];
 
-  // 4. Compose table
-  const cells = [headerRow, bgRow, contentRow];
+  // Build table rows
+  const cells = [
+    headerRow,
+    backgroundRow,
+    contentRow
+  ];
 
-  // 5. Create the block using reference to document
+  // Create the table using WebImporter helper
   const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  // 6. Replace original element with the block table, per instructions
+  // Replace the original element with the new table block
   element.replaceWith(block);
 }

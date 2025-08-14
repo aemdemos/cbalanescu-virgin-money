@@ -1,66 +1,61 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row: Block name
-  const headerRow = ['Columns (columns36)'];
+  // The block is "Columns (columns36)"; no Section Metadata table is required.
+  // There are two main columns. Each is a .sl-item in the top-level .sl-list.has-2-items
+  // Each column contains its own content panel, icon sections, and CTA
 
-  // 2. Find the two top-level columns (sl-item), each is a column
-  const columnItems = Array.from(element.querySelectorAll(':scope > .column-container > .sl > .sl-list > .sl-item'));
-  if (columnItems.length < 2) return; // Defensive: must have two columns
+  // 1. Find the top-level .column-container and .sl-list.has-2-items
+  let container = element.querySelector(':scope > .column-container');
+  if (!container) container = element;
+  let sl = container.querySelector(':scope > .sl');
+  if (!sl) sl = container;
+  let slList = sl.querySelector(':scope > .sl-list.has-2-items');
+  if (!slList) slList = sl;
 
-  // Helper: for a .sl-item panel, get its full content panel (everything relevant for that column)
-  function getPanelContent(panel) {
-    // Each panel has a .cm-content-panel-container which is the main content area
-    const panelContainer = panel.querySelector(':scope > .cm-content-panel-container');
-    if (!panelContainer) return [panel]; // fallback: just use the whole panel
+  // 2. Get direct child .sl-item columns
+  const columns = Array.from(slList.children).filter(c => c.classList.contains('sl-item'));
 
-    // Get the main two rows: 1. image+title+desc, 2. features list, 3. bottom CTA
-    const content = [];
-    // Get image+title+desc block
-    const innerSlList = panelContainer.querySelector(':scope > .column-container > .sl > .sl-list');
-    if (innerSlList) {
-      // There should be two .sl-item: image and headline block
-      const innerItems = innerSlList.querySelectorAll(':scope > .sl-item');
-      if (innerItems.length === 2) {
-        // We'll include both as is; preserves semantics and references existing nodes
-        content.push(innerItems[0], innerItems[1]);
-      } else {
-        // fallback: include all .sl-item
-        content.push(...innerItems);
+  // 3. For each column, collect all content blocks that are part of the column
+  function getColumnContent(slItem) {
+    // Get all direct children of the sl-item that are block-level content
+    const blocks = [];
+    // The panel at the top
+    const panel = slItem.querySelector(':scope > .cm-content-panel-container');
+    if (panel) blocks.push(panel);
+    // After the panel: all cm-icon-title and cm-rich-text siblings
+    let next = panel ? panel.nextElementSibling : slItem.firstElementChild;
+    while (next) {
+      if (
+        next.classList && (
+          next.classList.contains('cm-icon-title') ||
+          next.classList.contains('cm-rich-text')
+        )
+      ) {
+        blocks.push(next);
       }
+      next = next.nextElementSibling;
     }
-
-    // Now, all the feature sections (cm-icon-title)
-    // These are siblings of .cm-content-panel-container inside the .sl-item
-    // We want the feature sections directly AFTER panelContainer
-    let node = panelContainer.nextElementSibling;
-    while (node && node.classList.contains('cm-icon-title')) {
-      content.push(node);
-      node = node.nextElementSibling;
+    // If nothing gathered, fallback to all children
+    if (blocks.length === 0) {
+      blocks.push(...slItem.childNodes);
     }
-
-    // Finally, the bottom cta link (usually a .cm-rich-text with an <a>)
-    // Find the first .cm-rich-text.module__content.l-full-width after the features
-    while (node && (!node.classList.contains('cm-rich-text') || !node.querySelector('a'))) {
-      node = node.nextElementSibling;
-    }
-    if (node && node.classList.contains('cm-rich-text') && node.querySelector('a')) {
-      content.push(node);
-    }
-
-    return content;
+    // Remove any empty text nodes
+    const result = blocks.filter(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        return node.textContent.trim().length > 0;
+      }
+      return true;
+    });
+    // Return as array if multiple, single element if only one
+    return result.length === 1 ? result[0] : result;
   }
 
-  // For each column, build the content array
-  const leftContent = getPanelContent(columnItems[0]);
-  const rightContent = getPanelContent(columnItems[1]);
+  const tableRows = [];
+  // Header matches the example exactly
+  tableRows.push(['Columns (columns36)']);
+  // Each column's content is an array of its content blocks
+  tableRows.push(columns.map(getColumnContent));
 
-  // 3. Build the table cell structure
-  const cells = [
-    headerRow,
-    [leftContent, rightContent],
-  ];
-
-  // 4. Create and replace
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+  const table = WebImporter.DOMUtils.createTable(tableRows, document);
   element.replaceWith(table);
 }

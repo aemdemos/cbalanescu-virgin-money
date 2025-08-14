@@ -1,43 +1,34 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Ensure we have the header as specified
+  // The header row should be a single cell with the exact block name
   const headerRow = ['Columns (columns29)'];
 
   // Find the column container
   const columnContainer = element.querySelector('.column-container');
   if (!columnContainer) return;
 
-  // Find the .sl-list within the columnContainer
-  const slList = columnContainer.querySelector('.sl-list');
-  if (!slList) return;
-
-  // Get all direct children with class .sl-item
-  const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
-
-  // For each column, extract all its direct children (preserving structure)
-  const contentRow = slItems.map((slItem) => {
-    // If the column contains multiple content blocks, wrap them in a div
-    const children = Array.from(slItem.children);
-    if (children.length > 1) {
-      const wrapper = document.createElement('div');
-      children.forEach(child => wrapper.appendChild(child));
-      return wrapper;
+  // Find all direct .sl-item children (the columns)
+  const slItems = columnContainer.querySelectorAll(':scope > .sl > .sl-list > .sl-item');
+  const columns = [];
+  slItems.forEach((item) => {
+    // Left cell: stack all .cm-rich-text as one cell (array of elements)
+    const richTexts = Array.from(item.querySelectorAll(':scope > .cm-rich-text'));
+    if (richTexts.length) {
+      columns.push(richTexts);
+      return;
     }
-    // If column contains only one block, use it directly
-    else if (children.length === 1) {
-      return children[0];
+    // Right cell: .cm-image section if present
+    const image = item.querySelector(':scope > .cm-image');
+    if (image) {
+      columns.push(image);
+      return;
     }
-    // If empty column, use empty string
-    return '';
+    // Otherwise, put all children together
+    columns.push(Array.from(item.children));
   });
 
-  // Build the table data
-  const cells = [
-    headerRow,
-    contentRow
-  ];
-
-  // Create and replace the block table
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(blockTable);
+  // Compose table: header row (single cell), then content row (n cells)
+  const cells = [headerRow, columns];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

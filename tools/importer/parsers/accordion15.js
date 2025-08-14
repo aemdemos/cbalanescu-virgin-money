@@ -1,64 +1,62 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row as in the example
+  // Header must match the example block name exactly.
   const headerRow = ['Accordion (accordion15)'];
-  const rows = [headerRow];
+  const cells = [headerRow];
 
-  // Find the accordion-list
+  // Find the accordion list
   const ul = element.querySelector('ul.accordion-list');
   if (!ul) return;
 
-  // Each direct <li> child is an accordion item
-  const lis = Array.from(ul.children).filter(child => child.tagName === 'LI');
-
-  lis.forEach(li => {
-    // Title cell: find the <a> anchor, get only its visible text (not icons)
-    let titleCell;
+  // Each li is one accordion item
+  const lis = ul.querySelectorAll(':scope > li');
+  lis.forEach((li) => {
+    // Title: Get the clickable text only, not icons
+    let titleCell = '';
     const a = li.querySelector('a');
     if (a) {
-      // Remove any child div (icon) for pure text
-      const aClone = a.cloneNode(true);
-      const iconDiv = aClone.querySelector('div');
-      if (iconDiv) iconDiv.remove();
-      // The title is all textContent left, trimmed
-      const p = document.createElement('p');
-      p.textContent = aClone.textContent.trim();
-      titleCell = p;
-    } else {
-      // fallback for missing anchor
-      const p = document.createElement('p');
-      p.textContent = li.textContent.trim();
-      titleCell = p;
-    }
-
-    // Content cell: the expanded body
-    let contentCell = '';
-    const expandDiv = li.querySelector('div.expandcollapse-content');
-    if (expandDiv) {
-      // Use the <ol> inside as content (holds all accordion body items)
-      const ol = expandDiv.querySelector('ol');
-      if (ol && ol.children.length > 0) {
-        contentCell = ol;
-      } else if (expandDiv.children.length > 0) {
-        contentCell = Array.from(expandDiv.children);
-      } else {
-        // fallback to expandDiv itself
-        contentCell = expandDiv;
+      // There may be extra elements inside the <a> (e.g. <div>), so get only the text nodes
+      let titleText = '';
+      a.childNodes.forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          titleText += node.textContent;
+        }
+      });
+      titleText = titleText.trim();
+      // If titleText is empty, fallback to a.textContent, but strip child elements
+      if (!titleText) {
+        titleText = a.textContent.trim();
       }
+      // Preserve formatting
+      const titleSpan = document.createElement('span');
+      titleSpan.textContent = titleText;
+      titleCell = titleSpan;
+    }
+    // Content: Get the expanded content div or fallback
+    let contentCell = '';
+    const contentDiv = li.querySelector('div.expandcollapse-content');
+    if (contentDiv) {
+      // contentDiv may contain an <ol> or other elements. We want all of its content.
+      // Remove styles that hide the content
+      contentDiv.removeAttribute('style');
+      // If contentDiv has only an <ol> with wrapper divs, we want the visible content
+      // Use the contentDiv directly for robustness, referencing existing elements
+      contentCell = contentDiv;
     } else {
-      // fallback for items with body directly in the <li>
-      const otherContent = Array.from(li.childNodes).filter(node => node.nodeType === 1 && node !== a);
-      if (otherContent.length > 0) {
-        contentCell = otherContent;
+      // If no contentDiv, there might still be content in <li>
+      // Check for a <p> inside <li>
+      const pEls = li.querySelectorAll('p');
+      if (pEls.length) {
+        contentCell = Array.from(pEls);
       } else {
+        // Possibly empty item, leave blank
         contentCell = '';
       }
     }
-
-    rows.push([titleCell, contentCell]);
+    cells.push([titleCell, contentCell]);
   });
 
-  // Create the block using referenced elements
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  // Create and replace
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

@@ -1,39 +1,48 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  const headerRow = ['Accordion (accordion16)'];
-  const rows = [headerRow];
-
-  // Get each accordion item (li)
-  const items = Array.from(element.querySelectorAll(':scope > li'));
-
-  items.forEach((item) => {
-    // The clickable title is the <a> tag inside <li>
-    const a = item.querySelector('a');
-    let titleCell = '';
+  // Prepare the table rows, starting with the header
+  const rows = [['Accordion (accordion16)']];
+  // For edge case handling: if there are no LI children, don't error
+  const items = Array.from(element.children).filter((li) => li.tagName === 'LI');
+  items.forEach((li) => {
+    // 1. Title cell: get text content from the <a> accordion-item, excluding any icon DIVs
+    let title = '';
+    const a = li.querySelector('a.accordion-item');
     if (a) {
-      // Remove any child <div class="ec"> (these are just icons, not content)
-      const aText = document.createElement('span');
-      // Only include the text content of the <a>, not its children
-      aText.textContent = a.childNodes[0]?.textContent?.trim() || a.textContent.trim();
-      titleCell = aText;
-    }
-    // The content is in the sibling <div.expandcollapse-content>
-    const contentDiv = item.querySelector('div.expandcollapse-content');
-    let contentCell = '';
-    if (contentDiv) {
-      // Reference the actual content block inside, not clone
-      // Often within a .cm-rich-text or similar div, but if absent, just take all children
-      const richContent = contentDiv.querySelector('.cm-rich-text, .module__content, .l-full-width');
-      if (richContent) {
-        contentCell = richContent;
+      // Only use the direct text nodes of <a> (before any icons/divs)
+      const titleParts = [];
+      a.childNodes.forEach((n) => {
+        if (n.nodeType === Node.TEXT_NODE) {
+          if (n.textContent.trim()) {
+            titleParts.push(n.textContent.trim());
+          }
+        }
+      });
+      if (titleParts.length) {
+        title = titleParts.join(' ');
       } else {
-        // If no wrapper, just put all direct children in an array
-        contentCell = Array.from(contentDiv.children);
+        // fallback to textContent if only one node
+        title = a.textContent.trim();
       }
     }
-    rows.push([titleCell, contentCell]);
+    // 2. Content cell: reference the .module__content block if it exists, else the collapse content
+    let content = '';
+    const expandContent = li.querySelector('.expandcollapse-content');
+    if (expandContent) {
+      const moduleContent = expandContent.querySelector('.module__content');
+      if (moduleContent) {
+        content = moduleContent;
+      } else {
+        content = expandContent;
+      }
+    }
+    // Edge case: ensure cells are always present (avoid null/undefined)
+    rows.push([
+      title || '',
+      content || ''
+    ]);
   });
-
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  // Create the block table and replace
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

@@ -1,25 +1,29 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block table header
+  // Header row: one cell, block name
   const headerRow = ['Columns (columns27)'];
 
-  // Find the columns by locating .sl-list > .sl-item elements
+  // Find the column items (immediate children of .sl-list)
   const slList = element.querySelector('.sl-list');
-  let columnCells = [];
+  if (!slList) return;
+  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
 
-  if (slList) {
-    const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
-    // For each column, reference its .cm.cm-rich-text.module__content.l-full-width as the content
-    columnCells = slItems.map(item => {
-      const richContent = item.querySelector('.cm.cm-rich-text.module__content');
-      return richContent ? richContent : item;
-    });
-  }
+  // For each .sl-item, use the .cm-rich-text.module__content.l-full-width div
+  // fallback to .sl-item itself if not found
+  const columns = slItems.map(item => {
+    const rich = item.querySelector('.cm-rich-text.module__content.l-full-width');
+    return rich || item;
+  });
 
-  // Only replace if we have extracted columns
-  if (columnCells.length > 0) {
-    const tableRows = [headerRow, columnCells];
-    const blockTable = WebImporter.DOMUtils.createTable(tableRows, document);
-    element.replaceWith(blockTable);
-  }
+  // The second row must have as many columns as content blocks, header row is always ONE column
+  const cells = [
+    headerRow,
+    columns
+  ];
+
+  // Create the table
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace the original element
+  element.replaceWith(table);
 }

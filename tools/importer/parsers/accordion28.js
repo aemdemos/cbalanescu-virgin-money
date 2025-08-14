@@ -1,25 +1,26 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Prepare the header row exactly as required
+  // Prepare table rows, starting with the correct header
   const headerRow = ['Accordion (accordion28)'];
-
-  // Get all .filtered-content sections (each accordion item)
-  const accordionItems = element.querySelectorAll('.filtered-content');
   const rows = [headerRow];
-
-  // For each accordion item, extract the required content
-  accordionItems.forEach(item => {
-    // Title from data-title (always present)
-    const title = item.getAttribute('data-title') || '';
-    // Reference the whole item as the content cell for resilience
-    // (It contains all child structure, headings, links, etc)
-    rows.push([
-      title,
-      item
-    ]);
+  // Get all accordion sections (filtered-content)
+  const items = Array.from(element.querySelectorAll('.filtered-content'));
+  items.forEach((item) => {
+    // Title comes from data-title; fallback to first heading if not present
+    let title = item.getAttribute('data-title') || '';
+    if (!title) {
+      const h = item.querySelector('h2, h3, h4, h5, h6');
+      if (h) title = h.textContent.trim();
+    }
+    // Content is everything inside the first .column-container in the item
+    const content = item.querySelector('.column-container');
+    // Defensive: if content missing, create an empty div
+    const contentCell = content ? content : document.createElement('div');
+    // Defensive: title fallback empty string
+    rows.push([title, contentCell]);
   });
-
-  // Create the table and replace
-  const blockTable = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(blockTable);
+  // Create the accordion block table
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  // Replace the original element with the new table
+  element.replaceWith(table);
 }

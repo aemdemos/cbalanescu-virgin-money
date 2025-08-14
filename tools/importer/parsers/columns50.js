@@ -1,68 +1,61 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Extract columns: the root .column-container contains .sl > .sl-list.has-2-items > .sl-item (2 items)
-  const mainSl = element.querySelector('.sl');
-  if (!mainSl) return;
-  const mainSlList = mainSl.querySelector('.sl-list.has-2-items');
-  if (!mainSlList) return;
-  const mainItems = mainSlList.querySelectorAll(':scope > .sl-item');
-  if (mainItems.length < 2) return;
+  // Ensure the header matches exactly as per the requirement
+  const headerRow = ['Columns (columns50)'];
 
-  // First column: left, usually contains a heading.
-  const leftContent = mainItems[0].querySelector('.cm');
-  // Second column: right, contains paragraphs and a nested column of award images.
-  const rightItem = mainItems[1];
+  // The main structure is a two-column layout: left (heading), right (text + awards)
+  // From the HTML: .column-container > .sl > .sl-list.has-2-items > .sl-item (x2)
+  const slList = element.querySelector('.sl-list.has-2-items');
+  let leftColEl = null;
+  let rightColEl = null;
 
-  // Gather all non-empty paragraphs from right column.
-  let rightFragments = [];
-  const rightRich = rightItem.querySelector('.cm');
-  if (rightRich) {
-    Array.from(rightRich.children).forEach((child) => {
-      if ((child.tagName === 'P' || child.tagName === 'DIV' || child.tagName === 'SPAN') && child.textContent.trim().length > 0) {
-        rightFragments.push(child);
-      }
-    });
-  }
-
-  // Find nested column with awards images in right column.
-  const nestedColumn = rightItem.querySelector('.column-container');
-  if (nestedColumn) {
-    const nestedSl = nestedColumn.querySelector('.sl');
-    if (nestedSl) {
-      const nestedSlList = nestedSl.querySelector('.sl-list.has-1-item');
-      if (nestedSlList) {
-        const nestedSlItem = nestedSlList.querySelector('.sl-item');
-        if (nestedSlItem) {
-          const nestedCm = nestedSlItem.querySelector('.cm');
-          if (nestedCm) {
-            // Gather all images (award badges)
-            const imgNodes = Array.from(nestedCm.querySelectorAll('img'));
-            if (imgNodes.length > 0) {
-              // Place all images into a div container
-              const imgDiv = document.createElement('div');
-              imgNodes.forEach(img => imgDiv.appendChild(img));
-              rightFragments.push(imgDiv);
-            }
-          }
-        }
-      }
+  if (slList) {
+    const slItems = slList.querySelectorAll(':scope > .sl-item');
+    // Defensive: ensure we have 2 columns
+    if (slItems.length >= 2) {
+      leftColEl = slItems[0];
+      rightColEl = slItems[1];
     }
   }
 
-  // If rightFragments is empty, add a blank paragraph
-  if (rightFragments.length === 0) {
-    const emptyP = document.createElement('p');
-    rightFragments.push(emptyP);
+  // LEFT COLUMN: Grab the heading (should be an h3 inside .cm)
+  let leftContent = null;
+  if (leftColEl) {
+    const heading = leftColEl.querySelector('h3');
+    leftContent = heading ? heading : leftColEl;
   }
 
-  // Table header must be exactly 'Columns (columns50)'
-  const headerRow = ['Columns (columns50)'];
-  // Second row
-  const contentRow = [leftContent, rightFragments];
-  const cells = [headerRow, contentRow];
+  // RIGHT COLUMN: grab relevant paragraphs and images
+  let rightContentEls = [];
+  if (rightColEl) {
+    // Get all paragraph elements (skip empty ones)
+    const paras = Array.from(rightColEl.querySelectorAll('p')).filter(p => p.textContent.trim().length > 0);
+    paras.forEach(p => rightContentEls.push(p));
 
-  // Create the block table
+    // Now find the nested .column-container for awards
+    const nestedContainer = rightColEl.querySelector(':scope > .column-container');
+    if (nestedContainer) {
+      // Find all images inside
+      const awardImgs = nestedContainer.querySelectorAll('img');
+      if (awardImgs.length > 0) {
+        // Group all award images inside a div for layout
+        const imgGroupDiv = document.createElement('div');
+        awardImgs.forEach(img => imgGroupDiv.appendChild(img));
+        rightContentEls.push(imgGroupDiv);
+      }
+    }
+  }
+  // Defensive: If right column is completely empty, include an empty string
+  if (rightContentEls.length === 0) {
+    rightContentEls.push('');
+  }
+
+  // Compose the table: header row, then columns row
+  const cells = [
+    headerRow,
+    [leftContent, rightContentEls]
+  ];
+
   const block = WebImporter.DOMUtils.createTable(cells, document);
-  // Replace the original element
   element.replaceWith(block);
 }

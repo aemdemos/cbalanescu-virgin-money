@@ -1,34 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header row: block name as specified
+  // Header row as per block name, exactly matching spec
   const headerRow = ['Hero (hero26)'];
 
-  // Row 2: Background image (none present in this HTML)
+  // Row 2: Background image (none present, so empty string)
   const bgRow = [''];
 
-  // Row 3: Content: select the rich text container for all relevant text, headings, and CTAs
-  let contentBlock = null;
-  const children = element.querySelectorAll(':scope > div');
-  for (const child of children) {
-    if (child.classList.contains('cm-rich-text')) {
-      contentBlock = child;
+  // Row 3: Content (title, subheading, CTAs)
+  // Find the first child div with class 'cm-rich-text' for main content
+  let richText = null;
+  const childDivs = Array.from(element.querySelectorAll(':scope > div'));
+  for (let div of childDivs) {
+    if (div.classList.contains('cm-rich-text')) {
+      richText = div;
       break;
     }
   }
-  if (!contentBlock) {
-    // If not found, fallback to the element itself (should never happen with example HTML)
-    contentBlock = element;
-  }
+  // Fallback: if richText not found, use element itself
+  if (!richText) richText = element;
 
-  // Compose table rows as per markdown/example structure
+  // Confirm we reference the existing block, not clone
+  const contentRow = [richText];
+
+  // Build table
   const cells = [
     headerRow,
     bgRow,
-    [contentBlock],
+    contentRow
   ];
 
-  // Create the block table
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  // Replace the original element with the block
-  element.replaceWith(table);
+  // Create and replace
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

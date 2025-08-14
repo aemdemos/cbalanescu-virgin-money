@@ -1,44 +1,53 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the column container
+  // Block header must match example exactly
+  const headerRow = ['Columns (columns54)'];
+
+  // Find the column container (the main wrapper for the columns)
   const columnContainer = element.querySelector('.column-container');
   if (!columnContainer) return;
 
-  // Find the .sl-list (contains the columns)
+  // Find the .sl-list which wraps the columns
   const slList = columnContainer.querySelector('.sl-list');
   if (!slList) return;
 
-  // Get all direct children .sl-item (columns)
-  const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+  // Columns are direct children .sl-item
+  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+  // We expect exactly two columns per the HTML
+  if (slItems.length < 2) return;
 
-  // Prepare the header row as per requirements
-  const cells = [['Columns (columns54)']];
-
-  // Prepare the columns/cells for the main row
-  const cols = [];
-  for (let i = 0; i < slItems.length; i++) {
-    const item = slItems[i];
-    // First column: image section
-    if (i === 0) {
-      // Use the full section (contains figure/div/img)
-      const imageSection = item.querySelector('section.cm-image');
-      cols.push(imageSection ? imageSection : '');
-    } else if (i === 1) {
-      // Use the full .cm-rich-text block, which contains all relevant text and app store links
-      const richText = item.querySelector('.cm-rich-text');
-      cols.push(richText ? richText : '');
-    } else {
-      cols.push('');
-    }
+  // First column: image
+  let firstColContent;
+  // Find .cm-image inside first .sl-item
+  const imgSection = slItems[0].querySelector('.cm-image');
+  if (imgSection) {
+    // Return the existing section (which contains the figure/img structure)
+    firstColContent = imgSection;
+  } else {
+    // fallback: empty div
+    firstColContent = document.createElement('div');
   }
-  // Always ensure two columns (pad if needed)
-  while (cols.length < 2) cols.push('');
 
-  cells.push(cols);
+  // Second column: text and app links
+  let secondColContent;
+  // Grab the .cm-rich-text inside second .sl-item
+  const richTextSection = slItems[1].querySelector('.cm-rich-text');
+  if (richTextSection) {
+    secondColContent = richTextSection;
+  } else {
+    // fallback: empty div
+    secondColContent = document.createElement('div');
+  }
 
-  // Create the block table
+  // Structure as in the markdown example:
+  //   Header row with one cell
+  //   Second row with two columns: left and right
+  const cells = [
+    headerRow,
+    [firstColContent, secondColContent],
+  ];
+
+  // Create table and replace
   const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original element with the table block
   element.replaceWith(block);
 }

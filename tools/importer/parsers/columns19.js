@@ -1,52 +1,57 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the main columns container
-  const columnContainer = element.querySelector('.column-container');
-  if (!columnContainer) return;
+  // Table header row must match the block name exactly
+  const headerRow = ['Columns (columns19)'];
 
-  // Find sl-list (which should have .sl-item columns)
-  const slList = columnContainer.querySelector('.sl-list');
-  if (!slList) return;
+  // Find the main column container
+  const colContainer = element.querySelector('.column-container');
+  let columns = [];
 
-  // Get only direct .sl-item children (columns)
-  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
-  if (slItems.length < 2) return;
-
-  // Helper to collect all visible content (text and elements) in a node
-  function collectContent(node) {
-    const children = [];
-    node.childNodes.forEach(child => {
-      // Keep text nodes with non-empty text
-      if (child.nodeType === Node.TEXT_NODE) {
-        const txt = child.textContent.trim();
-        if (txt) children.push(document.createTextNode(txt));
-      } else if (child.nodeType === Node.ELEMENT_NODE) {
-        children.push(child);
-      }
+  if (colContainer) {
+    // Try to find the .sl-list (contains .sl-item columns)
+    const slList = colContainer.querySelector('.sl-list');
+    if (slList) {
+      // Each .sl-item = a column
+      const slItems = slList.querySelectorAll(':scope > .sl-item');
+      slItems.forEach((slItem) => {
+        // Collect all content from this column in order
+        let colContent = [];
+        // Include all child nodes (including text)
+        Array.from(slItem.childNodes).forEach(node => {
+          // Only add non-empty text nodes and all elements
+          if (node.nodeType === Node.TEXT_NODE) {
+            if (node.textContent.trim()) colContent.push(document.createTextNode(node.textContent));
+          } else {
+            colContent.push(node);
+          }
+        });
+        // Fallback to slItem itself if no content extracted
+        if (!colContent.length) colContent.push(slItem);
+        // Use array if >1, else just the node
+        columns.push(colContent.length === 1 ? colContent[0] : colContent);
+      });
+    } else {
+      // If no .sl-list, treat .column-container direct children as columns
+      const children = Array.from(colContainer.children);
+      children.forEach(child => {
+        columns.push(child);
+      });
+      // If no children, fallback to .column-container itself
+      if (!columns.length) columns.push(colContainer);
+    }
+  } else {
+    // Fallback: treat direct children of element as columns
+    const children = Array.from(element.children);
+    children.forEach(child => {
+      columns.push(child);
     });
-    return children;
+    // If no children, fallback to element itself
+    if (!columns.length) columns.push(element);
   }
 
-  // Build content for each column
-  // Column 1: all content in first .sl-item
-  const col1 = collectContent(slItems[0]);
-
-  // Column 2: all content in second .sl-item, plus any additional panels & accordions after main sl-list
-  const col2Content = collectContent(slItems[1]);
-  // Find extra .cm-content-panel-container and .cm-accordion siblings after sl-list (NOT inside sl-item)
-  const siblingPanels = Array.from(columnContainer.querySelectorAll(
-    ':scope > .cm-content-panel-container, :scope > .cm-accordion'
-  ));
-  // Add them to column 2 if present
-  siblingPanels.forEach(panel => {
-    col2Content.push(panel);
-  });
-
-  // Compose the columns table
-  const headerRow = ['Columns (columns19)'];
-  const columnsRow = [col1, col2Content];
-  const cells = [headerRow, columnsRow];
-
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Table must have header as single cell, then one row of columns
+  const cells = [headerRow, columns];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // Replace original element
+  element.replaceWith(block);
 }

@@ -1,68 +1,64 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header – exact per instruction
+  // Header row
   const headerRow = ['Columns (columns45)'];
 
-  // 2. Find .sl-list
+  // Find the .sl-list which contains the 2 columns (sl-items)
   const slList = element.querySelector('.sl-list');
   if (!slList) return;
   const slItems = slList.querySelectorAll(':scope > .sl-item');
-  if (slItems.length < 2) return;
+  if (slItems.length !== 2) return;
 
-  // 3. Left column (first .sl-item)
+  // --- Left column: All cm-icon-title sections + final rich-text CTA ---
   const leftItem = slItems[0];
-  // All child cq-dd-paragraphs
-  const paragraphs = Array.from(leftItem.querySelectorAll(':scope > .cq-dd-paragraph'));
-  // Only sections with .cm-icon-title for actual content
-  const iconTitleSections = paragraphs.map(p => p.querySelector('.cm.cm-icon-title')).filter(Boolean);
-
-  // Also, find any rich-text download button at the end
-  let downloadBlock = null;
-  const allRichText = Array.from(leftItem.querySelectorAll('.cm-rich-text'));
-  for (const rich of allRichText) {
-    const a = rich.querySelector('a');
-    if (a && a.href) {
-      downloadBlock = rich;
+  // Only direct children of leftItem with meaningful content
+  // Get all icon-title sections (these are <section> elements)
+  const iconTitleSections = Array.from(
+    leftItem.querySelectorAll(':scope .cm-icon-title')
+  );
+  // Find all rich text blocks inside leftItem
+  const richTexts = Array.from(leftItem.querySelectorAll(':scope .cm-rich-text'));
+  // Find the last rich text block inside leftItem that contains a link (CTA)
+  let cta = null;
+  for (let i = richTexts.length - 1; i >= 0; i--) {
+    if (richTexts[i].querySelector('a')) {
+      cta = richTexts[i];
       break;
     }
   }
-  // Compose left cell: all sections plus download block, if present
-  const leftCellContent = [...iconTitleSections];
-  if (downloadBlock) leftCellContent.push(downloadBlock);
+  // Compose left column cell: all iconTitleSections + CTA (if exists)
+  const leftColumnContent = [...iconTitleSections];
+  if (cta) leftColumnContent.push(cta);
 
-  // 4. Right column (second .sl-item)
+  // --- Right column: video or image ---
   const rightItem = slItems[1];
-  // Find video or iframe
-  let videoLink = null;
-  const video = rightItem.querySelector('video');
-  if (video) {
-    const source = video.querySelector('source');
-    if (source && source.src) {
-      // must convert to a link with href matching src
+  // Try to find video first
+  let rightMedia = rightItem.querySelector('video');
+  let rightColumnContent = null;
+  if (rightMedia) {
+    // Video: replace with a link to the video's src
+    const videoSource = rightMedia.querySelector('source');
+    if (videoSource && videoSource.src) {
       const link = document.createElement('a');
-      link.href = source.src;
-      link.textContent = 'Video';
-      videoLink = link;
+      link.href = videoSource.src;
+      link.textContent = videoSource.src.split('/').pop(); // Use filename for text
+      rightColumnContent = link;
     }
   } else {
-    const iframe = rightItem.querySelector('iframe');
-    if (iframe && iframe.src) {
-      const link = document.createElement('a');
-      link.href = iframe.src;
-      link.textContent = 'Video';
-      videoLink = link;
+    // Or fallback to image
+    const img = rightItem.querySelector('img');
+    if (img) {
+      rightColumnContent = img;
     }
   }
-  // Compose right cell
-  const rightCellContent = videoLink ? [videoLink] : [];
 
-  // 5. Table structure: header row, then row with two columns
+  // Construct cells array, matching column count
   const cells = [
     headerRow,
-    [leftCellContent, rightCellContent]
+    [leftColumnContent, rightColumnContent]
   ];
 
-  // 6. Create table and replace original element
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Create block table and replace
+  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(blockTable);
 }

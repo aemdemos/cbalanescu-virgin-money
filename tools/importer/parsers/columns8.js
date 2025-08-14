@@ -1,20 +1,42 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Check for top-level nav-footer ul
-  const navList = element.querySelector('ul.nav-footer');
-  if (!navList) return;
-  // Get all top level columns (LIs)
-  const columns = Array.from(navList.children).filter(node => node.tagName === 'LI');
-  // If no columns, do nothing
-  if (!columns.length) return;
+  // Find the main nav-footer list
+  const navUL = element.querySelector('ul.nav-footer');
+  if (!navUL) return;
+  const navItems = Array.from(navUL.children);
 
-  // Each LI represents a column: use the full <li> to preserve structure, including spans, lists, links, icons
+  // Helper: extract column content as a block (heading + list)
+  function extractColumnContent(li) {
+    const colContent = document.createElement('div');
+    // Heading
+    const heading = li.querySelector(':scope > span');
+    if (heading) {
+      // Use <strong> for headings to keep semantic meaning
+      const strong = document.createElement('strong');
+      strong.textContent = heading.textContent.trim();
+      colContent.appendChild(strong);
+    }
+    // List
+    const ul = li.querySelector(':scope > ul');
+    if (ul) {
+      // Instead of extracting just anchors, include the whole list structure
+      colContent.appendChild(ul);
+    }
+    return colContent;
+  }
+
+  // Compose columns: each nav item becomes a column
+  const cols = navItems.map(extractColumnContent);
+  // Only include non-empty columns
+  const filteredCols = cols.filter(col => col.childNodes.length);
+
+  // Table as per example: header and one row with all columns
+  const headerRow = ['Columns (columns8)'];
   const cells = [
-    ['Columns (columns8)'], // Header row, exactly matching the example
-    columns
+    headerRow,
+    filteredCols
   ];
 
-  // Create the block table and replace the original element
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }
