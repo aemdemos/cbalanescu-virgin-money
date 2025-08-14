@@ -4,11 +4,15 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 56px;
+  gap: 28px;
   width: 100%;
   max-width: 850px;
   margin-left: auto;
   margin-right: auto;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .columns img {
@@ -20,12 +24,17 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 170px;
+  min-width: 210px;
   flex: 1 1 0;
-  padding: 0;
+  padding: 0 12px;
   margin: 0;
   box-sizing: border-box;
   align-self: stretch;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  max-width: 400px;
+  justify-content: center;
 }
 
 .columns > div > .columns-img-col {
@@ -489,14 +498,15 @@
 .columns {
   background: #fff;
   font-family: Inter, sans-serif;
-  padding: 64px 56px;
-  box-shadow: 0 6px 32px 0 rgb(60 60 60 / 10%);
-  border-radius: 20px;
-  max-width: 1100px;
-  margin: 40px auto;
+  padding: 54px 56px;
+  box-shadow: 0 8px 36px 0 rgb(60 60 60 / 13%);
+  border-radius: 28px;
+  max-width: 900px;
+  margin: 64px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: stretch;
 }
 
 .columns ul {
@@ -513,27 +523,30 @@
 }
 
 .columns > div > div > ul > li:first-child > a {
-  color: #800080;
+  color: #609;
   font-weight: 700;
-  font-size: 2.5rem;
-  margin-bottom: 31px;
+  font-size: 2.25rem;
+  margin-bottom: 22px;
   pointer-events: none;
   cursor: default;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.13;
+  letter-spacing: -0.01em;
   text-align: left;
   display: block;
-  font-family: Inter, sans-serif;
+  font-family: var(--heading-font-family, inherit);
+  margin-top: 0;
 }
 
 .columns > div > div > ul > li:not(:first-child) > a {
-  color: #F06363;
-  font-size: 13px;
+  color: #333;
+  font-size: 1.11rem;
   font-weight: 400;
-  line-height: 1.32;
+  line-height: 1.5;
   text-align: left;
-  margin-bottom: 0;
-  letter-spacing: 0.01em;
+  margin-bottom: 14px;
+  letter-spacing: 0;
+  display: block;
+  opacity: 1;
 }
 
 .columns > div > div:last-child p {
@@ -591,7 +604,6 @@
   }
 }
 
-/* -- Left Column: Simulated image block -- */
 .columns > div > div:first-child {
   background: #fff;
   border-radius: 24px;
@@ -609,7 +621,6 @@
   flex: 0 0 44%;
 }
 
-/* Center the first column's content vertically */
 .columns > div > div:first-child ul {
   margin: 0;
   padding: 0;
@@ -619,7 +630,6 @@
   height: 100%;
 }
 
-/* -- Right Column: "content" block -- */
 .columns > div > div:nth-child(2) {
   display: flex;
   flex-direction: column;
@@ -632,7 +642,6 @@
   flex: 0 0 56%;
 }
 
-/* -- Third Column: Social/minimized -- */
 .columns > div > div:last-child {
   display: flex;
   flex-direction: column;
@@ -647,11 +656,6 @@
   flex: 0 0 6%;
 }
 
-/* -- Typography/Hierarchy: heading, simulated paragraph, note, "button" -- */
-
-/* Heading: first link in each column */
-
-/* Second column body links hierarchy */
 .columns > div > div:nth-child(2) > ul > li:nth-child(2) > a {
   color: #454545;
   font-size: 1.25rem;
@@ -685,7 +689,6 @@
   opacity: 0.68;
 }
 
-/* First column body links: normal text */
 .columns > div > div:first-child > ul > li:not(:first-child) > a {
   color: #454545;
   font-size: 1.13rem;
@@ -697,26 +700,77 @@
   opacity: 0.96;
 }
 
-/* Remove list bullets and spacing */
 .columns ul, .columns li {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Social links: style last column distinctly */
-
 .columns > div > div:last-child p > a:hover {
   color: #d0021b;
   opacity: 1;
 }
 
-/* Ensure vertical alignment of columns */
-
-/* Add top margin to the block for more vertical centering */
 @media (width >= 900px) {
   .columns {
     margin-top: 80px;
     margin-bottom: 80px;
+  }
+}
+
+/* Flex row for columns, centered vertically */
+
+/* Responsive: stack columns vertically on small screens, keep card effect */
+@media (width <= 900px) {
+  .columns {
+    max-width: 98vw;
+    padding: 22px 8vw;
+  }
+
+  .columns > div {
+    flex-direction: column;
+    gap: 22px;
+    align-items: stretch;
+    padding: 0;
+  }
+}
+
+/* Both columns: visually unified, no per-column card/background */
+
+/* Heading style in each column */
+
+/* List items: dark, unfaded */
+
+/* Remove last margin for neatness */
+.columns > div > div > ul > li:last-child > a {
+  margin-bottom: 0;
+}
+
+/* Hide any extra columns beyond the first two */
+.columns > div > div:nth-child(n+3) {
+  display: none;
+}
+
+/* Responsive: center text and columns on small screens */
+@media (width <= 600px) {
+  .columns > div > div > ul > li:first-child > a {
+    font-size: 1.45rem;
+    text-align: center;
+    margin-bottom: 13px;
+  }
+
+  .columns > div > div > ul > li:not(:first-child) > a {
+    text-align: center;
+    font-size: 0.99rem;
+    margin-bottom: 8px;
+  }
+
+  .columns > div > div {
+    align-items: center;
+    padding: 0 2px;
+  }
+
+  .columns {
+    padding: 12px 2vw;
   }
 }
