@@ -253,7 +253,6 @@
   padding: 2.5rem 0;
 }
 
-/* Top-level: Make sure .columns.columns7 > div lays out columns side-by-side */
 .columns.columns7 > div {
   display: flex;
   flex-direction: row;
@@ -264,7 +263,6 @@
   min-height: 520px;
 }
 
-/* Left column: phone image */
 .columns.columns7 .columns-img-col {
   flex: 0 1 420px;
   display: flex;
@@ -275,7 +273,6 @@
   width: 100%;
 }
 
-/* Ensure phone image fills the column proportionally */
 .columns.columns7 .columns-img-col img {
   width: 100%;
   height: auto;
@@ -283,7 +280,6 @@
   object-fit: contain;
 }
 
-/* Right column: text and buttons */
 .columns.columns7 > div > div:not(.columns-img-col) {
   flex: 1 1 0;
   display: flex;
@@ -296,7 +292,6 @@
   box-sizing: border-box;
 }
 
-/* Heading styling: left aligned, correct color and sizing */
 .columns.columns7 #bank-on-the-fly {
   color: #5e2590;
   font-size: 2.1rem;
@@ -308,7 +303,6 @@
   width: 100%;
 }
 
-/* Paragraph styling: left aligned, color, and divider line */
 .columns.columns7 #bank-on-the-fly + p {
   color: #333;
   font-size: 1rem;
@@ -321,13 +315,11 @@
   padding-bottom: 1.4rem;
 }
 
-/* Link styling: underline, dark color */
 .columns.columns7 #bank-on-the-fly + p a {
   color: #333;
   text-decoration: underline;
 }
 
-/* Buttons table: left aligned, fit-content background, proper padding */
 .columns.columns7 > div > div:not(.columns-img-col) table {
   background: #f6f6f6;
   margin: 1.4rem 0 0;
@@ -341,13 +333,11 @@
   box-sizing: border-box;
 }
 
-/* Table cells: spacing between buttons */
 .columns.columns7 > div > div:not(.columns-img-col) td {
   padding: 0 0.9rem;
   vertical-align: middle;
 }
 
-/* Ensure app button images have consistent height and spacing */
 .columns.columns7 > div > div:not(.columns-img-col) img[alt*="App store"],
 .columns.columns7 > div > div:not(.columns-img-col) img[alt*="Google Play"] {
   height: 2.7rem;
@@ -355,7 +345,6 @@
   display: block;
 }
 
-/* Responsive adjustments for mobile/tablet */
 @media (width <= 900px) {
   .columns.columns7 > div {
     flex-direction: column;
@@ -385,5 +374,100 @@
     margin-right: auto;
     min-width: 180px;
     max-width: 95vw;
+  }
+}
+
+
+.columns.columns11 {
+  background: #4a4b51;
+  padding: 32px 0;
+  font-family: var(--body-font-family);
+}
+
+.columns.columns11 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+}
+
+.columns.columns11 > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+/* Remove default list styles and tighten vertical spacing */
+.columns.columns11 ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.columns.columns11 li {
+  margin-bottom: 8px;
+  color: #e0e1e6;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+.columns.columns11 a {
+  color: #e0e1e6;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.columns.columns11 a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Always style the last column as an icon row for maximum robustness */
+.columns.columns11 > div > div:last-child {
+  align-items: flex-start;
+}
+
+.columns.columns11 > div > div:last-child ul {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.columns.columns11 > div > div:last-child li {
+  margin-bottom: 0;
+}
+
+.columns.columns11 > div > div:last-child img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: grayscale(1) brightness(3.3);
+}
+
+/* Responsive stacking on small screens */
+@media (width <= 900px) {
+  .columns.columns11 > div {
+    flex-direction: column;
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  .columns.columns11 {
+    padding: 24px 0;
   }
 }
