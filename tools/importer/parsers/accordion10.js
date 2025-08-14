@@ -1,45 +1,68 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row from block name
-  const rows = [['Accordion']];
+  // Accordion block header row
+  const headerRow = ['Accordion'];
+  const rows = [headerRow];
 
-  // Get the accordion items
-  const accordionList = element.querySelector('.accordion-list');
+  // Find the accordion items (li elements directly under ul.accordion-list)
+  const accordionList = element.querySelector('ul.accordion-list');
   if (!accordionList) return;
+  const items = accordionList.querySelectorAll(':scope > li');
 
-  const liItems = accordionList.querySelectorAll(':scope > li');
-  liItems.forEach((li) => {
-    // Title: always first <a> inside this li
-    const titleLink = li.querySelector(':scope > a');
-    let titleCell;
+  items.forEach((item) => {
+    // Title cell: the clickable a.accordion-item (reference original element)
+    const titleLink = item.querySelector('a.accordion-item');
+    let titleElem = null;
     if (titleLink) {
-      // Reference the whole <a> but remove the .ec div if present
-      const ecDiv = titleLink.querySelector('.ec');
-      if (ecDiv) ecDiv.remove();
-      // Keep the reference to the same <a> (preserving links, html, etc.)
-      titleCell = titleLink;
+      // Remove trailing .ec icon for clarity (but don't clone, reference original)
+      // Instead, create a DocumentFragment that only includes text and links from the original 'a'
+      // We want to preserve link if present, but not include unnecessary icon divs
+      // If .ec exists, exclude it
+      const frag = document.createDocumentFragment();
+      Array.from(titleLink.childNodes).forEach((node) => {
+        // Only add text nodes or inline elements (ignore .ec)
+        if (node.nodeType === 3 || (node.nodeType === 1 && !node.classList.contains('ec'))) {
+          frag.append(node);
+        }
+      });
+      // Wrap fragment in a <span> if it's just text, but keep <a> if link exists
+      if (titleLink.href) {
+        // Reference the actual anchor but remove the .ec child
+        const anchor = titleLink;
+        const ec = anchor.querySelector('.ec');
+        if (ec) ec.remove();
+        titleElem = anchor;
+      } else {
+        const span = document.createElement('span');
+        span.appendChild(frag);
+        titleElem = span;
+      }
     } else {
-      // fallback if no <a>: just use text content
-      titleCell = document.createElement('span');
-      titleCell.textContent = li.textContent.trim();
+      // Fallback: just use textContent
+      const span = document.createElement('span');
+      span.textContent = item.textContent.trim();
+      titleElem = span;
     }
 
-    // Content: look for .expandcollapse-content
-    let contentCell;
-    const ecContent = li.querySelector('.expandcollapse-content');
-    if (ecContent) {
-      // Reference the whole content div, which contains the ol and all tcs-wrappers/li/p structures
-      contentCell = ecContent;
+    // Content cell: the corresponding expandcollapse-content div for this <li>
+    // Reference its <ol> if present, otherwise include whole div
+    const contentDiv = item.querySelector('.expandcollapse-content');
+    let contentElem;
+    if (contentDiv) {
+      const ol = contentDiv.querySelector('ol');
+      if (ol) {
+        contentElem = ol;
+      } else {
+        contentElem = contentDiv;
+      }
     } else {
       // fallback: empty cell
-      contentCell = document.createElement('span');
-      contentCell.textContent = '';
+      contentElem = document.createElement('div');
     }
-
-    rows.push([titleCell, contentCell]);
+    rows.push([titleElem, contentElem]);
   });
 
-  // Create and replace
+  // Create and inject Accordion block table
   const table = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(table);
 }
