@@ -403,98 +403,6 @@
 }
 
 
-.columns.columns11 {
-  background: #4a4b51;
-  padding: 32px 0;
-  font-family: var(--body-font-family);
-}
-
-.columns.columns11 > div {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 100px;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-  height: auto;
-}
-
-.columns.columns11 > div > div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 0;
-}
-
-.columns.columns11 ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.columns.columns11 li {
-  margin-bottom: 8px;
-  color: #e0e1e6;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: 0.01em;
-}
-
-.columns.columns11 a {
-  color: #e0e1e6;
-  font-size: 13px;
-  font-weight: 400;
-  text-decoration: none;
-  transition: color 0.2s;
-  letter-spacing: 0.01em;
-}
-
-.columns.columns11 a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.columns.columns11 > div > div:last-child {
-  align-items: flex-start;
-}
-
-.columns.columns11 > div > div:last-child ul {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  margin: 0;
-  padding: 0;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.columns.columns11 > div > div:last-child li {
-  margin-bottom: 0;
-}
-
-.columns.columns11 > div > div:last-child img {
-  width: 24px;
-  height: 24px;
-  display: block;
-  filter: grayscale(1) brightness(3.3);
-}
-
-@media (width <= 900px) {
-  .columns.columns11 > div {
-    flex-direction: column;
-    gap: 32px;
-    max-width: 100%;
-  }
-
-  .columns.columns11 {
-    padding: 24px 0;
-  }
-}
-
-
 .columns {
   background: #fff;
   font-family: Inter, sans-serif;
@@ -718,9 +626,6 @@
   }
 }
 
-/* Flex row for columns, centered vertically */
-
-/* Responsive: stack columns vertically on small screens, keep card effect */
 @media (width <= 900px) {
   .columns {
     max-width: 98vw;
@@ -735,23 +640,14 @@
   }
 }
 
-/* Both columns: visually unified, no per-column card/background */
-
-/* Heading style in each column */
-
-/* List items: dark, unfaded */
-
-/* Remove last margin for neatness */
 .columns > div > div > ul > li:last-child > a {
   margin-bottom: 0;
 }
 
-/* Hide any extra columns beyond the first two */
 .columns > div > div:nth-child(n+3) {
   display: none;
 }
 
-/* Responsive: center text and columns on small screens */
 @media (width <= 600px) {
   .columns > div > div > ul > li:first-child > a {
     font-size: 1.45rem;
@@ -772,5 +668,173 @@
 
   .columns {
     padding: 12px 2vw;
+  }
+}
+
+
+/* Remove white card/panel styling and ensure direct dark background */
+.columns.columns11 {
+  background: #4b4c51;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 42px 0 0;
+  color: #d1d2d3;
+}
+
+/* Remove any inherited background, border-radius, or shadow from children */
+.columns.columns11 > div,
+.columns.columns11 > div > div {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: inherit;
+}
+
+/* Flex layout: columns side by side, top-aligned */
+.columns.columns11 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 980px;
+  margin: 0 auto;
+  gap: 80px;
+  width: 100%;
+}
+
+/* Each column: vertical stacking */
+.columns.columns11 > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 140px;
+  flex: 1 1 0;
+  padding: 0;
+}
+
+/* List styling: remove default bullets and spacing */
+.columns.columns11 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  background: none;
+}
+
+/* All list items: spacing and color */
+.columns.columns11 li {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #d1d2d3;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+}
+
+/* All links in columns: color and font */
+.columns.columns11 a {
+  color: #d1d2d3;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+  background: none;
+}
+
+/* On hover: white for contrast */
+.columns.columns11 a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* First list item in each column = heading style */
+.columns.columns11 > div > div ul li:first-child a {
+  font-size: 13px;
+  color: #d1d2d3;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.085em;
+  margin-bottom: 19px;
+  display: inline-block;
+}
+
+/* All other links: regular style */
+.columns.columns11 > div > div ul li:not(:first-child) a {
+  font-weight: 400;
+  text-transform: none;
+  margin-bottom: 8px;
+  letter-spacing: 0;
+  color: #d1d2d3;
+}
+
+/* Third column: horizontal social links */
+.columns.columns11 > div > div:last-child {
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 160px;
+  flex: 0 0 160px;
+}
+
+/* Social links row */
+.columns.columns11 > div > div:last-child p {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Social links styling - icon-like */
+.columns.columns11 > div > div:last-child p a {
+  color: #d1d2d3;
+  font-size: 20px;
+  text-decoration: none;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.columns.columns11 > div > div:last-child p a:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 8%);
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns11 > div {
+    flex-direction: column;
+    gap: 32px;
+    max-width: 98vw;
+    padding: 0 5vw;
+  }
+
+  .columns.columns11 > div > div:last-child {
+    flex: 0 0 auto;
+    min-width: 100px;
+  }
+}
+
+@media (width <= 600px) {
+  .columns.columns11 {
+    padding: 24px 0;
+  }
+
+  .columns.columns11 > div {
+    gap: 18px;
+    padding: 0 2vw;
+  }
+
+  .columns.columns11 li,
+  .columns.columns11 a {
+    font-size: 12px;
   }
 }
