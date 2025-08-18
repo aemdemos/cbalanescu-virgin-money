@@ -25,3 +25,167 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+
+.cards.cards1 {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 0;
+}
+
+.cards.cards1 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 32px; /* Minimal vertical gap, original is very compact */
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  place-items: stretch stretch;
+}
+
+@media (width <= 950px) {
+  .cards.cards1 > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width <= 630px) {
+  .cards.cards1 > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card container */
+.cards.cards1 > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center; /* vertically center content */
+  background: #fff;
+  border: none;
+  margin: 0;
+  padding: 32px 0 26px; /* more vertical padding for centering and balance */
+  min-width: 0;
+  min-height: 184px;
+  box-sizing: border-box;
+  box-shadow: none;
+  height: 100%;
+}
+
+/* Icon/image at top - always reserve space, even if no image is present */
+.cards.cards1 .cards-card-image {
+  min-height: 32px;
+  height: 32px;
+  margin: 0 0 10px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: 0;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.cards.cards1 .cards-card-image img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Card body */
+.cards.cards1 .cards-card-body {
+  flex: 1 1 0%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center; /* vertical centering */
+  width: 100%;
+}
+
+/* Title */
+.cards.cards1 .cards-card-body h2 {
+  font-size: 16px;
+  color: #7d2676;
+  font-weight: 600;
+  margin: 0 0 8px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  padding: 0;
+}
+
+/* Description text */
+.cards.cards1 .cards-card-body p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  margin: 0 0 16px;
+  padding: 0;
+  font-weight: 400;
+}
+
+/* Remove margin from button container */
+.cards.cards1 .cards-card-body p.button-container {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  padding: 0;
+}
+
+/* Button */
+.cards.cards1 .cards-card-body .button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid #e871ad;
+  background: #fff;
+  color: #e871ad;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 7px 38px 7px 14px; /* more right padding for arrow */
+  min-width: 0;
+  min-height: 32px;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.3;
+  text-decoration: none;
+  margin: 0;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  overflow: visible;
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px 16px;
+
+  /* Show arrow using SVG as background */
+  background-image: url('data:image/svg+xml;utf8,<svg width="20" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4l6 4-6 4" stroke="%23e871ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+}
+
+/* Remove base style for .button */
+.cards.cards1 .cards-card-body .button,
+.cards.cards1 .cards-card-body .button:visited {
+  background: #fff;
+  color: #e871ad;
+  border: 1px solid #e871ad;
+}
+
+/* Button hover/focus */
+.cards.cards1 .cards-card-body .button:hover,
+.cards.cards1 .cards-card-body .button:focus {
+  background: #fceaf3;
+  color: #7d2676;
+  border-color: #e871ad;
+  text-decoration: underline;
+}
+
+/* Last child spacing fix */
+.cards.cards1 .cards-card-body > *:last-child {
+  margin-bottom: 0;
+}
