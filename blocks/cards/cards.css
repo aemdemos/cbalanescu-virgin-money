@@ -355,7 +355,6 @@
   overflow: visible;
 }
 
-/* --- HEADER AREA --- */
 .cards.cards17 .cards-card-body {
   margin: 0;
   padding: 0;
@@ -372,7 +371,6 @@
   overflow: visible;
 }
 
-/* Hide 'null' text at the top */
 .cards.cards17 > ul > li > .cards-card-body:first-child > p {
   opacity: 0;
   height: 0;
@@ -381,11 +379,8 @@
   pointer-events: none;
 }
 
-/* Marker: lower and overlap with pointer */
 .cards.cards17 > ul > li > .cards-card-body:first-child::before {
   display: block;
-
-  /* larger and visually lower */
   width: 100px;
   height: 100px;
   background: #fff;
@@ -398,7 +393,6 @@
   z-index: 2;
 }
 
-/* Pointer: attached directly and overlapping marker base */
 .cards.cards17 > ul > li > .cards-card-body:first-child::after {
   display: block;
   position: absolute;
@@ -412,13 +406,10 @@
   z-index: 2;
   box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
   border-radius: 0 0 10px 10px;
-
-  /* visually overlaps bottom of marker */
   margin-top: -6px;
   content: "";
 }
 
-/* --- CARD BODY --- */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) {
   background: #fff;
   padding: 28px 22px 22px;
@@ -428,7 +419,6 @@
   justify-content: flex-start;
 }
 
-/* Heading */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) h3 {
   color: #409;
   font-size: 1.17rem;
@@ -437,7 +427,6 @@
   font-family: inherit;
 }
 
-/* Paragraph and list styles */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) p,
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) ul {
   color: #333;
@@ -457,9 +446,6 @@
   margin-bottom: 1px;
 }
 
-/* --- BUTTONS --- */
-
-/* Horizontal layout for CTAs, tighter gap */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) p:last-child {
   display: flex;
   flex-direction: row;
@@ -470,7 +456,6 @@
   justify-content: flex-start;
 }
 
-/* Style links as buttons */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) p:last-child a {
   display: inline-flex;
   align-items: center;
@@ -490,21 +475,18 @@
   justify-content: center;
 }
 
-/* First button: filled red */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) p:last-child a:first-child {
   background: #e30613;
   color: #fff;
   border-color: #e30613;
 }
 
-/* Second button: outlined red */
 .cards.cards17 > ul > li > .cards-card-body:nth-child(2) p:last-child a:last-child {
   background: #fff;
   color: #e30613;
   border: 2px solid #e30613;
 }
 
-/* --- RESPONSIVE --- */
 @media (width <= 900px) {
   .cards.cards17 > ul {
     grid-template-columns: 1fr;
@@ -518,5 +500,127 @@
 
   .cards.cards17 > ul > li {
     max-width: 98vw;
+  }
+}
+
+
+.cards.cards19 {
+  display: flex;
+  justify-content: center;
+  background: #fff;
+  padding: 0;
+}
+
+.cards.cards19 > ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.cards.cards19 > ul > li {
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  width: 320px;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cards.cards19 .cards-card-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: block;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: transparent; /* Ensure no grey placeholder if image loads */
+  position: relative;
+}
+
+.cards.cards19 .cards-card-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background: #eee; /* fallback color if image fails */
+}
+
+/* Remove unnecessary padding/margin from body and button container */
+.cards.cards19 .cards-card-body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.cards.cards19 .cards-card-body .button-container {
+  margin: 0;
+  padding: 0;
+}
+
+/* Text link: purple, left-aligned, wrapping, no button look */
+.cards.cards19 .cards-card-body a.button.primary {
+  background: none;
+  border: none;
+  color: #6c27b6;
+  font-size: 17px;
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  text-align: left;
+  text-decoration: none;
+  border-radius: 0;
+  line-height: 1.5;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  box-shadow: none;
+  display: inline;
+  cursor: pointer;
+}
+
+.cards.cards19 .cards-card-body a.button.primary:hover,
+.cards.cards19 .cards-card-body a.button.primary:focus {
+  color: #6c27b6;
+  background: none;
+  text-decoration: underline;
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media (width <= 1100px) {
+  .cards.cards19 > ul {
+    gap: 24px;
+    max-width: 700px;
+  }
+
+  .cards.cards19 > ul > li {
+    width: 48%;
+    min-width: 250px;
+    max-width: 100%;
+  }
+}
+
+@media (width <= 700px) {
+  .cards.cards19 > ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .cards.cards19 > ul > li {
+    width: 100%;
+    max-width: 400px;
   }
 }
