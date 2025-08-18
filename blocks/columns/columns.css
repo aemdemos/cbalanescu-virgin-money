@@ -811,7 +811,6 @@
   }
 }
 
-/* Main icon + heading row (Earn/Redeem) */
 .columns.columns12 > div > div > p:first-child {
   display: flex;
   flex-direction: row;
@@ -850,7 +849,6 @@
   }
 }
 
-/* Heading color per panel */
 .columns.columns12 > div > div:first-child > h3:first-of-type strong {
   color: #7118b6;
 }
@@ -859,7 +857,6 @@
   color: #e6002d;
 }
 
-/* Main panel description */
 .columns.columns12 > div > div > h3:first-of-type + p {
   font-size: 1.08rem;
   color: #757575;
@@ -867,7 +864,6 @@
   line-height: 1.7;
 }
 
-/* Bullet: icon + heading row (icon and heading must be inline, flex row) */
 .columns.columns12 > div > div > p:nth-of-type(n+3):not(.button-container) {
   display: flex;
   flex-direction: row;
@@ -911,7 +907,6 @@
   padding-top: 3px;
 }
 
-/* Heading color per panel for bullets */
 .columns.columns12 > div > div:first-child h3:not(:first-of-type) strong {
   color: #7118b6;
 }
@@ -920,7 +915,6 @@
   color: #e6002d;
 }
 
-/* Bullet description (indented to align with heading, margin-left matches icon + gap) */
 .columns.columns12 > div > div > h3:not(:first-of-type) + p {
   font-size: 0.96rem;
   color: #4d5156;
@@ -930,12 +924,10 @@
   max-width: 96%;
 }
 
-/* More space after last bullet before button */
 .columns.columns12 > div > div > h3:not(:first-of-type):last-of-type + p {
   margin-bottom: 36px;
 }
 
-/* Button alignment and style override */
 .columns.columns12 > div > div .button-container {
   display: flex;
   justify-content: center;
@@ -973,11 +965,145 @@
   }
 }
 
-/* Remove default bottom margins from panel children */
 .columns.columns12 > div > div > *:not(.button-container) {
   margin-bottom: 0;
 }
 
 .columns.columns12 > div > div > .button-container {
   margin-bottom: 0;
+}
+
+
+.columns.columns14 > div {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: stretch;
+  min-height: 230px;
+  height: 100%;
+}
+
+/* Each card: flex column, vertical centering with auto margin */
+.columns.columns14 > div > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 230px;
+  height: auto;
+  padding: 48px 40px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Use an inner wrapper for vertical centering via margin auto (works with provided structure) */
+.columns.columns14 > div > div > h2 {
+  margin: 0 0 24px;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  padding: 0;
+  margin-top: auto;
+}
+
+/* Group heading and button-container for "true" vertical centering using margin auto on top and bottom */
+.columns.columns14 > div > div > h2,
+.columns.columns14 > div > div > .button-container {
+  /* Remove any inherited vertical margins */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.columns.columns14 > div > div > .button-container:last-child {
+  margin-bottom: auto;
+}
+
+/* Remove double spacing between h2 and button-container */
+.columns.columns14 .button-container {
+  margin: 0;
+  padding: 0;
+}
+
+/* Left card: gradient background, white text */
+.columns.columns14 > div > div:first-child {
+  background: linear-gradient(135deg, #e30613 0%, #4a148c 100%);
+  color: #fff;
+}
+
+/* Right card: light grey background, colored text */
+.columns.columns14 > div > div:nth-child(2) {
+  background: #f4f4f6;
+}
+
+/* Left card heading: white */
+.columns.columns14 > div > div:first-child h2,
+.columns.columns14 > div > div:first-child h2 a {
+  color: #fff;
+}
+
+/* Right card heading: purple */
+.columns.columns14 > div > div:nth-child(2) h2,
+.columns.columns14 > div > div:nth-child(2) h2 a {
+  color: #4a148c;
+}
+
+/* Style links as left-aligned text, suppress button look, add arrow */
+.columns.columns14 .button-container .button {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.3;
+  box-shadow: none;
+  text-align: left;
+  white-space: normal;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.15s;
+}
+
+/* Left card link: white */
+.columns.columns14 > div > div:first-child .button-container .button {
+  color: #fff;
+}
+
+/* Right card link: red */
+.columns.columns14 > div > div:nth-child(2) .button-container .button {
+  color: #e30613;
+}
+
+/* Add inline SVG arrow after link text */
+.columns.columns14 .button-container .button::after {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1em;
+  margin-left: 8px;
+  background: url("data:image/svg+xml;utf8,<svg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 6H9' stroke='%23e30613' stroke-width='1.5' stroke-linecap='round'/><path d='M6.75 3.75L9 6L6.75 8.25' stroke='%23e30613' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center/contain;
+  content: "";
+}
+
+/* Ensure the arrow is white on the left card */
+.columns.columns14 > div > div:first-child .button-container .button::after {
+  background: url("data:image/svg+xml;utf8,<svg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 6H9' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round'/><path d='M6.75 3.75L9 6L6.75 8.25' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center/contain;
+}
+
+/* Responsive adjustments */
+@media (width <= 900px) {
+  .columns.columns14 > div {
+    flex-direction: column;
+    gap: 24px;
+    min-height: 0;
+    height: auto;
+  }
+
+  .columns.columns14 > div > div {
+    min-height: 120px;
+    padding: 28px 16px;
+  }
 }
