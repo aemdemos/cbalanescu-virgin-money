@@ -452,7 +452,6 @@
   font-family: var(--body-font-family);
 }
 
-/* Layout: three columns side by side */
 .columns.columns8 > div {
   display: flex;
   flex-direction: row;
@@ -462,7 +461,6 @@
   width: 100%;
 }
 
-/* Each column: stack items vertically, left aligned */
 .columns.columns8 > div > div {
   display: flex;
   flex-direction: column;
@@ -471,7 +469,6 @@
   text-align: left;
 }
 
-/* Headings: last <p> in each column, visually at top */
 .columns.columns8 > div > div > p:last-child {
   order: -1;
   text-transform: uppercase;
@@ -483,7 +480,6 @@
   align-self: flex-start;
 }
 
-/* List styling: no bullets, vertical spacing */
 .columns.columns8 ul {
   list-style: none;
   padding: 0;
@@ -498,7 +494,6 @@
   margin-bottom: 0;
 }
 
-/* Links: light grey, no underline unless hovered, small font */
 .columns.columns8 a {
   color: #bfc2c7;
   font-size: 12px;
@@ -513,7 +508,6 @@
   text-decoration: underline;
 }
 
-/* --- SOCIAL ICON ROW --- */
 .columns.columns8 > div > div:last-child {
   align-items: flex-start;
   display: flex;
@@ -522,17 +516,12 @@
   margin-right: 0;
 }
 
-/* put all social icon <p>s in a flex row: 
-   select only icon <p>s, i.e. every <p> except the last in the right column */
 .columns.columns8 > div > div:last-child .columns8-social-row {
   display: flex;
   flex-direction: row;
   gap: 16px;
   margin-bottom: 0;
 }
-
-/* If you can't add a .columns8-social-row wrapper, 
-   use a "hack": group all p:not(:last-child) in a flex row using a parent wrapper */
 
 .columns.columns8 > div > div:last-child::before {
   content: "";
@@ -553,8 +542,6 @@
   padding: 0;
 }
 
-/* Or, without relying on a wrapper, use absolute positioning hack:
-   Hide the original icon <p>s and visually reflow them in a row via CSS grid */
 @media (width >= 600px) {
   .columns.columns8 > div > div:last-child > p:not(:last-child) {
     display: inline-flex;
@@ -573,7 +560,6 @@
   }
 }
 
-/* Social icon images: size and style */
 .columns.columns8 img {
   width: 24px;
   height: 24px;
@@ -582,7 +568,6 @@
   filter: brightness(0) invert(0.85);
 }
 
-/* Responsive: stack columns vertically and reduce gap */
 @media (width <= 900px) {
   .columns.columns8 > div {
     flex-direction: column;
@@ -599,7 +584,202 @@
   }
 }
 
-/* Remove any edge margin from first and last columns for flush alignment */
 .columns.columns8 > div > div:first-child {
   margin-left: 0;
+}
+
+
+/* Main two-column layout */
+.columns.columns10 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 28px;
+}
+
+@media (width <= 900px) {
+  .columns.columns10 > div {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* Left column (heading and card image) */
+.columns.columns10 > div > div:first-child {
+  flex: 0 0 28%;
+  max-width: 285px;
+  min-width: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.columns.columns10 > div > div:first-child h3 {
+  color: #609;
+  font-size: 1.38rem;
+  font-weight: 800;
+  line-height: 1.13;
+  margin: 0 0 32px;
+  letter-spacing: 0;
+}
+
+.columns.columns10 > div > div:first-child p {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+/* Card image styling */
+.columns.columns10 > div > div:first-child img {
+  display: block;
+  margin: 0 auto;
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+/* Right column (offer/details box) */
+.columns.columns10 > div > div:last-child {
+  flex: 1 1 0;
+  background: #f8f8fa;
+  border-radius: 14px 14px 0 0;
+  padding: 36px 28px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-shadow: 0 2px 8px 0 rgb(60 60 60 / 3%);
+}
+
+@media (width <= 900px) {
+  .columns.columns10 > div > div:first-child,
+  .columns.columns10 > div > div:last-child {
+    max-width: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .columns.columns10 > div > div:last-child {
+    background: #f8f8fa;
+    padding: 18px 4px 12px;
+    box-shadow: none;
+  }
+}
+
+/* Right column heading and lead text */
+.columns.columns10 > div > div:last-child h3 {
+  color: #9c27b0;
+  font-size: 1.29rem;
+  font-weight: 700;
+  margin: 3px 0 14px;
+  letter-spacing: 0;
+}
+
+.columns.columns10 > div > div:last-child p strong {
+  color: #222;
+  font-size: 1.07rem;
+  font-weight: 700;
+}
+
+/* Bullets and lists */
+.columns.columns10 > div > div:last-child ul {
+  color: #222;
+  font-size: 1.02rem;
+  margin: 0 0 13px;
+  padding-left: 1.18em;
+}
+
+.columns.columns10 > div > div:last-child ul li {
+  margin-bottom: 7px;
+  line-height: 1.6;
+}
+
+.columns.columns10 > div > div:last-child ul li strong {
+  color: #ea0043;
+  font-weight: 700;
+}
+
+/* Button row: side by side, spacing and style */
+.columns.columns10 > div > div:last-child p {
+  margin: 14px 0 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.columns.columns10 > div > div:last-child p a {
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  vertical-align: middle;
+  box-shadow: 0 1.5px 5px 0 rgb(60 60 60 / 5%);
+  margin: 0;
+}
+
+.columns.columns10 > div > div:last-child p a:first-child {
+  background: #ea0043;
+  color: #fff;
+  border: none;
+}
+
+.columns.columns10 > div > div:last-child p a:last-child {
+  background: #fff;
+  color: #ea0043;
+  border: 2px solid #ea0043;
+}
+
+.columns.columns10 > div > div:last-child p a:hover,
+.columns.columns10 > div > div:last-child p a:focus {
+  filter: brightness(0.985);
+}
+
+/* Table: spacing, shadow, appearance */
+.columns.columns10 > div > div:last-child table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 22px 0 0;
+  font-size: 0.97rem;
+  background: #fff;
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 1px 7px 0 rgb(60 60 60 / 3%);
+}
+
+.columns.columns10 > div > div:last-child table th,
+.columns.columns10 > div > div:last-child table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+  text-align: left;
+}
+
+.columns.columns10 > div > div:last-child table th ul,
+.columns.columns10 > div > div:last-child table td ul {
+  margin: 0;
+  padding-left: 1em;
+  font-size: 1em;
+}
+
+/* Section spacing in right column */
+.columns.columns10 > div > div:last-child > * {
+  margin-bottom: 13px;
+}
+
+.columns.columns10 > div > div:last-child > *:last-child {
+  margin-bottom: 0;
 }
