@@ -133,7 +133,6 @@
   padding: 32px 0 0;
 }
 
-/* Outer row: side by side, vertically centered */
 .columns.columns3 > div {
   display: flex;
   flex-direction: row;
@@ -141,7 +140,6 @@
   width: 100%;
 }
 
-/* --- Left column (image) --- */
 .columns.columns3 .columns-img-col {
   display: flex;
   align-items: center;
@@ -152,12 +150,9 @@
   aspect-ratio: 1 / 1;
   height: auto;
   background: none;
-
-  /* Prevent collapse if the image fails to load */
   position: relative;
 }
 
-/* --- Ensure image fills its container --- */
 .columns.columns3 .columns-img-col picture,
 .columns.columns3 .columns-img-col img {
   width: 100%;
@@ -176,7 +171,6 @@
   left: 0;
 }
 
-/* --- Right column (text/cta) --- */
 .columns.columns3 > div > div:not(.columns-img-col) {
   display: flex;
   flex-direction: column;
@@ -189,7 +183,6 @@
   height: 100%;
 }
 
-/* Heading and strong text */
 .columns.columns3 h2,
 .columns.columns3 strong {
   font-size: 2.4rem;
@@ -200,7 +193,6 @@
   text-align: left;
 }
 
-/* Paragraph text */
 .columns.columns3 p {
   font-size: 1.09rem;
   color: #333;
@@ -209,20 +201,17 @@
   text-align: left;
 }
 
-/* Fine print/last para before button */
 .columns.columns3 p:last-of-type:not(.button-container) {
   font-size: 0.97rem;
   color: #888;
   margin-bottom: 16px;
 }
 
-/* Superscript */
 .columns.columns3 sup {
   font-size: 0.75em;
   vertical-align: super;
 }
 
-/* Button container */
 .columns.columns3 .button-container {
   margin-top: 22px;
   width: 100%;
@@ -312,5 +301,160 @@
   .columns.columns3 .button-container .button {
     font-size: 1rem;
     padding: 13px 22px;
+  }
+}
+
+
+.columns.columns7 {
+  background: #fff;
+  padding: 0;
+}
+
+/* Main horizontal layout: image left, content right */
+.columns.columns7 > div {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: stretch;
+}
+
+@media (width >= 900px) {
+  .columns.columns7 > div {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+/* Left image column */
+.columns.columns7 .columns-img-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 410px;
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+/* Image fit */
+.columns.columns7 .columns-img-col picture,
+.columns.columns7 .columns-img-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Right content column: two columns using grid for true grouping */
+.columns.columns7 > div > div:not(.columns-img-col) {
+  width: 100%;
+  max-width: 900px;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+}
+
+@media (width <= 899px) {
+  .columns.columns7 > div > div:not(.columns-img-col) {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* --- GROUPING AND BLOCKS --- */
+
+/* Group icon+heading+text vertically, align items horizontally */
+.columns.columns7 > div > div:not(.columns-img-col) p + h3 {
+  margin-top: 0;
+}
+
+.columns.columns7 > div > div:not(.columns-img-col) > p {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  margin-top: 36px;
+}
+
+/* Create visual group: icon and heading side by side */
+
+.columns.columns7 > div > div:not(.columns-img-col) > p picture {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  margin-bottom: 0;
+  margin-left: 0;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.columns.columns7 > div > div:not(.columns-img-col) > p picture img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  vertical-align: middle;
+  filter: none;
+}
+
+/* Headings: inline with icon, not with paragraph */
+.columns.columns7 > div > div:not(.columns-img-col) > h3 {
+  display: inline-block;
+  vertical-align: middle;
+  color: #C50080;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+  margin-left: 0;
+  margin-bottom: 0.3em;
+  text-align: left;
+  padding: 0;
+}
+
+/* Paragraph following heading: normal block, space below */
+.columns.columns7 > div > div:not(.columns-img-col) > h3 + p {
+  margin-top: 0.2em;
+  margin-bottom: 2.1em;
+  color: #444;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  padding: 0;
+  break-inside: avoid;
+}
+
+/* Prevent block splitting, keep icon+heading+text together */
+.columns.columns7 > div > div:not(.columns-img-col) > p,
+.columns.columns7 > div > div:not(.columns-img-col) > h3,
+.columns.columns7 > div > div:not(.columns-img-col) > h3 + p {
+  break-inside: avoid;
+}
+
+/* Remove extra spacing at end of columns */
+.columns.columns7 > div > div:not(.columns-img-col) > p:last-child,
+.columns.columns7 > div > div:not(.columns-img-col) > h3:last-child,
+.columns.columns7 > div > div:not(.columns-img-col) > h3 + p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive: stack columns on mobile */
+@media (width <= 899px) {
+  .columns.columns7 > div {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .columns.columns7 > div > div:not(.columns-img-col) {
+    display: block;
+    max-width: 100%;
+  }
+
+  .columns.columns7 > div > div:not(.columns-img-col) > p {
+    margin-top: 24px;
   }
 }
