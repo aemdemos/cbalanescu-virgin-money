@@ -1,72 +1,52 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // HEADER: exact match to example
+  // Table header row
   const headerRow = ['Columns (columns7)'];
 
-  // Find the outer sl-list (with has-feature-right for two columns)
-  const outerList = element.querySelector('.sl-list.has-feature-right') || element.querySelector('.sl-list');
-  if (!outerList) return;
-  const outerItems = Array.from(outerList.children);
+  // Find the main sl-list with the image and the inner content
+  const mainSlList = element.querySelector('.sl-list.has-2-items.has-feature-right');
+  if (!mainSlList) return;
+  const mainSlItems = Array.from(mainSlList.querySelectorAll(':scope > .sl-item'));
+  if (mainSlItems.length !== 2) return;
 
-  // --- COLUMN 1 ---
-  // Find the left image inside the first .sl-item
-  let leftCell = null;
-  if (outerItems[0]) {
-    // Find the first img inside this column
-    const img = outerItems[0].querySelector('img');
-    if (img) {
-      leftCell = img;
-    } else {
-      leftCell = outerItems[0]; // fallback to referencing the whole column
-    }
-  }
-  
-  // --- COLUMN 2 ---
-  // The second .sl-item contains a .column-container -> .sl -> .sl-list.has-2-items
-  let rightCell = null;
-  if (outerItems[1]) {
-    const innerList = outerItems[1].querySelector('.sl-list.has-2-items');
-    if (innerList) {
-      const innerItems = Array.from(innerList.children);
-      // Prepare two sub-columns as in the visual example
-      // Each inner sl-item contains several cm-icon-title sections
-      // We want to build two columns, each cell contains the respective icon-title sections
-      let col1Blocks = [];
-      let col2Blocks = [];
-      if (innerItems[0]) {
-        // Left column: all cm-icon-title sections under this sl-item
-        const col1Sections = innerItems[0].querySelectorAll('section.cm-icon-title');
-        col1Blocks = Array.from(col1Sections);
-      }
-      if (innerItems[1]) {
-        const col2Sections = innerItems[1].querySelectorAll('section.cm-icon-title');
-        col2Blocks = Array.from(col2Sections);
-      }
-      // Compose inner columns into a container (simulate columns visually)
-      // We'll use a <div style="display:flex"> to present two columns side by side
-      const columnsWrapper = document.createElement('div');
-      columnsWrapper.style.display = 'flex';
-      columnsWrapper.style.gap = '2em'; // Optional visual spacing
-      const leftColDiv = document.createElement('div');
-      col1Blocks.forEach(b => leftColDiv.appendChild(b));
-      const rightColDiv = document.createElement('div');
-      col2Blocks.forEach(b => rightColDiv.appendChild(b));
-      columnsWrapper.appendChild(leftColDiv);
-      columnsWrapper.appendChild(rightColDiv);
-      rightCell = columnsWrapper;
-    } else {
-      // Fallback: reference the entire item if no innerList found
-      rightCell = outerItems[1];
-    }
+  // First column: find the image element (should be inside figure > div > img)
+  let firstColContent = null;
+  const firstImg = mainSlItems[0].querySelector('img');
+  if (firstImg) {
+    // Reference image's parent figure if available, else just the image
+    const figure = firstImg.closest('figure');
+    firstColContent = figure ? figure : firstImg;
   }
 
-  // Compose the block table: header and two columns
+  // Second column: find the nested column-container
+  // The second mainSlItem contains a .column-container > .sl > .sl-list.has-2-items
+  const secondColContainer = mainSlItems[1].querySelector('.column-container');
+  if (!secondColContainer) return;
+  const secondColSlList = secondColContainer.querySelector('.sl-list.has-2-items');
+  if (!secondColSlList) return;
+  const secondColSlItems = Array.from(secondColSlList.querySelectorAll(':scope > .sl-item'));
+  // There should be two inner columns
+  if (!secondColSlItems.length) return;
+
+  // For each inner column, gather all the icon-title sections as elements, retaining structure
+  function extractIconTitleSections(slItem) {
+    // Each icon-title section should keep the image, heading, and paragraph
+    const sections = Array.from(slItem.querySelectorAll('section.cm-icon-title'));
+    return sections.map(section => section);
+  }
+  const leftSections = extractIconTitleSections(secondColSlItems[0]);
+  const rightSections = extractIconTitleSections(secondColSlItems[1]);
+
+  // Create two arrays for the second row: one for each column
+  // Each cell is an array of its sections
   const cells = [
     headerRow,
-    [leftCell, rightCell]
+    [firstColContent, [...leftSections, ...rightSections]]
   ];
 
-  // Create the block table using WebImporter
+  // Build the block table
   const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace element with block
   element.replaceWith(block);
 }

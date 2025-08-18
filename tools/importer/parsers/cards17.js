@@ -1,62 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header matches EXACTLY: Cards (cards17)
+  // Header row matches the example exactly
   const headerRow = ['Cards (cards17)'];
-  const cells = [headerRow];
 
-  // Get all cards (each .sl-item > section.cm-content-tile)
-  const items = element.querySelectorAll('.sl-item > section.cm-content-tile');
-  items.forEach((item) => {
-    // Image cell: find first img inside the card
-    let imgCell = null;
-    const img = item.querySelector('.image img');
-    if (img) {
-      imgCell = img;
-    } else {
-      imgCell = '';
-    }
+  // Find all immediate card elements
+  // .sl-item > section > div > .image and .content
+  const cardItems = Array.from(element.querySelectorAll('.sl-item'));
 
-    // Text cell: collect all "content" children except empty .subheading
-    const contentDiv = item.querySelector('.content');
-    let textParts = [];
-    if (contentDiv) {
-      // Title: h3.header (with <b> inside)
-      const h3 = contentDiv.querySelector('h3.header');
-      if (h3) {
-        textParts.push(h3);
-      }
+  const rows = cardItems.map(cardItem => {
+    // Defensive: find the section
+    const section = cardItem.querySelector('section');
+    if (!section) return null;
+    // Find image and content containers
+    // Structure: section > div > .image and .content
+    const mainDiv = section.querySelector(':scope > div');
+    if (!mainDiv) return null;
+    // Get all direct children (should be .image and .content)
+    const children = Array.from(mainDiv.children);
+    let imageDiv = children.find(c => c.classList.contains('image'));
+    let contentDiv = children.find(c => c.classList.contains('content'));
+    if (!imageDiv || !contentDiv) return null;
+    // Image cell: use <img> directly if exists
+    const imgEl = imageDiv.querySelector('img') || null;
+    // Text cell: use the .content block directly (includes heading, lists, text, ctas)
+    const textEl = contentDiv;
+    // Ensure at least one valid cell
+    if (!imgEl && !textEl) return null;
+    return [imgEl, textEl];
+  }).filter(Boolean);
 
-      // All children in contentDiv except empty subheading
-      Array.from(contentDiv.children).forEach((child) => {
-        if (
-          child.tagName === 'P' && 
-          child.classList.contains('subheading') && 
-          !child.textContent.trim()
-        ) {
-          // skip empty subheading
-          return;
-        }
-        // Include paragraphs and lists for descriptive text and CTAs
-        if (
-          child.tagName === 'P' || 
-          child.tagName === 'UL'
-        ) {
-          // skip empty paragraphs (usually non-breaking space)
-          if (child.tagName === 'P' && !child.textContent.trim() && child.innerHTML.includes('&nbsp;')) {
-            return;
-          }
-          textParts.push(child);
-        }
-      });
-    }
-    // If there are no parts, fallback to empty string
-    let textCell = textParts.length === 0 ? '' : (textParts.length === 1 ? textParts[0] : textParts);
-
-    cells.push([imgCell, textCell]);
-  });
-
-  // Create table using referenced elements
+  const cells = [headerRow, ...rows];
   const block = WebImporter.DOMUtils.createTable(cells, document);
-  // Replace the original element
   element.replaceWith(block);
 }

@@ -1,56 +1,67 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row matches example: exactly one cell with exact block name
+  // Header row for the block table, matches example exactly
   const headerRow = ['Hero (hero15)'];
 
-  // --------- Background Image Row ---------
-  let imageElem = null;
-  // Find background image from .intrinsic-el.img
-  const bgDiv = element.querySelector('.intrinsic-el.img');
-  if (bgDiv && bgDiv.style && bgDiv.style.backgroundImage) {
-    const urlMatch = bgDiv.style.backgroundImage.match(/url\(([^)]+)\)/);
-    if (urlMatch && urlMatch[1]) {
-      const src = urlMatch[1].replace(/['"]/g, '');
-      imageElem = document.createElement('img');
-      imageElem.src = src;
-      // Use .vh span text for alt, if present
-      const altSpan = bgDiv.querySelector('.vh');
-      imageElem.alt = altSpan ? altSpan.textContent.trim() : '';
+  // --- Background Image Row ---
+  let imageEl = null;
+  const imgDiv = element.querySelector('.img');
+  if (imgDiv && imgDiv.style && imgDiv.style.backgroundImage) {
+    const match = imgDiv.style.backgroundImage.match(/url\(("|')?(.*?)("|')?\)/);
+    if (match && match[2]) {
+      const bgImageUrl = match[2];
+      imageEl = document.createElement('img');
+      imageEl.src = bgImageUrl;
+      const altSpan = imgDiv.querySelector('span');
+      imageEl.alt = altSpan ? altSpan.textContent.trim() : '';
     }
   }
-  const imageRow = [imageElem || ''];
+  const imageRow = [imageEl ? imageEl : ''];
 
-  // --------- Content Row ---------
-  // Gather all content in the same order as source, preserving headings, subheadings, etc.
-  let contentArr = [];
-  const anchor = element.querySelector('a');
-  const contentDiv = anchor ? anchor.querySelector('.content') : null;
+  // --- Content Row: Gather all text content flexibly ---
+  // Get all direct children of the content div and flatten all text and elements
+  const contentDiv = element.querySelector('.content');
+  let contentChildren = [];
   if (contentDiv) {
-    // Iterate over all direct children to preserve order and content
+    // For each direct child node
     Array.from(contentDiv.childNodes).forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        // Replace CTA span with anchor, using original href
-        if (node.classList && node.classList.contains('cta') && anchor && anchor.href) {
-          const ctaLink = document.createElement('a');
-          ctaLink.href = anchor.href;
-          ctaLink.textContent = node.textContent;
-          ctaLink.className = 'cta';
-          contentArr.push(ctaLink);
+        // If it's a <h1> that contains a <p>, flatten the <p> into <h1>
+        if (node.tagName === 'H1' && node.querySelector('p')) {
+          const h1 = document.createElement('h1');
+          // preserve <span> etc inside the <p>
+          Array.from(node.querySelector('p').childNodes).forEach(child => {
+            h1.appendChild(child.cloneNode(true));
+          });
+          contentChildren.push(h1);
+        } else if (node.classList.contains('cta')) {
+          // handled below
         } else {
-          // Reference the existing element for headings, subheadings, paragraphs
-          contentArr.push(node);
+          contentChildren.push(node);
         }
-      } else if (node.nodeType === Node.TEXT_NODE) {
-        const txt = node.textContent.trim();
-        if (txt) contentArr.push(document.createTextNode(txt));
+      } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+        contentChildren.push(document.createTextNode(node.textContent));
       }
     });
+    // CTA logic: if a .cta span exists, wrap in link if parent <a> exists
+    const ctaSpan = contentDiv.querySelector('.cta');
+    const parentLink = element.querySelector('a');
+    if (ctaSpan && parentLink && parentLink.href) {
+      const ctaLinkEl = document.createElement('a');
+      ctaLinkEl.href = parentLink.href;
+      ctaLinkEl.textContent = ctaSpan.textContent;
+      contentChildren.push(ctaLinkEl);
+    } else if (ctaSpan && !parentLink) {
+      contentChildren.push(ctaSpan);
+    }
   }
-  // Always provide at least an empty string if nothing is found
-  const contentRow = [contentArr.length > 0 ? contentArr : ''];
 
-  // --------- Create and replace block table ---------
+  const contentRow = [contentChildren.length ? contentChildren : ''];
+
+  // Compose the block table with 3 rows, 1 column per the example
   const cells = [headerRow, imageRow, contentRow];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace original element with block table
+  element.replaceWith(block);
 }

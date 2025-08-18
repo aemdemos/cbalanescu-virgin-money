@@ -1,48 +1,51 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Helper: extract background image URL from style attribute
-  function getBackgroundImageUrl(style) {
-    if (!style) return null;
-    const urlMatch = style.match(/background-image:\s*url\(['"]?(.*?)['"]?\)/i);
-    return urlMatch && urlMatch[1] ? urlMatch[1] : null;
-  }
+  // Table header row matches example
+  const headerRow = ['Hero (hero41)'];
 
-  // Extract the background image as <img>
-  let imgEl = null;
-  const bgImgDiv = element.querySelector('.intrinsic-el.img');
-  if (bgImgDiv) {
-    const url = getBackgroundImageUrl(bgImgDiv.getAttribute('style'));
-    if (url) {
-      imgEl = document.createElement('img');
-      imgEl.src = url.startsWith('http') ? url : `https://www.virginmoney.com${url}`;
-      const vhSpan = bgImgDiv.querySelector('.vh');
-      imgEl.alt = vhSpan ? vhSpan.textContent.trim() : '';
+  // --- Extract background image ---
+  let imgCell = '';
+  const bgDiv = element.querySelector('.intrinsic-el.img');
+  if (bgDiv) {
+    const style = bgDiv.getAttribute('style') || '';
+    const urlMatch = style.match(/background-image:\s*url\(['"]?([^'")]+)['"]?\)/i);
+    if (urlMatch && urlMatch[1]) {
+      const altSpan = bgDiv.querySelector('.vh');
+      const altText = altSpan ? altSpan.textContent.trim() : '';
+      const img = document.createElement('img');
+      img.src = urlMatch[1];
+      if (altText) img.alt = altText;
+      imgCell = img;
     }
   }
 
-  // Extract all content from the .content block as a single cell, using references to child nodes
-  let contentCell = '';
+  // --- Extract text content block ---
+  let textCellContent = [];
   const contentDiv = element.querySelector('.content');
   if (contentDiv) {
-    // Use the actual child nodes as references (no cloning), to include all text and preserve formatting
-    // Remove empty subtitle if present
-    const nodes = [];
-    Array.from(contentDiv.childNodes).forEach(node => {
-      // Omit subtitle if it's empty
-      if (node.classList && node.classList.contains('subtitle') && !node.textContent.trim()) return;
-      if (node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && node.textContent.trim())) {
-        nodes.push(node);
+    // Collect all direct children (preserving order and full structure)
+    Array.from(contentDiv.childNodes).forEach((node) => {
+      if (node.nodeType === 1) {
+        textCellContent.push(node);
+      } else if (node.nodeType === 3 && node.textContent.trim()) {
+        // Preserve meaningful text nodes
+        const span = document.createElement('span');
+        span.textContent = node.textContent;
+        textCellContent.push(span);
       }
     });
-    contentCell = nodes.length === 1 ? nodes[0] : nodes;
+  }
+  // If no content found, ensure cell is not empty
+  if (textCellContent.length === 0) {
+    textCellContent = [''];
   }
 
-  // Build the block table
+  // Compose table as in example
   const cells = [
-    ['Hero (hero41)'],
-    [imgEl ? imgEl : ''],
-    [contentCell]
+    headerRow,
+    [imgCell],
+    [textCellContent]
   ];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

@@ -1,40 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Check for .sl-list with .sl-item children
-  const slList = Array.from(element.querySelectorAll(':scope > .sl > .sl-list'))[0];
-  if (!slList) return;
-  const slItems = Array.from(slList.children).filter(el => el.classList.contains('sl-item'));
-  if (slItems.length < 2) return;
-
-  // First column: image panel (panel with image)
-  const col1Panel = slItems[0].querySelector('.cm-content-panel-container');
-  let col1Content;
-  if (col1Panel) {
-    col1Content = col1Panel;
-  } else {
-    col1Content = slItems[0];
-  }
-
-  // Second column: heading, paragraphs, button
-  // Use the .cm-rich-text inside second sl-item if present, else sl-item itself
-  const col2Panel = slItems[1].querySelector('.cm-rich-text');
-  let col2Content;
-  if (col2Panel) {
-    col2Content = col2Panel;
-  } else {
-    col2Content = slItems[1];
-  }
-
-  // Table header matches example exactly
+  // Block header as per requirements
   const headerRow = ['Columns (columns32)'];
 
-  // Table second row: two columns
-  const secondRow = [col1Content, col2Content];
+  // Find the columns: .sl-list > .sl-item (each column is an sl-item)
+  const slList = element.querySelector('.sl-list');
+  const slItems = slList ? Array.from(slList.children).filter(child => child.classList.contains('sl-item')) : [];
 
-  // Final table
-  const cells = [headerRow, secondRow];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // Edge case: if no columns found, do nothing
+  if (slItems.length === 0) return;
 
-  // Replace element
-  element.replaceWith(block);
+  // For each column, extract the main content:
+  // - If it has a .cm-content-panel-container, use that
+  // - Otherwise, use the .cm-rich-text, else the whole sl-item
+  const columnsRow = slItems.map((item) => {
+    let content = null;
+    const panel = item.querySelector('.cm-content-panel-container');
+    const rich = item.querySelector('.cm-rich-text');
+    if (panel) {
+      content = panel;
+    } else if (rich) {
+      content = rich;
+    } else {
+      content = item;
+    }
+    return content;
+  });
+
+  // Table structure: header row, then the columns row
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    columnsRow,
+  ], document);
+
+  // Replace the original element with the block table
+  element.replaceWith(table);
 }

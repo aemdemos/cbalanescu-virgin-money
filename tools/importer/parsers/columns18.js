@@ -1,28 +1,34 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the list of columns: each .sl-item is a column
+  // 1. Table header row - matches exact block name
+  const headerRow = ['Columns (columns18)'];
+
+  // 2. Extract columns
+  // The main columns are the direct children of .sl-list
   const slList = element.querySelector('.sl-list');
-  let items = [];
+  let columns = [];
   if (slList) {
-    items = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+    // Each .sl-item is a column
+    columns = Array.from(slList.children).map((slItem) => {
+      // Find the rich text content inside the column
+      const richContent = slItem.querySelector('.cm-rich-text, .cm.cm-rich-text');
+      // Reference the content block if present, otherwise the sl-item itself
+      return richContent ? richContent : slItem;
+    });
+  } else {
+    // Fallback: for generality, if .sl-list not found, use direct children
+    columns = Array.from(element.children);
   }
 
-  // Fallback: if structure changes, find all direct children divs that look like columns
-  if (items.length === 0) {
-    items = Array.from(element.querySelectorAll(':scope > div'));
+  // Defensive: If no columns, fallback to whole element
+  if (columns.length === 0) {
+    columns = [element];
   }
 
-  // For each column, we want the main content area, or the item itself if not found
-  const cells = items.map(item => {
-    const colContent = item.querySelector('.cm, .module__content, .cm-rich-text') || item;
-    return colContent;
-  });
+  // 3. Table rows array: header, then the columns row
+  const tableRows = [headerRow, columns];
 
-  // Only build a table if we have at least one cell
-  if (cells.length > 0) {
-    const headerRow = ['Columns (columns18)'];
-    const tableData = [headerRow, cells];
-    const table = WebImporter.DOMUtils.createTable(tableData, document);
-    element.replaceWith(table);
-  }
+  // 4. Create and replace
+  const block = WebImporter.DOMUtils.createTable(tableRows, document);
+  element.replaceWith(block);
 }

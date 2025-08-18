@@ -1,56 +1,43 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Compose the block table starting with the header row matching the example
-  const cells = [['Cards (cards25)']];
+  // Table header as per block name and variant
+  const headerRow = ['Cards (cards25)'];
+  const rows = [headerRow];
 
-  // Find the actual cards inside the deeply nested structure
-  // Each card: section.cm-content-tile (one per card)
-  const cardSections = Array.from(element.querySelectorAll('section.cm-content-tile'));
+  // Locate all card sections: section.cm-content-tile
+  // Only those within the nested .sl-list > .sl-item > .cq-dd-paragraph > section
+  const cardSections = element.querySelectorAll('section.cm-content-tile');
 
-  cardSections.forEach(section => {
-    // Extract image (first cell)
-    let imgElem = null;
+  cardSections.forEach((section) => {
+    // First cell: image (mandatory)
+    let imageEl = null;
     const img = section.querySelector('.image img');
-    if (img) {
-      imgElem = img;
-    }
-    // Compose text content (second cell): heading, description, CTA
+    if (img) imageEl = img;
+    // Second cell: all text content
     const contentDiv = section.querySelector('.content');
-    const textElems = [];
+    const textContent = [];
     if (contentDiv) {
-      // Heading (h3) with <b> retained
+      // Heading (h3, possibly with <b> inside)
       const heading = contentDiv.querySelector('h3');
-      if (heading) {
-        textElems.push(heading);
-      }
-      // Description (any <p> not subheading and not containing the CTA)
+      if (heading) textContent.push(heading);
+      // All <p> elements except those with only whitespace, and except if they ONLY wrap the CTA
       const ps = Array.from(contentDiv.querySelectorAll('p'));
-      ps.forEach(p => {
-        if (
-          !p.classList.contains('subheading') && // skip subheading (empty in example)
-          !p.querySelector('a') && // skip CTA, handled later
-          p.textContent.trim() // skip empty
-        ) {
-          textElems.push(p);
-        }
+      ps.forEach((p) => {
+        // Ignore empty <p>
+        if (!p.textContent.trim()) return;
+        // If the <p> only contains a CTA anchor, skip it here, handled below
+        const onlyChild = p.children.length === 1 && p.querySelector('a');
+        if (onlyChild && p.textContent.trim() === p.querySelector('a').textContent.trim()) return;
+        textContent.push(p);
       });
-      // CTA (link inside last <p>, if present)
-      const ctaP = Array.from(contentDiv.querySelectorAll('p')).find(p => p.querySelector('a'));
-      if (ctaP) {
-        const a = ctaP.querySelector('a');
-        if (a) {
-          textElems.push(a);
-        }
-      }
+      // CTA: any anchor containing .cta span
+      const cta = contentDiv.querySelector('a .cta')?.closest('a');
+      if (cta) textContent.push(cta);
     }
-    // Row: [imgElem, textElems]
-    cells.push([
-      imgElem,
-      textElems.length === 1 ? textElems[0] : textElems
-    ]);
+    rows.push([imageEl, textContent]);
   });
 
-  // Create the table using the helper and replace the original element
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Build and replace the original element with the cards table
+  const table = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(table);
 }

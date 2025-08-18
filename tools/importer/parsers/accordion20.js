@@ -1,59 +1,54 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion block header
+  // Header row as in the example
   const headerRow = ['Accordion (accordion20)'];
-  const rows = [headerRow];
+  const rows = [];
 
-  // Find the accordion block section
-  const accordionSection = element.querySelector('section.cm-accordion, section.cm.cm-accordion');
+  // Find accordion block
+  const accordionSection = element.querySelector('.cm-accordion');
   if (!accordionSection) return;
   const ul = accordionSection.querySelector('ul.accordion-list');
   if (!ul) return;
 
-  // Get all direct <li> accordion items
-  const items = ul.querySelectorAll(':scope > li');
+  // Get accordion items (li)
+  const items = Array.from(ul.querySelectorAll('li'));
   items.forEach((li) => {
-    // Title: clickable accordion label (reference existing anchor, removing chevron if present)
-    const titleLink = li.querySelector('a.accordion-item');
-    let titleCell;
-    if (titleLink) {
-      // Create a fragment with only the label (ignore chevron divs)
-      const frag = document.createElement('span');
-      Array.from(titleLink.childNodes).forEach((n) => {
-        if (n.nodeType === Node.TEXT_NODE) {
-          frag.appendChild(document.createTextNode(n.textContent));
-        } else if (n.nodeType === Node.ELEMENT_NODE && n.tagName.toLowerCase() !== 'div') {
-          frag.appendChild(n);
-        }
-      });
-      titleCell = frag;
-    } else {
-      titleCell = '';
+    // Title: anchor text (excluding .ec)
+    const a = li.querySelector('a.accordion-item');
+    let titleContent = '';
+    if (a) {
+      // Remove trailing ec div if present
+      const ecDiv = a.querySelector('.ec');
+      if (ecDiv) ecDiv.remove();
+      titleContent = a;
     }
-
-    // Content: reference the first visible content block inside the item
-    let contentCell = '';
-    const contentDiv = li.querySelector('div.expandcollapse-content');
-    if (contentDiv) {
-      // Prefer the rich-text container if present
-      const richContent = contentDiv.querySelector('.cm-rich-text, .module__content, .cq-dd-paragraph');
-      if (richContent) {
-        contentCell = richContent;
+    // Body: all content blocks in .expandcollapse-content
+    const expandDiv = li.querySelector('.expandcollapse-content');
+    let bodyContent = '';
+    if (expandDiv) {
+      // Collect all direct rich-content children (not descendants)
+      const contentBlocks = Array.from(expandDiv.children).filter(
+        (el) => el.classList.contains('cm-rich-text') || el.classList.contains('cq-dd-paragraph')
+      );
+      if (contentBlocks.length === 0) {
+        bodyContent = expandDiv;
+      } else if (contentBlocks.length === 1) {
+        bodyContent = contentBlocks[0];
       } else {
-        contentCell = contentDiv;
+        bodyContent = contentBlocks;
       }
     }
-    rows.push([titleCell, contentCell]);
+    rows.push([titleContent, bodyContent]);
   });
 
-  // Check for extra rich text ("See more") outside <li> but inside <ul>
-  const extraRich = ul.querySelector(':scope > .cm-rich-text');
-  if (extraRich) {
-    rows.push(['', extraRich]);
+  // See more link at end (after all accordion items)
+  const seeMore = ul.querySelector('h6');
+  if (seeMore) {
+    rows.push(['', seeMore]);
   }
 
-  // Build the table
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  // Replace accordion section with the new table
-  accordionSection.parentNode.replaceChild(block, accordionSection);
+  // Create and replace
+  const cells = [headerRow, ...rows];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

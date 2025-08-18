@@ -1,35 +1,58 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header (matches example exactly)
+  // Block header from example
   const headerRow = ['Columns (columns50)'];
 
-  // 2. Find the two main columns (left and right)
-  // The structure is: 
-  // div.column-container
-  //   > div.sl
-  //     > div.sl-list.has-2-items
-  //       > div.sl-item (left)
-  //       > div.sl-item (right)
+  // Find the top-level .sl-list with two items: our two columns
   const slList = element.querySelector('.sl-list.has-2-items');
-  if (!slList) return; // edge case: no columns, don't create block
-  const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
-  if (slItems.length < 2) return; // need at least 2 columns
+  if (!slList) return;
+  const slItems = Array.from(slList.children).filter(child => child.matches('.sl-item'));
+  if (slItems.length !== 2) return;
 
-  // 3. For each column, preserve all content inside the sl-item
-  // Reference the actual sl-item DOM element (do not clone)
-  // This keeps all headings, paragraphs, images, lists, etc. as in the HTML
-  const leftColumn = slItems[0];
-  const rightColumn = slItems[1];
+  // LEFT COLUMN: Only the heading (inside .cm.cm-rich-text)
+  const leftItem = slItems[0];
+  const leftRichText = leftItem.querySelector('.cm.cm-rich-text');
+  // Use the existing heading element reference if present
+  let leftColumnContent = null;
+  if (leftRichText) {
+    // Find first heading element (h1-h6)
+    const heading = leftRichText.querySelector('h1, h2, h3, h4, h5, h6');
+    leftColumnContent = heading || leftRichText; // fallback: use the whole block
+  }
 
-  // 4. Table structure: two columns, one row (aside from header)
-  const cells = [
+  // RIGHT COLUMN: The text, then all award images (including all paragraphs in rich text)
+  const rightItem = slItems[1];
+  let rightColumnElements = [];
+
+  // Add all paragraphs from rich text
+  const rightRichText = rightItem.querySelector('.cm.cm-rich-text');
+  if (rightRichText) {
+    Array.from(rightRichText.children).forEach(child => {
+      if (child.tagName === 'P') rightColumnElements.push(child);
+    });
+  }
+
+  // Add award images block: locate nested column-container > .sl > .sl-list > .sl-item > .cm.cm-rich-text
+  const nestedColumn = rightItem.querySelector('.column-container');
+  if (nestedColumn) {
+    const awardRichText = nestedColumn.querySelector('.cm.cm-rich-text');
+    if (awardRichText) {
+      Array.from(awardRichText.children).forEach(child => {
+        rightColumnElements.push(child);
+      });
+    }
+  }
+
+  // If no left or right content, do not proceed
+  if (!leftColumnContent || rightColumnElements.length === 0) return;
+
+  // Compose the table for the block
+  const tableRows = [
     headerRow,
-    [leftColumn, rightColumn],
+    [leftColumnContent, rightColumnElements]
   ];
 
-  // 5. Create columns block table
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // 6. Replace the original element with the table
-  element.replaceWith(table);
+  // Create the block table, replacing original element
+  const block = WebImporter.DOMUtils.createTable(tableRows, document);
+  element.replaceWith(block);
 }

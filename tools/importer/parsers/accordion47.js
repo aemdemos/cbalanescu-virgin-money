@@ -1,48 +1,58 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row must match the required block name
+  // Table header must match example exactly
   const headerRow = ['Accordion (accordion47)'];
-  const rows = [headerRow];
+  const rows = [];
 
-  // Find all immediate li children of the accordion-list
-  const list = element.querySelector('ul.accordion-list');
-  if (list) {
-    const items = Array.from(list.children);
-    items.forEach((li) => {
-      // Find the title link (first <a> inside li)
-      let titleElem = null;
-      const a = li.querySelector('a');
-      if (a) {
-        // Remove icon div for clean title
-        const icon = a.querySelector('div.ec');
-        if (icon) icon.remove(); // removes from DOM (it is ok, soon replaced)
-        titleElem = a;
-      } else {
-        // Fallback: use first text node
-        titleElem = document.createElement('span');
-        titleElem.textContent = li.textContent.trim();
-      }
+  // Get all <li> direct children of the <ul class="accordion-list">
+  const ul = element.querySelector('ul.accordion-list');
+  if (!ul) return;
 
-      // Find the content: <div class="expandcollapse-content">
-      let contentElem = null;
-      const expandContent = li.querySelector('div.expandcollapse-content');
-      if (expandContent) {
-        // Use the inner content, if there is a module__content, use only that
-        const moduleContent = expandContent.querySelector('.module__content');
-        if (moduleContent) {
-          contentElem = moduleContent;
-        } else {
-          contentElem = expandContent;
+  // Each row: [Title, Content]
+  const items = Array.from(ul.children).filter(child => child.tagName === 'LI');
+  items.forEach(li => {
+    // Title: <a class="js-ec-link accordion-item">
+    const titleAnchor = li.querySelector('a.accordion-item');
+    let titleCell = '';
+    if (titleAnchor) {
+      // Remove trailing <div class="ec"> if present
+      // (usually the title is just the text before <div class="ec">)
+      // We'll extract only the plain text up to the <div class="ec"> if present, including any HTML inline formatting (not present in this example)
+      let titleParts = [];
+      for (let node of titleAnchor.childNodes) {
+        if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('ec')) {
+          break;
         }
-      } else {
-        // Fallback: empty div
-        contentElem = document.createElement('div');
+        // Keep all text and inline elements
+        titleParts.push(node);
       }
-      rows.push([titleElem, contentElem]);
-    });
-  }
-
-  // Create the table
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+      // If single text node, use its text content; otherwise, use the array
+      if (titleParts.length === 1 && titleParts[0].nodeType === Node.TEXT_NODE) {
+        titleCell = titleParts[0].textContent.trim();
+      } else {
+        // Wrap in a <span> so the DOMUtils table can accept it
+        const span = document.createElement('span');
+        titleParts.forEach(part => span.appendChild(part.cloneNode(true)));
+        titleCell = span;
+      }
+    }
+    // Content: <div class="expandcollapse-content">
+    const contentDiv = li.querySelector('div.expandcollapse-content');
+    let contentCell = '';
+    if (contentDiv) {
+      // Find the rich text block(s) inside
+      const contentBlocks = Array.from(contentDiv.children);
+      const meaningfulBlocks = contentBlocks.filter(block => block.childNodes.length > 0);
+      if (meaningfulBlocks.length > 0) {
+        contentCell = meaningfulBlocks.length === 1 ? meaningfulBlocks[0] : meaningfulBlocks;
+      } else {
+        // Fallback: use the contentDiv itself if nothing else
+        contentCell = contentDiv;
+      }
+    }
+    // Always push [titleCell, contentCell]
+    rows.push([titleCell, contentCell]);
+  });
+  const table = WebImporter.DOMUtils.createTable([headerRow, ...rows], document);
+  element.replaceWith(table);
 }

@@ -1,56 +1,82 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row: Must match exactly
+  // Helper to extract image url from a style background-image
+  function extractImageUrl(el) {
+    if (!el) return null;
+    const style = el.getAttribute('style') || '';
+    const match = style.match(/background-image:\s*url\(([^)]+)\)/);
+    if (match && match[1]) {
+      return match[1].replace(/^['"]|['"]$/g, '');
+    }
+    return null;
+  }
+
+  // Header row (block name must match example exactly)
   const headerRow = ['Hero (hero49)'];
 
-  // 2. Second row: Background image if present
+  // Image row: extract image from background-image, include alt text from span
   let imageEl = null;
-  const bgDiv = element.querySelector('.img');
-  if (bgDiv && bgDiv.style && bgDiv.style.backgroundImage) {
-    const urlMatch = bgDiv.style.backgroundImage.match(/url\((['"]?)(.*?)\1\)/);
-    if (urlMatch && urlMatch[2]) {
-      imageEl = document.createElement('img');
-      imageEl.src = urlMatch[2];
-      imageEl.setAttribute('loading', 'lazy');
-      const altSpan = bgDiv.querySelector('.vh');
-      if (altSpan) {
-        imageEl.alt = altSpan.textContent.trim();
-      }
-    }
+  const bgImageDiv = element.querySelector('.img');
+  const imageUrl = extractImageUrl(bgImageDiv);
+  let altText = '';
+  if (bgImageDiv) {
+    const altSpan = bgImageDiv.querySelector('span');
+    if (altSpan) altText = altSpan.textContent.trim();
   }
-  const secondRow = [imageEl ? imageEl : ''];
+  if (imageUrl) {
+    imageEl = document.createElement('img');
+    imageEl.src = imageUrl;
+    imageEl.alt = altText;
+    imageEl.setAttribute('loading', 'eager');
+  }
+  const imageRow = [imageEl ? imageEl : ''];
 
-  // 3. Third row: All text content, headings, CTA in one cell, referencing existing elements
-  const contentDiv = element.querySelector('.content');
-  let contentArr = [];
+  // Content row: extract all content, preserving semantics and all text
+  // The content is inside .content within an <a>
+  let contentDiv = null;
+  const mainLink = element.querySelector('a');
+  if (mainLink) {
+    contentDiv = mainLink.querySelector('.content');
+  }
+  if (!contentDiv) {
+    contentDiv = element.querySelector('.content');
+  }
+
+  // Reference all direct children of contentDiv (preserving order & types)
+  let contentItems = [];
   if (contentDiv) {
-    Array.from(contentDiv.childNodes).forEach((node) => {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        // If CTA span, convert to link referencing parent <a>
+    contentItems = Array.from(contentDiv.childNodes)
+      .map((node) => {
+        // Replace CTA span with <a> if needed
         if (
-          node.classList && node.classList.contains('cta') &&
-          element.querySelector('a') && element.querySelector('a').href
+          node.nodeType === 1 &&
+          node.classList.contains('cta') &&
+          mainLink &&
+          mainLink.getAttribute('href')
         ) {
           const ctaLink = document.createElement('a');
-          ctaLink.href = element.querySelector('a').href;
-          ctaLink.textContent = node.textContent;
-          ctaLink.className = 'cta';
-          contentArr.push(ctaLink);
-        } else {
-          contentArr.push(node);
+          ctaLink.href = mainLink.getAttribute('href');
+          ctaLink.textContent = node.textContent.trim();
+          ctaLink.className = 'cta-link';
+          return ctaLink;
         }
-      } else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-        // Preserve any meaningful raw text nodes
-        const span = document.createElement('span');
-        span.textContent = node.textContent.trim();
-        contentArr.push(span);
-      }
-    });
+        // Preserve element nodes and non-empty text nodes
+        if (node.nodeType === 1) {
+          return node;
+        }
+        if (node.nodeType === 3 && node.textContent.trim()) {
+          const span = document.createElement('span');
+          span.textContent = node.textContent;
+          return span;
+        }
+        return null;
+      })
+      .filter(Boolean);
   }
-  const thirdRow = [contentArr.length ? contentArr : ''];
+  const contentRow = [contentItems.length ? contentItems : ''];
 
-  // 4. Compose table: only one table as in example
-  const cells = [headerRow, secondRow, thirdRow];
+  // Compose table with 1 column and 3 rows (header, image, content)
+  const cells = [headerRow, imageRow, contentRow];
   const block = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(block);
 }

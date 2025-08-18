@@ -1,42 +1,34 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The header row must be a single cell with the exact text
-  const headerRow = ['Columns (columns29)'];
+  // Find the column container
+  const columnContainer = element.querySelector('.column-container');
+  let columns = [];
 
-  // Find columns content in HTML
-  const slList = element.querySelector('.sl-list');
-  let columnItems = [];
-  if (slList) {
-    columnItems = Array.from(slList.children);
+  if (columnContainer) {
+    const slList = columnContainer.querySelector('.sl-list');
+    if (slList) {
+      const slItems = slList.querySelectorAll(':scope > .sl-item');
+      columns = Array.from(slItems).map((slItem) => {
+        // Each sl-item may have 1 or more children
+        const children = Array.from(slItem.children);
+        if (children.length === 1) {
+          return children[0];
+        } else if (children.length > 1) {
+          return children;
+        }
+        return '';
+      });
+    }
   }
-
-  // Prepare the columns (second row)
-  const columns = [];
-
-  // First column: all rich text blocks from the first .sl-item
-  if (columnItems.length > 0) {
-    const firstColItem = columnItems[0];
-    // Find all immediate .cm.cm-rich-text children
-    const richTextBlocks = Array.from(firstColItem.querySelectorAll('.cm.cm-rich-text'));
-    columns.push(richTextBlocks);
-  } else {
-    columns.push(document.createTextNode(''));
+  // Fallback: put entire element in one cell if columns not found
+  if (columns.length < 2) {
+    columns = [element];
   }
-
-  // Second column: image from second .sl-item
-  if (columnItems.length > 1) {
-    const secondColItem = columnItems[1];
-    // Find the first <img> inside
-    const img = secondColItem.querySelector('img');
-    columns.push(img ? img : document.createTextNode(''));
-  } else {
-    columns.push(document.createTextNode(''));
-  }
-
-  // Compose table as per requirements: header is a single cell, next row contains two cells
-  const cells = [headerRow, columns];
-
-  // Create the block and replace the element
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Compose cells: header row (exactly one cell), then columns row
+  const cells = [
+    ['Columns (columns29)'], // fix: header row is always 1 cell only
+    columns // columns row: as many columns as needed
+  ];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

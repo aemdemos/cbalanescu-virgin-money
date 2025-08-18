@@ -1,55 +1,42 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion block header row
+  // Header row as specified in the instructions and example
   const headerRow = ['Accordion (accordion30)'];
-  const rows = [headerRow];
+  const cells = [headerRow];
 
-  // Get all <li> items (each is an accordion panel)
+  // Each <li> is an accordion item
   const items = element.querySelectorAll(':scope > li');
-
-  items.forEach((li) => {
-    // --- TITLE CELL ---
-    // The clickable <a> contains the question/title
-    // Ignore child <div class="ec">, only get text
-    const a = li.querySelector('a');
-    let title = '';
-    // Only use direct text nodes, not children like <div>
-    a.childNodes.forEach((node) => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        title += node.textContent;
-      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'DIV') {
-        title += node.textContent;
-      }
-    });
-    title = title.trim();
-    // Use <p> element for semantic heading (matches screenshot styling)
-    const titleEl = document.createElement('p');
-    titleEl.textContent = title;
-
-    // --- CONTENT CELL ---
-    // Find the expanded content for this panel
-    const contentDiv = li.querySelector('div.expandcollapse-content');
-    let contentCellEl;
-    if (contentDiv) {
-      // Prefer the .module__content div if present
-      const richContent = contentDiv.querySelector('.module__content');
-      if (richContent) {
-        contentCellEl = richContent; // Reference existing element
-      } else {
-        // If not, reference the entire contentDiv
-        contentCellEl = contentDiv;
-      }
-    } else {
-      // If content is missing, use empty div
-      contentCellEl = document.createElement('div');
+  items.forEach((item) => {
+    // Title: use the <a> as is, but remove the dropdown icon div for clean text
+    const a = item.querySelector('a');
+    let titleElem = '';
+    if (a) {
+      // Remove dropdown icon within the <a>, if any
+      const ecIcon = a.querySelector('.ec');
+      if (ecIcon) ecIcon.remove();
+      // Reference the existing element (not cloning)
+      titleElem = a;
     }
-
-    rows.push([titleEl, contentCellEl]);
+    // Content: Use the expandcollapse-content > the main content container
+    let contentElem = '';
+    const contentDiv = item.querySelector('.expandcollapse-content');
+    if (contentDiv) {
+      // Use the first child with class cm-rich-text/module__content/l-full-width or fallback to all children
+      const richContent = contentDiv.querySelector('.cm-rich-text, .module__content, .l-full-width');
+      if (richContent) {
+        contentElem = richContent;
+      } else {
+        // If for some reason the class isn't there, fallback to the contentDiv's children
+        if (contentDiv.children.length > 0) {
+          contentElem = Array.from(contentDiv.children);
+        } else {
+          contentElem = contentDiv;
+        }
+      }
+    }
+    cells.push([titleElem, contentElem]);
   });
 
-  // Build the block table
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-
-  // Replace the original accordion element
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

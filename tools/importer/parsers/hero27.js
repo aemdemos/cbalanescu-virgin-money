@@ -1,51 +1,33 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Helper to extract background-image url from style
-  function extractBgUrl(style) {
-    const match = style && style.match(/background-image:\s*url\(['"]?([^'"]+)['"]?\)/);
-    return match ? match[1] : null;
-  }
+  // Header row (must match example exactly)
+  const headerRow = ['Hero (hero27)'];
 
-  // Find the background image (if any)
-  let imageEl = null;
-  const bgDiv = element.querySelector('.intrinsic-el.img');
-  if (bgDiv && bgDiv.hasAttribute('style')) {
-    const bgUrl = extractBgUrl(bgDiv.getAttribute('style'));
-    if (bgUrl) {
-      imageEl = document.createElement('img');
-      imageEl.src = bgUrl;
-      imageEl.alt = '';
+  // --- Background Image Row ---
+  let bgImgEl = null;
+  const bgDiv = element.querySelector('.img[style*="background-image"]');
+  if (bgDiv) {
+    const style = bgDiv.getAttribute('style') || '';
+    const match = style.match(/background-image:\s*url\(([^\)]+)\)/);
+    if (match && match[1]) {
+      let src = match[1].trim().replace(/^['"]|['"]$/g, '');
+      if (src.startsWith('/')) {
+        src = 'https://www.virginmoney.com' + src;
+      }
+      bgImgEl = document.createElement('img');
+      bgImgEl.src = src;
+      bgImgEl.alt = '';
     }
   }
+  const imageRow = [bgImgEl ? bgImgEl : ''];
 
-  // Find the text content block
+  // --- Content Row ---
+  // Reference the .content div directly to ensure all text and semantic elements are included
   const contentDiv = element.querySelector('.content');
-  const contentNodes = [];
-  if (contentDiv) {
-    // h1: keep as heading
-    const h1 = contentDiv.querySelector('h1');
-    if (h1) contentNodes.push(h1);
-    // subtitle (if not empty)
-    const subtitle = contentDiv.querySelector('.subtitle');
-    if (subtitle && subtitle.textContent.trim()) contentNodes.push(subtitle);
-    // All other direct children (paragraphs, etc)
-    Array.from(contentDiv.children).forEach((child) => {
-      if (
-        child !== h1 &&
-        !(child.classList && child.classList.contains('subtitle'))
-      ) {
-        if (child.textContent.trim()) contentNodes.push(child);
-      }
-    });
-  }
+  const contentRow = [contentDiv ? contentDiv : ''];
 
-  // Compose table rows
-  const rows = [
-    ['Hero (hero27)'],
-    [imageEl ? imageEl : ''],
-    [contentNodes.length ? contentNodes : '']
-  ];
-
+  // --- Build block table ---
+  const rows = [headerRow, imageRow, contentRow];
   const block = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(block);
 }
