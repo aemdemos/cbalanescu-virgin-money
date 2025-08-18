@@ -1,46 +1,50 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block header, matches example
+  // Header row: must match EXACTLY
   const headerRow = ['Cards (cards46)'];
 
   // Find the cards container
   const cardsContainer = element.querySelector('.product-key-rates');
   if (!cardsContainer) return;
 
-  // Find all card items
-  const cardElements = Array.from(cardsContainer.querySelectorAll('.product-key-rate-item'));
+  // Get all card items
+  const cardItems = Array.from(cardsContainer.querySelectorAll('.product-key-rate-item'));
 
-  const rows = cardElements.map(card => {
-    // First cell: the image (mandatory)
-    const img = card.querySelector('img');
-    // If no image, use null so cell is empty
+  // Build rows for each card
+  const rows = cardItems.map(item => {
+    // Image (first cell)
+    const img = item.querySelector('img');
 
-    // Second cell: text content (mandatory)
-    const textContent = [];
+    // Second cell: Compose from title and description, referencing existing elements
+    // Title: from .key-value-text span
+    const titleSpan = item.querySelector('.key-value-text span');
+    // Description (may contain <b>, <a>, <br>): from .key-top-text
+    const descDiv = item.querySelector('.key-top-text');
 
-    // Title (if present)
-    const keyValue = card.querySelector('.key-value-text span');
-    if (keyValue && keyValue.textContent.trim()) {
-      // Use <strong> for title, retain color from source
-      keyValue.style.fontWeight = 'bold';
-      keyValue.style.color = '#e50040';
-      textContent.push(keyValue);
+    // Build a container for text content
+    const textCell = document.createElement('div');
+    if (titleSpan && titleSpan.textContent.trim()) {
+      // Use <div> for title, reference text
+      const titleDiv = document.createElement('div');
+      titleDiv.textContent = titleSpan.textContent;
+      titleDiv.style.fontWeight = 'bold';
+      titleDiv.style.color = '#D60A38';
+      titleDiv.style.fontSize = '1.2em';
+      textCell.appendChild(titleDiv);
     }
-
-    // Description (if present)
-    const keyTopText = card.querySelector('.key-top-text');
-    if (keyTopText) {
-      // Use existing element, don't clone
-      textContent.push(keyTopText);
+    if (descDiv && descDiv.innerHTML.trim()) {
+      // Use original element for description
+      textCell.appendChild(descDiv);
     }
-
-    return [img, textContent];
+    return [img, textCell];
   });
 
-  // Build cells array
+  // Compose the table data
   const cells = [headerRow, ...rows];
 
-  // Create and replace with table block
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(blockTable);
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace the original element with the new table
+  element.replaceWith(block);
 }

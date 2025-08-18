@@ -1,22 +1,21 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block name header row
+  // 1. Table header row, as per requirements.
   const headerRow = ['Hero (hero16)'];
 
-  // 2nd row: background image (none in provided HTML)
-  // Both screenshots and HTML indicate no background image is present in this snippet
-  const backgroundImageRow = [''];
+  // 2. Second row: background image (none in provided HTML, so empty string for cell)
+  const imageRow = [''];
 
-  // 3rd row: headline, subheading, CTA
-  // All provided HTML content is a single paragraph with a CTA link
-  // We reference the actual child paragraph element
+  // 3. Third row: title, subheading, CTA, etc. In this HTML, it's just a centered CTA paragraph.
+  // Reference the paragraph element directly if present, else empty string (edge case coverage)
   const p = element.querySelector('p');
-  // If there is no paragraph, fallback to all child nodes
-  const contentRow = [p ? [p] : Array.from(element.childNodes)];
+  const contentRow = [p ? p : ''];
 
-  // Compose rows for the table
-  const cells = [headerRow, backgroundImageRow, contentRow];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // Compose table rows
+  const rows = [headerRow, imageRow, contentRow];
+
+  // Create the table block
+  const block = WebImporter.DOMUtils.createTable(rows, document);
 
   // Replace the original element with the new block table
   element.replaceWith(block);

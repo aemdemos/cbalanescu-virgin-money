@@ -1,36 +1,60 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Cards (cards43) block always starts with a header row
+  // Table header must match the example exactly
   const headerRow = ['Cards (cards43)'];
-  const cells = [headerRow];
-
-  // Get all immediate .sl-item children (each card)
-  const cardElements = element.querySelectorAll('.sl-item');
-  cardElements.forEach(cardEl => {
-    // Find the image (must be first img inside the card)
-    const img = cardEl.querySelector('img');
-
-    // Find rich text container
-    const richText = cardEl.querySelector('.cm-rich-text');
-    let textElements = [];
-    if (richText) {
-      // Gather all children except the paragraph containing the image
-      Array.from(richText.children).forEach(child => {
-        if (!(child.tagName === 'P' && child.querySelector('img'))) {
-          textElements.push(child);
-        }
-      });
+  // Find all card items
+  const items = Array.from(element.querySelectorAll('.sl-item'));
+  const rows = items.map(item => {
+    const panel = item.querySelector('.cm-content-panel-container');
+    const rich = panel && panel.querySelector('.cm-rich-text');
+    // Find the image (first <img>)
+    let img = null;
+    if (rich) {
+      img = rich.querySelector('img');
     }
-    // Edge case: if image missing, cell will be empty
-    // Second cell: all text elements as array (preserves headings, links, formatting)
-    cells.push([
-      img || '',
-      textElements.length ? textElements : ''
-    ]);
+    // Find the heading (h5, h4, h3, etc.)
+    let heading = null;
+    if (rich) {
+      heading = rich.querySelector('h1,h2,h3,h4,h5,h6');
+    }
+    // Find the main description (the first <p> after the heading, not containing an <img>)
+    let description = null;
+    if (rich && heading) {
+      const children = Array.from(rich.children);
+      const headingIdx = children.indexOf(heading);
+      for (let i = headingIdx + 1; i < children.length; i++) {
+        if (
+          children[i].tagName === 'P' &&
+          !children[i].querySelector('img') &&
+          children[i].textContent.trim()
+        ) {
+          description = children[i];
+          break;
+        }
+      }
+    }
+    // Find CTA: the last <a> (with text) in rich
+    let cta = null;
+    if (rich) {
+      const aTags = Array.from(rich.querySelectorAll('a'));
+      // Only include if textContent is not empty
+      for (let i = aTags.length - 1; i >= 0; i--) {
+        if (aTags[i].textContent.trim()) {
+          cta = aTags[i];
+          break;
+        }
+      }
+    }
+    // Build right cell: heading, description, CTA (in order, omitting any missing)
+    const textCellElements = [];
+    if (heading) textCellElements.push(heading);
+    if (description) textCellElements.push(description);
+    if (cta) textCellElements.push(cta);
+    // If all text parts are missing, leave cell empty
+    return [img, textCellElements.length ? textCellElements : ''];
   });
-
-  // Create the block table
+  // Compose block table
+  const cells = [headerRow, ...rows];
   const table = WebImporter.DOMUtils.createTable(cells, document);
-  // Replace original element
   element.replaceWith(table);
 }

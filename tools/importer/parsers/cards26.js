@@ -1,65 +1,63 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block header as per example markdown
+  // Header row
   const headerRow = ['Cards (cards26)'];
-  const rows = [headerRow];
+  const cells = [headerRow];
 
-  // Helper to build the text block for each card
-  function buildTextCell(main, secondary) {
-    const cell = document.createElement('div');
-    // Title (h2)
-    const title = main.querySelector('h2');
-    if (title) cell.appendChild(title);
-
-    // Key rates (numbers + labels)
-    const keyRates = main.querySelector('.product-key-rates');
-    if (keyRates) {
-      Array.from(keyRates.children).forEach(item => {
-        const value = item.querySelector('.key-value-text');
-        const bottom = item.querySelector('.key-bottom-text');
-        if (value) cell.appendChild(value);
-        if (bottom) cell.appendChild(bottom);
-      });
-    }
-    // Extra description (rarely used)
-    const keyDesc = main.querySelector('.product-key-description');
-    if (keyDesc && keyDesc.textContent.trim()) cell.appendChild(keyDesc);
-
-    if (secondary) {
-      // Main product description
-      const prodDesc = secondary.querySelector('.product-description');
-      if (prodDesc) cell.appendChild(prodDesc);
-      // Features (ul, except .product-features which are always empty here)
-      Array.from(secondary.querySelectorAll('ul')).forEach(ul => {
-        if (!ul.classList.contains('product-features') && ul.children.length) cell.appendChild(ul);
-      });
-      // CTA links
-      const ctas = Array.from(secondary.querySelectorAll('a'));
-      if (ctas.length) {
-        const p = document.createElement('p');
-        ctas.forEach(a => p.appendChild(a));
-        cell.appendChild(p);
+  // Helper to extract cards from a tab
+  function extractCards(tab) {
+    const cardRows = [];
+    // Find all cards in this tab
+    const slList = tab.querySelector('.sl-list');
+    if (!slList) return cardRows;
+    const items = slList.querySelectorAll(':scope > .sl-item');
+    items.forEach(item => {
+      // First cell: image
+      let img = item.querySelector('.image img');
+      if (!img) {
+        // fallback for missing image
+        img = document.createElement('span');
+        img.textContent = 'No image';
       }
-    }
-    return cell;
+      // Second cell: text content
+      const textContent = [];
+      // Title
+      const title = item.querySelector('.product-name');
+      if (title) textContent.push(title);
+      // Key rates
+      const keyRates = item.querySelector('.product-key-rates');
+      if (keyRates) textContent.push(keyRates);
+      // Description
+      const productDesc = item.querySelector('.product-description');
+      if (productDesc) textContent.push(productDesc);
+      // Features list
+      const ul = item.querySelector('.content-secondary ul');
+      if (ul && ul.children.length) textContent.push(ul);
+      // Call-to-actions
+      const ctas = Array.from(item.querySelectorAll('.content-secondary a'));
+      if (ctas.length) textContent.push(...ctas);
+      // Remove empty paragraphs and empty lists from textContent
+      for (let i = textContent.length - 1; i >= 0; i--) {
+        const el = textContent[i];
+        if ((el.tagName === 'P' || el.tagName === 'UL') && !el.textContent.trim()) {
+          textContent.splice(i, 1);
+        }
+      }
+      cardRows.push([img, textContent]);
+    });
+    return cardRows;
   }
 
-  // Find all .tab panels (these include products for both offers)
-  const tabs = element.querySelectorAll('.tabs > .tab');
-  tabs.forEach(tab => {
-    const tiles = tab.querySelectorAll('.cm-product-tile');
-    tiles.forEach(tile => {
-      const img = tile.querySelector('.image img'); // reference the actual <img> element
-      const main = tile.querySelector('.content-main');
-      const secondary = tile.querySelector('.content-secondary');
-      // Only add if we have an image and text
-      if (img && main && secondary) {
-        rows.push([img, buildTextCell(main, secondary)]);
-      }
-    });
+  // Find all tabs and extract their cards
+  const tabPanels = element.querySelectorAll('.tab');
+  tabPanels.forEach(tab => {
+    if (tab.querySelector('.cm-product-tile')) {
+      const rows = extractCards(tab);
+      cells.push(...rows);
+    }
   });
 
-  // Replace the source element with the table block
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  // Create the table
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

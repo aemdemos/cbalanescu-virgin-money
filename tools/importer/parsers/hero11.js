@@ -1,26 +1,32 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row, as specified in the block name
+  // Block header matches the example exactly
   const headerRow = ['Hero (hero11)'];
 
-  // 2. Background row: this HTML does NOT contain a background image, so leave cell empty
-  const backgroundRow = [''];
+  // There is no image/background image element in the provided HTML, so blank cell as per block definition
+  const imageRow = [''];
 
-  // 3. Content row: collect all meaningful children (headings, paragraphs, links, etc)
-  // Content is inside .cm-rich-text (first child div)
-  const contentWrapper = element.querySelector('.cm-rich-text');
-  // Defensive: if wrapper missing, just use the original element
-  const wrapper = contentWrapper || element;
-  // Get all child nodes that are not empty text nodes
-  const contentNodes = Array.from(wrapper.childNodes).filter(
-    node => !(node.nodeType === Node.TEXT_NODE && node.textContent.trim() === '')
-  );
-  const contentRow = [contentNodes];
+  // Find the main content div (should be the rich text block)
+  let richTextDiv = null;
+  const children = element.querySelectorAll(':scope > div');
+  for (const child of children) {
+    if (child.classList.contains('cm-rich-text')) {
+      richTextDiv = child;
+      break;
+    }
+  }
 
-  // Compose table
-  const cells = [headerRow, backgroundRow, contentRow];
+  // Fallback: if not found, use the whole element so no content is lost
+  const contentCell = richTextDiv || element;
+
+  // Compose table rows (all content in one cell for the 3rd row)
+  const cells = [
+    headerRow,
+    imageRow,
+    [contentCell],
+  ];
+
+  // Create and replace the original element with the table
   const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original element
   element.replaceWith(table);
 }

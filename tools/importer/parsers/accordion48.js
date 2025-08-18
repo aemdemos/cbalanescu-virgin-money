@@ -1,56 +1,63 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion block header
   const headerRow = ['Accordion (accordion48)'];
-  // Find the accordion list
-  const accordionList = element.querySelector('.accordion-list');
-  if (!accordionList) return;
+  const rows = [headerRow];
 
-  // The first <li> (the accordion item) contains the overall title and the content <div>
-  const accordionItems = Array.from(accordionList.children);
-  // Find the first <li> that contains both an <a> and a .expandcollapse-content
-  let items = [];
-  for (const item of accordionItems) {
-    const a = item.querySelector('a');
-    const contentDiv = item.querySelector('.expandcollapse-content');
-    if (a && contentDiv) {
-      // The summary/title for the accordion block comes from <a>
-      // The actual accordion rows come from the <li>s inside <ol> in .expandcollapse-content
-      // Each .tcs-wrapper contains a <li>
-      const wrappers = Array.from(contentDiv.querySelectorAll('.tcs-wrapper'));
-      for (const wrapper of wrappers) {
-        // Each wrapper contains a <li>
-        const li = wrapper.querySelector('li');
-        if (!li) continue;
-        // The content structure: typically one or more <p> elements per item
-        // We want to preserve all formatting and reference elements directly
-        // Title is always the first <p> or if only one <p>, that is the title
-        const ps = li.querySelectorAll('p');
-        let titleElem, contentElems = [];
-        if (ps.length === 1) {
-          // Only one <p> - treat it as both title and content if needed
-          titleElem = ps[0];
-          // If there are other nodes in li besides this p, include them in content
-          const otherNodes = Array.from(li.childNodes).filter(node => node.nodeType === 1 && node.tagName !== 'P');
-          if (otherNodes.length > 0) {
-            contentElems = otherNodes;
-          } else {
-            contentElems = '';
-          }
-        } else if (ps.length > 1) {
-          titleElem = ps[0];
-          contentElems = Array.from(ps).slice(1);
-        } else {
-          // Fallback: treat whole li as title
-          titleElem = li;
-          contentElems = '';
-        }
-        items.push([titleElem, contentElems]);
+  // Get all accordion items (tcs-wrapper)
+  const accordionList = element.querySelector('ul.accordion-list');
+  if (!accordionList) return;
+  const topLi = accordionList.querySelector('li');
+  if (!topLi) return;
+  const expandCollapse = topLi.querySelector('.expandcollapse-content');
+  if (!expandCollapse) return;
+  const ol = expandCollapse.querySelector('ol');
+  if (!ol) return;
+  const wrappers = Array.from(ol.querySelectorAll(':scope > .tcs-wrapper'));
+
+  wrappers.forEach(wrapper => {
+    const itemLi = wrapper.querySelector('li');
+    if (!itemLi) return;
+    // Find all direct <p> elements
+    const ps = Array.from(itemLi.querySelectorAll(':scope > p'));
+    let titleCell, contentCell;
+    if (ps.length > 0) {
+      // Title: Only text and inline elements from the first <p>
+      const titleP = ps[0];
+      // We want the title to be just the text content of the first <p>, but retaining any inline HTML (e.g., <b>, <a>, <i>)
+      // But sometimes the first <p> is very long. To match the intent, we use the whole first <p> (with inline markup) as the title cell.
+      titleCell = titleP;
+
+      // Content: everything except the first <p>
+      const contentNodes = [];
+      // Add the rest of the <p>s
+      for (let i = 1; i < ps.length; i++) {
+        contentNodes.push(ps[i]);
       }
+      // Add any other direct child elements (such as <ul>, <ol>, <a>, etc.) and text, except the first <p>
+      Array.from(itemLi.childNodes).forEach(node => {
+        if (
+          node.nodeType === 1 && // Element
+          node.tagName !== 'P'
+        ) {
+          contentNodes.push(node);
+        } else if (
+          node.nodeType === 3 && // Text
+          node.textContent.trim() !== '' // skip whitespace-only
+        ) {
+          // Text directly in li (not in a <p>)
+          contentNodes.push(document.createTextNode(node.textContent));
+        }
+      });
+      contentCell = contentNodes.length > 0 ? contentNodes : '';
+    } else {
+      // If no <p>, treat all text in <li> as title
+      titleCell = document.createElement('span');
+      titleCell.textContent = itemLi.textContent.trim();
+      contentCell = '';
     }
-  }
-  // Assemble the table rows
-  const rows = [headerRow, ...items];
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+    rows.push([titleCell, contentCell]);
+  });
+
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

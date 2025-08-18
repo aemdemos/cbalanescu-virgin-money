@@ -1,27 +1,24 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row must be a single cell
-  const headerRow = ['Columns (columns23)'];
+  // Find the columns container (sl-list)
+  const columnsList = element.querySelector('.sl-list');
+  if (!columnsList) return;
 
-  // Find the .sl-list (container for column items)
-  const list = element.querySelector('.sl-list');
-  if (!list) return;
+  // Each direct child .sl-item is a column
+  const columnItems = Array.from(columnsList.querySelectorAll(':scope > .sl-item'));
 
-  // Get all .sl-item direct children (each is a column)
-  const items = Array.from(list.children).filter(child => child.classList.contains('sl-item'));
-
-  // For each column, reference the section inside
-  const columnCells = items.map(item => {
+  // For each .sl-item, get its <section> block (or item itself if missing)
+  const cellsRow = columnItems.map(item => {
     const section = item.querySelector('section');
     return section || item;
   });
 
-  // The second row: a single array, with each column as a cell
-  const tableData = [headerRow, columnCells];
+  // Build the table: header is a single cell, next row is all columns
+  const cells = [
+    ['Columns (columns23)'], // Single-cell header row
+    cellsRow                 // Row with N columns
+  ];
 
-  // Create the block table
-  const block = WebImporter.DOMUtils.createTable(tableData, document);
-
-  // Replace original element
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

@@ -1,40 +1,77 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Compose the block table for Hero (hero22)
-  // 1. Header row: block name
+  // HEADER ROW (block name)
   const headerRow = ['Hero (hero22)'];
 
-  // 2. Background image row: none present in HTML, leave empty string
+  // IMAGE ROW (optional background image)
+  // For this HTML, there is no background image, so use empty string
   const imageRow = [''];
 
-  // 3. Content row: headline, subtitle, description, CTA
-  // Get headline (h1.header)
-  const h1 = element.querySelector('h1');
-  // Get subtitle (span.subtitle)
-  const subtitle = element.querySelector('span.subtitle');
-  // Get non-empty paragraph (the description)
-  let descPara = null;
-  Array.from(element.querySelectorAll('p')).forEach(p => {
-    if (p.textContent.trim().length > 0) {
-      descPara = p;
+  // CONTENT ROW: Collect title, subheading, description, CTA, maintaining order and referencing elements
+  // Use only direct children for robustness
+  const children = Array.from(element.children);
+  let titleEl = null;
+  let subheadingEl = null;
+  let descEl = null;
+  let ctaEl = null;
+
+  // Find title (h1)
+  for (const child of children) {
+    if (child.tagName && child.tagName.toLowerCase() === 'h1') {
+      titleEl = child;
+      break;
     }
-  });
-  // Get CTA (span.cta)
-  const cta = element.querySelector('span.cta');
+  }
 
-  // Compile all present content into a single cell (array of elements)
-  const cellContent = [];
-  if (subtitle) cellContent.push(subtitle);
-  if (h1) cellContent.push(h1);
-  if (descPara) cellContent.push(descPara);
-  if (cta) cellContent.push(cta);
+  // Find subheading (subtitle span)
+  for (const child of children) {
+    if (child.classList && child.classList.contains('subtitle')) {
+      subheadingEl = child;
+      break;
+    }
+  }
 
-  const contentRow = [cellContent];
+  // Find description (first <p> with text)
+  for (const child of children) {
+    if (
+      child.tagName &&
+      child.tagName.toLowerCase() === 'p' &&
+      child.textContent.trim().length > 0
+    ) {
+      descEl = child;
+      break;
+    }
+  }
 
-  // Build the table for the block
-  const cells = [headerRow, imageRow, contentRow];
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
+  // Find CTA (span.cta)
+  for (const child of children) {
+    if (child.classList && child.classList.contains('cta')) {
+      ctaEl = child;
+      break;
+    }
+  }
 
-  // Replace original element
-  element.replaceWith(blockTable);
+  // Compose the cell, preserving order as in the example
+  const contentCell = [];
+  if (titleEl) contentCell.push(titleEl);
+  if (subheadingEl) contentCell.push(document.createElement('br'), subheadingEl);
+  if (descEl) contentCell.push(document.createElement('br'), descEl);
+  if (ctaEl) contentCell.push(document.createElement('br'), ctaEl);
+
+  // Make sure not to add extra <br> at start if title is missing
+  const filteredContentCell = [];
+  let first = true;
+  for (let i = 0; i < contentCell.length; i++) {
+    if (contentCell[i].tagName === 'BR') {
+      if (first) continue;
+    } else {
+      first = false;
+    }
+    filteredContentCell.push(contentCell[i]);
+  }
+
+  // Final table
+  const tableCells = [headerRow, imageRow, [filteredContentCell]];
+  const block = WebImporter.DOMUtils.createTable(tableCells, document);
+  element.replaceWith(block);
 }

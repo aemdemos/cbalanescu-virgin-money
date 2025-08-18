@@ -1,51 +1,40 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the columns container -- critical for extracting column structure
+  // Ensure primary column structure exists
   const columnContainer = element.querySelector('.column-container');
   if (!columnContainer) return;
-  const slList = columnContainer.querySelector('.sl-list');
+  const sl = columnContainer.querySelector('.sl');
+  if (!sl) return;
+  const slList = sl.querySelector('.sl-list');
   if (!slList) return;
-
-  // Get the direct children representing the columns
-  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
-  // The block is expected to have at least 2 columns
+  const slItems = slList.querySelectorAll(':scope > .sl-item');
   if (slItems.length < 2) return;
 
-  // For each sl-item, extract the main block of content
-  // - For the left column, it may contain a section.cm-image (image/figure)
-  // - For the right column, it may contain .cm-rich-text (headings, paragraphs, links)
-  // We reference the highest meaningful content element in each
-
-  // Left column (image)
-  let leftCol = null;
-  const leftImageSection = slItems[0].querySelector('section.cm-image');
-  if (leftImageSection) {
-    leftCol = leftImageSection;
-  } else {
-    // fallback: use the entire sl-item if no image section found
-    leftCol = slItems[0];
-  }
-  
-  // Right column (text etc.)
-  let rightCol = null;
-  const rightRichText = slItems[1].querySelector('.cm-rich-text');
-  if (rightRichText) {
-    rightCol = rightRichText;
-  } else {
-    // fallback: use the entire sl-item if no text section found
-    rightCol = slItems[1];
+  // First column: image block
+  const firstCol = slItems[0];
+  let imgEl = firstCol.querySelector('img');
+  if (imgEl) {
+    // Convert relative src to absolute
+    if (imgEl.src && imgEl.src.startsWith('/')) {
+      const a = document.createElement('a');
+      a.href = imgEl.src;
+      imgEl.src = a.href;
+    }
   }
 
-  // Table header must EXACTLY match example: 'Columns (columns44)'
+  // Second column: rich text block
+  const secondCol = slItems[1];
+  const richText = secondCol.querySelector('.cm-rich-text');
+  // Defensive: if richText is missing, fallback to secondCol itself
+  const rightColContent = richText || secondCol;
+
+  // Table Header matches example
   const headerRow = ['Columns (columns44)'];
+  // Table row: 2 columns (image, rich text)
+  const columnsRow = [imgEl || '', rightColContent];
 
-  // Second row: left and right columns as cells
-  const secondRow = [leftCol, rightCol];
-
-  // Compose final cells array for createTable
-  const cells = [headerRow, secondRow];
-
-  // Create and replace with table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // Build and replace
+  const tableCells = [headerRow, columnsRow];
+  const block = WebImporter.DOMUtils.createTable(tableCells, document);
   element.replaceWith(block);
 }

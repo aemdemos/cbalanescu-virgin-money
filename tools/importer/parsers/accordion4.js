@@ -1,47 +1,52 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row for block table
-  const headerRow = ['Accordion (accordion4)'];
+  // Header row as required by the block spec
+  const rows = [['Accordion (accordion4)']];
 
-  // Find all accordion items (li under ul.accordion-list)
-  const ul = element.querySelector('ul.accordion-list');
-  if (!ul) return;
-  const items = ul.querySelectorAll(':scope > li');
+  // Find accordion items
+  const accordionList = element.querySelector('ul.accordion-list');
+  if (!accordionList) return;
+  const accordionItem = accordionList.querySelector('li');
+  if (!accordionItem) return;
 
-  const rows = [];
-  items.forEach((li) => {
-    // Title: the <a> inside the li
-    const titleLink = li.querySelector(':scope > a');
-    let titleContent = '';
-    if (titleLink) {
-      // Remove any .ec icon or sub element
-      const ecDiv = titleLink.querySelector('.ec');
-      if (ecDiv) ecDiv.remove();
-      titleContent = titleLink.textContent.trim();
-    } else {
-      // If no <a> present, skip this row
-      return;
+  // Extract the title
+  const titleAnchor = accordionItem.querySelector('a');
+  let title = '';
+  if (titleAnchor) {
+    // Remove child divs (icons etc.)
+    titleAnchor.querySelectorAll('div,svg').forEach(d => d.remove());
+    title = titleAnchor.textContent.trim();
+  }
+
+  // Extract the content blocks (all tcs-wrapper inside expandcollapse-content > ol)
+  const expandDiv = accordionItem.querySelector('div.expandcollapse-content');
+  let wrappers = [];
+  if (expandDiv) {
+    const ol = expandDiv.querySelector('ol');
+    if (ol) {
+      wrappers = Array.from(ol.querySelectorAll(':scope > .tcs-wrapper'));
     }
-    // Content: the <div class="expandcollapse-content"> inside the li
-    const contentDiv = li.querySelector(':scope > div.expandcollapse-content');
-    let contentCell = '';
-    if (contentDiv) {
-      // If an <ol> exists inside contentDiv, use it (preserves all nested <li>s, wrappers, etc)
-      const ol = contentDiv.querySelector('ol');
-      if (ol) {
-        contentCell = ol;
-      } else {
-        // If there is any other content, use whole div
-        contentCell = contentDiv;
-      }
+  }
+  // For each tcs-wrapper, extract its content as a cell
+  wrappers.forEach(wrapper => {
+    // For each wrapper, get the <p> (or all children)
+    let contentEls = [];
+    // Some wrappers have multiple <p> or other nodes
+    contentEls = Array.from(wrapper.childNodes).filter(node => {
+      // Only keep elements and non-empty text
+      return node.nodeType === 1 || (node.nodeType === 3 && node.textContent.trim());
+    });
+    // If the first child is an <li>, use its children
+    if (contentEls.length === 1 && contentEls[0].tagName === 'LI') {
+      contentEls = Array.from(contentEls[0].childNodes).filter(node => {
+        return node.nodeType === 1 || (node.nodeType === 3 && node.textContent.trim());
+      });
     }
-    rows.push([titleContent, contentCell]);
+    // Place in table row: title on left, content on right
+    rows.push([title, contentEls]);
   });
 
-  // Compose table cell array
-  const cells = [headerRow, ...rows];
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original accordion element with the block table
-  element.replaceWith(blockTable);
+  // Create and replace with the table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(block);
 }

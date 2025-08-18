@@ -1,38 +1,44 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header matches exactly as required
+  // Header row: matches example
   const headerRow = ['Columns (columns2)'];
 
-  // Safely find the columns
+  // Find .sl-list (the actual columns container)
+  const slList = element.querySelector('.sl-list');
   let columns = [];
-  // The main list container for columns
-  const list = element.querySelector('.sl-list.has-2-items');
-  if (list) {
-    const items = Array.from(list.children).filter(child => child.classList.contains('sl-item'));
-    // Each sl-item contains a .cm-rich-text block
-    columns = items.map(item => {
-      // Reference the full .cm-rich-text block for semantic/format resilience
-      const content = item.querySelector('.cm-rich-text');
-      // If missing, safe fallback to empty div
-      return content ? content : document.createElement('div');
+
+  if (slList) {
+    // Find all direct children .sl-item
+    const slItems = slList.querySelectorAll(':scope > .sl-item');
+    // For each, get the main content (the .cm child, or if absent, the item itself)
+    columns = Array.from(slItems).map((item) => {
+      // Each .sl-item only has one .cm direct child
+      const content = item.querySelector(':scope > .cm');
+      // Defensive: if .cm is missing, use the sl-item itself
+      return content || item;
     });
-    // Ensure exactly 2 columns
-    while (columns.length < 2) {
-      columns.push(document.createElement('div'));
-    }
-    columns = columns.slice(0,2);
   } else {
-    // Fallback: get .cm-rich-text blocks directly from container
-    const richTexts = element.querySelectorAll('.cm-rich-text');
-    columns = Array.from(richTexts);
-    while (columns.length < 2) {
-      columns.push(document.createElement('div'));
-    }
-    columns = columns.slice(0,2);
+    // Fallback: treat all direct child divs as columns
+    columns = Array.from(element.querySelectorAll(':scope > div'));
   }
 
-  // Table rows: header, then the columns as a row
-  const cells = [headerRow, columns];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // If we have less than 2 columns, pad with empty string to ensure two columns
+  while (columns.length < 2) {
+    columns.push('');
+  }
+
+  // Only take the first 2 columns if there are more (enforce columns2 variant)
+  columns = columns.slice(0, 2);
+
+  // Compose table data
+  const cells = [
+    headerRow,
+    columns
+  ];
+
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace the original element
+  element.replaceWith(block);
 }

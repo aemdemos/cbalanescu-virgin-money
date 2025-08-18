@@ -1,48 +1,44 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // HEADER ROW: exactly as the example
+  // Find root columns container: Only parse if we get the correct column structure
+  const rootList = element.querySelector('.column-container > .sl > .sl-list');
+  if (!rootList) return;
+  // Get all columns: direct children with .sl-item
+  const columnEls = Array.from(rootList.children).filter(child => child.classList.contains('sl-item'));
+  // Each .sl-item is a column panel: extract each cell's content
+  const columnCells = columnEls.map(col => {
+    // In each column, find the main content panel
+    const panel = col.querySelector('.cm-content-panel-container');
+    // Gather all relevant sections (panel, icon-title sections, CTA)
+    const cellParts = [];
+    if (panel) {
+      cellParts.push(panel);
+    }
+    // All icon-title sections (immediate children only)
+    const iconSections = Array.from(col.querySelectorAll(':scope > section.cm-icon-title'));
+    iconSections.forEach(sec => {
+      cellParts.push(sec);
+    });
+    // CTA at the end (cm-rich-text, immediate child only)
+    const cta = col.querySelector(':scope > .cm-rich-text');
+    if (cta) {
+      cellParts.push(cta);
+    }
+    // If only one part, just use it; else, use fragment
+    if (cellParts.length === 1) {
+      return cellParts[0];
+    } else {
+      const frag = document.createDocumentFragment();
+      cellParts.forEach(part => frag.appendChild(part));
+      return frag;
+    }
+  });
+  // Table header matches example exactly
   const headerRow = ['Columns (columns12)'];
-
-  // Find the main columns wrapper
-  const mainColumnContainer = element.querySelector(':scope > .column-container');
-  let columnEls = [];
-  if (mainColumnContainer) {
-    const sl = mainColumnContainer.querySelector(':scope > .sl');
-    if (sl) {
-      const slList = sl.querySelector(':scope > .sl-list');
-      if (slList) {
-        // Each .sl-item is a column (there should be two)
-        const slItems = slList.querySelectorAll(':scope > .sl-item');
-        slItems.forEach((slItem) => {
-          // Gather all direct children (preserve structure & all text)
-          const colContent = [];
-          Array.from(slItem.children).forEach(child => colContent.push(child));
-          // Sometimes, there can be text nodes only
-          if (colContent.length === 0 && slItem.textContent.trim()) {
-            colContent.push(document.createTextNode(slItem.textContent.trim()));
-          }
-          // If still empty, push empty string to keep structure
-          columnEls.push(colContent.length === 1 ? colContent[0] : colContent);
-        });
-      }
-    }
-  }
-
-  // Fallback: treat the whole element as a single column if above didn't work
-  if (columnEls.length === 0) {
-    const fallbackContent = [];
-    Array.from(element.children).forEach(child => fallbackContent.push(child));
-    if (fallbackContent.length === 0 && element.textContent.trim()) {
-      fallbackContent.push(document.createTextNode(element.textContent.trim()));
-    }
-    columnEls.push(fallbackContent.length === 1 ? fallbackContent[0] : fallbackContent);
-  }
-
-  // Create the table
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    columnEls
-  ], document);
-
+  // Each content row is the set of columns extracted above
+  const tableRows = [headerRow, columnCells];
+  // Create the table block
+  const table = WebImporter.DOMUtils.createTable(tableRows, document);
+  // Replace original element with table
   element.replaceWith(table);
 }

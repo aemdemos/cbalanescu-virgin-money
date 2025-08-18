@@ -1,51 +1,26 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the columns container (.sl-list) and its direct children (.sl-item)
+  // Find the .sl-list within the container
   const slList = element.querySelector('.sl-list');
-  let col1 = null;
-  let col2 = null;
+  if (!slList) return;
 
-  if (slList) {
-    const items = slList.querySelectorAll(':scope > .sl-item');
-    // First column: rich text content
-    if (items[0]) {
-      const rich = items[0].querySelector('.cm-rich-text') || items[0];
-      col1 = rich;
-    }
-    // Second column: image content (just the image)
-    if (items[1]) {
-      const img = items[1].querySelector('img');
-      col2 = img || items[1];
-    }
-  }
+  // Get the .sl-item children (these represent columns)
+  const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+  const columns = slItems.map(item => {
+    // Use the first (and only) child of .sl-item directly
+    return item.firstElementChild || '';
+  });
 
-  // Fallbacks
-  if (!col1 && !col2) {
-    col1 = element;
-    col2 = '';
-  } else if (!col1) {
-    col1 = '';
-  } else if (!col2) {
-    col2 = '';
-  }
-
-  // Build cells for createTable
-  // Fix: Header row must be single cell, but rendered with colspan=2
-  const headerRow = [document.createTextNode('Columns (columns35)')];
+  // Compose the cells array:
+  // - The first row is a single-cell array (header row),
+  //   so that WebImporter.DOMUtils.createTable will create one <th> with colspan if needed
+  // - The second row is the columns array
   const cells = [
-    headerRow,
-    [col1, col2]
+    ['Columns (columns35)'],
+    columns
   ];
 
-  // Create the block table
+  // Create the table and replace the original element
   const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Set colspan=2 on the header cell to span both columns
-  const headerTr = table.querySelector('tr:first-child');
-  const headerTh = headerTr ? headerTr.querySelector('th') : null;
-  if (headerTh) {
-    headerTh.setAttribute('colspan', '2');
-  }
-
   element.replaceWith(table);
 }
