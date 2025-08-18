@@ -310,7 +310,6 @@
   padding: 0;
 }
 
-/* Main horizontal layout: image left, content right */
 .columns.columns7 > div {
   display: flex;
   flex-direction: column;
@@ -326,7 +325,6 @@
   }
 }
 
-/* Left image column */
 .columns.columns7 .columns-img-col {
   display: flex;
   flex-direction: column;
@@ -337,7 +335,6 @@
   flex-shrink: 0;
 }
 
-/* Image fit */
 .columns.columns7 .columns-img-col picture,
 .columns.columns7 .columns-img-col img {
   width: 100%;
@@ -347,7 +344,6 @@
   box-shadow: none;
 }
 
-/* Right content column: two columns using grid for true grouping */
 .columns.columns7 > div > div:not(.columns-img-col) {
   width: 100%;
   max-width: 900px;
@@ -365,9 +361,6 @@
   }
 }
 
-/* --- GROUPING AND BLOCKS --- */
-
-/* Group icon+heading+text vertically, align items horizontally */
 .columns.columns7 > div > div:not(.columns-img-col) p + h3 {
   margin-top: 0;
 }
@@ -378,8 +371,6 @@
   align-items: center;
   margin-top: 36px;
 }
-
-/* Create visual group: icon and heading side by side */
 
 .columns.columns7 > div > div:not(.columns-img-col) > p picture {
   display: inline-block;
@@ -400,7 +391,6 @@
   filter: none;
 }
 
-/* Headings: inline with icon, not with paragraph */
 .columns.columns7 > div > div:not(.columns-img-col) > h3 {
   display: inline-block;
   vertical-align: middle;
@@ -415,7 +405,6 @@
   padding: 0;
 }
 
-/* Paragraph following heading: normal block, space below */
 .columns.columns7 > div > div:not(.columns-img-col) > h3 + p {
   margin-top: 0.2em;
   margin-bottom: 2.1em;
@@ -428,21 +417,18 @@
   break-inside: avoid;
 }
 
-/* Prevent block splitting, keep icon+heading+text together */
 .columns.columns7 > div > div:not(.columns-img-col) > p,
 .columns.columns7 > div > div:not(.columns-img-col) > h3,
 .columns.columns7 > div > div:not(.columns-img-col) > h3 + p {
   break-inside: avoid;
 }
 
-/* Remove extra spacing at end of columns */
 .columns.columns7 > div > div:not(.columns-img-col) > p:last-child,
 .columns.columns7 > div > div:not(.columns-img-col) > h3:last-child,
 .columns.columns7 > div > div:not(.columns-img-col) > h3 + p:last-child {
   margin-bottom: 0;
 }
 
-/* Responsive: stack columns on mobile */
 @media (width <= 899px) {
   .columns.columns7 > div {
     flex-direction: column;
@@ -457,4 +443,163 @@
   .columns.columns7 > div > div:not(.columns-img-col) > p {
     margin-top: 24px;
   }
+}
+
+
+.columns.columns8 {
+  background: #4b4c52;
+  padding: 24px 0;
+  font-family: var(--body-font-family);
+}
+
+/* Layout: three columns side by side */
+.columns.columns8 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 60px;
+  width: 100%;
+}
+
+/* Each column: stack items vertically, left aligned */
+.columns.columns8 > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 180px;
+  text-align: left;
+}
+
+/* Headings: last <p> in each column, visually at top */
+.columns.columns8 > div > div > p:last-child {
+  order: -1;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  color: #e0e1e2;
+  margin: 0 0 24px;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+}
+
+/* List styling: no bullets, vertical spacing */
+.columns.columns8 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+}
+
+.columns.columns8 li {
+  margin-bottom: 8px;
+}
+
+.columns.columns8 li:last-child {
+  margin-bottom: 0;
+}
+
+/* Links: light grey, no underline unless hovered, small font */
+.columns.columns8 a {
+  color: #bfc2c7;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.columns.columns8 a:hover,
+.columns.columns8 a:focus {
+  color: #e0e1e2;
+  text-decoration: underline;
+}
+
+/* --- SOCIAL ICON ROW --- */
+.columns.columns8 > div > div:last-child {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-right: 0;
+}
+
+/* put all social icon <p>s in a flex row: 
+   select only icon <p>s, i.e. every <p> except the last in the right column */
+.columns.columns8 > div > div:last-child .columns8-social-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+/* If you can't add a .columns8-social-row wrapper, 
+   use a "hack": group all p:not(:last-child) in a flex row using a parent wrapper */
+
+.columns.columns8 > div > div:last-child::before {
+  content: "";
+  display: block;
+}
+
+.columns.columns8 > div > div:last-child > .columns8-social-icons-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.columns.columns8 > div > div:last-child > .columns8-social-icons-row > p {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Or, without relying on a wrapper, use absolute positioning hack:
+   Hide the original icon <p>s and visually reflow them in a row via CSS grid */
+@media (width >= 600px) {
+  .columns.columns8 > div > div:last-child > p:not(:last-child) {
+    display: inline-flex;
+    vertical-align: middle;
+    margin: 0 16px 0 0;
+    padding: 0;
+  }
+
+  .columns.columns8 > div > div:last-child > p:nth-last-child(2) {
+    margin-right: 0;
+  }
+
+  .columns.columns8 > div > div:last-child > p:last-child {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+/* Social icon images: size and style */
+.columns.columns8 img {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  filter: brightness(0) invert(0.85);
+}
+
+/* Responsive: stack columns vertically and reduce gap */
+@media (width <= 900px) {
+  .columns.columns8 > div {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .columns.columns8 > div > div {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .columns.columns8 {
+    padding: 16px 0;
+  }
+}
+
+/* Remove any edge margin from first and last columns for flush alignment */
+.columns.columns8 > div > div:first-child {
+  margin-left: 0;
 }
