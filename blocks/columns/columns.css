@@ -588,8 +588,6 @@
   margin-left: 0;
 }
 
-
-/* Main two-column layout */
 .columns.columns10 > div {
   display: flex;
   flex-direction: row;
@@ -604,7 +602,6 @@
   }
 }
 
-/* Left column (heading and card image) */
 .columns.columns10 > div > div:first-child {
   flex: 0 0 28%;
   max-width: 285px;
@@ -634,7 +631,6 @@
   margin: 0;
 }
 
-/* Card image styling */
 .columns.columns10 > div > div:first-child img {
   display: block;
   margin: 0 auto;
@@ -645,7 +641,6 @@
   margin-bottom: 0;
 }
 
-/* Right column (offer/details box) */
 .columns.columns10 > div > div:last-child {
   flex: 1 1 0;
   background: #f8f8fa;
@@ -675,7 +670,6 @@
   }
 }
 
-/* Right column heading and lead text */
 .columns.columns10 > div > div:last-child h3 {
   color: #9c27b0;
   font-size: 1.29rem;
@@ -690,7 +684,6 @@
   font-weight: 700;
 }
 
-/* Bullets and lists */
 .columns.columns10 > div > div:last-child ul {
   color: #222;
   font-size: 1.02rem;
@@ -708,7 +701,6 @@
   font-weight: 700;
 }
 
-/* Button row: side by side, spacing and style */
 .columns.columns10 > div > div:last-child p {
   margin: 14px 0 12px;
   display: flex;
@@ -748,7 +740,6 @@
   filter: brightness(0.985);
 }
 
-/* Table: spacing, shadow, appearance */
 .columns.columns10 > div > div:last-child table {
   width: 100%;
   border-collapse: collapse;
@@ -775,11 +766,218 @@
   font-size: 1em;
 }
 
-/* Section spacing in right column */
 .columns.columns10 > div > div:last-child > * {
   margin-bottom: 13px;
 }
 
 .columns.columns10 > div > div:last-child > *:last-child {
+  margin-bottom: 0;
+}
+
+
+.columns.columns12 > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (width <= 900px) {
+  .columns.columns12 > div {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+.columns.columns12 > div > div {
+  background: #f6f7f9;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 60px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+@media (width <= 900px) {
+  .columns.columns12 > div > div {
+    border-radius: 16px;
+    padding: 32px 12px 28px;
+  }
+}
+
+/* Main icon + heading row (Earn/Redeem) */
+.columns.columns12 > div > div > p:first-child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 0 10px;
+  padding: 0;
+  min-height: 48px;
+}
+
+.columns.columns12 > div > div > p:first-child picture {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.columns.columns12 > div > div > p:first-child img {
+  width: 46px;
+  height: 46px;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.columns.columns12 > div > div > h3:first-of-type {
+  display: inline-block;
+  margin: 0 0 2px;
+  font-size: 2.23rem;
+  line-height: 1.08;
+  font-weight: 800;
+  vertical-align: middle;
+}
+
+@media (width <= 900px) {
+  .columns.columns12 > div > div > h3:first-of-type {
+    font-size: 1.4rem;
+  }
+}
+
+/* Heading color per panel */
+.columns.columns12 > div > div:first-child > h3:first-of-type strong {
+  color: #7118b6;
+}
+
+.columns.columns12 > div > div:last-child > h3:first-of-type strong {
+  color: #e6002d;
+}
+
+/* Main panel description */
+.columns.columns12 > div > div > h3:first-of-type + p {
+  font-size: 1.08rem;
+  color: #757575;
+  margin: 0 0 38px;
+  line-height: 1.7;
+}
+
+/* Bullet: icon + heading row (icon and heading must be inline, flex row) */
+.columns.columns12 > div > div > p:nth-of-type(n+3):not(.button-container) {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  min-height: 38px;
+  margin-top: 22px;
+}
+
+.columns.columns12 > div > div > p:nth-of-type(3) {
+  margin-top: 20px;
+}
+
+.columns.columns12 > div > div > p:nth-of-type(n+3):not(.button-container) picture {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.columns.columns12 > div > div > p:nth-of-type(n+3):not(.button-container) img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.columns.columns12 > div > div > h3:not(:first-of-type) {
+  display: inline-block;
+  font-size: 1.09rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+  color: inherit;
+  vertical-align: middle;
+  padding-top: 3px;
+}
+
+/* Heading color per panel for bullets */
+.columns.columns12 > div > div:first-child h3:not(:first-of-type) strong {
+  color: #7118b6;
+}
+
+.columns.columns12 > div > div:last-child h3:not(:first-of-type) strong {
+  color: #e6002d;
+}
+
+/* Bullet description (indented to align with heading, margin-left matches icon + gap) */
+.columns.columns12 > div > div > h3:not(:first-of-type) + p {
+  font-size: 0.96rem;
+  color: #4d5156;
+  margin: 2px 0 0 40px;
+  line-height: 1.7;
+  margin-bottom: 18px;
+  max-width: 96%;
+}
+
+/* More space after last bullet before button */
+.columns.columns12 > div > div > h3:not(:first-of-type):last-of-type + p {
+  margin-bottom: 36px;
+}
+
+/* Button alignment and style override */
+.columns.columns12 > div > div .button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 28px;
+}
+
+.columns.columns12 > div > div .button {
+  border: 1.5px solid #e6002d;
+  color: #e6002d;
+  background: transparent;
+  border-radius: 6px;
+  padding: 15px 38px;
+  font-size: 1.08rem;
+  font-weight: 500;
+  line-height: 1.18;
+  display: inline-block;
+  margin: 0;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: none;
+}
+
+.columns.columns12 > div > div .button:hover,
+.columns.columns12 > div > div .button:focus {
+  background: #e6002d;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (width <= 900px) {
+  .columns.columns12 > div > div .button {
+    padding: 12px 18px;
+    font-size: 1rem;
+  }
+}
+
+/* Remove default bottom margins from panel children */
+.columns.columns12 > div > div > *:not(.button-container) {
+  margin-bottom: 0;
+}
+
+.columns.columns12 > div > div > .button-container {
   margin-bottom: 0;
 }
