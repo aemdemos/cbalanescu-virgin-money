@@ -1,58 +1,64 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Build the header row exactly as required.
+  // Block header row matches example exactly
   const headerRow = ['Columns (columns8)'];
 
-  // 2. Gather all the top-level <li> under nav > ul
-  const topLevelLis = element.querySelectorAll(':scope > ul > li');
-  const columns = [];
+  // Locate the UL containing columns
+  const navUl = element.querySelector('ul.nav-footer');
+  if (!navUl) return;
 
-  topLevelLis.forEach((li) => {
-    // Create an array to hold all direct children to preserve references
-    const colContent = [];
+  // Get direct LI children for columns
+  const columnLis = Array.from(navUl.children).filter(child => child.tagName === 'LI');
 
-    // Add the <span> as a <strong> (for heading), preserve reference to text
-    const headerSpan = li.querySelector(':scope > span');
-    if (headerSpan) {
-      // Create <strong> referencing the span's text
+  // Each column cell: Title (strong), UL of links or social list
+  const columnCells = columnLis.map(li => {
+    const cellContent = [];
+    // Title
+    const span = li.querySelector('span');
+    if (span && span.textContent.trim()) {
       const strong = document.createElement('strong');
-      strong.textContent = headerSpan.textContent;
-      colContent.push(strong);
+      strong.textContent = span.textContent.trim();
+      cellContent.push(strong);
     }
-
-    // Add all direct <ul> under this <li> (preserve structure and reference)
-    li.querySelectorAll(':scope > ul').forEach((ul) => {
-      colContent.push(ul);
-    });
-
-    // For social column: flatten so icons and links are visible, but do not clone
-    if (li.classList.contains('nav-footer-social')) {
-      const socialsUl = li.querySelector(':scope > ul');
-      if (socialsUl) {
-        Array.from(socialsUl.children).forEach((liItem) => {
-          // Only add social <a> links (preserve references)
-          const a = liItem.querySelector('a');
+    // List of links or social icons
+    const ul = li.querySelector('ul');
+    if (ul) {
+      if (li.classList.contains('nav-footer-social')) {
+        // Social icons: transform each <li> to an <a> containing SVG
+        Array.from(ul.querySelectorAll('li')).forEach(socialLi => {
+          const a = socialLi.querySelector('a');
           if (a) {
-            colContent.push(a);
+            // Reference the <span class="icon"> directly as visual icon
+            const iconSpan = a.querySelector('span.icon');
+            if (iconSpan) {
+              // Create a link, append iconSpan
+              const socialLink = document.createElement('a');
+              socialLink.href = a.href;
+              socialLink.target = a.target;
+              // Reference (not clone) the iconSpan
+              socialLink.appendChild(iconSpan);
+              cellContent.push(socialLink);
+            } else {
+              // fallback to text
+              cellContent.push(a);
+            }
           }
         });
+      } else {
+        // Regular UL: reference directly
+        cellContent.push(ul);
       }
     }
-
-    // If there is direct text node content (edge case), add it.
-    Array.from(li.childNodes).forEach((node) => {
-      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-        colContent.push(document.createTextNode(node.textContent.trim()));
-      }
-    });
-
-    columns.push(colContent);
+    return cellContent;
   });
 
-  // 3. Build the block table with a single header row and a single content row
-  const blockArr = [headerRow, columns];
-  const block = WebImporter.DOMUtils.createTable(blockArr, document);
+  // The table should include only the header row and one row with columns
+  const cells = [
+    headerRow,
+    columnCells
+  ];
 
-  // 4. Replace the original element
-  element.replaceWith(block);
+  // Create block and replace original element
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.parentNode.replaceChild(block, element);
 }

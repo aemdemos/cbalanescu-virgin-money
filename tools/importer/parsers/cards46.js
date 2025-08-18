@@ -1,42 +1,46 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Prepare table rows
-  const rows = [['Cards (cards46)']];
+  // Block header, matches example
+  const headerRow = ['Cards (cards46)'];
 
-  // Find all card items
-  const ratesBlock = element.querySelector('.cc01-rates');
-  const cardsContainer = ratesBlock && ratesBlock.querySelector('.product-key-rates');
+  // Find the cards container
+  const cardsContainer = element.querySelector('.product-key-rates');
   if (!cardsContainer) return;
 
-  const cardItems = cardsContainer.querySelectorAll(':scope > .product-key-rate-item');
+  // Find all card items
+  const cardElements = Array.from(cardsContainer.querySelectorAll('.product-key-rate-item'));
 
-  cardItems.forEach((item) => {
-    // First cell: image/icon, reference the actual img element
-    const img = item.querySelector('img');
-    // Second cell: text content
-    // Title (span inside .key-value-text, use strong tag for semantic meaning)
-    const titleSpan = item.querySelector('.key-value-text span');
-    let titleElem = null;
-    if (titleSpan && titleSpan.textContent.trim()) {
-      // Use <strong> for emphasis in cards, no color styling
-      titleElem = document.createElement('strong');
-      titleElem.textContent = titleSpan.textContent.trim();
+  const rows = cardElements.map(card => {
+    // First cell: the image (mandatory)
+    const img = card.querySelector('img');
+    // If no image, use null so cell is empty
+
+    // Second cell: text content (mandatory)
+    const textContent = [];
+
+    // Title (if present)
+    const keyValue = card.querySelector('.key-value-text span');
+    if (keyValue && keyValue.textContent.trim()) {
+      // Use <strong> for title, retain color from source
+      keyValue.style.fontWeight = 'bold';
+      keyValue.style.color = '#e50040';
+      textContent.push(keyValue);
     }
-    // Description: .key-top-text, reference entire block for robustness
-    const desc = item.querySelector('.key-top-text');
-    // Compose second cell
-    const cellContent = [];
-    if (titleElem) {
-      cellContent.push(titleElem);
-      // Add space or line break if desc exists
-      if (desc) cellContent.push(document.createElement('br'));
+
+    // Description (if present)
+    const keyTopText = card.querySelector('.key-top-text');
+    if (keyTopText) {
+      // Use existing element, don't clone
+      textContent.push(keyTopText);
     }
-    if (desc) {
-      cellContent.push(desc);
-    }
-    rows.push([img, cellContent]);
+
+    return [img, textContent];
   });
-  // Create table and replace original element
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(table);
+
+  // Build cells array
+  const cells = [headerRow, ...rows];
+
+  // Create and replace with table block
+  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(blockTable);
 }

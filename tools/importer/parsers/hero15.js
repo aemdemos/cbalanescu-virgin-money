@@ -1,63 +1,56 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row, exactly as required
+  // Header row matches example: exactly one cell with exact block name
   const headerRow = ['Hero (hero15)'];
 
-  // Row 2: Background image (optional)
-  let bgImgEl = '';
-  // Find any descendant with a background-image style
-  const bgImgDiv = element.querySelector('[style*="background-image"]');
-  if (bgImgDiv && bgImgDiv.style && bgImgDiv.style.backgroundImage) {
-    const match = bgImgDiv.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/);
-    if (match && match[1]) {
-      const img = document.createElement('img');
-      img.src = match[1];
-      // Use text from a visually hidden span if present as alt, else empty string
-      const altSpan = bgImgDiv.querySelector('span');
-      img.alt = altSpan ? altSpan.textContent.trim() : '';
-      bgImgEl = img;
+  // --------- Background Image Row ---------
+  let imageElem = null;
+  // Find background image from .intrinsic-el.img
+  const bgDiv = element.querySelector('.intrinsic-el.img');
+  if (bgDiv && bgDiv.style && bgDiv.style.backgroundImage) {
+    const urlMatch = bgDiv.style.backgroundImage.match(/url\(([^)]+)\)/);
+    if (urlMatch && urlMatch[1]) {
+      const src = urlMatch[1].replace(/['"]/g, '');
+      imageElem = document.createElement('img');
+      imageElem.src = src;
+      // Use .vh span text for alt, if present
+      const altSpan = bgDiv.querySelector('.vh');
+      imageElem.alt = altSpan ? altSpan.textContent.trim() : '';
     }
   }
-  const row2 = [bgImgEl];
+  const imageRow = [imageElem || ''];
 
-  // Row 3: Content (title, subtitle, description, CTA) -- keep all text content
-  const contentDiv = element.querySelector('.content');
-  const contentArr = [];
+  // --------- Content Row ---------
+  // Gather all content in the same order as source, preserving headings, subheadings, etc.
+  let contentArr = [];
+  const anchor = element.querySelector('a');
+  const contentDiv = anchor ? anchor.querySelector('.content') : null;
   if (contentDiv) {
-    // Use all children for coverage, maintain order
+    // Iterate over all direct children to preserve order and content
     Array.from(contentDiv.childNodes).forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        // For the .cta span, replace with a link to the parent <a> (CTA)
-        if (node.classList && node.classList.contains('cta')) {
-          // Only add if not already a link
-          const outerLink = element.querySelector('a[href]');
-          if (outerLink) {
-            const a = document.createElement('a');
-            a.href = outerLink.href;
-            a.textContent = node.textContent.trim();
-            contentArr.push(a);
-          } else {
-            contentArr.push(node);
-          }
+        // Replace CTA span with anchor, using original href
+        if (node.classList && node.classList.contains('cta') && anchor && anchor.href) {
+          const ctaLink = document.createElement('a');
+          ctaLink.href = anchor.href;
+          ctaLink.textContent = node.textContent;
+          ctaLink.className = 'cta';
+          contentArr.push(ctaLink);
         } else {
+          // Reference the existing element for headings, subheadings, paragraphs
           contentArr.push(node);
         }
       } else if (node.nodeType === Node.TEXT_NODE) {
-        // Add non-empty text nodes
-        const trimmed = node.textContent.trim();
-        if (trimmed) {
-          const span = document.createElement('span');
-          span.textContent = trimmed;
-          contentArr.push(span);
-        }
+        const txt = node.textContent.trim();
+        if (txt) contentArr.push(document.createTextNode(txt));
       }
     });
   }
-  // Fallback: if nothing found but .content exists, include it in full
-  const row3 = [contentArr.length ? contentArr : (contentDiv ? [contentDiv] : [''])];
+  // Always provide at least an empty string if nothing is found
+  const contentRow = [contentArr.length > 0 ? contentArr : ''];
 
-  // Compose and replace
-  const cells = [headerRow, row2, row3];
+  // --------- Create and replace block table ---------
+  const cells = [headerRow, imageRow, contentRow];
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

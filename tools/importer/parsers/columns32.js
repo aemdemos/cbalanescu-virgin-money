@@ -1,36 +1,40 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Prepare header as per block requirements
-  const headerRow = ['Columns (columns32)'];
+  // Check for .sl-list with .sl-item children
+  const slList = Array.from(element.querySelectorAll(':scope > .sl > .sl-list'))[0];
+  if (!slList) return;
+  const slItems = Array.from(slList.children).filter(el => el.classList.contains('sl-item'));
+  if (slItems.length < 2) return;
 
-  // Find the columns in the source HTML
-  let columns = [];
-  const slList = element.querySelector('.sl-list.has-2-items');
-  if (slList) {
-    const slItems = slList.querySelectorAll(':scope > .sl-item');
-    // Defensive: ensure we have at least two columns for a columns32 block
-    if (slItems.length >= 2) {
-      // First column: image/content block (the entire .cm-content-panel-container for robustness)
-      const firstPanel = slItems[0].querySelector('.cm-content-panel-container');
-      columns.push(firstPanel || slItems[0]);
-
-      // Second column: rich text block (the entire .cm-rich-text)
-      const secondRich = slItems[1].querySelector('.cm.cm-rich-text');
-      columns.push(secondRich || slItems[1]);
-    } else {
-      // If not enough columns, just push whatever exists (for resilience)
-      slItems.forEach(item => columns.push(item));
-    }
+  // First column: image panel (panel with image)
+  const col1Panel = slItems[0].querySelector('.cm-content-panel-container');
+  let col1Content;
+  if (col1Panel) {
+    col1Content = col1Panel;
   } else {
-    // Fallback: if not found, put the element itself
-    columns.push(element);
+    col1Content = slItems[0];
   }
 
-  const tableCells = [
-    headerRow,
-    columns
-  ];
+  // Second column: heading, paragraphs, button
+  // Use the .cm-rich-text inside second sl-item if present, else sl-item itself
+  const col2Panel = slItems[1].querySelector('.cm-rich-text');
+  let col2Content;
+  if (col2Panel) {
+    col2Content = col2Panel;
+  } else {
+    col2Content = slItems[1];
+  }
 
-  const table = WebImporter.DOMUtils.createTable(tableCells, document);
-  element.replaceWith(table);
+  // Table header matches example exactly
+  const headerRow = ['Columns (columns32)'];
+
+  // Table second row: two columns
+  const secondRow = [col1Content, col2Content];
+
+  // Final table
+  const cells = [headerRow, secondRow];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace element
+  element.replaceWith(block);
 }

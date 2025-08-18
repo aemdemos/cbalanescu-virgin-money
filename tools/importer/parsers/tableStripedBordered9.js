@@ -1,32 +1,34 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Block header row: exactly one cell, block name
+  // Table block header
   const headerRow = ['Table (striped, bordered)'];
 
-  // 2. Find the original table
+  // Find the main comparison table (there should only be one)
+  // Reference the existing table node directly (do not clone)
   const table = element.querySelector('table');
-  if (!table) return;
-  const thead = table.querySelector('thead');
-  const tbody = table.querySelector('tbody');
-  if (!thead || !tbody) return;
 
-  // 3. Column header row: extract text/HTML from each <th> (not the element itself)
-  const thRow = thead.querySelector('tr');
-  if (!thRow) return;
-  const tableHeaderRow = Array.from(thRow.children).map(th => th.innerHTML);
+  // Set up final cells array
+  const cells = [headerRow];
 
-  // 4. Data rows: extract text/HTML from each cell (<th> or <td>), never pass the cell elements
-  const blockRows = [];
-  const trs = Array.from(tbody.querySelectorAll('tr'));
-  trs.forEach(tr => {
-    const rowCells = Array.from(tr.children).map(cell => cell.innerHTML);
-    blockRows.push(rowCells);
-  });
+  if (table) {
+    // Reference the table directly
+    cells.push([table]);
+  } else {
+    // In the edge case where there is no table, include all content inside cm-comparison-table
+    const blockContent = element.querySelector('.cm-comparison-table');
+    if (blockContent && blockContent.children.length > 0) {
+      // group all children in an array
+      const arr = Array.from(blockContent.children);
+      cells.push([arr]);
+    } else {
+      // fallback: empty cell
+      cells.push(['']);
+    }
+  }
 
-  // 5. Compose the output: header row, then table header, then all data rows
-  const cells = [headerRow, tableHeaderRow, ...blockRows];
+  // Create block table
+  const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  // 6. Create and replace
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(blockTable);
+  // Replace original element with new block table
+  element.replaceWith(block);
 }

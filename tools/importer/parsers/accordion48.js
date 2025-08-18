@@ -1,71 +1,56 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion block header row
+  // Accordion block header
   const headerRow = ['Accordion (accordion48)'];
-
-  // Find the root accordion-list
-  const accordionList = element.querySelector('ul.accordion-list');
+  // Find the accordion list
+  const accordionList = element.querySelector('.accordion-list');
   if (!accordionList) return;
-  const mainLi = accordionList.querySelector('li');
-  if (!mainLi) return;
-  const contentDiv = mainLi.querySelector('.expandcollapse-content');
-  if (!contentDiv) return;
 
-  // Get all accordion items (tcs-wrapper divs)
-  const wrappers = Array.from(contentDiv.querySelectorAll('.tcs-wrapper'));
-  const rows = [];
-
-  wrappers.forEach(wrapper => {
-    // Each tcs-wrapper contains one <li>
-    const itemLi = wrapper.querySelector('li');
-    if (!itemLi) return;
-    // Title: get the first <p> OR the first child node that is text or an element
-    let titleCell = null;
-    let contentCell = null;
-    const allChildren = Array.from(itemLi.childNodes);
-    // Find the first <p> or text node for the title
-    let titleIndex = -1;
-    for (let i = 0; i < allChildren.length; i++) {
-      const node = allChildren[i];
-      if (
-        (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'P') ||
-        (node.nodeType === Node.TEXT_NODE && node.textContent.trim())
-      ) {
-        titleCell = node;
-        titleIndex = i;
-        break;
+  // The first <li> (the accordion item) contains the overall title and the content <div>
+  const accordionItems = Array.from(accordionList.children);
+  // Find the first <li> that contains both an <a> and a .expandcollapse-content
+  let items = [];
+  for (const item of accordionItems) {
+    const a = item.querySelector('a');
+    const contentDiv = item.querySelector('.expandcollapse-content');
+    if (a && contentDiv) {
+      // The summary/title for the accordion block comes from <a>
+      // The actual accordion rows come from the <li>s inside <ol> in .expandcollapse-content
+      // Each .tcs-wrapper contains a <li>
+      const wrappers = Array.from(contentDiv.querySelectorAll('.tcs-wrapper'));
+      for (const wrapper of wrappers) {
+        // Each wrapper contains a <li>
+        const li = wrapper.querySelector('li');
+        if (!li) continue;
+        // The content structure: typically one or more <p> elements per item
+        // We want to preserve all formatting and reference elements directly
+        // Title is always the first <p> or if only one <p>, that is the title
+        const ps = li.querySelectorAll('p');
+        let titleElem, contentElems = [];
+        if (ps.length === 1) {
+          // Only one <p> - treat it as both title and content if needed
+          titleElem = ps[0];
+          // If there are other nodes in li besides this p, include them in content
+          const otherNodes = Array.from(li.childNodes).filter(node => node.nodeType === 1 && node.tagName !== 'P');
+          if (otherNodes.length > 0) {
+            contentElems = otherNodes;
+          } else {
+            contentElems = '';
+          }
+        } else if (ps.length > 1) {
+          titleElem = ps[0];
+          contentElems = Array.from(ps).slice(1);
+        } else {
+          // Fallback: treat whole li as title
+          titleElem = li;
+          contentElems = '';
+        }
+        items.push([titleElem, contentElems]);
       }
     }
-    // If not found, fallback to the entire li
-    if (!titleCell) {
-      titleCell = itemLi;
-      titleIndex = -1;
-    }
-    // Content: everything AFTER the title
-    const contentElements = [];
-    for (let i = titleIndex + 1; i < allChildren.length; i++) {
-      const node = allChildren[i];
-      // Only include elements or non-empty text nodes
-      if (
-        (node.nodeType === Node.ELEMENT_NODE) ||
-        (node.nodeType === Node.TEXT_NODE && node.textContent.trim())
-      ) {
-        contentElements.push(node);
-      }
-    }
-    // If there is content, keep as an array (not cloning, referencing!)
-    if (contentElements.length === 1) {
-      contentCell = contentElements[0];
-    } else if (contentElements.length > 1) {
-      contentCell = contentElements;
-    } else {
-      // If no explicit content, provide an empty div for structure
-      contentCell = document.createElement('div');
-    }
-    rows.push([titleCell, contentCell]);
-  });
-
-  // Build the table for accordion block
-  const table = WebImporter.DOMUtils.createTable([headerRow, ...rows], document);
-  element.replaceWith(table);
+  }
+  // Assemble the table rows
+  const rows = [headerRow, ...items];
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(block);
 }

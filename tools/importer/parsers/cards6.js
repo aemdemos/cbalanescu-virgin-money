@@ -1,60 +1,78 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row EXACTLY matching the block name
+  // Cards (cards6) block header
   const headerRow = ['Cards (cards6)'];
-  const cards = [];
+  const cells = [headerRow];
 
-  // Select all immediate cards
-  const cardItems = element.querySelectorAll('.product-key-rate-item');
+  // Find all cards
+  const cardItems = element.querySelectorAll(':scope .product-key-rate-item');
   cardItems.forEach((card) => {
-    // First column: Image/Icon
+    // First column: image/icon (mandatory)
     const img = card.querySelector('img');
 
-    // Second column: Textual content
-    const content = [];
-    // Title: .key-value-text > span, style as <strong>
-    const keyValueText = card.querySelector('.key-value-text span');
-    if (keyValueText && keyValueText.textContent.trim()) {
-      const strong = document.createElement('strong');
-      strong.textContent = keyValueText.textContent.trim();
-      content.push(strong);
+    // Second column: text content (title, description, CTA)
+    // Title: Use the text from the .key-value-text > span, bolded
+    let titleNode = null;
+    const titleSpan = card.querySelector('.key-value-text > span');
+    if (titleSpan && titleSpan.textContent.trim()) {
+      titleNode = document.createElement('strong');
+      titleNode.textContent = titleSpan.textContent.trim();
     }
 
-    // Description & CTA: .key-top-text
+    // Description and CTA
     const keyTopText = card.querySelector('.key-top-text');
+    const descriptionFragments = [];
+    let ctaNode = null;
     if (keyTopText) {
-      // For robustness, include all children (text, <p>, <a>, <sup> etc)
-      keyTopText.childNodes.forEach((node) => {
-        // Only include non-empty text nodes
-        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-          const span = document.createElement('span');
-          span.textContent = node.textContent.trim();
-          content.push(span);
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          // If <p> or <a> or <sup>, reference directly
-          if (['P', 'A', 'SUP'].includes(node.tagName)) {
-            content.push(node);
-          } else {
-            // For other elements, include if not empty
-            if (node.textContent && node.textContent.trim()) {
-              content.push(node);
+      // Look for CTA <a> in .key-top-text
+      // Build description from all text and elements except the CTA link
+      Array.from(keyTopText.childNodes).forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          if (node.tagName === 'P') {
+            // If <p> contains a link, separate it out
+            const pLinks = node.querySelectorAll('a');
+            if (pLinks.length > 0) {
+              // Add all nodes except links
+              Array.from(node.childNodes).forEach((pChild) => {
+                if (pChild.nodeType === Node.ELEMENT_NODE && pChild.tagName === 'A') {
+                  ctaNode = pChild;
+                  // Don't push CTA to description
+                } else {
+                  descriptionFragments.push(pChild);
+                }
+              });
+            } else {
+              descriptionFragments.push(node);
             }
+          } else if (node.tagName === 'A') {
+            ctaNode = node;
+          } else {
+            descriptionFragments.push(node);
+          }
+        } else if (node.nodeType === Node.TEXT_NODE) {
+          if (node.textContent.trim()) {
+            descriptionFragments.push(document.createTextNode(node.textContent.trim()));
           }
         }
       });
     }
-    // If no content was added, ensure at least the description container is used
-    if (content.length === 0 && keyTopText) {
-      content.push(keyTopText);
+
+    // Build the second cell: [title, description, CTA]
+    const cellElements = [];
+    if (titleNode) cellElements.push(titleNode);
+    // Add description/paragraphs, preserving original structure
+    if (descriptionFragments.length > 0) {
+      descriptionFragments.forEach(frag => {
+        cellElements.push(frag);
+      });
     }
-    // Add card row to table: always two columns
-    cards.push([img, content]);
+    // Add CTA at the end, if present
+    if (ctaNode) cellElements.push(ctaNode);
+
+    // Push the row
+    cells.push([img, cellElements]);
   });
 
-  // Construct cell array
-  const cells = [headerRow, ...cards];
-  // Create table block
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  // Replace the original element
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

@@ -1,27 +1,43 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row: one cell only, as per strict requirements
-  const headerRow = ['Columns (columns51)'];
-
-  // Find sl-list, which contains the columns
+  // Find the columns container
   const slList = element.querySelector('.sl-list');
-  if (!slList) return;
+  const items = slList ? Array.from(slList.children) : Array.from(element.children);
 
-  // Each direct child of sl-list is a column cell
-  const slItems = Array.from(slList.children);
-
-  // For each column, use the main content block inside it
-  const contentRow = slItems.map((item) => {
-    // Use the .cm-rich-text if present, else .cm-icon-title, else the item itself
-    const richText = item.querySelector(':scope > .cm-rich-text');
-    if (richText) return richText;
-    const iconTitle = item.querySelector(':scope > section.cm-icon-title');
-    if (iconTitle) return iconTitle;
+  // Compose columns as before
+  const columns = items.map((item) => {
+    const rt = item.querySelector('.cm-rich-text');
+    if (rt) return rt;
+    const iconTitle = item.querySelector('.cm-icon-title');
+    if (iconTitle) {
+      const frag = document.createDocumentFragment();
+      const header = iconTitle.querySelector('.header');
+      if (header) {
+        const img = header.querySelector('img');
+        if (img) frag.appendChild(img);
+        const h2 = header.querySelector('h2');
+        if (h2) frag.appendChild(h2);
+      }
+      const content = iconTitle.querySelector('.content');
+      if (content) {
+        Array.from(content.children).forEach(child => frag.appendChild(child));
+      }
+      return frag;
+    }
     return item;
   });
 
-  // Table: header row is a single cell, second row has one cell per column
-  const cells = [headerRow, contentRow];
+  // Fix: Ensure header row has the same number of columns as content row
+  // First cell is the block name, others are empty strings
+  const headerRow = ['Columns (columns51)'];
+  while (headerRow.length < columns.length) headerRow.push('');
+
+  const cells = [
+    headerRow,
+    columns
+  ];
+
+  // Create and replace
   const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

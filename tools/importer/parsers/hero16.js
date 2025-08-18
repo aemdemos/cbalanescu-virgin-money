@@ -1,34 +1,23 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row: must match exactly
+  // Block name header row
   const headerRow = ['Hero (hero16)'];
 
-  // Image row: no image in provided HTML, so empty
-  const imageRow = [''];
+  // 2nd row: background image (none in provided HTML)
+  // Both screenshots and HTML indicate no background image is present in this snippet
+  const backgroundImageRow = [''];
 
-  // Content row: use all content inside the element, preserving structure
-  // We want to reference the existing <p> (with link) as the content cell
-  let contentCell;
-  // use all children if >1, else just the single p node for robustness
-  const directChildren = Array.from(element.children);
-  if (directChildren.length === 1) {
-    contentCell = directChildren[0];
-  } else if (directChildren.length > 1) {
-    const frag = document.createDocumentFragment();
-    directChildren.forEach(child => frag.appendChild(child));
-    contentCell = frag;
-  } else {
-    // fallback if element has no children
-    contentCell = '';
-  }
-  const contentRow = [contentCell];
+  // 3rd row: headline, subheading, CTA
+  // All provided HTML content is a single paragraph with a CTA link
+  // We reference the actual child paragraph element
+  const p = element.querySelector('p');
+  // If there is no paragraph, fallback to all child nodes
+  const contentRow = [p ? [p] : Array.from(element.childNodes)];
 
-  const cells = [
-    headerRow,
-    imageRow,
-    contentRow
-  ];
+  // Compose rows for the table
+  const cells = [headerRow, backgroundImageRow, contentRow];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Replace the original element with the new block table
+  element.replaceWith(block);
 }
