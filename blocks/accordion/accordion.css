@@ -1,8 +1,8 @@
+/* stylelint-disable no-descending-specificity */
 .accordion details {
   border: 1px solid #dadada;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 .accordion details + details {
   margin-top: 24px;
 }
@@ -58,4 +58,77 @@
 .accordion details[open] .accordion-item-body {
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
+}
+
+
+.accordion.accordion4 details {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: #F5F5F7;
+}
+
+.accordion.accordion4 summary.accordion-item-label {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* Bottom-align text and chevron */
+  justify-content: space-between;
+  background-color: #F5F5F7;
+  padding: 0 24px 0 8px;
+  min-height: 30px;
+  border-bottom: 1px solid #E2E2E3;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Remove default disclosure marker */
+.accordion.accordion4 summary.accordion-item-label::-webkit-details-marker,
+.accordion.accordion4 summary.accordion-item-label::marker {
+  display: none;
+}
+
+.accordion.accordion4 summary.accordion-item-label > p {
+  color: #707070;
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+  flex: 0 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: flex-end; /* aligns with chevron */
+}
+
+/* Chevron: baseline-aligned, slightly smaller and nudged down */
+.accordion.accordion4 summary.accordion-item-label::after {
+  display: inline-block;
+  margin-left: 4px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 4px 4px;
+  border-color: transparent transparent #C8102E;
+  position: relative;
+  top: 2px;
+}
+
+.accordion.accordion4 details[open] summary.accordion-item-label::after {
+  border-width: 4px 4px 0;
+  border-color: #C8102E transparent transparent;
+  top: -1px;
+}
+
+.accordion.accordion4 .accordion-item-body {
+  padding: 0 24px;
+  background: none;
+  border: none;
+}
+
+.accordion.accordion4 summary.accordion-item-label:focus,
+.accordion.accordion4 summary.accordion-item-label:hover,
+.accordion.accordion4 details[open] summary.accordion-item-label {
+  background-color: #F5F5F7;
 }
