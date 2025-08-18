@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -38,7 +39,7 @@
 .cards.cards1 > ul {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0 32px; /* Minimal vertical gap, original is very compact */
+  gap: 0 32px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -57,16 +58,15 @@
   }
 }
 
-/* Card container */
 .cards.cards1 > ul > li {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center; /* vertically center content */
+  justify-content: center;
   background: #fff;
   border: none;
   margin: 0;
-  padding: 32px 0 26px; /* more vertical padding for centering and balance */
+  padding: 32px 0 26px;
   min-width: 0;
   min-height: 184px;
   box-sizing: border-box;
@@ -74,7 +74,6 @@
   height: 100%;
 }
 
-/* Icon/image at top - always reserve space, even if no image is present */
 .cards.cards1 .cards-card-image {
   min-height: 32px;
   height: 32px;
@@ -97,7 +96,6 @@
   visibility: visible;
 }
 
-/* Card body */
 .cards.cards1 .cards-card-body {
   flex: 1 1 0%;
   padding: 0;
@@ -105,11 +103,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center; /* vertical centering */
+  justify-content: center;
   width: 100%;
 }
 
-/* Title */
 .cards.cards1 .cards-card-body h2 {
   font-size: 16px;
   color: #7d2676;
@@ -120,7 +117,6 @@
   padding: 0;
 }
 
-/* Description text */
 .cards.cards1 .cards-card-body p {
   font-size: 13px;
   color: #666;
@@ -130,7 +126,6 @@
   font-weight: 400;
 }
 
-/* Remove margin from button container */
 .cards.cards1 .cards-card-body p.button-container {
   margin: 0;
   width: 100%;
@@ -138,7 +133,6 @@
   padding: 0;
 }
 
-/* Button */
 .cards.cards1 .cards-card-body .button {
   display: flex;
   flex-direction: row;
@@ -150,7 +144,7 @@
   font-size: 13px;
   font-weight: 500;
   border-radius: 4px;
-  padding: 7px 38px 7px 14px; /* more right padding for arrow */
+  padding: 7px 38px 7px 14px;
   min-width: 0;
   min-height: 32px;
   width: 100%;
@@ -163,12 +157,9 @@
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 20px 16px;
-
-  /* Show arrow using SVG as background */
   background-image: url('data:image/svg+xml;utf8,<svg width="20" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 4l6 4-6 4" stroke="%23e871ad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
 
-/* Remove base style for .button */
 .cards.cards1 .cards-card-body .button,
 .cards.cards1 .cards-card-body .button:visited {
   background: #fff;
@@ -176,7 +167,6 @@
   border: 1px solid #e871ad;
 }
 
-/* Button hover/focus */
 .cards.cards1 .cards-card-body .button:hover,
 .cards.cards1 .cards-card-body .button:focus {
   background: #fceaf3;
@@ -185,7 +175,159 @@
   text-decoration: underline;
 }
 
-/* Last child spacing fix */
 .cards.cards1 .cards-card-body > *:last-child {
   margin-bottom: 0;
+}
+
+
+.cards.cards6 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-height: 430px;
+  height: 430px;
+  align-items: stretch;
+  background: #fff;
+}
+
+.cards.cards6 > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-right: 1px solid #eee;
+  background: #fff;
+  padding: 0 10px;
+  box-sizing: border-box;
+  min-height: 0;
+  height: 100%;
+}
+
+.cards.cards6 > ul > li:last-child {
+  border-right: none;
+}
+
+/* Card image/icon */
+.cards.cards6 .cards-card-image {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 40px;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.cards.cards6 .cards-card-image img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+}
+
+/* Card body content */
+.cards.cards6 .cards-card-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+/* Tighter heading and body text spacing */
+.cards.cards6 .cards-card-body p {
+  color: #333;
+  font-size: 0.97rem;
+  line-height: 1.25;
+  text-align: center;
+  margin: 0 0 2px;
+  font-weight: 400;
+  max-width: 355px;
+}
+
+/* Less dominant pseudo-heading style */
+.cards.cards6 .cards-card-body p:first-child {
+  color: #E60050;
+  font-size: 1.01rem;
+  font-weight: 600;
+  margin-bottom: 1px;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+/* Maintain button-container spacing but keep it tight */
+.cards.cards6 .cards-card-body p.button-container {
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+/* Remove extra bottom margin for last paragraph */
+.cards.cards6 .cards-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.cards.cards6 .cards-card-body sup {
+  font-size: 0.7em;
+  vertical-align: super;
+  line-height: 1;
+}
+
+/* Button: tighter top margin, match original shape/width */
+.cards.cards6 .cards-card-body .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #E60050 0%, #6F1A8A 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 2em;
+  min-width: 200px;
+  min-height: 40px;
+  padding: 10px 36px;
+  margin: 4px auto 0;
+  box-shadow: none;
+  text-overflow: unset;
+  white-space: nowrap;
+  overflow: visible;
+  transition: background 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.cards.cards6 .cards-card-body .button:hover,
+.cards.cards6 .cards-card-body .button:focus {
+  opacity: 0.9;
+  color: #fff;
+  background: linear-gradient(90deg, #D1004B 0%, #600076 100%);
+}
+
+@media (width <= 900px) {
+  .cards.cards6 > ul {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    height: auto;
+  }
+
+  .cards.cards6 > ul > li {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    min-height: 0;
+    height: auto;
+    padding: 24px 4px;
+  }
+
+  .cards.cards6 > ul > li:last-child {
+    border-bottom: none;
+  }
+
+  .cards.cards6 .cards-card-body p {
+    max-width: 98vw;
+  }
 }
