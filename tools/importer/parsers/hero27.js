@@ -1,55 +1,51 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header
-  const headerRow = ['Hero (hero27)'];
+  // Helper to extract background-image url from style
+  function extractBgUrl(style) {
+    const match = style && style.match(/background-image:\s*url\(['"]?([^'"]+)['"]?\)/);
+    return match ? match[1] : null;
+  }
 
-  // --- Extract background image for 2nd row ---
-  let imageElem = null;
+  // Find the background image (if any)
+  let imageEl = null;
   const bgDiv = element.querySelector('.intrinsic-el.img');
-  if (bgDiv?.style?.backgroundImage) {
-    const urlMatch = bgDiv.style.backgroundImage.match(/url\(['"]?(.*?)['"]?\)/);
-    if (urlMatch && urlMatch[1]) {
-      const img = document.createElement('img');
-      img.src = urlMatch[1];
-      img.setAttribute('loading', 'lazy');
-      imageElem = img;
+  if (bgDiv && bgDiv.hasAttribute('style')) {
+    const bgUrl = extractBgUrl(bgDiv.getAttribute('style'));
+    if (bgUrl) {
+      imageEl = document.createElement('img');
+      imageEl.src = bgUrl;
+      imageEl.alt = '';
     }
   }
 
-  // --- Extract content for 3rd row ---
+  // Find the text content block
   const contentDiv = element.querySelector('.content');
-  const contentParts = [];
+  const contentNodes = [];
   if (contentDiv) {
-    // Title
-    const header = contentDiv.querySelector('.header');
-    if (header) {
-      // The header might contain a <p><span> structure, preserve children
-      Array.from(header.childNodes).forEach(node => {
-        if (node.nodeType === Node.ELEMENT_NODE) {
-          contentParts.push(node);
-        }
-      });
-    }
-    // Subtitle (may be empty and is not present in this HTML)
+    // h1: keep as heading
+    const h1 = contentDiv.querySelector('h1');
+    if (h1) contentNodes.push(h1);
+    // subtitle (if not empty)
     const subtitle = contentDiv.querySelector('.subtitle');
-    if (subtitle && subtitle.textContent.trim()) {
-      contentParts.push(subtitle);
-    }
-    // Additional paragraphs that are not in the header
-    Array.from(contentDiv.querySelectorAll('p')).forEach(p => {
-      if (!header || !header.contains(p)) {
-        contentParts.push(p);
+    if (subtitle && subtitle.textContent.trim()) contentNodes.push(subtitle);
+    // All other direct children (paragraphs, etc)
+    Array.from(contentDiv.children).forEach((child) => {
+      if (
+        child !== h1 &&
+        !(child.classList && child.classList.contains('subtitle'))
+      ) {
+        if (child.textContent.trim()) contentNodes.push(child);
       }
     });
   }
 
-  // Arrange table rows
-  const tableRows = [
-    headerRow,
-    [imageElem ? imageElem : ''],
-    [contentParts]
+  // Compose table rows
+  const rows = [
+    ['Hero (hero27)'],
+    [imageEl ? imageEl : ''],
+    [contentNodes.length ? contentNodes : '']
   ];
 
-  const block = WebImporter.DOMUtils.createTable(tableRows, document);
+  const block = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(block);
 }

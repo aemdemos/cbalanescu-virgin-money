@@ -1,43 +1,51 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header, matching the example precisely
-  const headerRow = ['Columns (columns44)'];
-
-  // Find the column container
+  // Find the columns container -- critical for extracting column structure
   const columnContainer = element.querySelector('.column-container');
   if (!columnContainer) return;
-
-  // Find the sl-list (the container for the columns)
   const slList = columnContainer.querySelector('.sl-list');
   if (!slList) return;
 
-  // Get all columns (sl-item elements)
-  const slItems = slList.querySelectorAll(':scope > .sl-item');
+  // Get the direct children representing the columns
+  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+  // The block is expected to have at least 2 columns
+  if (slItems.length < 2) return;
 
-  // For each column, gather its content block as seen in the HTML
-  const columns = Array.from(slItems).map((item) => {
-    // Try to find known blocks inside each column
-    const imageSection = item.querySelector('.cm-image');
-    if (imageSection) {
-      return imageSection;
-    }
-    const richTextSection = item.querySelector('.cm-rich-text');
-    if (richTextSection) {
-      return richTextSection;
-    }
-    // As fallback, use the entire sl-item if other selectors fail
-    return item;
-  });
+  // For each sl-item, extract the main block of content
+  // - For the left column, it may contain a section.cm-image (image/figure)
+  // - For the right column, it may contain .cm-rich-text (headings, paragraphs, links)
+  // We reference the highest meaningful content element in each
 
-  // Check for expected number of columns (example shows 2 columns)
-  if (columns.length < 2) return;
+  // Left column (image)
+  let leftCol = null;
+  const leftImageSection = slItems[0].querySelector('section.cm-image');
+  if (leftImageSection) {
+    leftCol = leftImageSection;
+  } else {
+    // fallback: use the entire sl-item if no image section found
+    leftCol = slItems[0];
+  }
+  
+  // Right column (text etc.)
+  let rightCol = null;
+  const rightRichText = slItems[1].querySelector('.cm-rich-text');
+  if (rightRichText) {
+    rightCol = rightRichText;
+  } else {
+    // fallback: use the entire sl-item if no text section found
+    rightCol = slItems[1];
+  }
 
-  // Build table block
-  const cells = [headerRow, columns];
+  // Table header must EXACTLY match example: 'Columns (columns44)'
+  const headerRow = ['Columns (columns44)'];
 
-  // Create the block table
+  // Second row: left and right columns as cells
+  const secondRow = [leftCol, rightCol];
+
+  // Compose final cells array for createTable
+  const cells = [headerRow, secondRow];
+
+  // Create and replace with table
   const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original element with the block table
   element.replaceWith(block);
 }

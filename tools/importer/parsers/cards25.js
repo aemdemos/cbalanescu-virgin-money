@@ -1,53 +1,56 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block name header row, exactly as in the example
-  const headerRow = ['Cards (cards25)'];
+  // Compose the block table starting with the header row matching the example
+  const cells = [['Cards (cards25)']];
 
-  // Find all the .cm-content-tile sections (the cards)
-  const cardSections = element.querySelectorAll('section.cm-content-tile');
-  const rows = [];
+  // Find the actual cards inside the deeply nested structure
+  // Each card: section.cm-content-tile (one per card)
+  const cardSections = Array.from(element.querySelectorAll('section.cm-content-tile'));
 
-  cardSections.forEach((section) => {
-    // First cell: the image (mandatory)
-    const image = section.querySelector('.image img');
-
-    // Second cell: gather heading, description, and CTA (all from .content)
-    const content = section.querySelector('.content');
-    const cellContent = [];
-
-    // Heading (bold h3)
-    const heading = content.querySelector('.header');
-    if (heading && heading.textContent.trim()) {
-      cellContent.push(heading);
+  cardSections.forEach(section => {
+    // Extract image (first cell)
+    let imgElem = null;
+    const img = section.querySelector('.image img');
+    if (img) {
+      imgElem = img;
     }
-
-    // Descriptions (all <p> elements except subheading and CTA)
-    // Note: subheading is always present but empty; skip it
-    // CTA is the <a> in <p> with .cta inside
-    const ps = Array.from(content.querySelectorAll('p'));
-    ps.forEach((p) => {
-      // Ignore <p class="subheading">
-      if (p.classList.contains('subheading')) return;
-
-      // Check if this is the CTA (has .cta span inside an <a>)
-      const cta = p.querySelector('.cta');
-      if (cta) {
-        // Keep CTA <p> exactly as is so the structure and link are maintained
-        cellContent.push(p);
-      } else if (p.textContent.trim()) {
-        // Descriptive paragraph
-        cellContent.push(p);
+    // Compose text content (second cell): heading, description, CTA
+    const contentDiv = section.querySelector('.content');
+    const textElems = [];
+    if (contentDiv) {
+      // Heading (h3) with <b> retained
+      const heading = contentDiv.querySelector('h3');
+      if (heading) {
+        textElems.push(heading);
       }
-    });
-
-    // Compose the row, referencing the actual img and content as required
-    rows.push([
-      image,
-      cellContent
+      // Description (any <p> not subheading and not containing the CTA)
+      const ps = Array.from(contentDiv.querySelectorAll('p'));
+      ps.forEach(p => {
+        if (
+          !p.classList.contains('subheading') && // skip subheading (empty in example)
+          !p.querySelector('a') && // skip CTA, handled later
+          p.textContent.trim() // skip empty
+        ) {
+          textElems.push(p);
+        }
+      });
+      // CTA (link inside last <p>, if present)
+      const ctaP = Array.from(contentDiv.querySelectorAll('p')).find(p => p.querySelector('a'));
+      if (ctaP) {
+        const a = ctaP.querySelector('a');
+        if (a) {
+          textElems.push(a);
+        }
+      }
+    }
+    // Row: [imgElem, textElems]
+    cells.push([
+      imgElem,
+      textElems.length === 1 ? textElems[0] : textElems
     ]);
   });
 
-  const cells = [headerRow, ...rows];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Create the table using the helper and replace the original element
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

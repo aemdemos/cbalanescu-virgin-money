@@ -1,41 +1,42 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Block header: match exactly
+  // The header row must be a single cell with the exact text
   const headerRow = ['Columns (columns29)'];
 
-  // 2. Locate columns structure
-  // The parent element has .column-container > .sl > .sl-list.has-2-items > .sl-item (x2)
-  const list = element.querySelector('.column-container .sl .sl-list');
-  if (!list) return;
-  const items = Array.from(list.children);
+  // Find columns content in HTML
+  const slList = element.querySelector('.sl-list');
+  let columnItems = [];
+  if (slList) {
+    columnItems = Array.from(slList.children);
+  }
 
-  // 3. For each column, extract ALL direct content as elements, preserve order and formatting
-  const colCells = items.map(item => {
-    // If there are multiple children, gather them in order
-    // For the first column: two .cm-rich-text blocks
-    // For the second column: image block
-    const children = Array.from(item.children);
-    // Filter out empty wrappers (for robustness)
-    const filtered = children.filter(el => {
-      // Remove empty wrappers (like empty divs)
-      if (el.childElementCount === 0 && !el.textContent.trim()) return false;
-      return true;
-    });
-    // If only one child and it's an image block, return the image only
-    if (filtered.length === 1) {
-      const img = filtered[0].querySelector('img');
-      if (img) return img;
-    }
-    // Otherwise, return all non-empty children
-    return filtered;
-  });
+  // Prepare the columns (second row)
+  const columns = [];
 
-  // 4. Table: header, then a content row with cols
-  const cells = [headerRow, colCells];
+  // First column: all rich text blocks from the first .sl-item
+  if (columnItems.length > 0) {
+    const firstColItem = columnItems[0];
+    // Find all immediate .cm.cm-rich-text children
+    const richTextBlocks = Array.from(firstColItem.querySelectorAll('.cm.cm-rich-text'));
+    columns.push(richTextBlocks);
+  } else {
+    columns.push(document.createTextNode(''));
+  }
 
-  // 5. Create block table
+  // Second column: image from second .sl-item
+  if (columnItems.length > 1) {
+    const secondColItem = columnItems[1];
+    // Find the first <img> inside
+    const img = secondColItem.querySelector('img');
+    columns.push(img ? img : document.createTextNode(''));
+  } else {
+    columns.push(document.createTextNode(''));
+  }
+
+  // Compose table as per requirements: header is a single cell, next row contains two cells
+  const cells = [headerRow, columns];
+
+  // Create the block and replace the element
   const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // 6. Replace original element
   element.replaceWith(block);
 }

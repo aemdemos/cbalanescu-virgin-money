@@ -1,35 +1,37 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row for the table
-  const headerRow = ['Cards (cards38)'];
+  // Find the card list container
+  const cardList = element.querySelector('.sl-list');
+  if (!cardList) return;
+  // Each .sl-item contains two cards (sections)
+  const cardItems = Array.from(cardList.querySelectorAll(':scope > .sl-item'));
 
-  // Find all card sections
-  const cardSections = Array.from(element.querySelectorAll('section.cm-content-tile, section.cm.cm-content-tile'));
+  // Table header: block name exactly as specified
+  const rows = [['Cards (cards38)']];
 
-  const rows = cardSections.map(section => {
-    // First cell: first <img> found in the card
-    const img = section.querySelector('img');
-    const imageCell = img || '';
-
-    // Second cell: reference the entire .content block (all heading, text, links, etc)
-    const contentDiv = section.querySelector('.content');
-    let textCell = '';
-    if (contentDiv) {
-      // Remove empty subheading paragraphs (if any)
-      Array.from(contentDiv.querySelectorAll('p.subheading')).forEach(p => {
-        if (!p.textContent.trim()) {
-          p.remove();
-        }
-      });
-      // Reference the content block for the table cell
-      textCell = contentDiv;
-    }
-    return [imageCell, textCell];
+  // Aggregate all cards (sections) in row order
+  cardItems.forEach((item) => {
+    const sections = Array.from(item.querySelectorAll(':scope > section'));
+    sections.forEach((section) => {
+      // First column: image/icon (mandatory), the <img> inside .image
+      const imageWrapper = section.querySelector('.image');
+      let imageCell = '';
+      if (imageWrapper) {
+        const imgEl = imageWrapper.querySelector('img');
+        if (imgEl) imageCell = imgEl;
+      }
+      // Second column: all content from .content (heading, text, cta etc)
+      // Reference the actual .content element so all formatting and links are preserved
+      let textCell = '';
+      const contentEl = section.querySelector('.content');
+      if (contentEl) {
+        textCell = contentEl;
+      }
+      rows.push([imageCell, textCell]);
+    });
   });
-  
-  // Build the table
-  const cells = [headerRow, ...rows];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  // Replace original element
-  element.replaceWith(table);
+
+  // Create and replace block
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(block);
 }

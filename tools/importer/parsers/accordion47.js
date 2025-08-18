@@ -1,58 +1,48 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header
+  // Header row must match the required block name
   const headerRow = ['Accordion (accordion47)'];
+  const rows = [headerRow];
 
-  // Find all accordion items (li elements)
-  const items = Array.from(element.querySelectorAll('ul.accordion-list > li'));
-
-  // Build table rows: each row = [title cell, content cell]
-  const rows = items.map(li => {
-    // Title cell: get the anchor text without the .ec div
-    const a = li.querySelector('a.accordion-item');
-    // Remove the .ec div from the anchor (if present)
-    const ecDiv = a.querySelector('.ec');
-    if (ecDiv) ecDiv.remove();
-    // Compose the title: preserve HTML structure inside the anchor except the ec div
-    // If anchor contains other formatting (like <strong> etc), preserve it
-    let titleCell = a;
-
-    // Content cell: get the expandcollapse-content div
-    const contentDiv = li.querySelector('.expandcollapse-content');
-    // Find the main content block inside the content div
-    // Usually this is a div.cm-rich-text or .module__content
-    let contentArr = [];
-    Array.from(contentDiv.children).forEach(child => {
-      // Only include actual content elements, not empty wrappers
-      if (child.classList.contains('cm-rich-text') || child.classList.contains('module__content') || child.tagName === 'UL' || child.tagName === 'P') {
-        // For rich-text/module__content, include all children (paragraphs, lists, etc)
-        if (child.children.length > 0) {
-          contentArr.push(...Array.from(child.children));
-        } else {
-          contentArr.push(child);
-        }
-      } else if (child.tagName === 'P' || child.tagName === 'UL'|| child.tagName === 'A') {
-        contentArr.push(child);
+  // Find all immediate li children of the accordion-list
+  const list = element.querySelector('ul.accordion-list');
+  if (list) {
+    const items = Array.from(list.children);
+    items.forEach((li) => {
+      // Find the title link (first <a> inside li)
+      let titleElem = null;
+      const a = li.querySelector('a');
+      if (a) {
+        // Remove icon div for clean title
+        const icon = a.querySelector('div.ec');
+        if (icon) icon.remove(); // removes from DOM (it is ok, soon replaced)
+        titleElem = a;
+      } else {
+        // Fallback: use first text node
+        titleElem = document.createElement('span');
+        titleElem.textContent = li.textContent.trim();
       }
+
+      // Find the content: <div class="expandcollapse-content">
+      let contentElem = null;
+      const expandContent = li.querySelector('div.expandcollapse-content');
+      if (expandContent) {
+        // Use the inner content, if there is a module__content, use only that
+        const moduleContent = expandContent.querySelector('.module__content');
+        if (moduleContent) {
+          contentElem = moduleContent;
+        } else {
+          contentElem = expandContent;
+        }
+      } else {
+        // Fallback: empty div
+        contentElem = document.createElement('div');
+      }
+      rows.push([titleElem, contentElem]);
     });
-    // Fallback: if nothing added, include everything except aria/empty wrappers
-    if (contentArr.length === 0) {
-      contentArr = Array.from(contentDiv.children);
-    }
-    // Remove any .ec or visually irrelevant elements
-    contentArr = contentArr.filter(el => !(el.classList && el.classList.contains('ec')));
-    // If only one element, use it directly, else use the array
-    const contentCell = contentArr.length === 1 ? contentArr[0] : contentArr;
+  }
 
-    return [titleCell, contentCell];
-  });
-
-  // Compose table data
-  const tableData = [headerRow, ...rows];
-
-  // Create the block table
-  const block = WebImporter.DOMUtils.createTable(tableData, document);
-
-  // Replace element with block
+  // Create the table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(block);
 }

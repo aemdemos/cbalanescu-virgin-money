@@ -1,34 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row for Accordion block EXACTLY as specified
+  // ACCORDION BLOCK HEADER
   const headerRow = ['Accordion (accordion28)'];
 
-  // 2. Find all .filtered-content blocks inside the element (each represents an accordion item)
-  const filteredContents = Array.from(element.querySelectorAll('.filtered-content'));
-  
-  // 3. For each accordion item, create a row with:
-  //    - Title cell: Use the 'data-title' attribute
-  //    - Content cell: Reference the column-container, or the section itself if missing
-  const rows = filteredContents.map((section) => {
-    // Title extraction (dynamic, not hardcoded)
-    let titleText = section.getAttribute('data-title') || '';
-    // Always use a <p> for the title text for consistency and to match HTML semantics
-    const titleElem = document.createElement('p');
-    titleElem.textContent = titleText;
-    
-    // Content reference (full referenced element, not clone)
-    let contentElem = section.querySelector('.column-container');
-    if (!contentElem) contentElem = section; // fallback
+  // Find all accordion items (each .filtered-content block)
+  const filteredItems = Array.from(element.querySelectorAll('.filtered-content'));
 
-    return [titleElem, contentElem];
+  // Compose block table rows per accordion item
+  const rows = filteredItems.map((item) => {
+    // TITLE CELL: data-title attribute (mandatory)
+    let title = item.getAttribute('data-title');
+    // Fallback: get h3 inside item
+    if (!title) {
+      const h3 = item.querySelector('h3');
+      title = h3 ? h3.textContent.trim() : '';
+    }
+    // Create a div for the title to ensure semantic meaning and allow rich formatting (should not create with hardcoded string)
+    const titleElem = document.createElement('div');
+    titleElem.textContent = title;
+
+    // CONTENT CELL: take the entire .column-container inside item
+    const contentElem = item.querySelector('.column-container');
+    // If content missing, fallback to empty div
+    const bodyCell = contentElem ? contentElem : document.createElement('div');
+
+    return [titleElem, bodyCell];
   });
 
-  // 4. Compose final table data for block (first row is header)
+  // Compose the full table for the block
   const cells = [headerRow, ...rows];
+  const block = WebImporter.DOMUtils.createTable(cells, document);
 
-  // 5. Create the table block
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-
-  // 6. Replace the original element with the new table block
-  element.replaceWith(table);
+  // Replace original element with new block table
+  element.replaceWith(block);
 }

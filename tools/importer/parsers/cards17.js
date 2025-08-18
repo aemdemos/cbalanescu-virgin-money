@@ -1,51 +1,62 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block header row exactly as required
+  // Table header matches EXACTLY: Cards (cards17)
   const headerRow = ['Cards (cards17)'];
   const cells = [headerRow];
 
-  // Get all card items
-  const items = element.querySelectorAll('.sl-item');
-
+  // Get all cards (each .sl-item > section.cm-content-tile)
+  const items = element.querySelectorAll('.sl-item > section.cm-content-tile');
   items.forEach((item) => {
-    const section = item.querySelector('.cm-content-tile');
-    if (!section) return;
-
-    // Image: find first <img> inside .image
-    let imgEl = null;
-    const imageWrapper = section.querySelector('.image');
-    if (imageWrapper) {
-      imgEl = imageWrapper.querySelector('img');
+    // Image cell: find first img inside the card
+    let imgCell = null;
+    const img = item.querySelector('.image img');
+    if (img) {
+      imgCell = img;
+    } else {
+      imgCell = '';
     }
 
-    // Content cell (text, headings, lists, CTA links)
-    const contentEl = section.querySelector('.content');
-    const textContent = [];
-    if (contentEl) {
-      // Heading (h3.header) - reference directly
-      const heading = contentEl.querySelector('h3.header');
-      if (heading) textContent.push(heading);
+    // Text cell: collect all "content" children except empty .subheading
+    const contentDiv = item.querySelector('.content');
+    let textParts = [];
+    if (contentDiv) {
+      // Title: h3.header (with <b> inside)
+      const h3 = contentDiv.querySelector('h3.header');
+      if (h3) {
+        textParts.push(h3);
+      }
 
-      // Include all <p> and <ul> except .subheading
-      contentEl.childNodes.forEach((child) => {
-        if (child.nodeType === 1) {
-          // Exclude <p class="subheading">
-          if (child.matches('p.subheading')) return;
-          // Exclude empty <p> unless it contains links (e.g., for CTA)
-          if (child.matches('p') && child.textContent.trim() === '' && !child.querySelector('a')) return;
-          // Include <p> and <ul>
-          if (child.matches('p, ul')) {
-            textContent.push(child);
+      // All children in contentDiv except empty subheading
+      Array.from(contentDiv.children).forEach((child) => {
+        if (
+          child.tagName === 'P' && 
+          child.classList.contains('subheading') && 
+          !child.textContent.trim()
+        ) {
+          // skip empty subheading
+          return;
+        }
+        // Include paragraphs and lists for descriptive text and CTAs
+        if (
+          child.tagName === 'P' || 
+          child.tagName === 'UL'
+        ) {
+          // skip empty paragraphs (usually non-breaking space)
+          if (child.tagName === 'P' && !child.textContent.trim() && child.innerHTML.includes('&nbsp;')) {
+            return;
           }
+          textParts.push(child);
         }
       });
     }
+    // If there are no parts, fallback to empty string
+    let textCell = textParts.length === 0 ? '' : (textParts.length === 1 ? textParts[0] : textParts);
 
-    // Final row: [image, all text/links]
-    cells.push([imgEl, textContent]);
+    cells.push([imgCell, textCell]);
   });
 
-  // Create table and replace element
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(blockTable);
+  // Create table using referenced elements
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // Replace the original element
+  element.replaceWith(block);
 }

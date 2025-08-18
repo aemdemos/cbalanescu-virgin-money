@@ -1,52 +1,36 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Ensure header row matches specification
+  // Cards (cards43) block always starts with a header row
   const headerRow = ['Cards (cards43)'];
+  const cells = [headerRow];
 
-  // Find all direct card items
-  const cardItems = Array.from(element.querySelectorAll('.sl-list > .sl-item'));
-  const rows = cardItems.map(card => {
-    // Within each card
-    const contentPanel = card.querySelector('.cm-content-panel-container');
-    if (!contentPanel) return [document.createElement('div'), document.createElement('div')];
-    const richText = contentPanel.querySelector('.cm-rich-text');
-    if (!richText) return [document.createElement('div'), document.createElement('div')];
+  // Get all immediate .sl-item children (each card)
+  const cardElements = element.querySelectorAll('.sl-item');
+  cardElements.forEach(cardEl => {
+    // Find the image (must be first img inside the card)
+    const img = cardEl.querySelector('img');
 
-    // Image/icon (first cell) - always present in example
-    const img = richText.querySelector('img');
-    // If missing, add empty div for placeholder
-    const imageCell = img ? img : document.createElement('div');
-
-    // Text cell: heading, description, CTA
-    const textParts = [];
-    // Heading
-    const heading = richText.querySelector('h5, h4, h3');
-    if (heading) textParts.push(heading);
-    // Description: <p> except those containing <img> or which are only CTA (with <a>)
-    const ps = Array.from(richText.querySelectorAll('p'));
-    // p with <img>
-    const psWithoutImg = ps.filter(p => !p.querySelector('img'));
-    // Find CTA p (contains <a>)
-    let ctaP = null;
-    const descPs = [];
-    psWithoutImg.forEach(p => {
-      if (p.querySelector('a')) {
-        ctaP = p;
-      } else {
-        descPs.push(p);
-      }
-    });
-    descPs.forEach(p => textParts.push(p));
-    if (ctaP) textParts.push(ctaP);
-
-    // If no descriptive content, add an empty div
-    if (textParts.length === 0) textParts.push(document.createElement('div'));
-
-    return [imageCell, textParts];
+    // Find rich text container
+    const richText = cardEl.querySelector('.cm-rich-text');
+    let textElements = [];
+    if (richText) {
+      // Gather all children except the paragraph containing the image
+      Array.from(richText.children).forEach(child => {
+        if (!(child.tagName === 'P' && child.querySelector('img'))) {
+          textElements.push(child);
+        }
+      });
+    }
+    // Edge case: if image missing, cell will be empty
+    // Second cell: all text elements as array (preserves headings, links, formatting)
+    cells.push([
+      img || '',
+      textElements.length ? textElements : ''
+    ]);
   });
 
-  // Build table
-  const cells = [headerRow, ...rows];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Create the block table
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  // Replace original element
+  element.replaceWith(table);
 }

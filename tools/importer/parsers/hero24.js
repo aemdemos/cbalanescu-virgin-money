@@ -1,31 +1,29 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the main content container which holds heading, subheading, CTA
-  let contentContainer = element.querySelector('.cm-rich-text, .module__content');
-  if (!contentContainer) {
-    // fallback: look for a div containing at least a heading
-    const divs = element.querySelectorAll(':scope > div');
-    for (const div of divs) {
-      if (div.querySelector('h1, h2, h3, h4, h5, h6')) {
-        contentContainer = div;
-        break;
-      }
-    }
+  // Find the content panel container
+  const panel = element.querySelector('.cm-content-panel-container');
+  // The content (title, subheading, cta) is inside cm-rich-text
+  let contentCell = null;
+  if (panel) {
+    const richText = panel.querySelector('.cm-rich-text');
+    // If richText exists, use it, otherwise fallback to the panel itself
+    contentCell = richText || panel;
+  } else {
+    // Fallback in case structure changes
+    const richText = element.querySelector('.cm-rich-text');
+    contentCell = richText || element;
   }
-  // If still not found, fallback to the element itself
-  if (!contentContainer) {
-    contentContainer = element;
-  }
-  // Prepare table rows
+
+  // Table header as specified
   const headerRow = ['Hero (hero24)'];
-  // No background image, leave blank
-  const bgRow = [''];
-  // Third row: content
-  const contentRow = [contentContainer];
+  // No background image for this example, so empty string
+  const backgroundRow = [''];
+  // The content (title, subheading, CTA) goes in the third row
+  const contentRow = [contentCell];
 
   const cells = [
     headerRow,
-    bgRow,
+    backgroundRow,
     contentRow
   ];
 

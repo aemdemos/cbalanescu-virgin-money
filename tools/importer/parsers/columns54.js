@@ -1,37 +1,55 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row, exactly as in the example
+  // Header row as specified in the example
   const headerRow = ['Columns (columns54)'];
 
-  // Find the two rows (each sl-item in the top-level .sl-list)
-  const topSlList = element.querySelector(':scope > div > div > div.sl-list');
-  if (!topSlList) return;
-  const rowItems = Array.from(topSlList.querySelectorAll(':scope > .sl-item'));
+  // Find the two columns in the top-level .sl-list
+  const mainSlList = element.querySelector(':scope > .sl > .sl-list.has-2-items');
+  if (!mainSlList) return;
+  const mainSlItems = Array.from(mainSlList.querySelectorAll(':scope > .sl-item'));
+  if (mainSlItems.length !== 2) return;
 
-  // For this HTML, each row contains 4 logos (images), so we want 2 columns with 4 images each, matching the visual division of the example
-  // So, each cell in the content row will be a <div> containing all 4 logo sections for each row
-
-  // Prepare the two columns: left and right
-  const columns = [];
-  for (let i = 0; i < rowItems.length; i++) {
-    const rowItem = rowItems[i];
-    // Get the 4 logo sections in this row
-    const innerList = rowItem.querySelector(':scope > .column-container > .sl > .sl-list');
-    if (!innerList) {
-      columns.push(document.createElement('div')); // Empty placeholder if missing
-      continue;
-    }
-    const logoSections = Array.from(innerList.querySelectorAll(':scope > .sl-item > section.cm.cm-image'));
-    // Put all logos into a <div>
-    const cellDiv = document.createElement('div');
-    logoSections.forEach(section => cellDiv.appendChild(section));
-    columns.push(cellDiv);
+  // Helper to extract ALL content (text nodes, images, figures, lists, etc.) from each inner column cell
+  function extractColumnContent(colItem) {
+    // Find the .sl-list.has-4-items inside the column
+    const innerSlList = colItem.querySelector(':scope > .column-container > .sl > .sl-list.has-4-items');
+    if (!innerSlList) return [];
+    // For each sl-item, include ALL children, preserving semantic structure and text
+    return Array.from(innerSlList.querySelectorAll(':scope > .sl-item')).map(item => {
+      const cellContent = [];
+      // Include all element children (sections, figures, images, etc.)
+      Array.from(item.children).forEach(child => {
+        cellContent.push(child);
+      });
+      // Include all non-empty text nodes DIRECTLY under .sl-item
+      Array.from(item.childNodes).forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const txt = node.textContent.trim();
+          if (txt) cellContent.push(document.createTextNode(txt));
+        }
+      });
+      // If no children, use item itself
+      if (cellContent.length === 0) return item;
+      // If only one child, return it directly, else array
+      return cellContent.length === 1 ? cellContent[0] : cellContent;
+    });
   }
 
-  // Compose table data: header, then a single row with two columns
-  const tableData = [headerRow, columns];
+  // Get all blocks for left and right columns
+  const leftBlocks = extractColumnContent(mainSlItems[0]);
+  const rightBlocks = extractColumnContent(mainSlItems[1]);
 
-  // Replace the original element with the table
-  const table = WebImporter.DOMUtils.createTable(tableData, document);
+  // Defensive check: Expect 4 blocks per column
+  if (leftBlocks.length !== 4 || rightBlocks.length !== 4) return;
+
+  // Organize per example: two rows, two columns, each cell can have multiple elements
+  const cells = [
+    headerRow,
+    [ [leftBlocks[0], leftBlocks[1]], [rightBlocks[0], rightBlocks[1]] ],
+    [ [leftBlocks[2], leftBlocks[3]], [rightBlocks[2], rightBlocks[3]] ]
+  ];
+
+  // Create the table block and replace the original element
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

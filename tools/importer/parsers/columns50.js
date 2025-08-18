@@ -1,51 +1,35 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Component/block name
+  // 1. Table header (matches example exactly)
   const headerRow = ['Columns (columns50)'];
 
-  // Find the structure: top-level .sl-list with 2 .sl-item children
+  // 2. Find the two main columns (left and right)
+  // The structure is: 
+  // div.column-container
+  //   > div.sl
+  //     > div.sl-list.has-2-items
+  //       > div.sl-item (left)
+  //       > div.sl-item (right)
   const slList = element.querySelector('.sl-list.has-2-items');
-  let leftColContent = [];
-  let rightColContent = [];
+  if (!slList) return; // edge case: no columns, don't create block
+  const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
+  if (slItems.length < 2) return; // need at least 2 columns
 
-  if (slList) {
-    const items = slList.querySelectorAll(':scope > .sl-item');
-    // LEFT COLUMN (first .sl-item)
-    if (items[0]) {
-      // Find rich text (heading)
-      const leftRich = items[0].querySelector('.cm-rich-text');
-      if (leftRich) leftColContent.push(leftRich);
-    }
+  // 3. For each column, preserve all content inside the sl-item
+  // Reference the actual sl-item DOM element (do not clone)
+  // This keeps all headings, paragraphs, images, lists, etc. as in the HTML
+  const leftColumn = slItems[0];
+  const rightColumn = slItems[1];
 
-    // RIGHT COLUMN (second .sl-item)
-    if (items[1]) {
-      // Find rich text paragraphs
-      const rightRich = items[1].querySelector('.cm-rich-text');
-      if (rightRich) rightColContent.push(rightRich);
+  // 4. Table structure: two columns, one row (aside from header)
+  const cells = [
+    headerRow,
+    [leftColumn, rightColumn],
+  ];
 
-      // Find the inner column-container for awards images
-      const awardsContainer = items[1].querySelector('.column-container');
-      if (awardsContainer) {
-        // This container may contain .sl > .sl-list.has-1-item > .sl-item > .cm-rich-text
-        const awardsList = awardsContainer.querySelectorAll('.sl-list.has-1-item > .sl-item > .cm-rich-text');
-        awardsList.forEach(awardsRich => {
-          rightColContent.push(awardsRich);
-        });
-      }
-    }
-  }
+  // 5. Create columns block table
+  const table = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Safety: fallback to original if leftColContent or rightColContent is empty
-  if (leftColContent.length === 0) leftColContent.push(document.createTextNode(''));
-  if (rightColContent.length === 0) rightColContent.push(document.createTextNode(''));
-
-  // Create one row with the two columns
-  const columnsRow = [leftColContent, rightColContent];
-
-  // Build table
-  const cells = [headerRow, columnsRow];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace the original element
-  element.replaceWith(block);
+  // 6. Replace the original element with the table
+  element.replaceWith(table);
 }

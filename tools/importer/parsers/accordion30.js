@@ -2,39 +2,54 @@
 export default function parse(element, { document }) {
   // Accordion block header row
   const headerRow = ['Accordion (accordion30)'];
-  // Each <li> is an accordion item
-  const items = Array.from(element.querySelectorAll(':scope > li'));
-  const rows = [];
+  const rows = [headerRow];
 
-  items.forEach((item) => {
-    // Title cell: the <a> tag inside <li>, remove any trailing .ec div
-    const a = item.querySelector('a');
-    let titleCell = null;
-    if (a) {
-      // Remove extraneous .ec div if present
-      const ecDiv = a.querySelector(':scope > .ec');
-      if (ecDiv) ecDiv.remove();
-      titleCell = a;
-    } else {
-      titleCell = document.createElement('span');
-    }
-    // Content cell: the .expandcollapse-content div inside <li>
-    let contentCell = null;
-    const expandDiv = item.querySelector(':scope > .expandcollapse-content');
-    if (expandDiv) {
-      // Prefer the rich text content inside
-      const richContent = expandDiv.querySelector('.cm-rich-text');
+  // Get all <li> items (each is an accordion panel)
+  const items = element.querySelectorAll(':scope > li');
+
+  items.forEach((li) => {
+    // --- TITLE CELL ---
+    // The clickable <a> contains the question/title
+    // Ignore child <div class="ec">, only get text
+    const a = li.querySelector('a');
+    let title = '';
+    // Only use direct text nodes, not children like <div>
+    a.childNodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        title += node.textContent;
+      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'DIV') {
+        title += node.textContent;
+      }
+    });
+    title = title.trim();
+    // Use <p> element for semantic heading (matches screenshot styling)
+    const titleEl = document.createElement('p');
+    titleEl.textContent = title;
+
+    // --- CONTENT CELL ---
+    // Find the expanded content for this panel
+    const contentDiv = li.querySelector('div.expandcollapse-content');
+    let contentCellEl;
+    if (contentDiv) {
+      // Prefer the .module__content div if present
+      const richContent = contentDiv.querySelector('.module__content');
       if (richContent) {
-        contentCell = richContent;
+        contentCellEl = richContent; // Reference existing element
       } else {
-        contentCell = expandDiv;
+        // If not, reference the entire contentDiv
+        contentCellEl = contentDiv;
       }
     } else {
-      contentCell = document.createElement('div');
+      // If content is missing, use empty div
+      contentCellEl = document.createElement('div');
     }
-    rows.push([titleCell, contentCell]);
+
+    rows.push([titleEl, contentCellEl]);
   });
-  const tableCells = [headerRow, ...rows];
-  const block = WebImporter.DOMUtils.createTable(tableCells, document);
+
+  // Build the block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+
+  // Replace the original accordion element
   element.replaceWith(block);
 }

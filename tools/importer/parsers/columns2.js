@@ -1,35 +1,38 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block name header row, matching the example
+  // Header matches exactly as required
   const headerRow = ['Columns (columns2)'];
 
-  // Find the .sl-list which contains the column items
-  const slList = element.querySelector('.sl-list');
-  // If not found, fallback to all .sl-item under the element
-  const slItems = slList ? slList.querySelectorAll(':scope > .sl-item') : element.querySelectorAll(':scope > .sl-item');
-  // Get the column count (should be 2 for columns2)
-  const items = Array.from(slItems);
-
-  // Defensive: ensure we have at least one column
-  if (items.length === 0) {
-    // If no items found, replace with a block with only the header
-    const table = WebImporter.DOMUtils.createTable([headerRow], document);
-    element.replaceWith(table);
-    return;
+  // Safely find the columns
+  let columns = [];
+  // The main list container for columns
+  const list = element.querySelector('.sl-list.has-2-items');
+  if (list) {
+    const items = Array.from(list.children).filter(child => child.classList.contains('sl-item'));
+    // Each sl-item contains a .cm-rich-text block
+    columns = items.map(item => {
+      // Reference the full .cm-rich-text block for semantic/format resilience
+      const content = item.querySelector('.cm-rich-text');
+      // If missing, safe fallback to empty div
+      return content ? content : document.createElement('div');
+    });
+    // Ensure exactly 2 columns
+    while (columns.length < 2) {
+      columns.push(document.createElement('div'));
+    }
+    columns = columns.slice(0,2);
+  } else {
+    // Fallback: get .cm-rich-text blocks directly from container
+    const richTexts = element.querySelectorAll('.cm-rich-text');
+    columns = Array.from(richTexts);
+    while (columns.length < 2) {
+      columns.push(document.createElement('div'));
+    }
+    columns = columns.slice(0,2);
   }
 
-  // For each column, reference its .cm-rich-text block (the actual content)
-  const cells = items.map((item) => {
-    // Find the rich text content for this column
-    const richContent = item.querySelector('.cm-rich-text');
-    // If missing, fallback to the whole item
-    return richContent || item;
-  });
-
-  // Combine to final table structure: header row, then columns in second row
-  const rows = [headerRow, cells];
-
-  // Create table and replace original element
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  // Table rows: header, then the columns as a row
+  const cells = [headerRow, columns];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
   element.replaceWith(table);
 }

@@ -1,45 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Block table header must exactly match per requirements
+  // Table header matches example exactly
   const headerRow = ['Cards (cards5)'];
-  const cells = [headerRow];
+  const rows = [headerRow];
 
-  // The list of cards is in .sl-list, under .sl-item > .cm.cm-icon-title
   const slList = element.querySelector('.sl-list');
   if (!slList) return;
 
-  // Each .sl-item may have one or more sections (.cm.cm-icon-title)
-  const slItems = Array.from(slList.querySelectorAll('.sl-item'));
-  const cardSections = [];
-  slItems.forEach((item) => {
-    const sections = Array.from(item.querySelectorAll('section.cm.cm-icon-title'));
-    if (sections.length > 0) {
-      sections.forEach(section => cardSections.push(section));
-    }
+  // Each .sl-item may contain multiple card sections
+  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+  slItems.forEach((slItem) => {
+    // Skip pure rich-text intro block
+    if (slItem.querySelector('.cm-rich-text')) return;
+    // Find each section.cm-icon-title (card)
+    const cardSections = Array.from(slItem.querySelectorAll(':scope > section.cm-icon-title'));
+    cardSections.forEach(section => {
+      // First cell: image/icon
+      const img = section.querySelector('.header img');
+      // Second cell: text content (heading and description)
+      const title = section.querySelector('.header h2');
+      const desc = section.querySelector('.content p');
+      // Compose text cell (preserving strong for heading and paragraph for description)
+      const cellContent = document.createElement('div');
+      if (title) {
+        // Use <strong> for card heading to match example semantics
+        const strong = document.createElement('strong');
+        strong.textContent = title.textContent.trim();
+        cellContent.appendChild(strong);
+      }
+      if (desc) {
+        if (title) cellContent.appendChild(document.createElement('br'));
+        // Reference existing paragraph node directly
+        cellContent.appendChild(desc);
+      }
+      rows.push([
+        img || '',
+        cellContent
+      ]);
+    });
   });
 
-  // For each card, extract icon (mandatory), title (optional), description (optional)
-  cardSections.forEach(section => {
-    // 1st cell: the image/icon element in .header img
-    const img = section.querySelector('.header img');
-
-    // 2nd cell: heading (h2.header) and content (p)
-    const heading = section.querySelector('.header h2');
-    // Retain heading and paragraph DOM nodes if present
-    const contentDiv = section.querySelector('.content');
-    let description = null;
-    if (contentDiv) {
-      description = contentDiv.querySelector('p');
-    }
-    // Combine heading and description, only if they exist
-    const textCell = [];
-    if (heading) textCell.push(heading);
-    if (description) textCell.push(description);
-
-    cells.push([img, textCell]);
-  });
-
-  // Create the block table and replace the element
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }
