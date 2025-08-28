@@ -284,14 +284,12 @@
 
 
 .cards.cards12 {
-  /* Restrict the container, left-aligned instead of auto-centered */
   max-width: 1100px;
   margin: 40px 0 0 48px;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Cards grid: left aligned, with responsive columns and a tighter gap */
 .cards.cards12 > ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(260px, 1fr));
@@ -303,7 +301,6 @@
   width: auto;
 }
 
-/* Responsive: stack cards and add side padding on small screens */
 @media (width <= 900px) {
   .cards.cards12 {
     margin-left: 0;
@@ -317,7 +314,6 @@
   }
 }
 
-/* Card shape */
 .cards.cards12 > ul > li {
   display: flex;
   flex-direction: column;
@@ -331,7 +327,6 @@
   border: 1px solid #e5e5e5;
 }
 
-/* Top red block */
 .cards.cards12 .cards-card-body:first-child {
   background: #d50000;
   height: 52px;
@@ -344,7 +339,6 @@
   padding: 0;
 }
 
-/* Hide "null" content visually */
 .cards.cards12 .cards-card-body:first-child p {
   opacity: 0;
   height: 0;
@@ -352,7 +346,6 @@
   padding: 0;
 }
 
-/* Card content area */
 .cards.cards12 .cards-card-body:last-child {
   display: flex;
   flex-direction: column;
@@ -361,7 +354,6 @@
   margin: 0;
 }
 
-/* Card Title */
 .cards.cards12 .cards-card-body:last-child h3,
 .cards.cards12 .cards-card-body:last-child strong {
   color: #6A1B9A;
@@ -371,7 +363,6 @@
   line-height: 1.3;
 }
 
-/* Card description */
 .cards.cards12 .cards-card-body:last-child p:not(.button-container) {
   color: #212121;
   font-size: 15px;
@@ -379,13 +370,11 @@
   line-height: 1.5;
 }
 
-/* Button container for spacing */
 .cards.cards12 .cards-card-body:last-child .button-container {
   margin-top: 10px;
   text-align: left;
 }
 
-/* Outlined red button, compact, left-aligned */
 .cards.cards12 .cards-card-body:last-child .button {
   border: 2px solid #d50000;
   background: #fff;
@@ -403,7 +392,6 @@
   display: inline-block;
 }
 
-/* Button hover for clear feedback */
 .cards.cards12 .cards-card-body:last-child .button:hover,
 .cards.cards12 .cards-card-body:last-child .button:focus {
   background: #fff5f5;
@@ -411,9 +399,164 @@
   border-color: #b71c1c;
 }
 
-/* Superscript styling for footnote numbers */
 .cards.cards12 sup {
   font-size: 11px;
   vertical-align: super;
   color: #212121;
+}
+
+
+.cards.cards13 {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.cards.cards13 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (width <= 900px) {
+  .cards.cards13 > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (width <= 600px) {
+  .cards.cards13 > ul {
+    grid-template-columns: 1fr;
+    gap: 12px 0;
+  }
+}
+
+/* Card style and alignment */
+.cards.cards13 > ul > li {
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 18px 16px 16px;
+  min-width: 0;
+  box-sizing: border-box;
+  text-align: left;
+  position: relative;
+}
+
+/* Icon positioning: absolute left of heading, fine-tuned for baseline align */
+.cards.cards13 > ul > li .cards-card-image {
+  position: absolute;
+  top: 22px;
+  left: 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  height: 21px;
+  width: 21px;
+}
+
+.cards.cards13 > ul > li .cards-card-image img {
+  height: 21px;
+  width: 21px;
+  object-fit: contain;
+  display: block;
+  vertical-align: bottom;
+  filter: brightness(0) saturate(100%) invert(18%) sepia(70%) saturate(1513%) hue-rotate(294deg) brightness(96%) contrast(96%);
+}
+
+/* Card body style */
+.cards.cards13 > ul > li .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+/* Heading style and left margin for icon offset, font size increased and margin minimized */
+.cards.cards13 > ul > li .cards-card-body > h2 {
+  color: #8a2e6f;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-left: 32px;
+  margin-bottom: 0;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Description style, color darkened and margin minimized */
+.cards.cards13 > ul > li .cards-card-body > p:not(.button-container) {
+  color: #666;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 6px;
+  margin-top: 0;
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* Button container, tighter margin */
+.cards.cards13 > ul > li .button-container {
+  width: 100%;
+  text-align: left;
+  margin-top: 2px;
+}
+
+/* Button style, padding reduced */
+.cards.cards13 > ul > li .button-container .button {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #e94e8a;
+  color: #e94e8a;
+  background: #fff;
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  margin: 0;
+  text-align: left;
+  box-sizing: border-box;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* Arrow at end of button using SVG background */
+.cards.cards13 > ul > li .button-container .button::after {
+  display: inline-block;
+  margin-left: 8px;
+  width: 1em;
+  height: 1em;
+  background: url('data:image/svg+xml;utf8,<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M4 8h8M10 6l2 2-2 2" stroke="%23e94e8a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>') no-repeat center center;
+  background-size: contain;
+  vertical-align: middle;
+}
+
+/* Button hover/focus */
+.cards.cards13 > ul > li .button-container .button:hover,
+.cards.cards13 > ul > li .button-container .button:focus {
+  background: #fef4f9;
+  color: #c2235c;
+  border-color: #c2235c;
+}
+
+/* Remove extra default margins */
+.cards.cards13 > ul,
+.cards.cards13 > ul > li,
+.cards.cards13 .cards-card-body h2,
+.cards.cards13 .cards-card-body p {
+  margin-block: 0;
 }
