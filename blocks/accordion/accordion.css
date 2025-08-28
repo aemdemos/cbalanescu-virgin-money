@@ -556,7 +556,6 @@
   padding: 0 12px;
 }
 
-/* Show only the first two details as flex children */
 .accordion.accordion30 > details {
   display: none;
 }
@@ -573,7 +572,6 @@
   box-sizing: border-box;
 }
 
-/* Label styling */
 .accordion.accordion30 > details:nth-of-type(1) {
   flex: 1 1 0;
 }
@@ -603,7 +601,6 @@
   display: none;
 }
 
-/* Dropdown "select" styling */
 .accordion.accordion30 > details:nth-of-type(2) {
   flex: 0 0 auto;
 }
@@ -636,7 +633,6 @@
   display: none;
 }
 
-/* Custom chevron imitation for dropdown (using border) */
 .accordion.accordion30 > details:nth-of-type(2) > summary::after {
   display: block;
   position: absolute;
@@ -652,7 +648,6 @@
   content: "";
 }
 
-/* Responsive: stack vertically on very small screens */
 @media (width <= 400px) {
   .accordion.accordion30 {
     flex-direction: column;
@@ -667,5 +662,165 @@
     width: 100%;
     text-align: left;
     justify-content: flex-start;
+  }
+}
+
+
+.accordion.accordion48 {
+  background: #fafafa;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: Inter, sans-serif;
+}
+
+.accordion.accordion48 details {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.accordion.accordion48 details + details {
+  margin-top: 0;
+}
+
+/* More precise row spacing and balance for text/chevron */
+.accordion.accordion48 .accordion-item-label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 12px 28px; /* Reduce right pad so chevron is more visually centered with text */
+  border-bottom: 1px solid #eee;
+  background: #fafafa;
+  min-height: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #888;
+  line-height: 1.5;
+  transition: background 0.2s;
+  gap: 0;
+}
+
+.accordion.accordion48 details:last-child .accordion-item-label {
+  border-bottom: none;
+}
+
+.accordion.accordion48 .accordion-item-label::-webkit-details-marker,
+.accordion.accordion48 .accordion-item-label::marker {
+  display: none;
+  font-size: 0;
+  color: transparent;
+}
+
+.accordion.accordion48 .accordion-item-label .button-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.accordion.accordion48 .accordion-item-label .button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  text-align: left;
+  line-height: 1.5;
+  min-width: 0;
+  max-width: none;
+  display: inline;
+  cursor: pointer;
+  transition: none;
+  white-space: normal;
+  overflow: visible;
+}
+
+.accordion.accordion48 .accordion-item-label .button:hover,
+.accordion.accordion48 .accordion-item-label .button:focus {
+  background: none;
+  color: #888;
+  text-decoration: underline;
+}
+
+/* Chevron: perfect size, balanced buffer from right edge */
+.accordion.accordion48 .accordion-item-label::after {
+  width: 14px;
+  height: 14px;
+  margin-left: 12px;
+  margin-right: 4px; /* Less than before, bring closer to right edge but leave a comfortable gap */
+  vertical-align: middle;
+  display: inline-block;
+  border-right: 2px solid #e53935;
+  border-bottom: 2px solid #e53935;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+  transition: transform 0.2s;
+  box-sizing: border-box;
+  background: none;
+}
+
+.accordion.accordion48 details[open] > .accordion-item-label::after {
+  transform: rotate(-135deg);
+}
+
+.accordion.accordion48 .accordion-item-body {
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #888;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+  font-family: Inter, sans-serif;
+}
+
+.accordion.accordion48 details:not([open]) .accordion-item-body {
+  display: none;
+}
+
+.accordion.accordion48 details:last-child .accordion-item-body {
+  border-bottom: none;
+}
+
+.accordion.accordion48 .accordion-item-body ul,
+.accordion.accordion48 .accordion-item-body ol {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.accordion.accordion48 .accordion-item-body li {
+  color: #888;
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+}
+
+@media (width <= 600px) {
+  .accordion.accordion48 .accordion-item-label {
+    padding: 10px 10px 10px 14px;
+    font-size: 13px;
+  }
+
+  .accordion.accordion48 .accordion-item-label::after {
+    margin-left: 8px;
+    margin-right: 2px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .accordion.accordion48 .accordion-item-body {
+    padding: 10px 14px;
+    font-size: 13px;
   }
 }
