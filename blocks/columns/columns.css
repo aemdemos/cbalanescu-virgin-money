@@ -66,13 +66,11 @@
   border-right: 2px solid #e5e5e5;
 }
 
-/* Restore visibility of everything inside the block */
 .columns.columns4 > div > div > p,
 .columns.columns4 > div > div > h3 {
   display: block;
 }
 
-/* Icon Styles - Do NOT override with background so images show */
 .columns.columns4 img {
   width: 48px;
   height: 48px;
@@ -82,7 +80,6 @@
   object-fit: contain;
 }
 
-/* Headings */
 .columns.columns4 h3 {
   text-align: center;
   font-size: 28px;
@@ -92,17 +89,14 @@
   padding: 0;
 }
 
-/* Left column: Earn, purple heading */
 .columns.columns4 #earn {
   color: #7d1b85;
 }
 
-/* Right column: Redeem, red heading */
 .columns.columns4 #redeem {
   color: #e60000;
 }
 
-/* Description text */
 .columns.columns4 > div > div > p:not(:first-child) {
   color: #333;
   font-size: 17px;
@@ -114,7 +108,6 @@
   max-width: 420px;
 }
 
-/* Responsive: Stack columns on small screens */
 @media (width <=900px) {
   .columns.columns4,
   .columns.columns4 > div {
@@ -131,4 +124,127 @@
   .columns.columns4 > div > div:last-child {
     border-bottom: none;
   }
+}
+
+
+.columns.columns5 {
+  background: #fff;
+  padding: 32px 0;
+}
+
+/* Two-column layout: tighter gap, fully top-aligned */
+.columns.columns5.block.columns-2-cols > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns5.block.columns-2-cols > div {
+    flex-direction: column;
+    gap: 24px;
+    max-width: 100%;
+  }
+}
+
+/* Left column (heading): remove flex, ensure no extra alignment issues */
+.columns.columns5.block.columns-2-cols > div > div:first-child {
+  min-width: 200px;
+  padding-top: 0;
+}
+
+/* Heading style: remove margin to align perfectly with right content */
+.columns.columns5.block.columns-2-cols > div > div:first-child h3 {
+  font-size: 24px;
+  color: #7b1fa2;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
+  padding: 0;
+}
+
+/* Right column (text & button) */
+.columns.columns5.block.columns-2-cols > div > div:last-child {
+  flex: 1 1 0;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0;
+}
+
+/* Support text paragraphs: remove max-width, reduce margin below */
+.columns.columns5.block.columns-2-cols > div > div:last-child > p {
+  font-size: 12px;
+  color: #444;
+  line-height: 1.4;
+  margin: 0 0 6px;
+  padding: 0;
+}
+
+/* Button container margin: slightly reduce for tighter look */
+.columns.columns5.block.columns-2-cols > div > div:last-child > .button-container {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+/* Outlined button in right color */
+.columns.columns5.block.columns-2-cols .button-container .button {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #f44336;
+  background: transparent;
+  color: #f44336;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 6px 18px;
+  box-shadow: none;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Right arrow as SVG background image, visually consistent */
+.columns.columns5.block.columns-2-cols .button-container .button::after {
+  display: inline-block;
+  margin-left: 8px;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='rgb(244,67,54)' xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'><path d='M12.293 17.293a1 1 0 0 1 1.414 0l5-5a1 1 0 0 0 0-1.414l-5-5a1 1 0 1 1 1.414-1.414l5.707 5.707a2 2 0 0 1 0 2.828l-5.707 5.707a1 1 0 0 1-1.414-1.414z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  content: "";
+}
+
+/* Responsive adjustments for smaller screens */
+@media (width <= 900px) {
+  .columns.columns5 {
+    padding: 16px 0;
+  }
+
+  .columns.columns5.block.columns-2-cols > div > div:first-child h3 {
+    font-size: 20px;
+  }
+
+  .columns.columns5.block.columns-2-cols > div > div:last-child > p {
+    font-size: 12px;
+  }
+
+  .columns.columns5.block.columns-2-cols .button-container .button {
+    font-size: 13px;
+    padding: 5px 14px;
+  }
+}
+
+/* Remove the default margin for button from base styles */
+.columns.columns5 .button,
+.columns.columns5 .button.button {
+  margin: 0;
 }
