@@ -243,7 +243,6 @@
   min-height: 220px;
 }
 
-/* LEFT COLUMN: red background with centered book icon */
 .accordion.accordion21::before {
   display: block;
   flex: 0 0 180px;
@@ -274,7 +273,6 @@
   }
 }
 
-/* RIGHT COLUMN: accordion content stacked vertically */
 .accordion.accordion21 > .block {
   flex: 1 1 0%;
   min-width: 0;
@@ -286,7 +284,6 @@
   align-items: stretch;
 }
 
-/* Vertically stack accordion items, full width */
 .accordion.accordion21 > .block > details {
   width: 100%;
   margin: 0;
@@ -294,17 +291,13 @@
   border-radius: 0;
   background: #fff;
   box-sizing: border-box;
-
-  /* Remove horizontal flex so they stack vertically */
   display: block;
 }
 
-/* Divider between items except last */
 .accordion.accordion21 > .block > details:not(:last-of-type) {
   border-bottom: 1px solid #e6e6e6;
 }
 
-/* Accordion summary styling */
 .accordion.accordion21 summary {
   color: #333;
   font-size: 16px;
@@ -324,12 +317,10 @@
   transition: background 0.15s;
 }
 
-/* Hide default marker */
 .accordion.accordion21 summary::-webkit-details-marker {
   display: none;
 }
 
-/* Caret arrow */
 .accordion.accordion21 summary::after {
   display: block;
   width: 12px;
@@ -355,7 +346,6 @@
   background: #f8f8f8;
 }
 
-/* Adjust question text (summary > p) */
 .accordion.accordion21 summary > p {
   margin: 0;
   color: #333;
@@ -365,7 +355,6 @@
   line-height: 1.35;
 }
 
-/* Accordion body */
 .accordion.accordion21 .accordion-item-body {
   background: #fff;
   padding: 0 0 16px;
@@ -376,7 +365,6 @@
   background: #fff;
 }
 
-/* "See more" link styling */
 .accordion.accordion21 #see-more a,
 .accordion.accordion21 h6#see-more a {
   color: #E60000;
@@ -392,10 +380,179 @@
   margin: 18px 0 0;
 }
 
-/* Responsive adjustment for right column padding */
 @media (width <= 700px) {
   .accordion.accordion21 > .block {
     padding-left: 0;
     padding-top: 16px;
   }
+}
+
+
+.accordion.accordion27 {
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--body-font-family);
+  position: relative;
+  z-index: 1;
+}
+
+/* Restore visibility and stacking for details; remove margins/padding */
+.accordion.accordion27 details {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+  background: none;
+}
+
+/* SUMMARY ROW: flex row, increased left/right/vertical padding for breathing room */
+.accordion.accordion27 summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 16px 24px;
+  background: none;
+  cursor: pointer;
+  list-style: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #505050;
+  border-bottom: 1px solid #EEE;
+  transition: background-color 0.2s;
+  outline: none;
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+}
+
+/* Remove divider from last summary */
+.accordion.accordion27 details:last-child summary {
+  border-bottom: none;
+}
+
+/* Fix .button-container so <a> stays flex child and does not collapse */
+.accordion.accordion27 .button-container {
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+
+/* Make .button look like plain left-aligned text; override button base styles */
+.accordion.accordion27 .button {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #505050;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  display: block;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: none;
+  max-width: 100%;
+  cursor: pointer;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+}
+
+/* On hover/focus, show underline and keep gray color */
+.accordion.accordion27 .button:hover,
+.accordion.accordion27 .button:focus {
+  text-decoration: underline;
+  color: #505050;
+  background: none;
+}
+
+/* Remove default marker arrow from summary */
+.accordion.accordion27 summary::-webkit-details-marker,
+.accordion.accordion27 summary::marker {
+  display: none;
+}
+
+/* Custom red chevron icon using border only, right aligned, larger for visibility */
+.accordion.accordion27 summary::after {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  border-right: 2.5px solid #E53935;
+  border-bottom: 2.5px solid #E53935;
+  border-top: none;
+  border-left: none;
+  box-sizing: border-box;
+  transform: translateY(-50%) rotate(45deg);
+  transition: transform 0.2s;
+  background: none;
+  pointer-events: none;
+
+  /* NOTE: No content property used */
+}
+
+/* Rotate chevron when open */
+.accordion.accordion27 details[open] summary::after {
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+/* Accordion body styling */
+.accordion.accordion27 .accordion-item-body {
+  padding: 18px 24px 0;
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: #505050;
+  box-sizing: border-box;
+  margin: 0;
+  display: block;
+}
+
+/* Responsive adjustments for small screens */
+@media (width <= 600px) {
+  .accordion.accordion27 summary {
+    padding: 12px;
+    font-size: 14px;
+    min-height: 40px;
+  }
+
+  .accordion.accordion27 .button,
+  .accordion.accordion27 .accordion-item-body {
+    font-size: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .accordion.accordion27 summary::after {
+    right: 8px;
+    width: 18px;
+    height: 18px;
+    border-right: 2px solid #E53935;
+    border-bottom: 2px solid #E53935;
+  }
+}
+
+/* Remove any default summary padding if inherited from base styles */
+.accordion.accordion27 summary,
+.accordion.accordion27 summary:focus,
+.accordion.accordion27 summary:hover {
+  background: none;
+}
+
+/* Remove background color on open/focus/hover */
+.accordion.accordion27 details[open] summary,
+.accordion.accordion27 summary:focus,
+.accordion.accordion27 summary:hover {
+  background: none;
+}
+
+/* Remove unwanted vertical spacing between details elements */
+.accordion.accordion27 details + details {
+  margin-top: 0;
 }
