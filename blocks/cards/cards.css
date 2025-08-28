@@ -1163,7 +1163,6 @@
   padding: 0;
 }
 
-/* Three-column grid layout, responsive */
 .cards.cards46 ul {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1199,7 +1198,6 @@
   padding-bottom: 10px;
 }
 
-/* Icon should always show and be vertically tight to heading */
 .cards.cards46 .cards-card-image {
   display: flex;
   justify-content: center;
@@ -1221,7 +1219,6 @@
   margin-bottom: 0;
 }
 
-/* Center all card content */
 .cards.cards46 .cards-card-body {
   display: flex;
   flex-direction: column;
@@ -1233,7 +1230,6 @@
   padding: 0;
 }
 
-/* Simulate heading for the first line/strong in each card */
 .cards.cards46 .cards-card-body p:first-child {
   color: #D0021B;
   font-size: 18px;
@@ -1242,7 +1238,6 @@
   line-height: 1.2;
 }
 
-/* If paragraph begins with strong, ensure heading look */
 .cards.cards46 .cards-card-body p:first-child strong {
   font-size: 22px;
   color: #D0021B;
@@ -1252,7 +1247,6 @@
   line-height: 1.22;
 }
 
-/* Body text after heading: regular color, smaller, tight vertical spacing */
 .cards.cards46 .cards-card-body p:not(:first-child),
 .cards.cards46 .cards-card-body p:not(:first-child) strong {
   font-size: 15px;
@@ -1262,18 +1256,119 @@
   line-height: 1.45;
 }
 
-/* Make links red, bold, and underlined as in original */
 .cards.cards46 .cards-card-body a {
   color: #D0021B;
   font-weight: 700;
   text-decoration: underline;
 }
 
-/* Remove excess vertical height from each card */
-
-/* Remove any default image margins inside the icon wrapper */
-
-/* Compact margin if only one paragraph */
 .cards.cards46 .cards-card-body p:only-child {
   margin-bottom: 0;
+}
+
+
+.cards.cardsnoimages50 {
+  /* Ensure red background stretches full width and height of the block */
+  width: 100vw;
+  min-height: 430px; /* taller for vertical centering */
+  background: #ed0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Card row: flex row, perfectly centered both axes */
+.cards.cardsnoimages50 > ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* tighter gap matches original */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: auto;
+  box-sizing: border-box;
+}
+
+/* Card appearance */
+.cards.cardsnoimages50 > ul > li {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 9%);
+  padding: 48px 32px 38px; /* increased vertical padding for taller cards */
+  width: 344px;
+  min-width: 260px;
+  max-width: 380px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  box-sizing: border-box;
+  border: none;
+}
+
+/* Card content area: vertical stacking */
+.cards.cardsnoimages50 .cards-card-body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100%;
+}
+
+/* Headline styling */
+.cards.cardsnoimages50 .cards-card-body h5 {
+  color: #ed0000;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 22px;
+  text-align: center;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+}
+
+/* Superscript styling */
+.cards.cardsnoimages50 .cards-card-body h5 sup {
+  color: #ed0000;
+  font-size: 12px;
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+/* Card body text styling */
+.cards.cardsnoimages50 .cards-card-body p {
+  color: #333;
+  font-size: 15px;
+  margin: 0;
+  text-align: left;
+  line-height: 1.6;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Responsive: stack cards vertically, narrower cards, tighter padding/gap */
+@media (width <= 900px) {
+  .cards.cardsnoimages50 {
+    min-height: 0;
+    padding: 32px 0;
+  }
+
+  .cards.cardsnoimages50 > ul {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .cards.cardsnoimages50 > ul > li {
+    width: 95vw;
+    max-width: 400px;
+    padding: 28px 16px 20px;
+  }
 }
