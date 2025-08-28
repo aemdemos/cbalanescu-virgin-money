@@ -2040,11 +2040,10 @@
   padding: 48px 0;
 }
 
-/* Ensure main structure is two columns side-by-side on desktop */
 .columns.columns38 > div {
   display: flex;
   flex-direction: row;
-  align-items: center; /* Vertically center image/text */
+  align-items: center;
   justify-content: flex-start;
   gap: 44px;
   width: 100%;
@@ -2052,7 +2051,6 @@
   margin: 0 auto;
 }
 
-/* Left column: show phone image at proper scale and alignment */
 .columns.columns38 .columns-img-col {
   max-width: 400px;
   width: 100%;
@@ -2072,7 +2070,6 @@
   object-fit: contain;
 }
 
-/* Right column: stack and align text and button card */
 .columns.columns38 > div > div:not(.columns-img-col) {
   flex: 1 1 0;
   min-width: 0;
@@ -2083,7 +2080,6 @@
   padding-left: 0;
 }
 
-/* Heading styling */
 .columns.columns38 h2 {
   color: #4B0082;
   font-size: 2.7rem;
@@ -2094,7 +2090,6 @@
   line-height: 1.12;
 }
 
-/* Paragraph styling */
 .columns.columns38 p {
   color: #222;
   font-size: 1.13rem;
@@ -2106,7 +2101,6 @@
   margin-top: 0;
 }
 
-/* Divider below paragraph only if table follows */
 .columns.columns38 > div > div:not(.columns-img-col) p {
   position: relative;
 }
@@ -2125,7 +2119,6 @@
   content: "";
 }
 
-/* Ensure link in paragraph is styled correctly */
 .columns.columns38 p a,
 .columns.columns38 a {
   color: #4B0082;
@@ -2133,7 +2126,6 @@
   font-weight: 500;
 }
 
-/* App store buttons card: appropriate width, spacing, and shadow */
 .columns.columns38 table {
   background: #f6f6f6;
   border-radius: 22px;
@@ -2147,7 +2139,6 @@
   margin-right: 0;
 }
 
-/* Button badge row */
 .columns.columns38 table tr {
   display: flex;
   flex-direction: row;
@@ -2156,7 +2147,6 @@
   width: 100%;
 }
 
-/* Button badge cell */
 .columns.columns38 table td {
   padding: 0 18px;
   vertical-align: middle;
@@ -2164,7 +2154,6 @@
   background: none;
 }
 
-/* Button badge images */
 .columns.columns38 table img {
   max-width: 185px;
   width: 100%;
@@ -2174,7 +2163,6 @@
   display: block;
 }
 
-/* Responsive stacking for mobile */
 @media (width <= 900px) {
   .columns.columns38 > div {
     flex-direction: column;
@@ -2214,4 +2202,132 @@
   .columns.columns38 table img {
     max-width: 120px;
   }
+}
+
+
+.columns.columns42 {
+  background: #fff;
+  padding: 0;
+}
+
+.columns.columns42 > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+@media (width <= 900px) {
+  .columns.columns42 > div {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Slightly increase gap between feature blocks for closer match to original */
+.columns.columns42 > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ICON + TITLE ROW: Use flex, tight alignment */
+.columns.columns42 > div > div > p:first-of-type,
+.columns.columns42 > div > div > p:nth-of-type(3) {
+  display: none;
+}
+
+.columns.columns42 > div > div > p:first-of-type + h2,
+.columns.columns42 > div > div > p:nth-of-type(3) + h2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Show the relevant icon in the heading flex row */
+.columns.columns42 > div > div > p:first-of-type + h2::before,
+.columns.columns42 > div > div > p:nth-of-type(3) + h2::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Left column icons */
+.columns.columns42 > div > div:first-child > p:first-of-type + h2::before {
+  background-image: url('./media_11035018494789ef40babfdd3873ba54d33efbcee.png');
+}
+
+.columns.columns42 > div > div:first-child > p:nth-of-type(3) + h2::before {
+  background-image: url('./media_18a3545649857bd19f2302c67bf695677fdcc10e8.png');
+}
+
+/* Right column icons */
+.columns.columns42 > div > div:last-child > p:first-of-type + h2::before {
+  background-image: url('./media_1be5aed87cdccaa9d21588905e584129dc21eddb3.png');
+}
+
+.columns.columns42 > div > div:last-child > p:nth-of-type(3) + h2::before {
+  background-image: url('./media_11223f18a40954199bd200522ddff693ce1520075.png');
+}
+
+/* Headings: left column */
+.columns.columns42 > div > div:first-child h2,
+.columns.columns42 > div > div:first-child h2 strong {
+  color: #50047a;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  display: inline;
+  line-height: 1.2;
+}
+
+/* Headings: right column */
+.columns.columns42 > div > div:last-child h2,
+.columns.columns42 > div > div:last-child h2 strong {
+  color: #c7206f;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  display: inline;
+  line-height: 1.2;
+}
+
+/* Remove default h2 margin */
+.columns.columns42 h2 {
+  margin: 0;
+  padding: 0;
+}
+
+/* Description styles: smaller margin above, compact lines, indent to align with heading text */
+.columns.columns42 > div > div > h2 + p,
+.columns.columns42 > div > div > h2 + p + p {
+  font-size: 13px;
+  color: #4c4b4e;
+  margin: 2px 0 0 26px;
+  font-weight: normal;
+  line-height: 1.4;
+  padding: 0;
+}
+
+/* Superscript styling */
+.columns.columns42 sup {
+  font-size: 9px;
+  vertical-align: super;
+  line-height: 0;
+}
+
+/* Remove default paragraph margin for tight layout */
+.columns.columns42 p {
+  margin: 0;
+  padding: 0;
 }
