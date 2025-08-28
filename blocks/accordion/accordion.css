@@ -2,7 +2,6 @@
   border: 1px solid #dadada;
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
 .accordion details + details {
   margin-top: 24px;
 }
@@ -58,4 +57,93 @@
 .accordion details[open] .accordion-item-body {
   border-top: 1px solid #dadada;
   background-color: var(--background-color);
+}
+
+
+.accordion.accordion9 {
+  background: #f5f5f7;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion.accordion9 details {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.accordion.accordion9 details summary {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end; /* baseline didn't quite work, so stick chevron to bottom */
+  background: #f5f5f7;
+  min-height: 18px;
+  padding: 0 14px 0 16px;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-bottom: none;
+  overflow: visible;
+}
+
+.accordion.accordion9 details summary::-webkit-details-marker,
+.accordion.accordion9 details summary::marker {
+  display: none;
+}
+
+.accordion.accordion9 details summary .button-container .button {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #666;
+  font-size: 13px;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-align: left;
+  white-space: normal;
+  text-decoration: none;
+  pointer-events: auto;
+  display: inline;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+.accordion.accordion9 details summary .button-container {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+/* Chevron styling */
+.accordion.accordion9 details summary::after {
+  width: 6px;
+  height: 6px;
+  display: inline-block;
+  border-right: 1px solid #c8102e;
+  border-bottom: 1px solid #c8102e;
+  border-top: none;
+  border-left: none;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-bottom: 1px; /* Ensures tip aligns with text baseline */
+  align-self: flex-end;
+  transform: rotate(45deg);
+  background: none;
+  margin-right: -2px;
+}
+
+@media (width <= 600px) {
+  .accordion.accordion9 details summary {
+    padding: 0 5px 0 8px;
+  }
+}
+
+.accordion.accordion9 details .accordion-item-body {
+  padding: 0 16px;
+  border: none;
+  background: none;
 }
