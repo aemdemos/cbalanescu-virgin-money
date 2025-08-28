@@ -1,0 +1,48 @@
+{
+  "templates": [
+    {
+      "name": "'E-commerce Product Listing'",
+      "cluster": 1,
+      "pages": [
+        {
+          "url": "https://virginmoney.com.au/home-loans",
+          "uuid": "cb9c54d08c53f04818ba2e5ec5f977de94ec3d38"
+        },
+        {
+          "url": "https://virginmoney.com.au/help",
+          "uuid": "8b8187ba8aac55725a2cfce61430ab1d9b8140fc"
+        },
+        {
+          "url": "https://virginmoney.com.au/virgin-money-rewards",
+          "uuid": "266f17b85126020ded07e0d84d56bfeff7fc6890"
+        },
+        {
+          "url": "https://virginmoney.com.au/superannuation",
+          "uuid": "d18019275ab869772117eed25220a8cf54a84c57"
+        },
+        {
+          "url": "https://virginmoney.com.au/insurance",
+          "uuid": "b26172b90fb8ce81b5f29141829c9422f978a969"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "uuid": "c8bcf026fdf90359448f304d08ad001f7d9461a7"
+        },
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "uuid": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e"
+        }
+      ]
+    },
+    {
+      "name": "Product Listing Page",
+      "cluster": 2,
+      "pages": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "uuid": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562"
+        }
+      ]
+    }
+  ]
+}
