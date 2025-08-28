@@ -76,7 +76,7 @@
 .accordion.accordion9 details summary {
   display: flex;
   flex-direction: row;
-  align-items: flex-end; /* baseline didn't quite work, so stick chevron to bottom */
+  align-items: flex-end;
   background: #f5f5f7;
   min-height: 18px;
   padding: 0 14px 0 16px;
@@ -118,7 +118,6 @@
   display: block;
 }
 
-/* Chevron styling */
 .accordion.accordion9 details summary::after {
   width: 6px;
   height: 6px;
@@ -129,7 +128,7 @@
   border-left: none;
   box-sizing: border-box;
   margin-left: 0;
-  margin-bottom: 1px; /* Ensures tip aligns with text baseline */
+  margin-bottom: 1px;
   align-self: flex-end;
   transform: rotate(45deg);
   background: none;
@@ -144,6 +143,94 @@
 
 .accordion.accordion9 details .accordion-item-body {
   padding: 0 16px;
+  border: none;
+  background: none;
+}
+
+
+.accordion.accordion16 {
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  /* Ensure container is visible */
+  display: block;
+}
+
+.accordion.accordion16 > details {
+  display: block;
+  border: none;
+  margin: 0;
+  border-bottom: 1px solid #eee;
+}
+
+.accordion.accordion16 > details:last-child {
+  border-bottom: none;
+}
+
+.accordion.accordion16 > details > summary {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 10px 8px;
+  background: transparent;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #555;
+  font-weight: 400;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  min-height: 32px;
+  gap: 8px;
+  width: 100%;
+  line-height: 1.4;
+}
+
+.accordion.accordion16 > details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion.accordion16 > details > summary > p {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  font-weight: inherit;
+  flex: 1 1 0%;
+  align-self: center;
+  line-height: 1.4;
+  white-space: normal;
+  display: block;
+}
+
+/* Chevron: use border-based pseudo-element, small and aligned */
+.accordion.accordion16 > details > summary::after {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  border-color: #d32f2f;
+  box-sizing: border-box;
+  background: none;
+  margin-left: 8px;
+  vertical-align: middle;
+  align-self: center;
+  transform: rotate(45deg);
+  content: "";
+}
+
+.accordion.accordion16 > details[open] > summary::after {
+  transform: rotate(-135deg);
+}
+
+.accordion.accordion16 > details > .accordion-item-body {
+  padding: 0;
+  margin: 0;
   border: none;
   background: none;
 }
