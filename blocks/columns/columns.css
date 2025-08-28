@@ -2933,13 +2933,12 @@
 .columns.columns53 > div {
   display: flex;
   flex-direction: row;
-  align-items: center; /* vertical centering of columns */
+  align-items: center;
   gap: 64px;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Responsive: stack columns on small screens */
 @media (width <= 900px) {
   .columns.columns53 > div {
     flex-direction: column;
@@ -2948,15 +2947,12 @@
   }
 }
 
-/* Left column: heading, centered vertically */
 .columns.columns53 > div > div:first-child {
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-width: 0;
   flex: 0 1 40%;
-
-  /* Padding for visual separation on desktop */
   padding-left: 2vw;
 }
 
@@ -2981,7 +2977,6 @@
   }
 }
 
-/* Right column: stack cards vertically, align left */
 .columns.columns53 > div > div:last-child {
   display: flex;
   flex-direction: column;
@@ -2999,14 +2994,11 @@
   }
 }
 
-/* Card icon row: icon left, rest right */
 .columns.columns53 > div > div:last-child > p {
   margin: 0;
   display: flex;
   align-items: center;
   gap: 10px;
-
-  /* Keep icon and next h3 visually grouped, but don't force more than one icon/h3 per row */
 }
 
 .columns.columns53 > div > div:last-child > p picture {
@@ -3022,7 +3014,6 @@
   vertical-align: middle;
 }
 
-/* Card heading: purple, bold, aligns under icon row */
 .columns.columns53 > div > div:last-child > h3 {
   font-size: 1.11rem;
   color: #5C2D91;
@@ -3031,7 +3022,6 @@
   line-height: 1.2;
 }
 
-/* Card body: body text always left-aligned and single-column, no flex/grid */
 .columns.columns53 > div > div:last-child > h3 + p,
 .columns.columns53 > div > div:last-child > h3 + p + p {
   font-size: 1rem;
@@ -3044,7 +3034,6 @@
   text-align: left;
 }
 
-/* Make pink/bold links and numbers inside card body */
 .columns.columns53 > div > div:last-child a,
 .columns.columns53 > div > div:last-child strong,
 .columns.columns53 > div > div:last-child b {
@@ -3053,12 +3042,10 @@
   text-decoration: none;
 }
 
-/* Tighter grouping between icon row and heading */
 .columns.columns53 > div > div:last-child > p + h3 {
   margin-top: -3px;
 }
 
-/* Card vertical separation */
 .columns.columns53 > div > div:last-child > h3:not(:first-of-type) {
   margin-top: 18px;
 }
@@ -3076,8 +3063,74 @@
   }
 }
 
-/* Remove default margin from inner paragraphs */
 .columns.columns53 p {
   margin: 0;
   padding: 0;
+}
+
+
+.columns.columns55 {
+  background: #fff;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* Logo row: flex container with slightly increased gap for ideal visual grouping */
+.columns.columns55 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 30px; /* slightly increased for more breathing room, matches original image */
+  min-height: 40px;
+  width: 100%;
+}
+
+/* Logo columns: vertical centering, no extra margin/padding */
+.columns.columns55 .columns-img-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 0;
+}
+
+/* Logo images: visually consistent, slightly taller for legibility */
+.columns.columns55 .columns-img-col img {
+  display: block;
+  max-height: 36px; /* increased for visual parity with original */
+  width: auto;
+  height: auto;
+  margin: 0;
+  vertical-align: middle;
+  object-fit: contain;
+  background: transparent;
+  border: none;
+}
+
+/* Responsive: tighter wrap and gap, smaller images on tablet */
+@media (width <= 900px) {
+  .columns.columns55 > div {
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+  }
+
+  .columns.columns55 .columns-img-col img {
+    max-height: 24px;
+  }
+}
+
+/* Responsive: tightly packed, smallest images on mobile */
+@media (width <= 600px) {
+  .columns.columns55 > div {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .columns.columns55 .columns-img-col img {
+    max-height: 14px;
+  }
 }
