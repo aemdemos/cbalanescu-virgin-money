@@ -1370,7 +1370,6 @@
   height: 100%;
 }
 
-/* Panel backgrounds and text color */
 .columns.columns31 > div > div:first-child {
   background: linear-gradient(135deg, #e60000 0%, #5a189a 100%);
   color: #fff;
@@ -1381,7 +1380,6 @@
   color: #5a189a;
 }
 
-/* Headings */
 .columns.columns31 h2 {
   font-size: 24px;
   font-weight: 400;
@@ -1396,7 +1394,6 @@
   text-decoration: none;
 }
 
-/* Spacing between heading and link */
 .columns.columns31 .button-container {
   margin: 0;
   margin-top: 0;
@@ -1425,7 +1422,6 @@
   margin-top: 40px;
 }
 
-/* Link colors and arrow SVGs for each panel */
 .columns.columns31 > div > div:first-child .button {
   color: #fff;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path d='M6 8h6m0 0l-2-2m2 2l-2 2' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>");
@@ -1436,7 +1432,6 @@
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><path d='M6 8h6m0 0l-2-2m2 2l-2 2' stroke='red' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/></svg>");
 }
 
-/* Responsive stacking and panel sizing */
 @media (width <= 900px) {
   .columns.columns31 > div {
     flex-direction: column;
@@ -1446,5 +1441,139 @@
   .columns.columns31 > div > div {
     min-height: 180px;
     padding: 32px 16px;
+  }
+}
+
+
+.columns.columns32 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Top-align columns so text starts at same y as icon box */
+  justify-content: flex-start;
+  gap: 28px;
+  width: 100%;
+}
+
+/* Stack columns vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns32 > div {
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+}
+
+.columns.columns32 .columns-img-col {
+  background: #F3F3F4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  min-height: 180px;
+  flex: 0 0 220px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Tweak on mobile: shrink the left block responsively */
+@media (width <= 900px) {
+  .columns.columns32 .columns-img-col {
+    min-width: 0;
+    min-height: 100px;
+    flex-basis: auto;
+  }
+}
+
+.columns.columns32 .columns-img-col picture,
+.columns.columns32 .columns-img-col img {
+  display: block;
+  margin: 0 auto;
+  max-width: 64px;
+  max-height: 64px;
+  width: 64px;
+  height: 64px;
+}
+
+/* Top-align right column text/button, increase width for longer lines */
+.columns.columns32 > div > div:not(.columns-img-col) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* top-align content */
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 800px;
+  height: auto;
+}
+
+@media (width <= 900px) {
+  .columns.columns32 > div > div:not(.columns-img-col) {
+    padding: 0;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Heading size and spacing (tight, visually bold) */
+.columns.columns32 h4 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  font-family: var(--heading-font-family);
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+/* Paragraph/text: compact, tight vertical rhythm */
+.columns.columns32 p:not(.button-container) {
+  color: #6D6D6D;
+  font-size: 1.05rem;
+  font-family: var(--body-font-family);
+  margin: 0 0 8px;
+  line-height: 1.5;
+  width: 100%;
+}
+
+/* Button container: left-aligned, snug to paragraph */
+.columns.columns32 .button-container {
+  width: 100%;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+/* Button: color, border, shape, padding; override base styles for visual match */
+.columns.columns32 .button.primary {
+  background: #fff;
+  border: 1.5px solid #E60022;
+  color: #E60022;
+  border-radius: 6px;
+  padding: 8px 32px;
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: var(--body-font-family);
+  box-shadow: none;
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+  min-width: 0;
+  line-height: 1.25;
+  transition: background 0.2s, color 0.2s;
+}
+
+.columns.columns32 .button.primary:hover,
+.columns.columns32 .button.primary:focus {
+  background: #ffe6ea;
+  color: #E60022;
+  border-color: #E60022;
+}
+
+@media (width <= 900px) {
+  .columns.columns32 .button-container {
+    width: auto;
+    margin: 8px 0 0;
   }
 }
