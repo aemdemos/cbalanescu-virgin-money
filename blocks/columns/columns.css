@@ -946,7 +946,6 @@
   width: 100%;
 }
 
-/* Tighter flex columns, visually grouped */
 .columns.columns18 > div {
   display: flex;
   flex-direction: row;
@@ -960,7 +959,6 @@
   box-sizing: border-box;
 }
 
-/* Responsive stacking for small screens */
 @media (width <= 900px) {
   .columns.columns18 > div {
     flex-direction: column;
@@ -970,7 +968,6 @@
   }
 }
 
-/* Remove all list bullets and fix spacing */
 .columns.columns18 ul,
 .columns.columns18 ul ul {
   list-style: none;
@@ -978,7 +975,6 @@
   padding: 0;
 }
 
-/* Top-level heading only */
 .columns.columns18 > div > div > ul > li {
   color: #e0e0e0;
   font-size: 12px;
@@ -990,7 +986,6 @@
   line-height: 1.6;
 }
 
-/* Sub-links */
 .columns.columns18 > div > div > ul > li > ul > li {
   color: #ccc;
   font-size: 12px;
@@ -1001,12 +996,10 @@
   line-height: 1.7;
 }
 
-/* Remove extra margin under last sub-link */
 .columns.columns18 > div > div > ul > li > ul > li:last-child {
   margin-bottom: 0;
 }
 
-/* Links inside sub-lists */
 .columns.columns18 > div > div > ul > li > ul > li a {
   color: #ccc;
   text-decoration: none;
@@ -1022,7 +1015,6 @@
   text-decoration: underline;
 }
 
-/* Social icons row below heading, slightly reduced gap and margin */
 .columns.columns18 .columns-img-col > ul > li > ul {
   display: flex;
   flex-direction: row;
@@ -1036,7 +1028,6 @@
   padding: 0;
 }
 
-/* Social icons style */
 .columns.columns18 .columns-img-col picture,
 .columns.columns18 .columns-img-col img {
   display: inline-block;
@@ -1046,21 +1037,184 @@
   filter: brightness(0) invert(0.85);
 }
 
-/* Narrow social column, left-aligned content */
 .columns.columns18 > div > .columns-img-col {
   max-width: 80px;
   flex: 0 0 80px;
   text-align: left;
 }
 
-/* Ensure left-alignment for all columns */
 .columns.columns18 > div > div {
   text-align: left;
 }
 
-/* Prevent excessive width on link columns */
 .columns.columns18 > div > div:not(.columns-img-col) {
   flex: 1 1 0;
   min-width: 140px;
   max-width: 200px;
+}
+
+
+.columns.columns24 {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 0 32px;
+  background: #fff;
+}
+
+.columns.columns24 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.8em;
+  width: 100%;
+}
+
+@media (width <= 900px) {
+  .columns.columns24 > div {
+    flex-direction: column;
+    gap: 2em;
+  }
+}
+
+.columns.columns24 > div > div {
+  flex: 1 1 0;
+  min-width: 370px;
+  max-width: 480px;
+  padding: 0 2.2em;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+@media (width <= 900px) {
+  .columns.columns24 > div > div {
+    min-width: 0;
+    max-width: 100%;
+    padding: 0 1em;
+  }
+}
+
+/* Headings - less dominant than before */
+.columns.columns24 h2 {
+  color: #6d2380;
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-top: 0.15em;
+  margin-bottom: 0.7em;
+  line-height: 1.2;
+}
+
+/* Body copy */
+.columns.columns24 p,
+.columns.columns24 ul,
+.columns.columns24 li {
+  color: #232323;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-top: 0.55em;
+  margin-bottom: 0.55em;
+}
+
+/* List style: remove bullets, add left padding for checkmark bg */
+.columns.columns24 ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.1em;
+}
+
+.columns.columns24 ul li {
+  position: relative;
+  padding-left: 2em;
+  margin-bottom: 0.4em;
+  min-height: 1em;
+  background: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 9L8 13L14 6' stroke='%2316c36d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat left 0.1em center;
+  background-size: 1.2em 1.2em;
+  word-break: normal;
+  white-space: normal;
+}
+
+/* Button row: more vertical spacing */
+.columns.columns24 p:has(> a[title="Tell me more"]) {
+  margin-bottom: 1em;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  gap: 0.85em;
+}
+
+/* Buttons */
+.columns.columns24 p > a[title="Tell me more"],
+.columns.columns24 p > a[title="Apply now"] {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.52em 1.3em;
+  font-weight: 500;
+  font-size: 1.04rem;
+  margin: 0;
+  text-decoration: none;
+  vertical-align: middle;
+  box-shadow: none;
+}
+
+.columns.columns24 p > a[title="Tell me more"] {
+  background: #fff;
+  border: 1.5px solid #fa4a7a;
+  color: #fa4a7a;
+  transition: background 0.2s, color 0.2s;
+}
+
+.columns.columns24 p > a[title="Tell me more"]:hover {
+  background: #fa4a7a;
+  color: #fff;
+}
+
+.columns.columns24 p > a[title="Apply now"] {
+  background: #a0139f;
+  color: #fff;
+  border: none;
+  transition: background 0.2s;
+}
+
+.columns.columns24 p > a[title="Apply now"]:hover {
+  background: #6d2380;
+}
+
+/* "Find out more about our:" section header */
+.columns.columns24 strong {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #232323;
+  display: block;
+  margin-bottom: 0.48em;
+  margin-top: 1.05em;
+  letter-spacing: 0.01em;
+}
+
+/* Resource links: align vertically, use purple text */
+.columns.columns24 .button-container {
+  margin-bottom: 0.05em;
+}
+
+.columns.columns24 .button-container .button {
+  background: none;
+  color: #a0139f;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: underline;
+  line-height: 1.66;
+  box-shadow: none;
+  max-width: unset;
+  margin: 0;
+  display: inline;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.columns.columns24 .button-container .button:hover,
+.columns.columns24 .button-container .button:focus {
+  color: #6d2380;
+  background: none;
 }
