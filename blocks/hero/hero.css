@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
@@ -69,22 +70,20 @@
 }
 
 .hero.hero3 > div:first-child {
-  flex: 0 0 0; /* Remove left spacer effect */
+  flex: 0 0 0;
   height: 100%;
-
-  /* No width or padding to avoid pushing content */
 }
 
 .hero.hero3 > div:last-child {
   flex: 1 1 0;
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Ensure left alignment */
+  justify-content: flex-start;
   height: 100%;
-  padding-left: 12px; /* Much less left padding, keeps button close to edge */
+  padding-left: 12px;
   padding-top: 18px;
   padding-bottom: 18px;
-  max-width: 380px; /* Limit container width so button doesn't drift center */
+  max-width: 380px;
 }
 
 .hero.hero3 .button-container {
@@ -99,7 +98,7 @@
   font-family: var(--body-font-family);
   font-weight: 700;
   border: none;
-  padding: 0 28px 0 0; /* Smaller right padding for arrow */
+  padding: 0 28px 0 0;
   border-radius: 0;
   box-shadow: none;
   display: inline-flex;
@@ -145,4 +144,136 @@
     height: 18px;
     margin-left: 10px;
   }
+}
+
+
+.hero.hero8 {
+  background: #f7f7fa;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* align items to the top */
+  justify-content: center;
+  max-width: 900px;
+  margin: 72px auto 0;
+  padding: 0 0 72px;
+  box-sizing: border-box;
+}
+
+/* Left: image and red border container */
+.hero.hero8 > div:first-child {
+  flex: 0 0 320px;
+  display: flex;
+  align-items: flex-start;  /* align image to top of hero block */
+  justify-content: flex-end;
+  min-width: 320px;
+  min-height: 320px;
+  margin-right: 24px; /* reduced gap for a more compact appearance */
+  position: relative;
+  background: none;
+}
+
+/* Simulate image and red border.
+   Replace the background-image value with your real image as needed.
+   If using actual <img>, ensure the image is inside this div and style accordingly.
+*/
+.hero.hero8 > div:first-child > div {
+  width: 320px;
+  height: 320px;
+  background: #fff url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=320&h=320&q=80') center center / cover no-repeat;
+  position: relative;
+  box-sizing: border-box;
+  border-right: 12px solid #e6001f;
+  border-bottom: 12px solid #e6001f;
+}
+
+/* Right: text container */
+.hero.hero8 > div:last-child {
+  flex: 1 1 0;
+  display: flex;
+  align-items: flex-start; /* top-align text block */
+  min-width: 0;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+.hero.hero8 > div:last-child > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 480px;
+  width: 100%;
+  margin-top: 0; /* flush with top of image */
+}
+
+/* Heading styles */
+.hero.hero8 h1,
+.hero.hero8 h1 strong {
+  font-size: 2rem;
+  font-family: var(--heading-font-family);
+  color: #56008c;
+  font-weight: 700;
+  margin: 0 0 18px;
+  line-height: 1.15;
+  text-align: left;
+  letter-spacing: 0;
+}
+
+/* Paragraph styles */
+.hero.hero8 p {
+  font-size: 1rem;
+  color: #222;
+  font-family: var(--body-font-family);
+  margin: 0;
+  line-height: 1.5;
+  text-align: left;
+  max-width: 440px;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 800px) {
+  .hero.hero8 {
+    flex-direction: column;
+    max-width: 100%;
+    padding: 32px 0;
+    margin: 32px auto 0;
+  }
+
+  .hero.hero8 > div:first-child {
+    margin: 0 0 24px;
+    min-width: 0;
+    min-height: 0;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .hero.hero8 > div:first-child > div {
+    width: 96vw;
+    max-width: 320px;
+    height: 192px;
+    border-right: 8px solid #e6001f;
+    border-bottom: 8px solid #e6001f;
+  }
+
+  .hero.hero8 > div:last-child {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .hero.hero8 > div:last-child > div {
+    margin-top: 0;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .hero.hero8 p {
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
+}
+
+/* Remove extra spacing for sections inside hero */
+.hero.hero8 .section {
+  margin: 0;
+  padding: 0;
 }
