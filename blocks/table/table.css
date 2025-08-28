@@ -50,18 +50,187 @@
   margin-top: 0.25em;
 }
 
-/* no header variant */
 .table.block.no-header table tbody tr {
   border-top: 1px solid;
 }
 
-/* striped variant */
-.table.block.striped tbody tr:nth-child(odd) {
-  background-color: var(--overlay-background-color);
+
+.table.striped.bordered.tablestripedbordered10 {
+  font-family: Inter, Arial, sans-serif;
+  color: #322e38;
+  background: #fff;
+  margin-top: 0;
+  padding-top: 0;
+  overflow-x: auto;
 }
 
-/* bordered variant */
-.table.block.bordered table th,
-.table.block.bordered table td {
-  border: 1px solid;
+/* Table width and layout */
+.table.striped.bordered.tablestripedbordered10 table {
+  width: 100%;
+  min-width: 1200px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+/* Ensure table rows use native layout */
+.table.striped.bordered.tablestripedbordered10 tr {
+  /* Do not use display: grid/flex here, keep native row layout */
+}
+
+/* General cell styles */
+.table.striped.bordered.tablestripedbordered10 th,
+.table.striped.bordered.tablestripedbordered10 td {
+  vertical-align: top;
+  padding: 22px 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  background: #fff;
+  color: #322e38;
+  box-sizing: border-box;
+  word-break: normal;
+  white-space: normal;
+  border: 1px solid #e8e7ec;
+}
+
+/* First column: muted background and left-aligned for all rows */
+.table.striped.bordered.tablestripedbordered10 th:first-child,
+.table.striped.bordered.tablestripedbordered10 td:first-child {
+  width: 240px;
+  min-width: 180px;
+  max-width: 270px;
+  background: #f7f4f8;
+  color: #6c6e7c;
+  font-weight: 500;
+  text-align: left;
+  vertical-align: top;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  border-right: 1px solid #e8e7ec;
+}
+
+/* Product headers: purple, white text, centered */
+.table.striped.bordered.tablestripedbordered10 th:not(:first-child) {
+  font-weight: 700;
+  font-size: 17px;
+  text-align: center;
+  background: #a00063;
+  color: #fff;
+  vertical-align: top;
+}
+
+/* Other columns: share remaining space */
+.table.striped.bordered.tablestripedbordered10 th:not(:first-child),
+.table.striped.bordered.tablestripedbordered10 td:not(:first-child) {
+  width: auto;
+}
+
+/* Lists: consistent left padding */
+.table.striped.bordered.tablestripedbordered10 ul {
+  margin: 0 0 10px;
+  padding-left: 20px;
+  list-style-type: disc;
+  color: #322e38;
+  font-size: 15px;
+}
+
+/* Paragraph and strong styles */
+.table.striped.bordered.tablestripedbordered10 p {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: #322e38;
+}
+
+.table.striped.bordered.tablestripedbordered10 strong {
+  font-weight: 700;
+  color: inherit;
+}
+
+.table.striped.bordered.tablestripedbordered10 sup {
+  font-size: 0.7em;
+  vertical-align: super;
+}
+
+/* Links: purple, underline */
+.table.striped.bordered.tablestripedbordered10 a {
+  color: #a00063;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+/* Button containers: vertical stack, good spacing, centered in cell */
+.table.striped.bordered.tablestripedbordered10 .button-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* Buttons: compact, content-sized, centered horizontally */
+.table.striped.bordered.tablestripedbordered10 a.button,
+.table.striped.bordered.tablestripedbordered10 .button {
+  display: block;
+  width: auto;
+  max-width: 180px;
+  border-radius: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  background: #a00063;
+  color: #fff;
+  border: none;
+  box-shadow: none;
+  line-height: 1.2;
+  white-space: normal;
+  text-overflow: unset;
+  overflow: visible;
+  letter-spacing: 0.01em;
+}
+
+/* "More info" buttons: outlined style */
+.table.striped.bordered.tablestripedbordered10 a.button[title*="More info"],
+.table.striped.bordered.tablestripedbordered10 .button[title*="More info"] {
+  background: #fff;
+  color: #a00063;
+  border: 2px solid #a00063;
+}
+
+/* Responsive: stack cells vertically on mobile */
+@media (width <= 900px) {
+  .table.striped.bordered.tablestripedbordered10 table,
+  .table.striped.bordered.tablestripedbordered10 thead,
+  .table.striped.bordered.tablestripedbordered10 tbody,
+  .table.striped.bordered.tablestripedbordered10 th,
+  .table.striped.bordered.tablestripedbordered10 td,
+  .table.striped.bordered.tablestripedbordered10 tr {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: unset;
+  }
+
+  .table.striped.bordered.tablestripedbordered10 tr {
+    margin-bottom: 18px;
+  }
+
+  .table.striped.bordered.tablestripedbordered10 th,
+  .table.striped.bordered.tablestripedbordered10 td {
+    text-align: left !important;
+  }
+}
+
+/* Limit table container max width for readability */
+@media (width >= 1200px) {
+  .table.striped.bordered.tablestripedbordered10 table {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
 }
