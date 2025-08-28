@@ -1845,7 +1845,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  gap: 0; /* Remove gap so badges sit right next to text */
+  gap: 0;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -1853,7 +1853,7 @@
 
 .columns.columns36 > div > div:first-child {
   flex: 1 1 auto;
-  max-width: 760px; /* Restrict width so paragraph wraps to second line */
+  max-width: 760px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -1869,7 +1869,7 @@
   line-height: 1.15;
   font-family: inherit;
   letter-spacing: 0.01em;
-  overflow-wrap: break-word; /* Corrected from word-break */
+  overflow-wrap: break-word;
 }
 
 .columns.columns36 p {
@@ -1890,7 +1890,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  gap: 12px; /* Small gap between badges */
+  gap: 12px;
   justify-content: flex-end;
   min-width: 0;
   padding-bottom: 5px;
@@ -1933,4 +1933,104 @@
   width: auto;
   max-width: 100%;
   height: auto;
+}
+
+
+.columns.columns37 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.columns.columns37 > div > div {
+  flex: 1 1 0;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.columns.columns37 > div > div:first-child {
+  background: #f4f4f5;
+}
+
+.columns.columns37 > div > div:last-child {
+  background: #fff;
+}
+
+.columns.columns37 h3 {
+  color: #5f249f;
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--heading-font-family), sans-serif;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.columns.columns37 .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.columns.columns37 > div > div .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--body-font-family), sans-serif;
+  line-height: 1.2;
+  min-width: 175px;
+  min-height: 28px;
+  padding: 0 22px;
+  border-radius: 5px;
+  margin: 0;
+  box-shadow: none;
+  transition: background 0.2s, box-shadow 0.2s;
+  border-width: 1px;
+  border-style: solid;
+  white-space: nowrap;
+}
+
+.columns.columns37 > div > div:first-child .button {
+  background: linear-gradient(90deg, #eb2227 0%, #8f23b3 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+.columns.columns37 > div > div:last-child .button {
+  background: #fff;
+  color: #eb2227;
+  border-color: #eb2227;
+}
+
+@media (width <= 900px) {
+  .columns.columns37 > div {
+    max-width: 100%;
+  }
+}
+
+@media (width <= 700px) {
+  .columns.columns37 > div {
+    flex-direction: column;
+  }
+
+  .columns.columns37 > div > div {
+    max-width: 100%;
+    min-height: 60px;
+    padding: 12px 0;
+  }
 }
