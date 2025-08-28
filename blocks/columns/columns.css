@@ -132,7 +132,6 @@
   padding: 32px 0;
 }
 
-/* Two-column layout: tighter gap, fully top-aligned */
 .columns.columns5.block.columns-2-cols > div {
   display: flex;
   flex-direction: row;
@@ -144,7 +143,6 @@
   width: 100%;
 }
 
-/* Responsive: stack columns vertically on small screens */
 @media (width <= 900px) {
   .columns.columns5.block.columns-2-cols > div {
     flex-direction: column;
@@ -153,13 +151,11 @@
   }
 }
 
-/* Left column (heading): remove flex, ensure no extra alignment issues */
 .columns.columns5.block.columns-2-cols > div > div:first-child {
   min-width: 200px;
   padding-top: 0;
 }
 
-/* Heading style: remove margin to align perfectly with right content */
 .columns.columns5.block.columns-2-cols > div > div:first-child h3 {
   font-size: 24px;
   color: #7b1fa2;
@@ -169,7 +165,6 @@
   padding: 0;
 }
 
-/* Right column (text & button) */
 .columns.columns5.block.columns-2-cols > div > div:last-child {
   flex: 1 1 0;
   min-width: 250px;
@@ -179,7 +174,6 @@
   margin-top: 0;
 }
 
-/* Support text paragraphs: remove max-width, reduce margin below */
 .columns.columns5.block.columns-2-cols > div > div:last-child > p {
   font-size: 12px;
   color: #444;
@@ -188,13 +182,11 @@
   padding: 0;
 }
 
-/* Button container margin: slightly reduce for tighter look */
 .columns.columns5.block.columns-2-cols > div > div:last-child > .button-container {
   margin-top: 12px;
   margin-bottom: 0;
 }
 
-/* Outlined button in right color */
 .columns.columns5.block.columns-2-cols .button-container .button {
   display: inline-flex;
   align-items: center;
@@ -210,7 +202,6 @@
   line-height: 1.4;
 }
 
-/* Right arrow as SVG background image, visually consistent */
 .columns.columns5.block.columns-2-cols .button-container .button::after {
   display: inline-block;
   margin-left: 8px;
@@ -223,7 +214,6 @@
   content: "";
 }
 
-/* Responsive adjustments for smaller screens */
 @media (width <= 900px) {
   .columns.columns5 {
     padding: 16px 0;
@@ -243,8 +233,96 @@
   }
 }
 
-/* Remove the default margin for button from base styles */
 .columns.columns5 .button,
 .columns.columns5 .button.button {
   margin: 0;
+}
+
+
+/* Layout: Columns side by side, compact and equal width */
+.columns.columns6 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px; /* More compact horizontal spacing */
+  width: 100%;
+}
+
+/* Responsive: stack columns on mobile */
+@media (width <= 899px) {
+  .columns.columns6 > div {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* Each column: vertical stack, left-aligned, equal width & compact */
+.columns.columns6 > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 180px; /* Controls compactness and keeps columns visually balanced */
+}
+
+/* Headings: left aligned, purple, small bold */
+.columns.columns6 h3 {
+  color: #7d3f98;
+  font-size: 12px;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 7px;
+  text-align: left;
+  letter-spacing: 0.01em;
+}
+
+/* Remove bullets and spacing from ul */
+.columns.columns6 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* List items: compact vertical spacing, left-aligned */
+.columns.columns6 li {
+  margin: 0 0 2px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Remove strong bolding for links */
+.columns.columns6 strong {
+  font-weight: normal;
+}
+
+/* Link styling: red, small, left aligned */
+.columns.columns6 a {
+  color: #f26b6b;
+  font-size: 11px;
+  font-family: Inter, sans-serif;
+  font-weight: normal;
+  text-decoration: none;
+  line-height: 1.35;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+  background: url("data:image/svg+xml,%3Csvg width='10' height='10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5h6M6 3l2 2-2 2' stroke='%23f26b6b' stroke-width='1.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right center / 10px 10px;
+  padding-right: 18px;
+}
+
+/* Simulate arrow after each link using a background SVG (no content property, no hardcoded string) */
+
+/* Underline on hover for links */
+.columns.columns6 a:hover {
+  text-decoration: underline;
+}
+
+/* Remove last li margin for clean alignment */
+.columns.columns6 li:last-child {
+  margin-bottom: 0;
 }
