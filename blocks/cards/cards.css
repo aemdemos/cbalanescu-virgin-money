@@ -46,7 +46,6 @@
   list-style: none;
 }
 
-/* Card styles */
 .cards.cardsnoimages1 > ul > li {
   background: #fff;
   border-radius: 14px;
@@ -60,7 +59,6 @@
   justify-content: center;
 }
 
-/* Card body/content */
 .cards.cardsnoimages1 .cards-card-body {
   padding: 44px 20px;
   color: #e60000;
@@ -73,7 +71,6 @@
   justify-content: center;
 }
 
-/* Headline */
 .cards.cardsnoimages1 .cards-card-body h5 {
   color: #e60000;
   font-size: 15px;
@@ -83,7 +80,6 @@
   text-align: center;
 }
 
-/* Superscript */
 .cards.cardsnoimages1 .cards-card-body sup {
   color: #e60000;
   font-size: 10px;
@@ -91,7 +87,6 @@
   font-weight: 400;
 }
 
-/* Responsive adjustments: stack cards vertically on mobile */
 @media (width <= 700px) {
   .cards.cardsnoimages1 {
     padding: 18px 0;
@@ -107,5 +102,190 @@
     min-width: 0;
     max-width: 400px;
     width: 90%;
+  }
+}
+
+
+.cards.cards2 > ul {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+}
+
+@media (width <= 900px) {
+  .cards.cards2 > ul {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+}
+
+/* Card styling & structure */
+.cards.cards2 > ul > li {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgb(0 0 0 / 7%);
+  border: none;
+  min-width: 280px;
+  max-width: 380px;
+  width: 100%;
+  padding: 38px 38px 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: 560px;
+  transition: box-shadow 0.15s;
+}
+
+@media (width <= 900px) {
+  .cards.cards2 > ul > li {
+    max-width: 100%;
+    min-width: 0;
+    padding: 28px 12px;
+    min-height: 0;
+  }
+}
+
+/* Icon/image at top of card */
+.cards.cards2 .cards-card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 22px;
+  line-height: 0;
+}
+
+.cards.cards2 .cards-card-image img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Card body: vertical stack, flex to push button to bottom */
+.cards.cards2 .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 auto;
+  width: 100%;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+/* Headline: first paragraph in card body */
+.cards.cards2 .cards-card-body p:first-of-type {
+  color: #E6003C;
+  font-size: 1.17rem;
+  font-weight: 600;
+  margin: 0 0 16px;
+  text-align: center;
+  line-height: 1.22;
+  letter-spacing: 0.01em;
+  max-width: 95%;
+}
+
+/* Body text for subsequent paragraphs */
+.cards.cards2 .cards-card-body p:not(:first-of-type) {
+  color: #222;
+  font-size: 0.95rem;
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.56;
+  margin: 0 0 8px;
+}
+
+/* Superscript footnotes */
+.cards.cards2 .cards-card-body sup {
+  font-size: 0.8em;
+  vertical-align: super;
+}
+
+/* Button container at bottom using margin-top:auto */
+.cards.cards2 .cards-card-body .button-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Button styling */
+.cards.cards2 .cards-card-body .button {
+  background: linear-gradient(90deg,#E6003C 0%,#800083 100%);
+  color: #fff;
+  font-size: 1.09rem;
+  font-weight: 500;
+  border-radius: 9px;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 9%);
+  padding: 15px 42px;
+  border: none;
+  transition: background 0.2s;
+  text-align: center;
+  display: inline-block;
+  min-width: 180px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0 auto;
+}
+
+.cards.cards2 .cards-card-body .button[title*="Redeem"] {
+  background: #E6003C;
+}
+
+/* Add right arrow icon (SVG as background, no content property) */
+.cards.cards2 .cards-card-body .button::after {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  vertical-align: middle;
+  background: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 7l-1.41 1.41L16.17 12l-3.58 3.59L14 17l5-5z"/></svg>') no-repeat center/contain;
+}
+
+@media (width <= 900px) {
+  .cards.cards2 .cards-card-image {
+    margin-bottom: 10px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .cards.cards2 .cards-card-image img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .cards.cards2 .cards-card-body p:first-of-type {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .cards.cards2 .cards-card-body p:not(:first-of-type) {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  .cards.cards2 .cards-card-body .button {
+    font-size: 0.98rem;
+    padding: 10px 22px;
+    min-width: 140px;
+  }
+
+  .cards.cards2 .cards-card-body .button::after {
+    width: 15px;
+    height: 15px;
+    margin-left: 6px;
   }
 }
