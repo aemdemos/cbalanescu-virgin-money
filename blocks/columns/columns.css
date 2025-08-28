@@ -1676,7 +1676,6 @@
   gap: 0;
 }
 
-/* Left: Phone mockup */
 .columns.columns35 .columns-img-col {
   display: flex;
   align-items: center;
@@ -1700,7 +1699,6 @@
   display: block;
 }
 
-/* Right: Text and buttons */
 .columns.columns35 > div > div:not(.columns-img-col) {
   flex: 1 1 0;
   display: flex;
@@ -1825,4 +1823,114 @@
   .columns.columns35 > div > div:not(.columns-img-col) table img {
     width: 110px;
   }
+}
+
+
+.columns.columns36 {
+  background: #fff;
+  padding: 32px 0;
+  margin-left: 32px;
+  margin-right: 32px;
+}
+
+@media (width <= 900px) {
+  .columns.columns36 {
+    padding: 16px 0;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+.columns.columns36 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0; /* Remove gap so badges sit right next to text */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.columns.columns36 > div > div:first-child {
+  flex: 1 1 auto;
+  max-width: 760px; /* Restrict width so paragraph wraps to second line */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.columns.columns36 h2,
+.columns.columns36 h2 strong {
+  color: #5d1eb7;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  line-height: 1.15;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  overflow-wrap: break-word; /* Corrected from word-break */
+}
+
+.columns.columns36 p {
+  color: #4a4a4a;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+.columns.columns36 sup {
+  font-size: 0.7em;
+  color: #4a4a4a;
+  vertical-align: super;
+}
+
+.columns.columns36 .columns-img-col {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 12px; /* Small gap between badges */
+  justify-content: flex-end;
+  min-width: 0;
+  padding-bottom: 5px;
+}
+
+.columns.columns36 .columns-img-col img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  display: inline-block;
+  max-width: 120px;
+}
+
+@media (width <= 900px) {
+  .columns.columns36 > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 100%;
+  }
+
+  .columns.columns36 > div > div:first-child {
+    max-width: 100%;
+  }
+
+  .columns.columns36 .columns-img-col {
+    justify-content: flex-start;
+    gap: 12px;
+    padding-bottom: 0;
+    margin-top: 8px;
+  }
+
+  .columns.columns36 .columns-img-col img {
+    height: 48px;
+    max-width: 70px;
+  }
+}
+
+.columns.columns36 img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
 }
