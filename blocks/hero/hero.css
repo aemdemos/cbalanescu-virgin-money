@@ -151,7 +151,7 @@
   background: #f7f7fa;
   display: flex;
   flex-direction: row;
-  align-items: flex-start; /* align items to the top */
+  align-items: flex-start;
   justify-content: center;
   max-width: 900px;
   margin: 72px auto 0;
@@ -159,23 +159,18 @@
   box-sizing: border-box;
 }
 
-/* Left: image and red border container */
 .hero.hero8 > div:first-child {
   flex: 0 0 320px;
   display: flex;
-  align-items: flex-start;  /* align image to top of hero block */
+  align-items: flex-start;
   justify-content: flex-end;
   min-width: 320px;
   min-height: 320px;
-  margin-right: 24px; /* reduced gap for a more compact appearance */
+  margin-right: 24px;
   position: relative;
   background: none;
 }
 
-/* Simulate image and red border.
-   Replace the background-image value with your real image as needed.
-   If using actual <img>, ensure the image is inside this div and style accordingly.
-*/
 .hero.hero8 > div:first-child > div {
   width: 320px;
   height: 320px;
@@ -186,11 +181,10 @@
   border-bottom: 12px solid #e6001f;
 }
 
-/* Right: text container */
 .hero.hero8 > div:last-child {
   flex: 1 1 0;
   display: flex;
-  align-items: flex-start; /* top-align text block */
+  align-items: flex-start;
   min-width: 0;
   height: 100%;
   justify-content: flex-start;
@@ -203,10 +197,9 @@
   align-items: flex-start;
   max-width: 480px;
   width: 100%;
-  margin-top: 0; /* flush with top of image */
+  margin-top: 0;
 }
 
-/* Heading styles */
 .hero.hero8 h1,
 .hero.hero8 h1 strong {
   font-size: 2rem;
@@ -219,7 +212,6 @@
   letter-spacing: 0;
 }
 
-/* Paragraph styles */
 .hero.hero8 p {
   font-size: 1rem;
   color: #222;
@@ -230,7 +222,6 @@
   max-width: 440px;
 }
 
-/* Responsive: stack columns vertically on small screens */
 @media (width <= 800px) {
   .hero.hero8 {
     flex-direction: column;
@@ -272,8 +263,156 @@
   }
 }
 
-/* Remove extra spacing for sections inside hero */
 .hero.hero8 .section {
   margin: 0;
   padding: 0;
+}
+
+
+.hero.hero19 {
+  background: #f7f7f9;
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 56px 0;
+  box-sizing: border-box;
+}
+
+/* Remove empty space from first column */
+.hero.hero19 > div:first-child {
+  display: none;
+}
+
+/* Center main content column */
+.hero.hero19 > div:last-child {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Max-width and centering for inner content */
+.hero.hero19 > div:last-child > div {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading: purple, bold, slightly heavier, less margin below */
+.hero.hero19 h2 {
+  color: #6700ab;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+  line-height: 1.12;
+}
+
+/* Both paragraphs: same size, color, and line height */
+.hero.hero19 > div:last-child > div > p {
+  color: #4a4a4a;
+  font-size: 15px;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.35;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* First (subheading) paragraph: slightly more below */
+.hero.hero19 > div:last-child > div > p:first-of-type {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* Second paragraph: more space above */
+.hero.hero19 > div:last-child > div > p:nth-of-type(2) {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+/* Button row: more space above, increased gap, side by side */
+.hero.hero19 > div:last-child > div > p:last-of-type {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 48px;
+  margin-bottom: 0;
+}
+
+/* Button shared styles */
+.hero.hero19 > div:last-child > div > p:last-of-type a {
+  font-family: Inter, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 6px 28px;
+  display: inline-block;
+  transition: filter 0.15s, background 0.15s, color 0.15s, border-color 0.15s;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: none;
+  margin: 0;
+  min-width: 160px;
+}
+
+/* First button: gradient background with white text */
+.hero.hero19 > div:last-child > div > p:last-of-type a:first-child {
+  background: linear-gradient(90deg, #f71c32 0%, #6700ab 100%);
+  color: #fff;
+  border: none;
+}
+
+/* Second button: white background, red border and text */
+.hero.hero19 > div:last-child > div > p:last-of-type a:last-child {
+  background: #fff;
+  color: #f71c32;
+  border: 1.5px solid #f71c32;
+}
+
+/* Button hover/focus states */
+.hero.hero19 > div:last-child > div > p:last-of-type a:first-child:hover,
+.hero.hero19 > div:last-child > div > p:last-of-type a:first-child:focus {
+  filter: brightness(0.95);
+}
+
+.hero.hero19 > div:last-child > div > p:last-of-type a:last-child:hover,
+.hero.hero19 > div:last-child > div > p:last-of-type a:last-child:focus {
+  background: #ffe7eb;
+  color: #d4122f;
+  border-color: #d4122f;
+}
+
+/* Responsive for mobile: stack content, buttons vertical */
+@media (width <= 700px) {
+  .hero.hero19 {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 32px 0;
+  }
+
+  .hero.hero19 > div:last-child > div {
+    max-width: 98vw;
+    padding: 0 4vw;
+  }
+
+  .hero.hero19 > div:last-child > div > p:last-of-type {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero.hero19 > div:last-child > div > p:last-of-type a {
+    min-width: 0;
+    width: 100%;
+  }
 }
