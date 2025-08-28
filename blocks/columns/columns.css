@@ -343,7 +343,6 @@
   }
 }
 
-/* IMAGE COLUMN */
 .columns.columns7 .columns-img-col {
   flex: 0 0 375px;
   max-width: 375px;
@@ -362,7 +361,6 @@
   display: block;
 }
 
-/* CONTENT COLUMN */
 .columns.columns7 > div > div:not(.columns-img-col) {
   flex: 1 1 0;
   display: flex;
@@ -374,7 +372,6 @@
   margin-top: 0;
 }
 
-/* HEADLINE */
 .columns.columns7 h2 {
   font-size: 2.5rem;
   color: #720D7C;
@@ -385,7 +382,6 @@
   text-align: left;
 }
 
-/* BODY TEXT */
 .columns.columns7 p {
   color: #333;
   font-size: 1.08rem;
@@ -400,7 +396,6 @@
   margin-bottom: 20px;
 }
 
-/* BUTTON */
 .columns.columns7 .button-container {
   margin-top: 10px;
   margin-bottom: 0;
@@ -449,3 +444,276 @@
     min-width: 0;
   }
 }
+
+
+.columns.columns11 {
+  display: block;
+  background: #fff;
+  border-bottom: 1.5px solid #ededed;
+  margin: 40px auto 24px;
+  max-width: 1150px;
+  box-sizing: border-box;
+  overflow: visible;
+  padding-bottom: 0;
+  font-size: 16px;
+  overflow-x: auto;
+}
+
+.columns.columns11 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 84px;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Responsive: stack columns vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns11 {
+    margin: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    max-width: 100vw;
+  }
+
+  .columns.columns11 > div {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* LEFT COLUMN: heading + image */
+.columns.columns11 > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex: 0 0 380px;
+  min-width: 300px;
+  max-width: 420px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+@media (width <= 900px) {
+  .columns.columns11 > div > div:first-child {
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+
+.columns.columns11 > div > div:first-child h3 {
+  color: #4b0076;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 38px;
+  line-height: 1.18;
+}
+
+.columns.columns11 > div > div:first-child p {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.columns.columns11 > div > div:first-child picture,
+.columns.columns11 > div > div:first-child img {
+  display: block;
+  margin: 0 auto;
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 11%);
+}
+
+/* RIGHT COLUMN: offer box container */
+.columns.columns11 > div > div:last-child {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 590px;
+  background: #f7f6f9;
+  border-radius: 13px;
+  padding: 58px 34px 32px;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (width <= 900px) {
+  .columns.columns11 > div > div:last-child {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0;
+    padding: 28px 3vw 18px;
+    margin: 0 auto;
+  }
+}
+
+/* Offer heading */
+.columns.columns11 > div > div:last-child h3 {
+  color: #4b0076;
+  font-size: 1.70rem;
+  font-weight: bold;
+  margin: 0 0 19px;
+  line-height: 1.18;
+}
+
+/* Subheading (bold top paragraph) */
+.columns.columns11 > div > div:last-child > p strong {
+  color: #222;
+  font-size: 1.16rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15px;
+  line-height: 1.25;
+}
+
+/* Bullet list styling */
+.columns.columns11 > div > div:last-child ul {
+  color: #222;
+  font-size: 1.05rem;
+  margin-bottom: 1.14em;
+  margin-top: 0.18em;
+  padding-left: 1.3em;
+}
+
+.columns.columns11 > div > div:last-child ul li {
+  margin-bottom: 12px;
+  line-height: 1.70;
+}
+
+.columns.columns11 > div > div:last-child ul li strong {
+  color: #d0021b;
+}
+
+.columns.columns11 sup {
+  font-size: 0.73em;
+  color: #b1b1b1;
+  vertical-align: super;
+}
+
+/* Buttons row: Apply Now + Find Out More */
+.columns.columns11 > div > div:last-child > p {
+  margin-bottom: 38px;
+  margin-top: 18px;
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.columns.columns11 > div > div:last-child > p a {
+  display: inline-block;
+  min-width: 148px;
+  padding: 17px 44px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 1.16rem;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  vertical-align: middle;
+  transition: background .2s, color .2s, border .2s;
+  margin: 0;
+  line-height: 1.33;
+}
+
+.columns.columns11 > div > div:last-child > p a:first-of-type {
+  background: #d0021b;
+  color: #fff;
+  border: none;
+}
+
+.columns.columns11 > div > div:last-child > p a:not(:first-of-type) {
+  background: #fff;
+  color: #d0021b;
+  border: 1.5px solid #d0021b;
+}
+
+/* Table styling: Use flex for rows, keep cells side by side, more vertical gap */
+.columns.columns11 table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 26px;
+  margin: 44px 0 20px;
+  font-size: 1.07rem;
+  background: none;
+  max-width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.columns.columns11 table thead,
+.columns.columns11 table tbody {
+  display: table-row-group;
+}
+
+.columns.columns11 table tr {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.columns.columns11 table th,
+.columns.columns11 table td {
+  background: #fff;
+  padding: 17px 18px 17px 19px;
+  border-radius: 10px;
+  font-weight: normal;
+  color: #222;
+  vertical-align: top;
+  text-align: left;
+  line-height: 1.6;
+  flex: 1 1 0;
+  min-width: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.columns.columns11 table th {
+  color: #4b0076;
+  font-weight: 700;
+  flex: 0 0 170px;
+}
+
+/* Spacing between cells */
+.columns.columns11 table th:not(:last-child),
+.columns.columns11 table td:not(:last-child) {
+  margin-right: 18px;
+}
+
+/* Details link at bottom: spacing */
+.columns.columns11 ul:last-of-type {
+  margin-top: 26px;
+}
+
+/* Responsive table adjustments */
+@media (width <= 900px) {
+  .columns.columns11 table tr,
+  .columns.columns11 table thead,
+  .columns.columns11 table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .columns.columns11 table th,
+  .columns.columns11 table td {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    border-radius: 0;
+    padding: 10px 7vw;
+    font-size: 0.99rem;
+  }
+}
+
+/* Prevent horizontal overflow */
