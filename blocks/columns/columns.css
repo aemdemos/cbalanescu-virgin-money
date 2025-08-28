@@ -819,7 +819,6 @@
   box-sizing: border-box;
 }
 
-/* Main flex row with image + all text stacked in right column */
 .columns.columns15 > div {
   display: flex;
   flex-direction: row;
@@ -832,7 +831,6 @@
   gap: 0;
 }
 
-/* Image column: left, fixed width, vertically top-aligned */
 .columns.columns15 > div > .columns-img-col {
   flex: 0 0 38%;
   max-width: 38%;
@@ -851,7 +849,6 @@
   object-fit: contain;
 }
 
-/* Right content area: stack both text columns vertically as one block */
 .columns.columns15 > div > div:not(.columns-img-col) {
   flex: 1 1 0;
   min-width: 0;
@@ -871,12 +868,10 @@
   margin-top: 0;
 }
 
-/* Visually merge the two text columns (stack them as a single right column) */
 .columns.columns15 > div > div:not(.columns-img-col) > * {
   width: 100%;
 }
 
-/* Section heading with icon inline, magenta color */
 .columns.columns15 > div > div:not(.columns-img-col) > p:has(picture) {
   margin: 24px 0 0;
   display: flex;
@@ -900,7 +895,6 @@
   display: block;
 }
 
-/* Headings: magenta, proper weight, spacing */
 .columns.columns15 > div > div:not(.columns-img-col) > h3 {
   display: inline-block;
   font-size: 18px;
@@ -916,7 +910,6 @@
   font-weight: bold;
 }
 
-/* Body text: medium gray, smaller font, spacing */
 .columns.columns15 > div > div:not(.columns-img-col) > p:not(:has(picture)) {
   font-size: 14px;
   color: #656565;
@@ -925,12 +918,10 @@
   font-weight: 400;
 }
 
-/* Remove extra margin on last section */
 .columns.columns15 > div > div:not(.columns-img-col) > p:last-child {
   margin-bottom: 0;
 }
 
-/* Responsive: stack on mobile, adjust paddings */
 @media (width <= 900px) {
   .columns.columns15 > div {
     flex-direction: column;
@@ -945,4 +936,131 @@
   }
 }
 
-/* Optional: remove background gray for the block's container if present */
+
+.columns.columns18 {
+  background: #505157;
+  padding: 0;
+  margin: 0;
+  font-family: Inter, sans-serif;
+  color: #ccc;
+  width: 100%;
+}
+
+/* Tighter flex columns, visually grouped */
+.columns.columns18 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive stacking for small screens */
+@media (width <= 900px) {
+  .columns.columns18 > div {
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px 6px;
+    max-width: 100%;
+  }
+}
+
+/* Remove all list bullets and fix spacing */
+.columns.columns18 ul,
+.columns.columns18 ul ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Top-level heading only */
+.columns.columns18 > div > div > ul > li {
+  color: #e0e0e0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  margin-bottom: 12px;
+  font-family: Inter, sans-serif;
+  line-height: 1.6;
+}
+
+/* Sub-links */
+.columns.columns18 > div > div > ul > li > ul > li {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-bottom: 4px;
+  line-height: 1.7;
+}
+
+/* Remove extra margin under last sub-link */
+.columns.columns18 > div > div > ul > li > ul > li:last-child {
+  margin-bottom: 0;
+}
+
+/* Links inside sub-lists */
+.columns.columns18 > div > div > ul > li > ul > li a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: Inter, sans-serif;
+  transition: color 0.2s;
+  font-weight: 400;
+}
+
+.columns.columns18 > div > div > ul > li > ul > li a:hover,
+.columns.columns18 > div > div > ul > li > ul > li a:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Social icons row below heading, slightly reduced gap and margin */
+.columns.columns18 .columns-img-col > ul > li > ul {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 0;
+  margin: 5px 0 0;
+}
+
+.columns.columns18 .columns-img-col > ul > li > ul > li {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+/* Social icons style */
+.columns.columns18 .columns-img-col picture,
+.columns.columns18 .columns-img-col img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(0.85);
+}
+
+/* Narrow social column, left-aligned content */
+.columns.columns18 > div > .columns-img-col {
+  max-width: 80px;
+  flex: 0 0 80px;
+  text-align: left;
+}
+
+/* Ensure left-alignment for all columns */
+.columns.columns18 > div > div {
+  text-align: left;
+}
+
+/* Prevent excessive width on link columns */
+.columns.columns18 > div > div:not(.columns-img-col) {
+  flex: 1 1 0;
+  min-width: 140px;
+  max-width: 200px;
+}
