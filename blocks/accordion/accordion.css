@@ -684,13 +684,12 @@
   margin-top: 0;
 }
 
-/* More precise row spacing and balance for text/chevron */
 .accordion.accordion48 .accordion-item-label {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px 12px 28px; /* Reduce right pad so chevron is more visually centered with text */
+  padding: 12px 16px 12px 28px;
   border-bottom: 1px solid #eee;
   background: #fafafa;
   min-height: 0;
@@ -752,12 +751,11 @@
   text-decoration: underline;
 }
 
-/* Chevron: perfect size, balanced buffer from right edge */
 .accordion.accordion48 .accordion-item-label::after {
   width: 14px;
   height: 14px;
   margin-left: 12px;
-  margin-right: 4px; /* Less than before, bring closer to right edge but leave a comfortable gap */
+  margin-right: 4px;
   vertical-align: middle;
   display: inline-block;
   border-right: 2px solid #e53935;
@@ -823,4 +821,120 @@
     padding: 10px 14px;
     font-size: 13px;
   }
+}
+
+
+.accordion.accordion49 details {
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* Use grid for 2-column layout and perfect vertical alignment */
+.accordion.accordion49 .accordion-item-label {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 32px;
+  height: 32px;
+  background: #f5f5f7;
+  border-bottom: 1px solid #e5e5e7;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Remove default margins, grid for vertical centering */
+.accordion.accordion49 .accordion-item-label .button-container,
+.accordion.accordion49 .accordion-item-label .button-container p {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+
+/* Anchor: fills parent, uses grid for vertical centering */
+.accordion.accordion49 .accordion-item-label .button-container .button,
+.accordion.accordion49 .accordion-item-label .button-container a.button {
+  background: none;
+  color: #444;
+  font-size: 13px;
+  font-weight: normal;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  text-align: left;
+  line-height: normal;
+  display: grid;
+  align-items: center;
+  height: 32px;
+  width: 100%;
+  cursor: pointer;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* Chevron: browser marker color and size */
+.accordion.accordion49 .accordion-item-label::-webkit-details-marker,
+.accordion.accordion49 .accordion-item-label::marker {
+  color: #c8102e;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+/* If custom chevron arrow is used via ::after, ensure visual match and vertical centering */
+.accordion.accordion49 .accordion-item-label::after {
+  border-color: #c8102e;
+  width: 8px;
+  height: 8px;
+  border-width: 2px 2px 0 0;
+  border-style: solid;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: 0;
+  display: inline-block;
+  position: static;
+}
+
+/* Prevent extra vertical space in header due to open state */
+.accordion.accordion49 details[open] .accordion-item-label {
+  background: #f5f5f7;
+}
+
+/* Responsive adjustment for smaller screens: maintain padding and legibility */
+@media (width <= 600px) {
+  .accordion.accordion49 .accordion-item-label {
+    min-height: 36px;
+    height: 36px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .accordion.accordion49 .accordion-item-label .button-container .button,
+  .accordion.accordion49 .accordion-item-label .button-container a.button {
+    font-size: 14px;
+    height: 36px;
+  }
+}
+
+/* Body area: clean separation */
+.accordion.accordion49 .accordion-item-body {
+  padding: 0 16px;
+  border: none;
+  background: transparent;
+}
+
+.accordion.accordion49 details[open] .accordion-item-body {
+  border-top: 1px solid #e5e5e7;
+  background: #fff;
 }
