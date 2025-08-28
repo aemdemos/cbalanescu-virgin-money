@@ -1,7 +1,16 @@
 /* stylelint-disable no-descending-specificity */
 .columns > div {
-  display: flex;
+  display: grid;
   flex-direction: column;
+  grid-template-columns: 1.1fr 2fr 1fr;
+  place-items: center stretch;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 64px 40px;
+  background: #fff;
+  min-height: 360px;
+  gap: 0 48px;
+  box-sizing: border-box;
 }
 
 .columns img {
@@ -14,6 +23,12 @@
 
 .columns > div > .columns-img-col {
   order: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  max-width: 340px;
+  height: 100%;
 }
 
 .columns > div > .columns-img-col img {
@@ -983,7 +998,6 @@
   height: 100%;
 }
 
-/* Each card: flex column, vertical centering with auto margin */
 .columns.columns14 > div > div {
   display: flex;
   flex-direction: column;
@@ -997,7 +1011,6 @@
   position: relative;
 }
 
-/* Use an inner wrapper for vertical centering via margin auto (works with provided structure) */
 .columns.columns14 > div > div > h2 {
   margin: 0 0 24px;
   font-size: 2rem;
@@ -1008,10 +1021,8 @@
   margin-top: auto;
 }
 
-/* Group heading and button-container for "true" vertical centering using margin auto on top and bottom */
 .columns.columns14 > div > div > h2,
 .columns.columns14 > div > div > .button-container {
-  /* Remove any inherited vertical margins */
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -1020,36 +1031,30 @@
   margin-bottom: auto;
 }
 
-/* Remove double spacing between h2 and button-container */
 .columns.columns14 .button-container {
   margin: 0;
   padding: 0;
 }
 
-/* Left card: gradient background, white text */
 .columns.columns14 > div > div:first-child {
   background: linear-gradient(135deg, #e30613 0%, #4a148c 100%);
   color: #fff;
 }
 
-/* Right card: light grey background, colored text */
 .columns.columns14 > div > div:nth-child(2) {
   background: #f4f4f6;
 }
 
-/* Left card heading: white */
 .columns.columns14 > div > div:first-child h2,
 .columns.columns14 > div > div:first-child h2 a {
   color: #fff;
 }
 
-/* Right card heading: purple */
 .columns.columns14 > div > div:nth-child(2) h2,
 .columns.columns14 > div > div:nth-child(2) h2 a {
   color: #4a148c;
 }
 
-/* Style links as left-aligned text, suppress button look, add arrow */
 .columns.columns14 .button-container .button {
   background: none;
   border: none;
@@ -1067,17 +1072,14 @@
   transition: color 0.15s;
 }
 
-/* Left card link: white */
 .columns.columns14 > div > div:first-child .button-container .button {
   color: #fff;
 }
 
-/* Right card link: red */
 .columns.columns14 > div > div:nth-child(2) .button-container .button {
   color: #e30613;
 }
 
-/* Add inline SVG arrow after link text */
 .columns.columns14 .button-container .button::after {
   display: inline-block;
   vertical-align: middle;
@@ -1088,12 +1090,10 @@
   content: "";
 }
 
-/* Ensure the arrow is white on the left card */
 .columns.columns14 > div > div:first-child .button-container .button::after {
   background: url("data:image/svg+xml;utf8,<svg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 6H9' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round'/><path d='M6.75 3.75L9 6L6.75 8.25' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center/contain;
 }
 
-/* Responsive adjustments */
 @media (width <= 900px) {
   .columns.columns14 > div {
     flex-direction: column;
@@ -1105,5 +1105,122 @@
   .columns.columns14 > div > div {
     min-height: 120px;
     padding: 28px 16px;
+  }
+}
+
+
+/* Use CSS Grid for true alignment: left "image"/icon, right grouped content, rightmost icons */
+
+/* Left: vertical alignment for image/icons (or empty) */
+
+/* Center: group two link columns vertically like a stacked content block */
+.columns > div > div:not(.columns-img-col):first-of-type {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  min-width: 320px;
+  max-width: 500px;
+}
+
+/* Group both ULs in the center column into a vertical stack, tighter gap */
+.columns > div > div:not(.columns-img-col):first-of-type ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Headline: first link in first UL, styled as heading */
+.columns > div > div:not(.columns-img-col):first-of-type ul:first-child li:first-child a {
+  color: #800080;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+
+/* Button: last link in each UL styled as a button */
+.columns > div > div:not(.columns-img-col):first-of-type ul li:last-child a {
+  background: #d0021b;
+  color: #fff;
+  padding: 0.6em 2em;
+  border-radius: 2em;
+  font-weight: 600;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 8px rgb(208 2 27 / 9%);
+  margin-top: 18px;
+  display: inline-block;
+  transition: background 0.18s, color 0.18s;
+}
+
+.columns > div > div:not(.columns-img-col):first-of-type ul li:last-child a:hover,
+.columns > div > div:not(.columns-img-col):first-of-type ul li:last-child a:focus {
+  background: #800080;
+  color: #fff;
+}
+
+/* All other links: subtle, dark-grey, not bold */
+.columns > div > div:not(.columns-img-col):first-of-type ul li:not(:first-child, :last-child) a {
+  color: #b3b3b3;
+  font-size: 1.05rem;
+  font-weight: 400;
+  transition: color 0.15s;
+}
+
+.columns > div > div:not(.columns-img-col):first-of-type ul li:not(:first-child, :last-child) a:hover,
+.columns > div > div:not(.columns-img-col):first-of-type ul li:not(:first-child, :last-child) a:focus {
+  color: #800080;
+}
+
+/* Right: icons vertically centered and spaced out */
+.columns > div > div.columns-img-col ~ div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  min-width: 90px;
+}
+
+.columns > div > div.columns-img-col ~ div p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  margin: 0;
+}
+
+.columns > div > div.columns-img-col ~ div picture,
+.columns > div > div.columns-img-col ~ div img {
+  opacity: 0.21;
+  width: 38px;
+  height: 38px;
+}
+
+/* Responsive: stack for smaller screens, keep content grouped */
+@media (width <= 900px) {
+  .columns > div {
+    grid-template-columns: 1fr;
+    padding: 32px 12px;
+    gap: 38px 0;
+    min-height: unset;
+  }
+
+  .columns > div > .columns-img-col,
+  .columns > div > div:not(.columns-img-col):first-of-type,
+  .columns > div > div.columns-img-col ~ div {
+    min-width: 0;
+    max-width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .columns > div > div.columns-img-col ~ div {
+    gap: 18px;
   }
 }
