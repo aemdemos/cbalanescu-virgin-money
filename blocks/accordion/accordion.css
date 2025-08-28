@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .accordion details {
   border: 1px solid #dadada;
 }
@@ -153,8 +154,6 @@
   padding: 0;
   margin: 0;
   width: 100%;
-
-  /* Ensure container is visible */
   display: block;
 }
 
@@ -207,7 +206,6 @@
   display: block;
 }
 
-/* Chevron: use border-based pseudo-element, small and aligned */
 .accordion.accordion16 > details > summary::after {
   display: inline-block;
   width: 14px;
@@ -233,4 +231,171 @@
   margin: 0;
   border: none;
   background: none;
+}
+
+
+.accordion.accordion21 {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  position: relative;
+  background: none;
+  min-height: 220px;
+}
+
+/* LEFT COLUMN: red background with centered book icon */
+.accordion.accordion21::before {
+  display: block;
+  flex: 0 0 180px;
+  width: 180px;
+  min-width: 140px;
+  height: auto;
+  align-self: stretch;
+  background: #E60000;
+  background-image: url('data:image/svg+xml;utf8,<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="20" width="50" height="40" rx="4" stroke="white" stroke-width="4" fill="none"/><rect x="35" y="28" width="10" height="22" fill="white"/><polygon points="35,28 40,34 45,28" fill="%23E60000"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80px 80px;
+  content: "";
+}
+
+@media (width <= 700px) {
+  .accordion.accordion21 {
+    flex-direction: column;
+    min-height: unset;
+  }
+
+  .accordion.accordion21::before {
+    width: 100%;
+    min-width: 0;
+    height: 120px;
+    min-height: 80px;
+    background-size: 48px 48px;
+  }
+}
+
+/* RIGHT COLUMN: accordion content stacked vertically */
+.accordion.accordion21 > .block {
+  flex: 1 1 0%;
+  min-width: 0;
+  background: #fff;
+  padding: 0 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* Vertically stack accordion items, full width */
+.accordion.accordion21 > .block > details {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: #fff;
+  box-sizing: border-box;
+
+  /* Remove horizontal flex so they stack vertically */
+  display: block;
+}
+
+/* Divider between items except last */
+.accordion.accordion21 > .block > details:not(:last-of-type) {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+/* Accordion summary styling */
+.accordion.accordion21 summary {
+  color: #333;
+  font-size: 16px;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-weight: 400;
+  padding: 16px 40px 16px 0;
+  margin: 0;
+  background: none;
+  outline: none;
+  border: none;
+  min-height: 48px;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+/* Hide default marker */
+.accordion.accordion21 summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Caret arrow */
+.accordion.accordion21 summary::after {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid #E60000;
+  border-bottom: 2px solid #E60000;
+  border-top: 0;
+  border-left: 0;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  background: none;
+  pointer-events: none;
+}
+
+.accordion.accordion21 details[open] > summary::after {
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.accordion.accordion21 summary:focus {
+  outline: none;
+  background: #f8f8f8;
+}
+
+/* Adjust question text (summary > p) */
+.accordion.accordion21 summary > p {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+/* Accordion body */
+.accordion.accordion21 .accordion-item-body {
+  background: #fff;
+  padding: 0 0 16px;
+}
+
+.accordion.accordion21 details[open] .accordion-item-body {
+  border-top: none;
+  background: #fff;
+}
+
+/* "See more" link styling */
+.accordion.accordion21 #see-more a,
+.accordion.accordion21 h6#see-more a {
+  color: #E60000;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: underline;
+  font-family: 'Open Sans', Arial, sans-serif;
+  margin-top: 14px;
+  display: inline-block;
+}
+
+.accordion.accordion21 #see-more {
+  margin: 18px 0 0;
+}
+
+/* Responsive adjustment for right column padding */
+@media (width <= 700px) {
+  .accordion.accordion21 > .block {
+    padding-left: 0;
+    padding-top: 16px;
+  }
 }
