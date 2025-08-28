@@ -733,7 +733,6 @@
   content-visibility: auto;
 }
 
-/* Content section below image */
 .hero.hero39 > div:last-child {
   width: 100%;
   background: #f5f5f5;
@@ -754,7 +753,6 @@
   align-items: flex-start;
 }
 
-/* Heading styling */
 .hero.hero39 h1 {
   color: #6f35a5;
   font-family: var(--heading-font-family);
@@ -768,7 +766,6 @@
   text-align: left;
 }
 
-/* Subtext styling */
 .hero.hero39 p {
   color: #555;
   font-size: 1.1em;
@@ -778,7 +775,6 @@
   text-align: left;
 }
 
-/* Responsive for smaller screens */
 @media (width <= 900px) {
   .hero.hero39 > div:first-child {
     height: 160px;
@@ -800,5 +796,113 @@
 
   .hero.hero39 p {
     font-size: 1em;
+  }
+}
+
+
+.hero.hero54 {
+  background: #f5f5f7;
+  padding: 32px 0 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Hide empty first column */
+.hero.hero54 > div:first-child {
+  display: none;
+}
+
+/* Content container: slightly wider and still centered */
+.hero.hero54 > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Headline styles: purple, bold, slightly more relaxed spacing */
+.hero.hero54 h5 {
+  color: #5d1bb0;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 10px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+/* Paragraph styles: slightly more line-height and margin */
+.hero.hero54 p:not(.button-container) {
+  color: #555;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.33;
+  margin: 0 0 15px;
+  text-align: center;
+  word-break: normal;
+}
+
+/* Button container: center */
+.hero.hero54 .button-container {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Button: compact, correct font, gradient, rounded, arrow */
+.hero.hero54 .button-container .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 32px;
+  padding: 6px 24px;
+  border-radius: 7px;
+  border: none;
+  background: linear-gradient(90deg, #ed1c24 0%, #90c 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgb(237 28 36 / 8%);
+  margin: 0;
+  transition: background 0.2s, box-shadow 0.2s;
+  position: relative;
+  text-align: center;
+  max-width: none;
+  white-space: nowrap;
+}
+
+/* Arrow as SVG background in a pseudo-element */
+.hero.hero54 .button-container .button::after {
+  display: inline-block;
+  margin-left: 10px;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  background: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/></svg>') no-repeat center;
+  background-size: 14px 14px;
+  content: "";
+}
+
+/* Responsive: soften padding and container width */
+@media (width <= 600px) {
+  .hero.hero54 {
+    padding: 14px 0 20px;
+  }
+
+  .hero.hero54 > div:last-child {
+    max-width: 96vw;
+    padding: 0 5px;
+  }
+
+  .hero.hero54 .button-container .button {
+    width: 100%;
+    min-width: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
