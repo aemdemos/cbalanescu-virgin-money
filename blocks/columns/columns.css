@@ -470,7 +470,6 @@
   box-sizing: border-box;
 }
 
-/* Responsive: stack columns vertically on small screens */
 @media (width <= 900px) {
   .columns.columns11 {
     margin: 0;
@@ -485,7 +484,6 @@
   }
 }
 
-/* LEFT COLUMN: heading + image */
 .columns.columns11 > div > div:first-child {
   display: flex;
   flex-direction: column;
@@ -533,7 +531,6 @@
   box-shadow: 0 8px 24px rgb(0 0 0 / 11%);
 }
 
-/* RIGHT COLUMN: offer box container */
 .columns.columns11 > div > div:last-child {
   flex: 1 1 0;
   min-width: 0;
@@ -558,7 +555,6 @@
   }
 }
 
-/* Offer heading */
 .columns.columns11 > div > div:last-child h3 {
   color: #4b0076;
   font-size: 1.70rem;
@@ -567,7 +563,6 @@
   line-height: 1.18;
 }
 
-/* Subheading (bold top paragraph) */
 .columns.columns11 > div > div:last-child > p strong {
   color: #222;
   font-size: 1.16rem;
@@ -577,7 +572,6 @@
   line-height: 1.25;
 }
 
-/* Bullet list styling */
 .columns.columns11 > div > div:last-child ul {
   color: #222;
   font-size: 1.05rem;
@@ -601,7 +595,6 @@
   vertical-align: super;
 }
 
-/* Buttons row: Apply Now + Find Out More */
 .columns.columns11 > div > div:last-child > p {
   margin-bottom: 38px;
   margin-top: 18px;
@@ -638,7 +631,6 @@
   border: 1.5px solid #d0021b;
 }
 
-/* Table styling: Use flex for rows, keep cells side by side, more vertical gap */
 .columns.columns11 table {
   width: 100%;
   border-collapse: separate;
@@ -685,18 +677,15 @@
   flex: 0 0 170px;
 }
 
-/* Spacing between cells */
 .columns.columns11 table th:not(:last-child),
 .columns.columns11 table td:not(:last-child) {
   margin-right: 18px;
 }
 
-/* Details link at bottom: spacing */
 .columns.columns11 ul:last-of-type {
   margin-top: 26px;
 }
 
-/* Responsive table adjustments */
 @media (width <= 900px) {
   .columns.columns11 table tr,
   .columns.columns11 table thead,
@@ -716,4 +705,119 @@
   }
 }
 
-/* Prevent horizontal overflow */
+
+.columns.columns14 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background: #fff;
+  gap: 0;
+}
+
+/* Left column: heading and first two features stacked vertically */
+.columns.columns14 > div:first-child {
+  flex: 0 1 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 220px;
+  padding-left: 32px;
+  padding-right: 0;
+  padding-top: 24px;
+}
+
+/* Right column: next two features stacked vertically */
+.columns.columns14 > div:last-child {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 220px;
+  padding-left: 56px;
+  padding-right: 32px;
+  padding-top: 120px; /* Visually aligns feature grid with left column's features */
+}
+
+/* Heading: large, purple, margin below */
+.columns.columns14 > div:first-child > div:first-child h3 {
+  font-size: 24px;
+  color: #6F2DA8;
+  font-weight: 400;
+  margin: 0 0 64px;
+  line-height: 1.2;
+}
+
+/* Feature blocks: always stack icon, title, desc vertically */
+.columns.columns14 > div > div:not(:first-child),
+.columns.columns14 > div:last-child > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 0;
+  max-width: 340px;
+}
+
+/* Last feature in each column no extra space */
+.columns.columns14 > div > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Icon at top of each feature */
+.columns.columns14 img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+/* Feature title */
+.columns.columns14 h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #6F2DA8;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+/* Feature description */
+.columns.columns14 p {
+  font-size: 12px;
+  color: #333;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Superscript styling */
+.columns.columns14 sup {
+  font-size: 8px;
+  color: #999;
+  vertical-align: super;
+}
+
+/* Responsive: stack all features vertically on small screens */
+@media (width <= 900px) {
+  .columns.columns14 {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .columns.columns14 > div {
+    min-width: 0;
+    padding: 0;
+  }
+
+  .columns.columns14 > div > div {
+    margin-bottom: 24px;
+    max-width: unset;
+  }
+
+  .columns.columns14 > div > div:last-child {
+    margin-bottom: 0;
+  }
+
+  .columns.columns14 > div:first-child > div:first-child h3 {
+    margin-bottom: 24px;
+  }
+}
