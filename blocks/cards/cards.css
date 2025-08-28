@@ -631,7 +631,6 @@
   padding: 0;
 }
 
-/* --- FLEX row for side-by-side cards --- */
 .cards.cards26.block > ul {
   display: flex;
   flex-direction: row;
@@ -651,7 +650,6 @@
   }
 }
 
-/* --- Card container: more compact, sharper shadow, less rounded corners --- */
 .cards.cards26.block > ul > li {
   display: flex;
   flex-direction: column;
@@ -665,7 +663,6 @@
   margin: 0;
 }
 
-/* --- Red header area: less vertical space, raise icon --- */
 .cards.cards26.block > ul > li > .cards-card-body:first-child {
   background: #e30613;
   min-height: 90px;
@@ -676,7 +673,6 @@
   position: relative;
 }
 
-/* --- Icon bubble: overlap border, strong shadow, higher position --- */
 .cards.cards26.block > ul > li > .cards-card-body:first-child p {
   margin: 0;
   width: 66px;
@@ -695,17 +691,15 @@
   z-index: 2;
 }
 
-/* --- Content area: tighter padding, less vertical space --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) {
   padding: 14px 12px 18px;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   background: #fff;
-  margin-top: 33px; /* Offset for icon overlap */
+  margin-top: 33px;
 }
 
-/* --- Heading: slightly larger, bold, purple, tighter spacing --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) h3 {
   color: #409;
   font-size: 1.12rem;
@@ -717,7 +711,6 @@
   text-align: left;
 }
 
-/* --- Paragraphs and lists: smaller font, tighter line-height --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p,
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) ul {
   color: #222;
@@ -728,7 +721,6 @@
   text-align: left;
 }
 
-/* --- Lists: less indent, smaller bullets --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) ul {
   padding-left: 13px;
   margin-bottom: 7px;
@@ -738,7 +730,6 @@
   margin-bottom: 2px;
 }
 
-/* --- Button row: compact buttons, small gap, left-aligned --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p:last-child {
   display: flex;
   flex-direction: row;
@@ -750,7 +741,6 @@
   justify-content: flex-start;
 }
 
-/* --- Buttons: shorter, less padding, less rounded --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p:last-child a {
   display: inline-flex;
   align-items: center;
@@ -773,27 +763,23 @@
   cursor: pointer;
 }
 
-/* --- First button: solid red, white text --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p:last-child a:first-child {
   background: #e30613;
   color: #fff;
 }
 
-/* --- Second button: white, thin red border, red text --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p:last-child a:last-child {
   background: #fff;
   color: #e30613;
   border: 1.2px solid #e30613;
 }
 
-/* --- Button hover/focus --- */
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p:last-child a:hover,
 .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p:last-child a:focus {
   box-shadow: 0 3px 9px rgb(50 0 0 / 14%);
   opacity: 0.97;
 }
 
-/* --- Responsive improvements --- */
 @media (width <= 600px) {
   .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) {
     padding: 8px 3px 12px;
@@ -804,7 +790,6 @@
   }
 }
 
-/* --- Stack buttons vertically on very small screens --- */
 @media (width <= 450px) {
   .cards.cards26.block > ul > li > .cards-card-body:nth-child(2) p:last-child {
     flex-direction: column;
@@ -813,8 +798,198 @@
   }
 }
 
-/* --- Prevent card body from stretching beyond card width --- */
 .cards.cards26.block > ul > li > .cards-card-body {
   width: 100%;
   box-sizing: border-box;
+}
+
+
+.cards.cards40 {
+  display: block;
+  width: 100%;
+}
+
+/* Ensure block and children are shown */
+.cards.cards40,
+.cards.cards40 > ul,
+.cards.cards40 > ul > li,
+.cards.cards40 > ul > li > .cards-card-body {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  min-height: 0;
+  display: revert;
+}
+
+/* Restore grid layout for cards */
+.cards.cards40 > ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+@media (width <= 900px) {
+  .cards.cards40 > ul {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.cards.cards40 > ul > li {
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 470px;
+  box-shadow: none;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Top image area: background-image & subtle rounded corners */
+.cards.cards40 > ul > li > .cards-card-body:first-child {
+  min-height: 220px;
+  height: 220px;
+  width: 100%;
+  border-radius: 6px 6px 0 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.cards.cards40 > ul > li:nth-child(1) > .cards-card-body:first-child {
+  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80');
+}
+
+.cards.cards40 > ul > li:nth-child(2) > .cards-card-body:first-child {
+  background-image: url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80');
+}
+
+.cards.cards40 > ul > li:nth-child(3) > .cards-card-body:first-child {
+  background-image: url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80');
+}
+
+/* Card content: tighter, less top padding, more compact */
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) {
+  padding: 6px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+/* Heading */
+.cards.cards40 h2 {
+  margin: 0 0 4px;
+  font-size: 1.30rem;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  line-height: 1.17;
+}
+
+.cards.cards40 h2 strong {
+  color: #609;
+  font-weight: 700;
+}
+
+/* Subheading: lighter, smaller, tighter */
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p strong {
+  color: #bdbdbd;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+  letter-spacing: 0.09em;
+  opacity: 0.85;
+}
+
+/* Description */
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:nth-of-type(2) {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  line-height: 1.42;
+}
+
+/* Button row: left-aligned, gap reduced */
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  margin-top: 0;
+  margin-bottom: 0;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Buttons: tighter sizing */
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 136px;
+  min-width: 100px;
+  padding: 9px 0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2.5px solid transparent;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  line-height: 1.18;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+
+/* Apply now = red filled button */
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child > a:first-child {
+  background: #E60029;
+  color: #fff;
+  border-color: #E60029;
+}
+
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child > a:first-child:hover {
+  background: #b3001f;
+  border-color: #b3001f;
+}
+
+/* Learn more = purple outlined button */
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child > a:last-child {
+  background: #fff;
+  color: #609;
+  border: 2.5px solid #609;
+}
+
+.cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child > a:last-child:hover {
+  background: #f3e6fa;
+  color: #450066;
+  border-color: #450066;
+}
+
+/* Responsive: stack buttons vertically on very narrow screens */
+@media (width <= 500px) {
+  .cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .cards.cards40 > ul > li > .cards-card-body:not(:first-child) > p:last-child > a {
+    width: 100%;
+    min-width: 100px;
+  }
 }
