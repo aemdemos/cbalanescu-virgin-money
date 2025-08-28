@@ -2812,7 +2812,6 @@
   padding-top: 0;
 }
 
-/* Responsive stacking */
 @media (width <= 900px) {
   .columns.columns52 > div {
     flex-direction: column;
@@ -2821,7 +2820,6 @@
   }
 }
 
-/* Heading column: wide enough for no wrapping, top-aligned */
 .columns.columns52 > div > div:first-child {
   flex: 0 1 460px;
   min-width: 340px;
@@ -2834,7 +2832,6 @@
   white-space: nowrap;
 }
 
-/* Allow heading wrap on small screens */
 @media (width <= 800px) {
   .columns.columns52 > div > div:first-child {
     white-space: normal;
@@ -2842,7 +2839,6 @@
   }
 }
 
-/* Heading styles: flush top, tight spacing */
 .columns.columns52 h3 {
   color: #7B3BBE;
   font-size: 2.7rem;
@@ -2854,7 +2850,6 @@
   letter-spacing: 0;
 }
 
-/* Card columns: wide, top-aligned, content centered horizontally */
 .columns.columns52 > div > div:nth-child(2),
 .columns.columns52 > div > div:nth-child(3) {
   flex: 1 1 0;
@@ -2870,7 +2865,6 @@
   margin-top: 0;
 }
 
-/* Card icons: flush top with no extra space above */
 .columns.columns52 picture,
 .columns.columns52 img {
   display: block;
@@ -2881,7 +2875,6 @@
   padding: 0;
 }
 
-/* Card titles: tight spacing, compact line-height */
 .columns.columns52 h2 {
   color: #7B3BBE;
   font-size: 1.22rem;
@@ -2892,7 +2885,6 @@
   text-align: center;
 }
 
-/* Card description: tight below title */
 .columns.columns52 > div > div:nth-child(2) p:not(.button-container),
 .columns.columns52 > div > div:nth-child(3) p:not(.button-container) {
   color: #666;
@@ -2902,13 +2894,11 @@
   font-family: Inter, sans-serif;
 }
 
-/* Button container: reduce margin for compact look */
 .columns.columns52 .button-container {
   text-align: center;
   margin-top: 8px;
 }
 
-/* Button styles (override default) */
 .columns.columns52 .button-container .button {
   border: 1.5px solid #E64A8A;
   border-radius: 8px;
@@ -2932,10 +2922,162 @@
   text-decoration: underline;
 }
 
-/* Ensure all fonts are sans-serif */
 .columns.columns52 h3,
 .columns.columns52 h2,
 .columns.columns52 p,
 .columns.columns52 .button {
   font-family: Inter, sans-serif;
+}
+
+
+.columns.columns53 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* vertical centering of columns */
+  gap: 64px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive: stack columns on small screens */
+@media (width <= 900px) {
+  .columns.columns53 > div {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+  }
+}
+
+/* Left column: heading, centered vertically */
+.columns.columns53 > div > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  flex: 0 1 40%;
+
+  /* Padding for visual separation on desktop */
+  padding-left: 2vw;
+}
+
+.columns.columns53 > div > div:first-child h3 {
+  font-size: 2.1rem;
+  color: #5C2D91;
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0;
+  white-space: pre-line;
+}
+
+@media (width <= 900px) {
+  .columns.columns53 > div > div:first-child {
+    justify-content: flex-start;
+    flex: 1 1 100%;
+    padding-left: 0;
+  }
+
+  .columns.columns53 > div > div:first-child h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Right column: stack cards vertically, align left */
+.columns.columns53 > div > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+  flex: 1 1 60%;
+  align-items: flex-start;
+  padding-right: 2vw;
+}
+
+@media (width <= 900px) {
+  .columns.columns53 > div > div:last-child {
+    padding-right: 0;
+    gap: 28px;
+  }
+}
+
+/* Card icon row: icon left, rest right */
+.columns.columns53 > div > div:last-child > p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  /* Keep icon and next h3 visually grouped, but don't force more than one icon/h3 per row */
+}
+
+.columns.columns53 > div > div:last-child > p picture {
+  display: flex;
+  align-items: center;
+}
+
+.columns.columns53 > div > div:last-child > p picture img {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Card heading: purple, bold, aligns under icon row */
+.columns.columns53 > div > div:last-child > h3 {
+  font-size: 1.11rem;
+  color: #5C2D91;
+  font-weight: 600;
+  margin: 2px 0 4px 26px;
+  line-height: 1.2;
+}
+
+/* Card body: body text always left-aligned and single-column, no flex/grid */
+.columns.columns53 > div > div:last-child > h3 + p,
+.columns.columns53 > div > div:last-child > h3 + p + p {
+  font-size: 1rem;
+  color: #333;
+  margin: 0 0 0 26px;
+  line-height: 1.38;
+  max-width: 42em;
+  display: block;
+  white-space: normal;
+  text-align: left;
+}
+
+/* Make pink/bold links and numbers inside card body */
+.columns.columns53 > div > div:last-child a,
+.columns.columns53 > div > div:last-child strong,
+.columns.columns53 > div > div:last-child b {
+  color: #E20074;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Tighter grouping between icon row and heading */
+.columns.columns53 > div > div:last-child > p + h3 {
+  margin-top: -3px;
+}
+
+/* Card vertical separation */
+.columns.columns53 > div > div:last-child > h3:not(:first-of-type) {
+  margin-top: 18px;
+}
+
+@media (width <= 600px) {
+  .columns.columns53 > div > div:last-child > h3 {
+    font-size: 0.97rem;
+    margin-left: 16px;
+  }
+
+  .columns.columns53 > div > div:last-child > h3 + p,
+  .columns.columns53 > div > div:last-child > h3 + p + p {
+    font-size: 0.93rem;
+    margin-left: 16px;
+  }
+}
+
+/* Remove default margin from inner paragraphs */
+.columns.columns53 p {
+  margin: 0;
+  padding: 0;
 }
