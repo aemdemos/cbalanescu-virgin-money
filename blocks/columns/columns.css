@@ -2329,15 +2329,15 @@
   margin: 0 auto;
   box-sizing: border-box;
   display: flex;
-  align-items: flex-start; /* Top-align image and text */
+  align-items: flex-start;
   min-height: 650px;
 }
 
 .columns.columns44 > div {
   display: flex;
   flex-direction: row;
-  align-items: flex-start; /* Top-align columns */
-  gap: 0.6rem; /* Tighter gap for more cohesion */
+  align-items: flex-start;
+  gap: 0.6rem;
   width: 100%;
 }
 
@@ -2401,7 +2401,7 @@
 }
 
 .columns.columns44 .button-container {
-  margin-top: 0.2rem; /* Minimal gap for integrated CTA */
+  margin-top: 0.2rem;
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -2461,5 +2461,186 @@
   .columns.columns44 > div > div:not(.columns-img-col) {
     margin-left: 0;
     max-width: 100%;
+  }
+}
+
+
+.columns.columns45 {
+  max-width: 980px;
+  margin: 48px auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Columns layout: side-by-side, vertically centered */
+.columns.columns45 > div {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center; /* card vertically centered to features stack */
+}
+
+/* Responsive: stack columns on mobile */
+@media (width <= 900px) {
+  .columns.columns45 {
+    max-width: 100%;
+    margin: 0;
+    padding: 16px 4vw;
+    border-radius: 0;
+  }
+
+  .columns.columns45 > div {
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+}
+
+/* Left column: features list, slightly less wide */
+.columns.columns45 > div > div:first-child {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Icon+heading row grouping: flex for icon + heading on same row, baseline for perfect vertical alignment */
+.columns.columns45 > div > div:first-child > p + h2,
+.columns.columns45 > div > div:first-child > p + h3 {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 0.15em;
+  margin-top: 0;
+}
+
+/* Remove bottom margin from icon p and top margin from heading */
+.columns.columns45 > div > div:first-child > p {
+  margin-bottom: 0;
+}
+
+/* Headings: slightly larger, bolder */
+.columns.columns45 h2 {
+  font-size: 1.85rem;
+  color: #A1006B;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  line-height: 1.13;
+  margin: 0.6em 0 0.12em;
+}
+
+.columns.columns45 h3 {
+  font-size: 1.1rem;
+  color: #A1006B;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  line-height: 1.16;
+  margin: 0.5em 0 0.08em;
+}
+
+/* Icon size and alignment */
+.columns.columns45 picture img {
+  width: 26px;
+  height: 26px;
+  vertical-align: middle;
+  margin-right: 0;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+/* Feature paragraphs: compact, readable */
+.columns.columns45 p {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  margin: 0 0 8px;
+  max-width: 650px;
+}
+
+/* Reduce vertical space between feature blocks */
+.columns.columns45 > div > div:first-child > *:not(.button-container) {
+  margin-bottom: 8px;
+}
+
+/* Button closer to last feature */
+.columns.columns45 .button-container {
+  margin-top: 2px;
+}
+
+/* Feature links: Virgin Money pink */
+.columns.columns45 a {
+  color: #A1006B;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* CTA button: flush left, not too wide, correct color */
+.columns.columns45 .button-container a.button {
+  background: #A1006B;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 11px 32px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: left;
+  min-width: 240px;
+  max-width: 100%;
+}
+
+.columns.columns45 .button-container a.button:hover {
+  background: #92015f;
+}
+
+/* Right column: visually balanced card, taller min-height */
+.columns.columns45 > div > div:last-child {
+  flex: 0 0 340px;
+  max-width: 340px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgb(0 0 0 / 10%);
+  box-shadow: 0 4px 32px rgb(0 0 0 / 4%);
+  padding: 32px 16px;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Vertically and horizontally center the button in the card */
+.columns.columns45 > div > div:last-child .button-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Ensure any image/video in card fits */
+.columns.columns45 > div > div:last-child img,
+.columns.columns45 > div > div:last-child video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Remove excessive horizontal padding if mobile */
+@media (width <= 600px) {
+  .columns.columns45 {
+    padding: 8px 2vw;
+  }
+
+  .columns.columns45 > div > div:last-child {
+    padding: 8px;
   }
 }
