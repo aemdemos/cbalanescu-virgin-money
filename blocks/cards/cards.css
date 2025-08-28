@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -126,7 +127,6 @@
   }
 }
 
-/* Card styling & structure */
 .cards.cards2 > ul > li {
   background: #fff;
   border-radius: 18px;
@@ -154,7 +154,6 @@
   }
 }
 
-/* Icon/image at top of card */
 .cards.cards2 .cards-card-image {
   display: flex;
   justify-content: center;
@@ -173,7 +172,6 @@
   margin: 0 auto;
 }
 
-/* Card body: vertical stack, flex to push button to bottom */
 .cards.cards2 .cards-card-body {
   display: flex;
   flex-direction: column;
@@ -184,7 +182,6 @@
   height: 100%;
 }
 
-/* Headline: first paragraph in card body */
 .cards.cards2 .cards-card-body p:first-of-type {
   color: #E6003C;
   font-size: 1.17rem;
@@ -196,7 +193,6 @@
   max-width: 95%;
 }
 
-/* Body text for subsequent paragraphs */
 .cards.cards2 .cards-card-body p:not(:first-of-type) {
   color: #222;
   font-size: 0.95rem;
@@ -206,13 +202,11 @@
   margin: 0 0 8px;
 }
 
-/* Superscript footnotes */
 .cards.cards2 .cards-card-body sup {
   font-size: 0.8em;
   vertical-align: super;
 }
 
-/* Button container at bottom using margin-top:auto */
 .cards.cards2 .cards-card-body .button-container {
   margin-top: auto;
   display: flex;
@@ -220,7 +214,6 @@
   width: 100%;
 }
 
-/* Button styling */
 .cards.cards2 .cards-card-body .button {
   background: linear-gradient(90deg,#E6003C 0%,#800083 100%);
   color: #fff;
@@ -245,7 +238,6 @@
   background: #E6003C;
 }
 
-/* Add right arrow icon (SVG as background, no content property) */
 .cards.cards2 .cards-card-body .button::after {
   display: inline-block;
   width: 18px;
@@ -288,4 +280,140 @@
     height: 15px;
     margin-left: 6px;
   }
+}
+
+
+.cards.cards12 {
+  /* Restrict the container, left-aligned instead of auto-centered */
+  max-width: 1100px;
+  margin: 40px 0 0 48px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Cards grid: left aligned, with responsive columns and a tighter gap */
+.cards.cards12 > ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 18px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  place-items: flex-start start;
+  width: auto;
+}
+
+/* Responsive: stack cards and add side padding on small screens */
+@media (width <= 900px) {
+  .cards.cards12 {
+    margin-left: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .cards.cards12 > ul {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+/* Card shape */
+.cards.cards12 > ul > li {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 2%);
+  overflow: hidden;
+  min-width: 0;
+  width: 100%;
+  max-width: 340px;
+  border: 1px solid #e5e5e5;
+}
+
+/* Top red block */
+.cards.cards12 .cards-card-body:first-child {
+  background: #d50000;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: transparent;
+  border-radius: 16px 16px 0 0;
+  padding: 0;
+}
+
+/* Hide "null" content visually */
+.cards.cards12 .cards-card-body:first-child p {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Card content area */
+.cards.cards12 .cards-card-body:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 20px 22px 22px;
+  margin: 0;
+}
+
+/* Card Title */
+.cards.cards12 .cards-card-body:last-child h3,
+.cards.cards12 .cards-card-body:last-child strong {
+  color: #6A1B9A;
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 12px;
+  line-height: 1.3;
+}
+
+/* Card description */
+.cards.cards12 .cards-card-body:last-child p:not(.button-container) {
+  color: #212121;
+  font-size: 15px;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+/* Button container for spacing */
+.cards.cards12 .cards-card-body:last-child .button-container {
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Outlined red button, compact, left-aligned */
+.cards.cards12 .cards-card-body:last-child .button {
+  border: 2px solid #d50000;
+  background: #fff;
+  color: #d50000;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 24px;
+  margin: 0;
+  text-align: left;
+  box-shadow: none;
+  max-width: 120px;
+  line-height: 1.25;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+/* Button hover for clear feedback */
+.cards.cards12 .cards-card-body:last-child .button:hover,
+.cards.cards12 .cards-card-body:last-child .button:focus {
+  background: #fff5f5;
+  color: #b71c1c;
+  border-color: #b71c1c;
+}
+
+/* Superscript styling for footnote numbers */
+.cards.cards12 sup {
+  font-size: 11px;
+  vertical-align: super;
+  color: #212121;
 }
