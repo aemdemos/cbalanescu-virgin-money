@@ -714,7 +714,6 @@
   gap: 0;
 }
 
-/* Left column: heading and first two features stacked vertically */
 .columns.columns14 > div:first-child {
   flex: 0 1 360px;
   display: flex;
@@ -726,7 +725,6 @@
   padding-top: 24px;
 }
 
-/* Right column: next two features stacked vertically */
 .columns.columns14 > div:last-child {
   flex: 1 1 0;
   display: flex;
@@ -735,10 +733,9 @@
   min-width: 220px;
   padding-left: 56px;
   padding-right: 32px;
-  padding-top: 120px; /* Visually aligns feature grid with left column's features */
+  padding-top: 120px;
 }
 
-/* Heading: large, purple, margin below */
 .columns.columns14 > div:first-child > div:first-child h3 {
   font-size: 24px;
   color: #6F2DA8;
@@ -747,7 +744,6 @@
   line-height: 1.2;
 }
 
-/* Feature blocks: always stack icon, title, desc vertically */
 .columns.columns14 > div > div:not(:first-child),
 .columns.columns14 > div:last-child > div {
   display: flex;
@@ -758,12 +754,10 @@
   max-width: 340px;
 }
 
-/* Last feature in each column no extra space */
 .columns.columns14 > div > div:last-child {
   margin-bottom: 0;
 }
 
-/* Icon at top of each feature */
 .columns.columns14 img {
   width: 32px;
   height: 32px;
@@ -772,7 +766,6 @@
   display: inline-block;
 }
 
-/* Feature title */
 .columns.columns14 h2 {
   font-size: 16px;
   font-weight: 600;
@@ -781,7 +774,6 @@
   line-height: 1.2;
 }
 
-/* Feature description */
 .columns.columns14 p {
   font-size: 12px;
   color: #333;
@@ -789,14 +781,12 @@
   line-height: 1.5;
 }
 
-/* Superscript styling */
 .columns.columns14 sup {
   font-size: 8px;
   color: #999;
   vertical-align: super;
 }
 
-/* Responsive: stack all features vertically on small screens */
 @media (width <= 900px) {
   .columns.columns14 {
     flex-direction: column;
@@ -821,3 +811,138 @@
     margin-bottom: 24px;
   }
 }
+
+
+.columns.columns15 {
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Main flex row with image + all text stacked in right column */
+.columns.columns15 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 32px 0;
+  gap: 0;
+}
+
+/* Image column: left, fixed width, vertically top-aligned */
+.columns.columns15 > div > .columns-img-col {
+  flex: 0 0 38%;
+  max-width: 38%;
+  min-width: 320px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 0 0 32px;
+  box-sizing: border-box;
+}
+
+.columns.columns15 > div > .columns-img-col img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Right content area: stack both text columns vertically as one block */
+.columns.columns15 > div > div:not(.columns-img-col) {
+  flex: 1 1 0;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 0 32px;
+  background: #fff;
+  gap: 0;
+}
+
+.columns.columns15 > div > div:nth-child(2) {
+  margin-bottom: 0;
+}
+
+.columns.columns15 > div > div:nth-child(3) {
+  margin-top: 0;
+}
+
+/* Visually merge the two text columns (stack them as a single right column) */
+.columns.columns15 > div > div:not(.columns-img-col) > * {
+  width: 100%;
+}
+
+/* Section heading with icon inline, magenta color */
+.columns.columns15 > div > div:not(.columns-img-col) > p:has(picture) {
+  margin: 24px 0 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.columns.columns15 > div > div:not(.columns-img-col) > p:has(picture) picture {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  height: 24px;
+  width: 24px;
+  min-width: 24px;
+}
+
+.columns.columns15 > div > div:not(.columns-img-col) > p:has(picture) img {
+  height: 24px;
+  width: 24px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Headings: magenta, proper weight, spacing */
+.columns.columns15 > div > div:not(.columns-img-col) > h3 {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #c11a5b;
+  margin: 0 0 4px;
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+.columns.columns15 > div > div:not(.columns-img-col) > h3 strong {
+  color: #c11a5b;
+  font-weight: bold;
+}
+
+/* Body text: medium gray, smaller font, spacing */
+.columns.columns15 > div > div:not(.columns-img-col) > p:not(:has(picture)) {
+  font-size: 14px;
+  color: #656565;
+  margin: 0 0 24px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Remove extra margin on last section */
+.columns.columns15 > div > div:not(.columns-img-col) > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive: stack on mobile, adjust paddings */
+@media (width <= 900px) {
+  .columns.columns15 > div {
+    flex-direction: column;
+    padding: 16px 0;
+  }
+
+  .columns.columns15 > div > .columns-img-col,
+  .columns.columns15 > div > div:not(.columns-img-col) {
+    max-width: 100%;
+    width: 100%;
+    padding: 0 8px;
+  }
+}
+
+/* Optional: remove background gray for the block's container if present */
