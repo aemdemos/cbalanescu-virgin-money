@@ -1094,7 +1094,6 @@
   }
 }
 
-/* Headings - less dominant than before */
 .columns.columns24 h2 {
   color: #6d2380;
   font-size: 2.1rem;
@@ -1104,7 +1103,6 @@
   line-height: 1.2;
 }
 
-/* Body copy */
 .columns.columns24 p,
 .columns.columns24 ul,
 .columns.columns24 li {
@@ -1115,7 +1113,6 @@
   margin-bottom: 0.55em;
 }
 
-/* List style: remove bullets, add left padding for checkmark bg */
 .columns.columns24 ul {
   list-style: none;
   padding-left: 0;
@@ -1133,7 +1130,6 @@
   white-space: normal;
 }
 
-/* Button row: more vertical spacing */
 .columns.columns24 p:has(> a[title="Tell me more"]) {
   margin-bottom: 1em;
   margin-top: 1em;
@@ -1142,7 +1138,6 @@
   gap: 0.85em;
 }
 
-/* Buttons */
 .columns.columns24 p > a[title="Tell me more"],
 .columns.columns24 p > a[title="Apply now"] {
   display: inline-block;
@@ -1179,7 +1174,6 @@
   background: #6d2380;
 }
 
-/* "Find out more about our:" section header */
 .columns.columns24 strong {
   font-size: 1.1rem;
   font-weight: 600;
@@ -1190,7 +1184,6 @@
   letter-spacing: 0.01em;
 }
 
-/* Resource links: align vertically, use purple text */
 .columns.columns24 .button-container {
   margin-bottom: 0.05em;
 }
@@ -1217,4 +1210,146 @@
 .columns.columns24 .button-container .button:focus {
   color: #6d2380;
   background: none;
+}
+
+
+.columns.columns29 {
+  background: #fde4e1;
+  padding: 28px 0 24px;
+}
+
+.columns.columns29 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* perfectly vertically center content */
+  justify-content: flex-start;
+  gap: 32px; /* slightly tighter gap for visual balance */
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (width <= 900px) {
+  .columns.columns29 > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+    padding: 0 16px;
+    max-width: 100%;
+  }
+}
+
+/* Text Column */
+.columns.columns29 > div > div:not(.columns-img-col) {
+  flex: 1 1 0;
+  min-width: 320px;
+  max-width: 760px;
+  padding-left: 18px;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Image Column */
+.columns.columns29 .columns-img-col {
+  flex: 1 1 0;
+  min-width: 260px;
+  max-width: 490px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 18px;
+  margin-top: 0;
+}
+
+.columns.columns29 .columns-img-col img,
+.columns.columns29 .columns-img-col picture {
+  width: 470px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive image size */
+@media (width <= 900px) {
+  .columns.columns29 .columns-img-col {
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-top: 0;
+    max-width: 100%;
+  }
+
+  .columns.columns29 .columns-img-col img {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+/* Typography */
+.columns.columns29 h4 {
+  color: #444;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  line-height: 1.14;
+}
+
+.columns.columns29 p:not(.button-container) {
+  color: #444;
+  font-size: 1.06rem;
+  margin-bottom: 15px;
+  line-height: 1.45;
+  max-width: 94%;
+}
+
+/* List: red browser bullets, visually distinct */
+.columns.columns29 ul {
+  color: #e94545;
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.columns.columns29 ul li {
+  color: #444;
+  font-size: 1.13rem;
+  line-height: 1.5;
+  margin-bottom: 6px;
+  padding-left: 0;
+}
+
+.columns.columns29 .button-container {
+  margin-top: 8px; /* reduced gap for tighter button alignment */
+}
+
+/* Button styling: size, color, border, left alignment */
+.columns.columns29 .button.primary {
+  border: 2px solid #e94545;
+  background: #fff;
+  color: #e94545;
+  border-radius: 8px;
+  font-size: 1.14rem;
+  padding: 14px 38px;
+  font-weight: bold;
+  box-sizing: border-box;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.2;
+  transition: background 0.2s, color 0.2s;
+  text-align: left;
+  min-width: 260px;
+  display: inline-block;
+}
+
+.columns.columns29 .button.primary:hover,
+.columns.columns29 .button.primary:focus {
+  background: #e94545;
+  color: #fff;
+}
+
+.columns.columns29 > div > div:not(.columns-img-col) > :last-child {
+  margin-bottom: 0;
 }
