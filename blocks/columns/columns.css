@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -29,5 +30,105 @@
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+}
+
+
+.columns.columns4 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+}
+
+.columns.columns4 > div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 0;
+}
+
+.columns.columns4 > div > div {
+  flex: 1 1 0%;
+  background: #f6f7f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 18px 28px 8px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.columns.columns4 > div > div:first-child {
+  border-right: 2px solid #e5e5e5;
+}
+
+/* Restore visibility of everything inside the block */
+.columns.columns4 > div > div > p,
+.columns.columns4 > div > div > h3 {
+  display: block;
+}
+
+/* Icon Styles - Do NOT override with background so images show */
+.columns.columns4 img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid #dfdfdf;
+  display: block;
+  object-fit: contain;
+}
+
+/* Headings */
+.columns.columns4 h3 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 0 2px;
+  padding: 0;
+}
+
+/* Left column: Earn, purple heading */
+.columns.columns4 #earn {
+  color: #7d1b85;
+}
+
+/* Right column: Redeem, red heading */
+.columns.columns4 #redeem {
+  color: #e60000;
+}
+
+/* Description text */
+.columns.columns4 > div > div > p:not(:first-child) {
+  color: #333;
+  font-size: 17px;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  max-width: 420px;
+}
+
+/* Responsive: Stack columns on small screens */
+@media (width <=900px) {
+  .columns.columns4,
+  .columns.columns4 > div {
+    flex-direction: column;
+  }
+
+  .columns.columns4 > div > div {
+    border-right: none;
+    border-bottom: 2px solid #e5e5e5;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .columns.columns4 > div > div:last-child {
+    border-bottom: none;
   }
 }
