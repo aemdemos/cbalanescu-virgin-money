@@ -1004,7 +1004,6 @@
   max-width: 1200px;
 }
 
-/* Card styling */
 .cards.cards41 > ul > li {
   background: #F6F6F7;
   border: none;
@@ -1017,13 +1016,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Top align for original look */
+  justify-content: flex-start;
   text-align: center;
   box-sizing: border-box;
   transition: box-shadow 0.2s;
 }
 
-/* Icon/Image at top of card, slightly smaller margin */
 .cards.cards41 .cards-card-image {
   display: flex;
   justify-content: center;
@@ -1041,7 +1039,6 @@
   margin: 0 auto;
 }
 
-/* Card body, stack vertically, top aligned */
 .cards.cards41 .cards-card-body {
   display: flex;
   flex-direction: column;
@@ -1054,7 +1051,6 @@
   flex: 1 1 auto;
 }
 
-/* Card Title */
 .cards.cards41 .cards-card-body h5 {
   font-size: 21px;
   color: #222326;
@@ -1064,7 +1060,6 @@
   line-height: 1.25;
 }
 
-/* Description: lighter and smaller */
 .cards.cards41 .cards-card-body p:not(.button-container) {
   font-size: 15px;
   color: #939393;
@@ -1074,7 +1069,6 @@
   font-weight: 400;
 }
 
-/* CTA Link Styling: less space below */
 .cards.cards41 .cards-card-body .button-container {
   margin-bottom: 6px;
   margin-top: 0;
@@ -1083,7 +1077,6 @@
   justify-content: center;
 }
 
-/* CTA should be closer to body text, bold red link */
 .cards.cards41 .cards-card-body .button-container a.button,
 .cards.cards41 .cards-card-body .button-container a.button.primary,
 .cards.cards41 .cards-card-body .button-container strong a.button,
@@ -1106,7 +1099,6 @@
   transition: color 0.2s;
 }
 
-/* Remove inherited button hover styling, show underline */
 .cards.cards41 .cards-card-body .button-container a.button:hover,
 .cards.cards41 .cards-card-body .button-container a.button.primary:hover,
 .cards.cards41 .cards-card-body .button-container strong a.button:hover,
@@ -1116,7 +1108,6 @@
   text-decoration: underline;
 }
 
-/* Responsive stacking for tablets/phones */
 @media (width <= 900px) {
   .cards.cards41 > ul {
     grid-template-columns: 1fr;
@@ -1161,7 +1152,128 @@
   }
 }
 
-/* Optional: Add subtle hover effect for cards */
 .cards.cards41 > ul > li:hover {
   box-shadow: 0 10px 28px rgb(34 35 38 / 12%);
+}
+
+
+.cards.cards46 {
+  background: #fff;
+  width: 100%;
+  padding: 0;
+}
+
+/* Three-column grid layout, responsive */
+.cards.cards46 ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  place-items: start center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+@media (width <= 900px) {
+  .cards.cards46 ul {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.cards.cards46 ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  max-width: 300px;
+  width: 100%;
+  padding: 18px 8px 16px;
+  box-sizing: border-box;
+  min-height: unset;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Icon should always show and be vertically tight to heading */
+.cards.cards46 .cards-card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  width: 100%;
+  min-height: 62px;
+}
+
+.cards.cards46 .cards-card-image img,
+.cards.cards46 .cards-card-image picture img {
+  max-width: 58px;
+  max-height: 58px;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  object-fit: contain;
+  margin-bottom: 0;
+}
+
+/* Center all card content */
+.cards.cards46 .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Simulate heading for the first line/strong in each card */
+.cards.cards46 .cards-card-body p:first-child {
+  color: #D0021B;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+/* If paragraph begins with strong, ensure heading look */
+.cards.cards46 .cards-card-body p:first-child strong {
+  font-size: 22px;
+  color: #D0021B;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 8px;
+  line-height: 1.22;
+}
+
+/* Body text after heading: regular color, smaller, tight vertical spacing */
+.cards.cards46 .cards-card-body p:not(:first-child),
+.cards.cards46 .cards-card-body p:not(:first-child) strong {
+  font-size: 15px;
+  color: #3A3A3A;
+  font-weight: 400;
+  margin: 0 0 0.4em;
+  line-height: 1.45;
+}
+
+/* Make links red, bold, and underlined as in original */
+.cards.cards46 .cards-card-body a {
+  color: #D0021B;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Remove excess vertical height from each card */
+
+/* Remove any default image margins inside the icon wrapper */
+
+/* Compact margin if only one paragraph */
+.cards.cards46 .cards-card-body p:only-child {
+  margin-bottom: 0;
 }
