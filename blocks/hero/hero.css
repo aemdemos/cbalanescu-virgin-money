@@ -434,7 +434,6 @@
   justify-content: center;
 }
 
-/* Center the main content block and control its max width for readability */
 .hero.hero25 > div {
   width: 100%;
   max-width: 680px;
@@ -444,7 +443,6 @@
   align-items: center;
 }
 
-/* Content inside the inner div: vertical stack, centered */
 .hero.hero25 > div > div {
   width: 100%;
   display: flex;
@@ -452,7 +450,6 @@
   align-items: center;
 }
 
-/* Heading styling */
 .hero.hero25 h2 {
   color: #6101a3;
   font-weight: 700;
@@ -464,13 +461,11 @@
   overflow-wrap: break-word;
 }
 
-/* Ensure <strong> inside the heading inherits the color and weight */
 .hero.hero25 h2 strong {
   color: inherit;
   font-weight: inherit;
 }
 
-/* Subheading styles (first <p> after h2) */
 .hero.hero25 h2 + p {
   color: #222;
   font-size: 0.97rem;
@@ -482,7 +477,6 @@
   overflow-wrap: break-word;
 }
 
-/* Button container: center horizontally */
 .hero.hero25 .button-container {
   display: flex;
   justify-content: center;
@@ -490,7 +484,6 @@
   margin-bottom: 0;
 }
 
-/* Button: gradient background, rectangular corners */
 .hero.hero25 .button-container .button {
   background: linear-gradient(90deg, #e50914 0%, #6101a3 100%);
   color: #fff;
@@ -510,14 +503,12 @@
   text-align: center;
 }
 
-/* Remove excessive default button margin & border-radius from base styles */
 .hero.hero25 .button-container .button,
 .hero.hero25 .button-container a.button:any-link {
   margin: 0;
   border-radius: 6px;
 }
 
-/* Responsive: reduce block padding and font size for small screens */
 @media (width <= 600px) {
   .hero.hero25 {
     padding: 32px 0;
@@ -536,4 +527,189 @@
     font-size: 0.92rem;
     max-width: 100%;
   }
+}
+
+
+.hero.hero34 {
+  background: #f7f7fa;
+  min-height: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center the two columns vertically */
+  justify-content: flex-start;
+  gap: 64px;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@media (width <= 900px) {
+  .hero.hero34 {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+    padding: 32px 0 0;
+    min-height: unset;
+  }
+}
+
+/* Left image block */
+.hero.hero34 > div:first-child {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 240px;
+  padding-left: 48px;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+
+.hero.hero34 > div:first-child > div {
+  width: 180px;
+  height: 180px;
+  background: #fad4ec url('https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=facearea&w=400&h=400') center center no-repeat;
+  background-size: cover;
+  border: 10px solid #f03;
+  box-sizing: border-box;
+  box-shadow: 12px 12px 0 0 #f03;
+}
+
+@media (width <= 900px) {
+  .hero.hero34 > div:first-child {
+    padding-left: 0;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .hero.hero34 > div:first-child > div {
+    margin: 0 auto;
+  }
+}
+
+/* Right: text content (keep the vertical stack compact, center in available space) */
+.hero.hero34 > div:last-child {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  /* Remove excess top padding, rely on align-items:center for vertical centering */
+  padding: 0 32px 0 0;
+  box-sizing: border-box;
+  max-width: 600px;
+  min-width: 0;
+}
+
+@media (width <= 900px) {
+  .hero.hero34 > div:last-child {
+    padding: 32px 16px 0;
+    max-width: 100%;
+    min-height: unset;
+  }
+}
+
+/* Typography and spacing: keep text elements compactly grouped */
+.hero.hero34 > div:last-child > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 440px;
+}
+
+.hero.hero34 > div:last-child > div > h1,
+.hero.hero34 > div:last-child > div > h1 strong {
+  color: #6c1870;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  line-height: 1.13;
+  font-family: var(--heading-font-family), sans-serif;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+.hero.hero34 > div:last-child > div > p:first-of-type {
+  color: #888;
+  text-transform: uppercase;
+  font-size: 0.88rem;
+  letter-spacing: 0.13em;
+  margin: 0 0 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.hero.hero34 > div:last-child > div > h1 + p + p {
+  color: #222;
+  font-size: 1.08rem;
+  font-weight: 400;
+  margin: 0 0 22px;
+  line-height: 1.5;
+  max-width: 440px;
+  text-align: left;
+  display: block;
+}
+
+.hero.hero34 > div:last-child > div > h1 + p + p + p {
+  margin: 0 0 18px;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #131313;
+}
+
+.hero.hero34 .button-container {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.hero.hero34 .button-container .button {
+  background: #e90052;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 13px 28px;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: background 0.2s;
+  text-align: left;
+  min-width: 0;
+}
+
+.hero.hero34 .button-container .button:hover,
+.hero.hero34 .button-container .button:focus {
+  background: #c10044;
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (width <= 600px) {
+  .hero.hero34 .button-container .button {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+  }
+
+  .hero.hero34 > div:last-child {
+    padding: 24px 8px 0;
+  }
+
+  .hero.hero34 {
+    gap: 20px;
+    padding: 20px 0 0;
+  }
+}
+
+/* Ensure all text in content is left-aligned */
+.hero.hero34 > div:last-child * {
+  text-align: left;
 }
