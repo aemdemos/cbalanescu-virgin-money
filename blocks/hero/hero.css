@@ -421,3 +421,119 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+
+.hero.hero25 {
+  background: #f4f4f5;
+  width: 100%;
+  padding: 48px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center the main content block and control its max width for readability */
+.hero.hero25 > div {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Content inside the inner div: vertical stack, centered */
+.hero.hero25 > div > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Heading styling */
+.hero.hero25 h2 {
+  color: #6101a3;
+  font-weight: 700;
+  font-size: 2.1rem;
+  text-align: center;
+  margin: 0 0 12px;
+  line-height: 1.19;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* Ensure <strong> inside the heading inherits the color and weight */
+.hero.hero25 h2 strong {
+  color: inherit;
+  font-weight: inherit;
+}
+
+/* Subheading styles (first <p> after h2) */
+.hero.hero25 h2 + p {
+  color: #222;
+  font-size: 0.97rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 0 0 32px;
+  line-height: 1.35;
+  max-width: 520px;
+  overflow-wrap: break-word;
+}
+
+/* Button container: center horizontally */
+.hero.hero25 .button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/* Button: gradient background, rectangular corners */
+.hero.hero25 .button-container .button {
+  background: linear-gradient(90deg, #e50914 0%, #6101a3 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 32px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  margin: 0;
+  min-width: 120px;
+  max-width: 100%;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* Remove excessive default button margin & border-radius from base styles */
+.hero.hero25 .button-container .button,
+.hero.hero25 .button-container a.button:any-link {
+  margin: 0;
+  border-radius: 6px;
+}
+
+/* Responsive: reduce block padding and font size for small screens */
+@media (width <= 600px) {
+  .hero.hero25 {
+    padding: 32px 0;
+  }
+
+  .hero.hero25 > div {
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
+  .hero.hero25 h2 {
+    font-size: 1.15rem;
+  }
+
+  .hero.hero25 h2 + p {
+    font-size: 0.92rem;
+    max-width: 100%;
+  }
+}
