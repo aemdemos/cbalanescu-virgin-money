@@ -2034,3 +2034,184 @@
     padding: 12px 0;
   }
 }
+
+
+.columns.columns38 {
+  padding: 48px 0;
+}
+
+/* Ensure main structure is two columns side-by-side on desktop */
+.columns.columns38 > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Vertically center image/text */
+  justify-content: flex-start;
+  gap: 44px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left column: show phone image at proper scale and alignment */
+.columns.columns38 .columns-img-col {
+  max-width: 400px;
+  width: 100%;
+  flex: 0 0 400px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  min-width: 260px;
+}
+
+.columns.columns38 .columns-img-col img,
+.columns.columns38 .columns-img-col picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Right column: stack and align text and button card */
+.columns.columns38 > div > div:not(.columns-img-col) {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 0;
+}
+
+/* Heading styling */
+.columns.columns38 h2 {
+  color: #4B0082;
+  font-size: 2.7rem;
+  font-weight: 700;
+  font-family: Inter, sans-serif;
+  margin: 0 0 10px;
+  text-align: left;
+  line-height: 1.12;
+}
+
+/* Paragraph styling */
+.columns.columns38 p {
+  color: #222;
+  font-size: 1.13rem;
+  font-family: Inter, sans-serif;
+  margin-bottom: 8px;
+  line-height: 1.6;
+  max-width: 610px;
+  text-align: left;
+  margin-top: 0;
+}
+
+/* Divider below paragraph only if table follows */
+.columns.columns38 > div > div:not(.columns-img-col) p {
+  position: relative;
+}
+
+.columns.columns38 > div > div:not(.columns-img-col) p + table {
+  margin-top: 27px;
+}
+
+.columns.columns38 > div > div:not(.columns-img-col) p + table::before {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #e5e5e5;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  content: "";
+}
+
+/* Ensure link in paragraph is styled correctly */
+.columns.columns38 p a,
+.columns.columns38 a {
+  color: #4B0082;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* App store buttons card: appropriate width, spacing, and shadow */
+.columns.columns38 table {
+  background: #f6f6f6;
+  border-radius: 22px;
+  padding: 18px 28px;
+  box-sizing: border-box;
+  border-collapse: separate;
+  box-shadow: 0 6px 32px rgb(60 60 60 / 13%);
+  max-width: 445px;
+  display: block;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Button badge row */
+.columns.columns38 table tr {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Button badge cell */
+.columns.columns38 table td {
+  padding: 0 18px;
+  vertical-align: middle;
+  border: none;
+  background: none;
+}
+
+/* Button badge images */
+.columns.columns38 table img {
+  max-width: 185px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(60 60 60 / 13%);
+  display: block;
+}
+
+/* Responsive stacking for mobile */
+@media (width <= 900px) {
+  .columns.columns38 > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  .columns.columns38 .columns-img-col {
+    max-width: 100%;
+    width: 100%;
+    min-width: 0;
+    justify-content: flex-start;
+    margin-bottom: 0;
+  }
+
+  .columns.columns38 table {
+    padding: 12px 6px;
+    max-width: 100%;
+  }
+}
+
+@media (width <= 480px) {
+  .columns.columns38 > div {
+    gap: 12px;
+  }
+
+  .columns.columns38 table tr {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .columns.columns38 table td {
+    padding: 10px 0;
+  }
+
+  .columns.columns38 table img {
+    max-width: 120px;
+  }
+}
