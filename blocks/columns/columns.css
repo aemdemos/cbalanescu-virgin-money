@@ -2716,7 +2716,6 @@
   background: #fff;
 }
 
-/* Two-column grid layout */
 .columns.columns51 > div {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -2724,7 +2723,6 @@
   align-items: start;
 }
 
-/* Responsive: stack on small screens */
 @media (width <= 900px) {
 .columns.columns51 > div {
     grid-template-columns: 1fr;
@@ -2732,20 +2730,11 @@
   }
 }
 
-/* Left column: heading */
 .columns.columns51 > div > div:first-child h3 {
-  color: #6b2681;
-  font-size: 2.4rem;
-  font-weight: 400;
-  line-height: 1.08;
-  margin: 0 0 0 4px;
-  padding: 0;
-  word-break: break-word;
-  hyphens: auto;
-  max-width: 100%;
-}
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
 
-/* Right column: description */
 .columns.columns51 > div > div:last-child > p:first-child {
   color: #666;
   font-size: 14px;
@@ -2755,7 +2744,6 @@
   max-width: 95%;
 }
 
-/* Layout all icon rows as flex rows */
 .columns.columns51 > div > div:last-child > p:not(:first-child) {
   display: flex;
   flex-direction: row;
@@ -2764,7 +2752,6 @@
   padding: 0;
 }
 
-/* Make icons consistent and inline */
 .columns.columns51 > div > div:last-child picture {
   display: inline-block;
   margin: 0;
@@ -2779,7 +2766,6 @@
   vertical-align: middle;
 }
 
-/* Responsive icon size */
 @media (width <= 900px) {
   .columns.columns51 > div > div:first-child h3 {
     font-size: 2rem;
@@ -2812,4 +2798,144 @@
     max-width: 38px;
     width: 38px;
   }
+}
+
+
+.columns.columns52 > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  width: 100%;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Responsive stacking */
+@media (width <= 900px) {
+  .columns.columns52 > div {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+  }
+}
+
+/* Heading column: wide enough for no wrapping, top-aligned */
+.columns.columns52 > div > div:first-child {
+  flex: 0 1 460px;
+  min-width: 340px;
+  max-width: 600px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 0;
+  padding-top: 0;
+  white-space: nowrap;
+}
+
+/* Allow heading wrap on small screens */
+@media (width <= 800px) {
+  .columns.columns52 > div > div:first-child {
+    white-space: normal;
+    min-width: 0;
+  }
+}
+
+/* Heading styles: flush top, tight spacing */
+.columns.columns52 h3 {
+  color: #7B3BBE;
+  font-size: 2.7rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+  padding-top: 0;
+  line-height: 1.05;
+  font-family: Inter, sans-serif;
+  letter-spacing: 0;
+}
+
+/* Card columns: wide, top-aligned, content centered horizontally */
+.columns.columns52 > div > div:nth-child(2),
+.columns.columns52 > div > div:nth-child(3) {
+  flex: 1 1 0;
+  min-width: 330px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  background: #fff;
+  padding: 0;
+  margin-top: 0;
+}
+
+/* Card icons: flush top with no extra space above */
+.columns.columns52 picture,
+.columns.columns52 img {
+  display: block;
+  margin: 0 auto 4px;
+  width: 32px;
+  height: 32px;
+  visibility: visible;
+  padding: 0;
+}
+
+/* Card titles: tight spacing, compact line-height */
+.columns.columns52 h2 {
+  color: #7B3BBE;
+  font-size: 1.22rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+  line-height: 1.1;
+  font-family: Inter, sans-serif;
+  text-align: center;
+}
+
+/* Card description: tight below title */
+.columns.columns52 > div > div:nth-child(2) p:not(.button-container),
+.columns.columns52 > div > div:nth-child(3) p:not(.button-container) {
+  color: #666;
+  font-size: 1rem;
+  margin: 0 0 8px;
+  text-align: center;
+  font-family: Inter, sans-serif;
+}
+
+/* Button container: reduce margin for compact look */
+.columns.columns52 .button-container {
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Button styles (override default) */
+.columns.columns52 .button-container .button {
+  border: 1.5px solid #E64A8A;
+  border-radius: 8px;
+  background: none;
+  color: #E64A8A;
+  font-size: 1.12rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+  cursor: pointer;
+  box-sizing: border-box;
+  line-height: 1.25;
+  padding: 7px 36px;
+  margin: 0;
+}
+
+.columns.columns52 .button-container .button:hover,
+.columns.columns52 .button-container .button:focus {
+  background: #F6EAF3;
+  color: #E64A8A;
+  text-decoration: underline;
+}
+
+/* Ensure all fonts are sans-serif */
+.columns.columns52 h3,
+.columns.columns52 h2,
+.columns.columns52 p,
+.columns.columns52 .button {
+  font-family: Inter, sans-serif;
 }
