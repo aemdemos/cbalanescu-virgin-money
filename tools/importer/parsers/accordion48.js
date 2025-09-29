@@ -1,31 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  const headerRow = ['Accordion (accordion48)'];
-  const cells = [headerRow];
-
-  // Get the <ul class="accordion-list"> inside the section
+  // Defensive: ensure we're working with the expected structure
   const ul = element.querySelector('ul.accordion-list');
   if (!ul) return;
-  // For each <li> (accordion item)
-  Array.from(ul.children).forEach((li) => {
-    // Title cell: the <a> element (remove any child div.ec for clarity)
-    const a = li.querySelector('a');
-    let titleCell = '';
+
+  // Table header row as specified
+  const headerRow = ['Accordion (accordion48)'];
+  const rows = [headerRow];
+
+  // Each <li> is an accordion item
+  ul.querySelectorAll(':scope > li').forEach((li) => {
+    // Title cell: the <a> element's text content (excluding arrow icon)
+    const a = li.querySelector('a.accordion-item');
+    let titleText = '';
     if (a) {
-      // Remove any icon <div> from the <a> for just the title
-      Array.from(a.querySelectorAll('div')).forEach(div => div.remove());
-      // Use the <a> directly, so links and formatting are preserved
-      titleCell = a;
+      // Remove any child <div> (icon container)
+      const aClone = a.cloneNode(true);
+      aClone.querySelectorAll('div').forEach(div => div.remove());
+      titleText = aClone.textContent.trim();
     }
-    // Content cell: the expand-collapse content
+
+    // Content cell: the expandcollapse-content div
     const contentDiv = li.querySelector('div.expandcollapse-content');
-    let contentCell = '';
+    let contentCell;
     if (contentDiv) {
-      contentCell = contentDiv;
+      // Defensive: find the actual content block inside
+      const richText = contentDiv.querySelector('.cm-rich-text');
+      if (richText) {
+        contentCell = richText;
+      } else {
+        // fallback: use the whole contentDiv
+        contentCell = contentDiv;
+      }
+    } else {
+      contentCell = document.createElement('div');
     }
-    cells.push([titleCell, contentCell]);
+
+    rows.push([titleText, contentCell]);
   });
 
-  const blockTable = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(blockTable);
+  // Create the table block
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

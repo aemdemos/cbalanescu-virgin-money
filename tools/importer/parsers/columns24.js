@@ -1,36 +1,26 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row for the block (must match spec exactly)
-  const headerRow = ['Columns (columns24)'];
-
-  // Find the column items (sl-item) inside .sl-list
+  // Helper: get immediate column items
   const slList = element.querySelector('.sl-list');
-  let columnsRow = [];
-
+  let columns = [];
   if (slList) {
-    // Get all .sl-item children as columns
-    const items = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
-    columnsRow = items.map(item => {
-      // Prefer the '.cm-rich-text' direct descendant for clear semantics
-      const richContent = item.querySelector('.cm-rich-text');
-      // If not found, fallback to the sl-item itself (for edge cases)
-      return richContent ? richContent : item;
+    // Get direct child .sl-item elements (columns)
+    const items = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+    columns = items.map((item) => {
+      // Each .sl-item contains a .cm-rich-text module__content
+      const content = item.querySelector('.cm-rich-text');
+      // Defensive: fallback to item itself if not found
+      return content || item;
     });
-  } else {
-    // Fallback if no sl-list: treat direct children as columns
-    const directDivs = Array.from(element.querySelectorAll(':scope > div'));
-    columnsRow = directDivs.length ? directDivs : [element];
   }
-
-  // Ensure at least one column (avoid empty table)
-  if (columnsRow.length === 0) {
-    columnsRow = ['']; // empty cell to preserve structure
-  }
-
-  // Compose final cells array for block table
-  const cells = [headerRow, columnsRow];
-
-  // Replace the original element with the new block table
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Table header row
+  const headerRow = ['Columns (columns24)'];
+  // Table columns row: each column's content in its own cell
+  const columnsRow = columns.length ? columns : [element];
+  // Compose table data
+  const tableData = [headerRow, columnsRow];
+  // Create block table
+  const block = WebImporter.DOMUtils.createTable(tableData, document);
+  // Replace original element
+  element.replaceWith(block);
 }

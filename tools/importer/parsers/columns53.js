@@ -1,45 +1,34 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header row, per example
-  const headerRow = ['Columns (columns53)'];
-
   // Find the main column container
-  const columnContainer = element.querySelector('.column-container');
-  if (!columnContainer) return;
-
-  // Inside columnContainer, the two visual columns:
-  // Left: .sl-list > .sl-item (first) -> .cm-rich-text (heading)
-  // Right: .sl-list > .sl-item (second) -> all .cm-icon-title sections
-
-  // Left column: Get heading block (should be h3 inside .cm-rich-text)
-  let leftCol = null;
+  const columnContainer = element.querySelector('.column-container') || element;
+  // Find the .sl-list inside columnContainer
   const slList = columnContainer.querySelector('.sl-list');
-  if (slList) {
-    const slItems = slList.querySelectorAll(':scope > .sl-item');
-    if (slItems.length > 0) {
-      const richText = slItems[0].querySelector('.cm-rich-text');
-      if (richText) leftCol = richText;
-      else leftCol = slItems[0];
-    }
-    // Right column: collect all icon-title sections from second sl-item
-    let rightCol = null;
-    if (slItems.length > 1) {
-      // There may be multiple sections inside
-      const iconTitleSections = slItems[1].querySelectorAll('.cm-icon-title');
-      if (iconTitleSections.length > 0) {
-        // Group in a wrapper div
-        rightCol = document.createElement('div');
-        iconTitleSections.forEach(section => {
-          rightCol.appendChild(section);
-        });
-      } else {
-        // fallback: use entire second sl-item
-        rightCol = slItems[1];
-      }
-      // Build the cells: [leftCol, rightCol]
-      const tableRows = [headerRow, [leftCol, rightCol]];
-      const block = WebImporter.DOMUtils.createTable(tableRows, document);
-      element.replaceWith(block);
-    }
+  if (!slList) return;
+  const slItems = slList.querySelectorAll(':scope > .sl-item');
+  if (slItems.length < 2) return;
+
+  // Left column: rich text (heading)
+  let leftCell = slItems[0].querySelector('.cm-rich-text') || slItems[0];
+
+  // Right column: all .cm-icon-title sections
+  const iconSections = slItems[1].querySelectorAll('.cm-icon-title');
+  let rightCell;
+  if (iconSections.length > 0) {
+    // Create a wrapper div to preserve semantic grouping
+    rightCell = document.createElement('div');
+    iconSections.forEach(section => {
+      rightCell.appendChild(section);
+    });
+  } else {
+    rightCell = slItems[1];
   }
+
+  // Table header: must match target block name exactly
+  const headerRow = ['Columns (columns53)'];
+  const contentRow = [leftCell, rightCell];
+
+  const rows = [headerRow, contentRow];
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

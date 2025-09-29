@@ -1,37 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row matches example
-  const headerRow = ['Hero (hero8)'];
-
-  // Defensive: get first child div, which holds image & content
-  const innerDiv = element.firstElementChild;
-  let imageBlock = null;
-  let contentBlock = null;
-
-  if (innerDiv) {
-    // Find the image and content divs
-    for (const child of innerDiv.children) {
-      if (!imageBlock && child.classList.contains('image')) {
-        imageBlock = child;
-      }
-      if (!contentBlock && child.classList.contains('content')) {
-        contentBlock = child;
-      }
-    }
+  // Find image and content containers
+  const imageDiv = element.querySelector('.image');
+  let imageEl = null;
+  if (imageDiv) {
+    // Find the actual <img> tag
+    imageEl = imageDiv.querySelector('img');
   }
 
-  // If imageBlock is present, use it; otherwise, empty cell
-  const rowImage = [imageBlock || ''];
-  // If contentBlock is present, use it; otherwise, empty cell
-  const rowContent = [contentBlock || ''];
+  const contentDiv = element.querySelector('.content');
+  const contentParts = [];
+  if (contentDiv) {
+    // Title (optional)
+    const h1 = contentDiv.querySelector('h1');
+    if (h1) {
+      // Preserve heading level and formatting
+      contentParts.push(h1);
+    }
+    // Subtitle (optional)
+    const subtitle = contentDiv.querySelector('.subtitle');
+    if (subtitle && subtitle.textContent.trim()) {
+      contentParts.push(subtitle);
+    }
+    // Paragraph (optional)
+    // Only add paragraphs that are not inside h1
+    Array.from(contentDiv.children).forEach((child) => {
+      if (child.tagName === 'P' && child !== h1) {
+        contentParts.push(child);
+      }
+    });
+  }
 
-  // Compose table
-  const cells = [
+  // Compose table rows
+  const headerRow = ['Hero (hero8)'];
+  const imageRow = [imageEl ? imageEl : ''];
+  const contentRow = [contentParts.length ? contentParts : ''];
+
+  const table = WebImporter.DOMUtils.createTable([
     headerRow,
-    rowImage,
-    rowContent
-  ];
-
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+    imageRow,
+    contentRow
+  ], document);
   element.replaceWith(table);
 }

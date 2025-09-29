@@ -1,58 +1,58 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Helper: get direct children with tag name
-  function getDirectChildrenByTag(parent, tag) {
-    return Array.from(parent.children).filter(child => child.tagName === tag.toUpperCase());
-  }
+  // Find the main sl-list (the outer one)
+  const slList = element.querySelector('.sl-list.has-2-items');
+  if (!slList) return;
+  const slItems = Array.from(slList.children).filter((el) => el.classList.contains('sl-item'));
+  if (slItems.length < 2) return;
 
-  // Header row, exactly matching block name
-  const headerRow = ['Columns (columns51)'];
+  // First column: left side (heading)
+  const leftContent = slItems[0].querySelector('.cm-rich-text');
 
-  // --- COLUMN DETECTION ---
-  // This block is structured as two high-level columns within .sl-list.has-2-items.has-feature-right
-  // Each .sl-item in that list is a column
-  const mainSlList = element.querySelector('.sl-list.has-2-items.has-feature-right');
-  const slItems = mainSlList ? getDirectChildrenByTag(mainSlList, 'div') : [];
-
-  // Prepare cells for each column
-  let leftCell = null;
-  let rightCellItems = [];
-
-  // --- LEFT COLUMN ---
-  if (slItems.length > 0) {
-    // The first .sl-item contains .cm-rich-text with h3
-    const leftRich = slItems[0].querySelector('.cm-rich-text');
-    if (leftRich) {
-      leftCell = leftRich;
+  // Second column: right side (paragraph and awards)
+  const rightContent = slItems[1].querySelector('.cm-rich-text');
+  // Find nested column-container for awards
+  const nestedColumn = slItems[1].querySelector('.column-container');
+  let awardsContent = null;
+  if (nestedColumn) {
+    const nestedSlList = nestedColumn.querySelector('.sl-list.has-1-item');
+    if (nestedSlList) {
+      const nestedSlItem = nestedSlList.querySelector('.sl-item');
+      if (nestedSlItem) {
+        awardsContent = nestedSlItem.querySelector('.cm-rich-text');
+      }
     }
   }
 
-  // --- RIGHT COLUMN ---
-  if (slItems.length > 1) {
-    const rightSlItem = slItems[1];
-    // Gather all .cm-rich-text elements in this column
-    const rightRichTexts = rightSlItem.querySelectorAll('.cm-rich-text');
-    rightRichTexts.forEach(el => {
-      rightCellItems.push(el);
+  // Each cell must be a single element or array of elements, not nested arrays or divs
+  // Remove empty paragraphs from rightContent and awardsContent
+  function cleanContent(node) {
+    if (!node) return null;
+    const clone = node.cloneNode(true);
+    Array.from(clone.querySelectorAll('p')).forEach(p => {
+      if (!p.textContent.trim() && !p.querySelector('img')) p.remove();
     });
-    // Also check for any nested .column-container with additional rich text (images)
-    const nestedColumn = rightSlItem.querySelector('.column-container .sl-list.has-1-item .sl-item .cm-rich-text');
-    if (nestedColumn && !rightCellItems.includes(nestedColumn)) {
-      rightCellItems.push(nestedColumn);
-    }
+    return clone;
   }
 
-  // If nothing found, ensure we don't have an empty cell
-  if (!leftCell) leftCell = document.createElement('div');
-  if (rightCellItems.length === 0) rightCellItems.push(document.createElement('div'));
+  const cleanedRight = cleanContent(rightContent);
+  const cleanedAwards = cleanContent(awardsContent);
 
-  // Compose cells array for block table
-  const cells = [
+  // Compose right column cell: paragraph + awards (as flat array of elements)
+  const rightCellContent = [];
+  if (cleanedRight) rightCellContent.push(...cleanedRight.childNodes);
+  if (cleanedAwards) rightCellContent.push(...cleanedAwards.childNodes);
+
+  // Table rows
+  const headerRow = ['Columns (columns51)'];
+  const columnsRow = [leftContent, rightCellContent];
+
+  // Create table
+  const table = WebImporter.DOMUtils.createTable([
     headerRow,
-    [leftCell, rightCellItems] // Second row: two columns
-  ];
+    columnsRow,
+  ], document);
 
-  // Create and replace
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Replace original element
+  element.replaceWith(table);
 }

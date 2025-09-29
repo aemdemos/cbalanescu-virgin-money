@@ -1,32 +1,37 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header must match example exactly
+  // Find the main content panel
+  const panel = element.querySelector('.cm-content-panel-container');
+  // Find the rich text block inside the panel
+  const richText = panel && panel.querySelector('.cm-rich-text');
+
+  // --- 1. Table Header: Must match target block name exactly ---
   const headerRow = ['Hero (hero25)'];
 
-  // 2. Background row: example has background image but HTML does not, so leave empty
-  const backgroundRow = [''];
+  // --- 2. Background Image Row: empty, as there is no image in source HTML ---
+  const bgImageRow = [''];
 
-  // 3. Content row: must include all of the content in a single cell
-  // Find the inner content panel
-  let contentRow = [''];
-  const panelContainer = element.querySelector('.cm-content-panel-container');
-  if (panelContainer) {
-    // Get the content block inside
-    const richText = panelContainer.querySelector('.cm-rich-text');
-    if (richText) {
-      // Reference all children (h2, p, p>a)
-      const cellDiv = document.createElement('div');
-      Array.from(richText.children).forEach(child => {
-        cellDiv.appendChild(child);
-      });
-      contentRow = [cellDiv];
-    }
+  // --- 3. Content Row: preserve semantic structure ---
+  // Compose a fragment with all richText children (headings, paragraphs, links)
+  let contentFragment = document.createDocumentFragment();
+  if (richText) {
+    Array.from(richText.children).forEach((child) => {
+      // Reference existing elements (do not clone)
+      contentFragment.appendChild(child);
+    });
+  } else {
+    // Edge case: fallback to panel if richText is missing
+    Array.from(panel.children).forEach((child) => {
+      contentFragment.appendChild(child);
+    });
   }
+  // If fragment is empty (edge case), insert an empty cell
+  const contentRow = [contentFragment.childNodes.length ? contentFragment : ''];
 
-  // Compose the block table
-  const cells = [headerRow, backgroundRow, contentRow];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  // --- 4. Create the table block ---
+  const rows = [headerRow, bgImageRow, contentRow];
+  const block = WebImporter.DOMUtils.createTable(rows, document);
 
-  // Replace the original element with the new block
+  // --- 5. Replace the original element ---
   element.replaceWith(block);
 }

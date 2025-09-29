@@ -1,51 +1,51 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row as required
+  // Defensive: ensure element is a UL with accordion-list class
+  if (!element || !element.classList.contains('accordion-list')) return;
+
+  // Table header row
   const headerRow = ['Accordion (accordion16)'];
   const rows = [headerRow];
 
-  // Each item is a <li>
+  // Get all LI (accordion items)
   const items = Array.from(element.querySelectorAll(':scope > li'));
-  items.forEach(li => {
-    // Title cell: the clickable <a> element. Use text only, as in example.
-    const a = li.querySelector(':scope > a');
+
+  items.forEach((li) => {
+    // Title cell: find the first <a> with class 'accordion-item'
+    const titleLink = li.querySelector('a.accordion-item');
     let titleCell;
-    if (a) {
-      // Remove any child <div> (e.g., the .ec icon)
-      Array.from(a.querySelectorAll('div')).forEach(div => div.remove());
-      const titleText = a.textContent.trim();
-      const titleDiv = document.createElement('div');
-      titleDiv.textContent = titleText;
-      titleCell = titleDiv;
+    if (titleLink) {
+      // Defensive: clone only the text node (not icons/divs)
+      // Remove any child <div class="ec"> (icon)
+      const linkClone = titleLink.cloneNode(true);
+      const ecDiv = linkClone.querySelector('.ec');
+      if (ecDiv) ecDiv.remove();
+      // Remove aria attributes for cleanliness
+      linkClone.removeAttribute('aria-controls');
+      linkClone.removeAttribute('aria-expanded');
+      titleCell = linkClone;
     } else {
-      // fallback in case there's no <a>
-      const emptyDiv = document.createElement('div');
-      emptyDiv.textContent = '';
-      titleCell = emptyDiv;
+      // Fallback: use first text node in LI
+      titleCell = document.createTextNode(li.textContent.trim());
     }
 
-    // Content cell: the expandcollapse-content div, which may contain a .module__content rich text div
-    const content = li.querySelector(':scope > div.expandcollapse-content');
+    // Content cell: find the first div with class 'expandcollapse-content'
+    const contentDiv = li.querySelector('div.expandcollapse-content');
     let contentCell;
-    if (content) {
-      // Prefer the actual .module__content rich text div if present
-      const rich = content.querySelector(':scope > div.module__content');
-      if (rich) {
-        contentCell = rich;
-      } else {
-        contentCell = content;
-      }
+    if (contentDiv) {
+      // Defensive: Use the entire contentDiv for resilience
+      contentCell = contentDiv;
     } else {
-      // fallback in case there's no content div
-      const emptyDiv = document.createElement('div');
-      emptyDiv.textContent = '';
-      contentCell = emptyDiv;
+      // Fallback: empty cell
+      contentCell = document.createTextNode('');
     }
 
     rows.push([titleCell, contentCell]);
   });
 
-  // Create the block table and replace the original element
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(table);
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+
+  // Replace the original element with the block
+  element.replaceWith(block);
 }

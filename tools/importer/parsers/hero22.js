@@ -1,53 +1,46 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row (must match example)
-  const headerRow = ['Hero (hero22)'];
-
-  // Get background image (if present)
-  let imageEl = null;
+  // Extract background image from .intrinsic-el style or data-hlx-background-image
+  let bgImageUrl = '';
   const intrinsicEl = element.querySelector('.intrinsic-el');
-  if (intrinsicEl && intrinsicEl.style && intrinsicEl.style.backgroundImage) {
-    const bg = intrinsicEl.style.backgroundImage;
-    const match = bg.match(/^url\(["']?(.*?)["']?\)$/);
-    if (match && match[1]) {
-      const img = document.createElement('img');
-      img.src = match[1];
-      imageEl = img;
+  if (intrinsicEl) {
+    const styleBg = intrinsicEl.style.backgroundImage;
+    if (styleBg && styleBg !== 'url( )' && styleBg !== 'url("")') {
+      const match = styleBg.match(/url\(("|')?(.*?)\1?\)/);
+      if (match && match[2]) {
+        bgImageUrl = match[2];
+      }
+    }
+    if (!bgImageUrl && intrinsicEl.dataset.hlxBackgroundImage) {
+      const dataBg = intrinsicEl.dataset.hlxBackgroundImage;
+      const match = dataBg.match(/url\(("|')?(.*?)\1?\)/);
+      if (match && match[2]) {
+        bgImageUrl = match[2];
+      }
     }
   }
-  // Second row: Either background image (img), or fallback to the .intrinsic-el if no image found
-  let imageCell = imageEl || intrinsicEl;
 
-  // Also, capture any text in a .vh span (for accessibility/semantics)
-  let vhTextNode = '';
-  const vh = element.querySelector('.vh');
-  if (vh && vh.textContent.trim()) {
-    // Use a paragraph for extracted text
-    const p = document.createElement('p');
-    p.textContent = vh.textContent.trim();
-    vhTextNode = p;
-  }
-  // Compose cell content
-  let imageRowCell;
-  if (imageCell && vhTextNode) {
-    imageRowCell = [imageCell, vhTextNode];
-  } else if (imageCell) {
-    imageRowCell = imageCell;
-  } else if (vhTextNode) {
-    imageRowCell = vhTextNode;
-  } else {
-    imageRowCell = '';
+  // Always create a table with 3 rows (header, image, content)
+  const headerRow = ['Hero (hero22)'];
+  let imageRow = [''];
+  if (bgImageUrl) {
+    const imageEl = document.createElement('img');
+    imageEl.src = bgImageUrl;
+    imageEl.alt = '';
+    imageRow = [imageEl];
   }
 
-  // Third row: For this HTML, there is no additional text content block
-  const textCell = '';
+  // For content row, extract any text content from the full block (not just intrinsic-el)
+  let contentText = '';
+  contentText = element.textContent.trim();
+  const contentRow = [contentText ? contentText : ''];
 
-  // Create the table
   const cells = [
     headerRow,
-    [imageRowCell],
-    [textCell]
+    imageRow,
+    contentRow,
   ];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(block);
 }

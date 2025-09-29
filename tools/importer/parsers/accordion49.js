@@ -1,63 +1,71 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion block header
-  const headerRow = ['Accordion (accordion49)'];
-
-  // Find the accordion content
-  // The structure is: <ul class="accordion-list"> <li> <a>...</a> <div>...</div> </li> </ul>
-  const accordionList = element.querySelector('ul.accordion-list');
+  // Find the accordion list
+  const accordionList = element.querySelector('.accordion-list');
   if (!accordionList) return;
 
-  // There is a single <li> in this accordion (for this HTML)
-  const li = accordionList.querySelector(':scope > li');
-  if (!li) return;
+  // Only direct <li> children (each is an accordion item)
+  const items = Array.from(accordionList.children).filter((li) => li.tagName === 'LI');
 
-  // Get the title anchor for the accordion
-  const titleAnchor = li.querySelector(':scope > a');
-  let titleCell;
-  if (titleAnchor) {
-    const ecDiv = titleAnchor.querySelector('.ec');
-    if (ecDiv) ecDiv.remove();
-    // Remove interaction-related attributes (optional)
-    titleAnchor.removeAttribute('aria-controls');
-    titleAnchor.removeAttribute('aria-expanded');
-    titleAnchor.removeAttribute('class');
-    titleAnchor.removeAttribute('target');
-    titleCell = titleAnchor;
-  } else {
-    titleCell = document.createTextNode('');
-  }
+  // Table header: block name must match exactly
+  const headerRow = ['Accordion (accordion49)'];
+  const rows = [headerRow];
 
-  // Find the content div for the accordion
-  const contentDiv = li.querySelector(':scope > div.expandcollapse-content');
-  let contentCell;
-  if (contentDiv) {
-    // Look for the <ol>
-    const ol = contentDiv.querySelector('ol');
-    if (ol) {
-      // The original HTML wraps each <li> inside a <div class="tcs-wrapper">
-      // We want to preserve the <li> elements (and their contents) as-is inside the content cell, keeping their structure and formatting
-      // We'll extract all <li> in the same order
-      const liWrappers = Array.from(ol.querySelectorAll(':scope > .tcs-wrapper'));
-      const liElements = liWrappers.map(wrapper => {
-        const itemLi = wrapper.querySelector('li');
-        return itemLi ? itemLi : null;
-      }).filter(Boolean);
-      if (liElements.length > 0) {
-        contentCell = liElements;
+  items.forEach((li) => {
+    // Title cell: clickable <a> inside <li>
+    const titleLink = li.querySelector('a');
+    let titleCell;
+    if (titleLink) {
+      // Use only the text content of the link for the title cell
+      titleCell = document.createElement('div');
+      titleCell.textContent = titleLink.textContent.trim();
+    } else {
+      // Fallback: use first text node
+      titleCell = document.createElement('div');
+      titleCell.textContent = li.textContent.trim();
+    }
+
+    // Content cell: the .expandcollapse-content div inside <li>
+    const contentDiv = li.querySelector('.expandcollapse-content');
+    let contentCell;
+    if (contentDiv) {
+      // Defensive: grab all children of the content div
+      // Usually, it's a single <ol> with many <div.tcs-wrapper><li>...</li></div>
+      // We'll collect all <li> elements inside .expandcollapse-content
+      const ol = contentDiv.querySelector('ol');
+      if (ol) {
+        // Each tcs-wrapper contains a <li> (the actual content)
+        const wrappers = Array.from(ol.children).filter((el) => el.classList.contains('tcs-wrapper'));
+        // For each wrapper, extract the <li> inside
+        wrappers.forEach((wrapper) => {
+          const innerLi = wrapper.querySelector('li');
+          if (innerLi) {
+            // Create a row for each <li> found
+            const contentFrag = document.createElement('div');
+            Array.from(innerLi.childNodes).forEach((node) => {
+              contentFrag.appendChild(node.cloneNode(true));
+            });
+            rows.push([titleCell.cloneNode(true), contentFrag]);
+          }
+        });
+        return; // We've already pushed rows for each item
       } else {
-        contentCell = [ol];
+        // Fallback: use the contentDiv itself
+        contentCell = document.createElement('div');
+        Array.from(contentDiv.childNodes).forEach((node) => {
+          contentCell.appendChild(node.cloneNode(true));
+        });
       }
     } else {
-      // Fallback: just include the contentDiv
-      contentCell = [contentDiv];
+      // Fallback: empty cell
+      contentCell = document.createElement('div');
     }
-  } else {
-    contentCell = document.createTextNode('');
-  }
 
-  // Build table
-  const rows = [headerRow, [titleCell, contentCell]];
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+    // Only push if not handled above (no <ol> structure)
+    rows.push([titleCell, contentCell]);
+  });
+
+  // Create and replace
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

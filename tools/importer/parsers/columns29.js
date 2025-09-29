@@ -1,32 +1,39 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find all column blocks in the source
-  const slList = element.querySelector('.column-container .sl .sl-list');
-  if (!slList) return;
-  const slItems = Array.from(slList.children).filter(e => e.classList.contains('sl-item'));
+  // Find the column container
+  const columnContainer = element.querySelector('.column-container');
+  if (!columnContainer) return;
 
-  // For each column, gather all rich text and images
-  const columnsContent = slItems.map(slItem => {
-    const richTexts = Array.from(slItem.querySelectorAll('.cm-rich-text'));
-    const imgs = Array.from(slItem.querySelectorAll('img'));
-    const content = [];
-    richTexts.forEach(rt => content.push(rt));
-    imgs.forEach(img => content.push(img));
-    if (content.length === 0) content.push(slItem);
-    return content.length === 1 ? content[0] : content;
+  // Find the .sl-list (row of columns)
+  const slList = columnContainer.querySelector('.sl-list');
+  if (!slList) return;
+
+  // Get all direct .sl-item children (columns)
+  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+  if (slItems.length === 0) return;
+
+  // For each column, collect its content as a single element or fragment
+  const columns = slItems.map((item) => {
+    // If only one child, use it directly
+    if (item.children.length === 1) {
+      return item.children[0];
+    }
+    // Otherwise, wrap all children in a fragment
+    const frag = document.createDocumentFragment();
+    Array.from(item.children).forEach(child => frag.appendChild(child));
+    return frag;
   });
 
-  // Create a header row with one cell only, regardless of column count
+  // Table header must match block name exactly
   const headerRow = ['Columns (columns29)'];
-  // All columns go in a single row array
-  const cells = [headerRow, columnsContent];
+  const contentRow = columns;
 
-  // Create the block table
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  // After table creation, set the header row th to span all columns
-  const headerTr = table.querySelector('tr');
-  if (headerTr && headerTr.children.length === 1 && columnsContent.length > 1) {
-    headerTr.children[0].setAttribute('colspan', columnsContent.length);
-  }
+  // Create the table
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow
+  ], document);
+
+  // Replace the original element
   element.replaceWith(table);
 }

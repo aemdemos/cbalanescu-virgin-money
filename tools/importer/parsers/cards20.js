@@ -1,38 +1,41 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header: matches example exactly
+  // Table header as per instructions
   const headerRow = ['Cards (cards20)'];
-  const rows = [];
+  const rows = [headerRow];
 
-  // Find all card items (sl-item inside sl-list)
-  const cardItems = element.querySelectorAll('.sl-list > .sl-item');
+  // Find all cards (sl-item)
+  const cardItems = element.querySelectorAll(':scope .sl-list > .sl-item');
+
   cardItems.forEach((item) => {
-    // Image: find first img inside .image
-    let img = null;
-    const imgDiv = item.querySelector('.image');
-    if (imgDiv) {
-      img = imgDiv.querySelector('img');
-    }
+    // Find the link inside the card
+    const link = item.querySelector('a.cm-image-block-link');
+    if (!link) return; // Defensive: skip if no link
 
-    // Text: find title (h2.header), and check for description (none in sample HTML)
-    let textCell = [];
-    const h2 = item.querySelector('.content .header');
-    if (h2) textCell.push(h2);
-    // There is no additional description or CTA in this HTML, so nothing else to add
-    // If in future, description or CTA (e.g., a link) are present, add them below
-    // Example:
-    // const desc = item.querySelector('.content p');
-    // if (desc) textCell.push(desc);
-    // const link = item.querySelector('.cm-image-block-link:not([class*="image-block-link"])');
-    // if (link) textCell.push(link);
+    // Get the image element (use the actual <img>)
+    const imgDiv = link.querySelector('.image');
+    let imgEl = imgDiv ? imgDiv.querySelector('img') : null;
+    // Defensive: skip if no image
+    if (!imgEl) return;
 
-    rows.push([img, textCell]); // Always use an array for text cell to keep semantic grouping
+    // Get the heading/title
+    const contentDiv = link.querySelector('.content');
+    let titleEl = contentDiv ? contentDiv.querySelector('h2') : null;
+    // Defensive: skip if no title
+    if (!titleEl) return;
+
+    // Compose the text cell: use only the heading text
+    const textCell = document.createElement('div');
+    textCell.appendChild(titleEl.cloneNode(true));
+
+    // Add the row: [image, text content]
+    rows.push([
+      imgEl,
+      textCell
+    ]);
   });
 
-  // Compose cells for createTable
-  const cells = [headerRow, ...rows];
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-
-  // Replace original element with the table block
-  element.replaceWith(block);
+  // Create the table and replace the original element
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

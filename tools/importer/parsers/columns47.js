@@ -1,38 +1,32 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header must match block name exactly
-  const headerRow = ['Columns (columns47)'];
-
-  // Get column containers from the HTML structure
-  // The HTML has: .sl-list.has-2-items.has-feature-right > .sl-item (each column)
+  // Find the .sl-list (columns container)
   const slList = element.querySelector('.sl-list');
-  let columns = [];
-  if (slList) {
-    const items = Array.from(slList.querySelectorAll(':scope > .sl-item'));
-    columns = items.map((item) => {
-      // Grab the only direct child of .sl-item, which is the content
-      // Reference the child element(s) directly
-      const children = Array.from(item.children);
-      if (children.length === 1) {
-        return children[0];
-      }
-      // If there are multiple children, return them as an array (rare for this structure, but resilient)
-      return children;
-    });
-  }
+  if (!slList) return;
 
-  // If no .sl-list found, fallback: treat element's direct children as columns
-  if (columns.length === 0) {
-    columns = Array.from(element.children);
-  }
+  // Get all .sl-item columns
+  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+  if (slItems.length < 2) return;
 
-  // Only create the block if there is content
-  if (columns.length > 0) {
-    const cells = [
-      headerRow,
-      columns
-    ];
-    const table = WebImporter.DOMUtils.createTable(cells, document);
-    element.replaceWith(table);
-  }
+  // Left column: rich text heading (e.g., Quick links)
+  let leftCell = null;
+  const leftRich = slItems[0].querySelector('.cm-rich-text, .cm');
+  if (leftRich) leftCell = leftRich;
+  else leftCell = slItems[0];
+
+  // Right column: links list
+  let rightCell = null;
+  const rightSection = slItems[1].querySelector('section.cm-links');
+  if (rightSection) rightCell = rightSection;
+  else rightCell = slItems[1];
+
+  // Compose the table
+  const headerRow = ['Columns (columns47)'];
+  const contentRow = [leftCell, rightCell];
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow,
+  ], document);
+
+  element.replaceWith(table);
 }

@@ -1,33 +1,28 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header: must match example exactly
-  const headerRow = ['Columns (columns33)'];
-
-  // 2. Find sl-list (columns block) and its direct children
+  // Defensive: get the two column items
   const slList = element.querySelector('.sl-list');
   if (!slList) return;
+  const slItems = slList.querySelectorAll(':scope > .sl-item');
+  if (slItems.length < 2) return;
 
-  // 3. Get each column's top-level sl-item
-  const columnItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+  // First column: heading
+  const firstCol = slItems[0].querySelector('.cm-rich-text');
+  // Second column: eligibility list
+  const secondCol = slItems[1].querySelector('.cm-rich-text');
 
-  // 4. Each column: gather its rich content block (preserve structure)
-  const columns = columnItems.map((item) => {
-    // Find the .cm-rich-text block within this item
-    const rich = item.querySelector('.cm-rich-text');
-    if (rich) {
-      return rich;
-    }
-    // fallback: entire item if structure differs
-    return item;
-  });
+  // Defensive: if either is missing, fallback to empty
+  const col1 = firstCol ? firstCol : document.createElement('div');
+  const col2 = secondCol ? secondCol : document.createElement('div');
 
-  // 5. Build the block table as per the example (header, then columns)
-  const cells = [
+  // Build table rows
+  const headerRow = ['Columns (columns33)'];
+  const contentRow = [col1, col2];
+
+  const table = WebImporter.DOMUtils.createTable([
     headerRow,
-    columns
-  ];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+    contentRow,
+  ], document);
 
-  // 6. Replace the original element with the table
   element.replaceWith(table);
 }

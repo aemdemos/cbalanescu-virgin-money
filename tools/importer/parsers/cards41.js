@@ -1,51 +1,54 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // The header must match exactly
-  const headerRow = ['Cards (cards41)'];
-  const rows = [];
-  // Find the sl-list block; if not present, exit
-  const slList = element.querySelector('.sl-list');
-  if (!slList) return;
-  // Gather each direct child card (sl-item)
-  const items = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
-  items.forEach(item => {
-    // Locate card content
-    const contentPanel = item.querySelector('.cm-content-panel-container');
-    if (!contentPanel) return;
-    const richText = contentPanel.querySelector('.cm-rich-text') || contentPanel;
-    // Find the first image in card
+  // Helper to extract card content from a .sl-item
+  function extractCardContent(slItem) {
+    // Find the content panel container
+    const contentPanel = slItem.querySelector('.cm-content-panel-container');
+    if (!contentPanel) return [null, null];
+    const richText = contentPanel.querySelector('.cm-rich-text');
+    if (!richText) return [null, null];
+
+    // Find the image (first img in the content)
     const img = richText.querySelector('img');
-    // Find the heading: h5 or h4, or bold/strong
-    let heading = richText.querySelector('h5, h4');
-    if (!heading) {
-      const bold = richText.querySelector('p b, p strong');
-      if (bold) heading = bold;
+    let imgRef = null;
+    if (img) {
+      // Reference the existing image element
+      imgRef = img;
     }
-    // Find all p tags except those with an img inside
-    const allPs = Array.from(richText.querySelectorAll('p')).filter(p => !p.querySelector('img'));
-    // Find the CTA (anchor inside a paragraph)
-    let ctaP = allPs.find(p => p.querySelector('a'));
-    let cta = ctaP ? ctaP.querySelector('a') : null;
-    // Remove CTA paragraph from allPs
-    let descriptionPs = allPs.filter(p => p !== ctaP);
-    // If heading is inside a paragraph, don't duplicate that paragraph in description
-    if (heading && heading.parentElement.tagName === 'P') {
-      descriptionPs = descriptionPs.filter(p => p !== heading.parentElement);
+
+    // Build the text cell
+    // We'll preserve headings, paragraphs, links, and superscript
+    const textCell = document.createElement('div');
+    Array.from(richText.children).forEach((child) => {
+      // Skip the image (and its parent <p> if that's all it contains)
+      if (
+        child.tagName === 'P' &&
+        child.querySelector('img') &&
+        child.childNodes.length === 1
+      ) {
+        return;
+      }
+      textCell.appendChild(child.cloneNode(true));
+    });
+
+    return [imgRef, textCell];
+  }
+
+  // Find all cards
+  const slItems = element.querySelectorAll('.sl-item');
+  const rows = [];
+  // Header row: must match block name exactly
+  rows.push(['Cards (cards41)']);
+
+  slItems.forEach((slItem) => {
+    const [img, textCell] = extractCardContent(slItem);
+    if (img && textCell) {
+      rows.push([img, textCell]);
     }
-    // Build the text cell with references to original elements
-    const cellContent = [];
-    if (heading) cellContent.push(heading);
-    descriptionPs.forEach(p => cellContent.push(p));
-    if (cta) cellContent.push(cta);
-    rows.push([
-      img,
-      cellContent.length === 1 ? cellContent[0] : cellContent
-    ]);
   });
-  // Compose full table and replace original element
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    ...rows
-  ], document);
+
+  // Create the table block
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  // Replace the original element
   element.replaceWith(table);
 }

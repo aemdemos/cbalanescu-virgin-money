@@ -1,37 +1,56 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row matches example
+  // Helper to extract accordion items
+  function getAccordionRows(element) {
+    const rows = [];
+    // Find the accordion list
+    const ul = element.querySelector('ul.accordion-list');
+    if (!ul) return rows;
+    // Each <li> is an accordion item
+    ul.querySelectorAll(':scope > li').forEach((li) => {
+      // Title: <a class="accordion-item">
+      const a = li.querySelector('a.accordion-item');
+      let title = null;
+      if (a) {
+        // Remove any trailing icons/divs from the title
+        // Clone to avoid modifying source
+        const aClone = a.cloneNode(true);
+        // Remove any child divs (e.g., icon wrappers)
+        Array.from(aClone.querySelectorAll('div')).forEach((div) => div.remove());
+        // Use the text content as the title
+        title = aClone;
+      }
+      // Content: <div class="expandcollapse-content">
+      const contentDiv = li.querySelector('div.expandcollapse-content');
+      let content = null;
+      if (contentDiv) {
+        // Find the rich text content inside
+        const richContent = contentDiv.querySelector('.cm-rich-text, .cm-rich-text.module__content');
+        if (richContent) {
+          content = richContent;
+        } else {
+          // If not found, use all children of contentDiv
+          content = document.createElement('div');
+          Array.from(contentDiv.childNodes).forEach((node) => {
+            content.appendChild(node.cloneNode(true));
+          });
+        }
+      }
+      if (title && content) {
+        rows.push([title, content]);
+      }
+    });
+    return rows;
+  }
+
+  // Build table rows
   const headerRow = ['Accordion (accordion27)'];
-  const rows = [headerRow];
+  const accordionRows = getAccordionRows(element);
+  const tableCells = [headerRow, ...accordionRows];
 
-  // Find <ul class="accordion-list">
-  const ul = element.querySelector('ul.accordion-list');
-  if (!ul) return;
-  // Only direct <li> children are accordion items
-  const lis = Array.from(ul.children);
-  lis.forEach(li => {
-    // Title cell: <a class="accordion-item">
-    const titleAnchor = li.querySelector('a.accordion-item');
-    let titleCell = '';
-    if (titleAnchor) {
-      // Remove any icon-like div.ec in the anchor (dropdown arrow)
-      const icon = titleAnchor.querySelector('div.ec');
-      if (icon) icon.remove();
-      // Reference existing element (not clone)
-      titleCell = titleAnchor;
-    }
-    // Content cell: <div class="expandcollapse-content">
-    const contentDiv = li.querySelector('div.expandcollapse-content');
-    let contentCell = '';
-    if (contentDiv) {
-      // Reference the content container directly
-      contentCell = contentDiv;
-    }
-    rows.push([titleCell, contentCell]);
-  });
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(tableCells, document);
 
-  // Create block table
-  const block = WebImporter.DOMUtils.createTable(rows, document);
   // Replace the original element
   element.replaceWith(block);
 }
