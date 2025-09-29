@@ -1,42 +1,29 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header must match example exactly
+  // Header row as per block guidelines
   const headerRow = ['Columns (columns7)'];
 
-  // Find the columns: two .sl-item children
-  const slList = element.querySelector('.sl-list.has-feature-right');
-  const slItems = slList ? slList.querySelectorAll(':scope > .sl-item') : [];
+  // Defensive: get the two main column items
+  const slList = element.querySelector('.sl-list');
+  if (!slList) return;
+  const slItems = Array.from(slList.querySelectorAll(':scope > .sl-item'));
+  if (slItems.length < 2) return;
 
-  // Defensive: ensure we always have two columns (even if one is missing)
-  let column1Content = '';
-  let column2Content = '';
+  // First column: image
+  let imageSection = slItems[0].querySelector('section.cm-image');
+  let imageContent = imageSection ? imageSection : slItems[0];
 
-  if (slItems[0]) {
-    // Column 1: image block
-    // This block is a section.cm-image > figure > div > img
-    // We want to reference the existing <img> element for semantic fidelity
-    const img = slItems[0].querySelector('img');
-    if (img) {
-      column1Content = img;
-    }
-  }
+  // Second column: rich text
+  let richTextSection = slItems[1].querySelector('.cm-rich-text');
+  let richTextContent = richTextSection ? richTextSection : slItems[1];
 
-  if (slItems[1]) {
-    // Column 2: rich text block
-    // All content inside .cm-rich-text, including headings, paragraphs, CTA
-    const richText = slItems[1].querySelector('.cm-rich-text');
-    if (richText) {
-      column2Content = richText;
-    }
-  }
+  // Second row: two columns, image and text
+  const secondRow = [imageContent, richTextContent];
 
-  // Compose block table as per example structure
-  const cells = [
-    headerRow,
-    [column1Content, column2Content]
-  ];
+  // Build table
+  const cells = [headerRow, secondRow];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Create and replace table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Replace original element
+  element.replaceWith(table);
 }

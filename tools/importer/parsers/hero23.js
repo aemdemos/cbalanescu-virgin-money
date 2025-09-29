@@ -1,38 +1,69 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Header row, matches example exactly
+  if (!element) return;
+
+  // 1. Table Header Row
   const headerRow = ['Hero (hero23)'];
 
-  // 2. Background image row - no image in provided HTML, so blank cell
-  const bgRow = [''];
+  // 2. Background Image Row (always present, empty if no image)
+  let imageCell = '';
+  const img = element.querySelector('img');
+  if (img) {
+    imageCell = img;
+  }
+  const imageRow = [imageCell];
 
-  // 3. Content row: Title (heading), subtitle, description, CTA
-  // Collect content in order and only include non-empty elements
-  const contentEls = [];
+  // 3. Content Row
+  // Compose content cell in correct order: headline, subheading, paragraph(s), CTA
+  const contentCell = [];
 
-  // Title: use .header or h1; if it's wrapped or contains child elements, use the entire element for full formatting
-  const title = element.querySelector('.header, h1');
-  if (title && title.textContent.trim()) contentEls.push(title);
+  // Headline (find any h1, even if nested)
+  let headlineText = '';
+  const h1 = element.querySelector('h1');
+  if (h1) {
+    // If h1 contains a bold span, use its text
+    const boldSpan = h1.querySelector('span b');
+    headlineText = boldSpan ? boldSpan.textContent.trim() : h1.textContent.trim();
+    const headline = document.createElement('h1');
+    headline.textContent = headlineText;
+    contentCell.push(headline);
+  }
 
-  // Subtitle: .subtitle
+  // Subheading (find any .subtitle)
   const subtitle = element.querySelector('.subtitle');
-  if (subtitle && subtitle.textContent.trim()) contentEls.push(subtitle);
+  if (subtitle) {
+    const subheading = document.createElement('h2');
+    subheading.textContent = subtitle.textContent.trim();
+    contentCell.push(subheading);
+  }
 
-  // Paragraph description: first non-empty <p> that's not inside .header
-  // Exclude empty paragraphs and those inside the header
-  const paragraphs = Array.from(element.querySelectorAll('p')).filter(
-    p => p.textContent.trim().length > 0 && !p.closest('.header, h1')
-  );
-  if (paragraphs.length) contentEls.push(paragraphs[0]);
+  // Paragraphs (collect all non-empty <p> elements, including those with children)
+  const paragraphs = Array.from(element.querySelectorAll('p')).filter(p => p.textContent.trim().length > 0);
+  paragraphs.forEach(p => {
+    contentCell.push(p.cloneNode(true));
+  });
 
-  // CTA: .cta
-  const cta = element.querySelector('.cta');
-  if (cta && cta.textContent.trim()) contentEls.push(cta);
+  // CTA (find any .cta)
+  const ctaEl = element.querySelector('.cta');
+  if (ctaEl) {
+    // If there's a link inside, use it. Otherwise, just text.
+    let ctaContent;
+    const link = ctaEl.querySelector('a');
+    if (link) {
+      ctaContent = link.cloneNode(true);
+    } else {
+      ctaContent = document.createElement('span');
+      ctaContent.textContent = ctaEl.textContent.trim();
+      ctaContent.className = 'cta';
+    }
+    contentCell.push(ctaContent);
+  }
 
-  // Assemble table rows
-  const cells = [headerRow, bgRow, [contentEls]];
+  const contentRow = [contentCell];
 
-  // Create table and replace element
-  const block = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(block);
+  // Build table with 3 rows: header, image, content
+  const cells = [headerRow, imageRow, contentRow];
+
+  const table = WebImporter.DOMUtils.createTable(cells, document);
+  element.replaceWith(table);
 }

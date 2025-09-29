@@ -1,36 +1,69 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find each card block (sl-item), each contains a section.cm-content-tile
-  const cardItems = element.querySelectorAll('.sl-item');
-  const headerRow = ['Cards (cards26)'];
-  const rows = [];
+  // Helper to extract card content from a .sl-item
+  function extractCard(slItem) {
+    // Find the section containing the card
+    const section = slItem.querySelector('section.cm-content-tile, section.cm');
+    if (!section) return [document.createElement('div'), document.createElement('div')];
 
-  cardItems.forEach(item => {
-    // Get the card image (mandatory)
-    const img = item.querySelector('.image img');
-    // Get the card text content (mandatory)
-    const contentDiv = item.querySelector('.content');
-    // Reference the original nodes instead of cloning
-    let textCell;
+    // Image (first cell)
+    let imageCell = null;
+    const imageDiv = section.querySelector('.image');
+    if (imageDiv) {
+      const img = imageDiv.querySelector('img');
+      if (img) {
+        imageCell = img;
+      }
+    }
+    if (!imageCell) {
+      imageCell = document.createElement('div');
+    }
+
+    // Text content (second cell)
+    const contentDiv = section.querySelector('.content');
+    let textCellContent = [];
     if (contentDiv) {
-      // We want all child nodes of .content except empty text
-      // We'll build a document fragment to preserve structure
-      textCell = document.createDocumentFragment();
-      Array.from(contentDiv.childNodes).forEach(node => {
-        // Only include non-empty text nodes and elements
-        if (node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && node.textContent.trim())) {
-          textCell.appendChild(node);
+      // Title (h3.header > b)
+      const header = contentDiv.querySelector('.header');
+      if (header) {
+        const h3 = document.createElement('h3');
+        h3.innerHTML = header.innerHTML;
+        textCellContent.push(h3);
+      }
+      // All paragraphs and lists (description, features, etc.)
+      // We'll collect all elements except the header and image
+      Array.from(contentDiv.children).forEach((child) => {
+        if (child.classList.contains('header')) return;
+        // Only add non-empty paragraphs and lists
+        if (
+          (child.tagName === 'P' && child.textContent.trim() !== '') ||
+          child.tagName === 'UL' ||
+          child.tagName === 'OL'
+        ) {
+          textCellContent.push(child);
         }
       });
-    } else {
-      textCell = '';
     }
-    rows.push([img, textCell]);
+    // Defensive: if nothing found, add an empty div
+    if (textCellContent.length === 0) {
+      textCellContent.push(document.createElement('div'));
+    }
+
+    return [imageCell, textCellContent];
+  }
+
+  // Find all cards
+  const slItems = element.querySelectorAll(':scope .sl-item');
+  const rows = [];
+  // Header row
+  rows.push(['Cards (cards26)']);
+  // Card rows
+  slItems.forEach((slItem) => {
+    rows.push(extractCard(slItem));
   });
 
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    ...rows
-  ], document);
-  element.replaceWith(table);
+  // Create the block table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  // Replace original element
+  element.replaceWith(block);
 }

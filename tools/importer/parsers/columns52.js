@@ -1,24 +1,55 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Find the .sl-list block containing the columns
-  const slList = element.querySelector('.sl-list');
-  const slItems = slList ? Array.from(slList.children) : [];
+  // Helper to get direct children by selector
+  function getDirectChildren(parent, selector) {
+    return Array.from(parent.children).filter((child) => child.matches(selector));
+  }
 
-  // Defensive: If there are no columns, do not create a table
-  if (slItems.length === 0) return;
-
-  // Header matches spec exactly
+  // 1. Header row
   const headerRow = ['Columns (columns52)'];
-  // Compose the columns row: each cell is the main child content from each .sl-item
-  const columnsRow = slItems.map(item => {
-    // Reference the direct child (block) so we preserve all inner structure and semantics
-    return item.firstElementChild;
+
+  // 2. Get the main columns content
+  // The structure is:
+  // <div class="column-container">
+  //   <div class="sl">
+  //     <div class="sl-list has-3-items">
+  //       <div class="sl-item">...</div>
+  //       <div class="sl-item">...</div>
+  //       <div class="sl-item">...</div>
+  //     </div>
+  //   </div>
+  // </div>
+
+  // Defensive: find the .sl-list inside the block
+  const slList = element.querySelector('.sl-list');
+  if (!slList) return;
+
+  // Get all .sl-item direct children (columns)
+  const slItems = getDirectChildren(slList, '.sl-item');
+
+  // Defensive: if no items, do nothing
+  if (!slItems.length) return;
+
+  // For this layout, the first item is a heading column, the next two are icon-title sections
+  // We'll create a single row with three columns
+  const columnsRow = slItems.map((item) => {
+    // For each item, extract its main content
+    // If it contains a .cm-rich-text, use that
+    const rich = item.querySelector('.cm-rich-text');
+    if (rich) return rich;
+
+    // If it contains a .cm-icon-title section, use the whole section
+    const iconTitle = item.querySelector('.cm-icon-title');
+    if (iconTitle) return iconTitle;
+
+    // Fallback: use the item itself
+    return item;
   });
 
   // Compose the table
-  const cells = [headerRow, columnsRow];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+  const tableCells = [headerRow, columnsRow];
+  const blockTable = WebImporter.DOMUtils.createTable(tableCells, document);
 
-  // Replace the column container with the new table
-  element.replaceWith(table);
+  // Replace the original element
+  element.replaceWith(blockTable);
 }

@@ -1,90 +1,63 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Only one table needs to be created (the Accordion block)
-  // The header row should be exactly: 'Accordion (accordion21)'
+  // Find the right column containing the accordion
+  const columns = element.querySelectorAll(':scope > div');
+  if (!columns || columns.length < 2) return;
+  const rightCol = columns[1];
 
-  // Find the accordion section (should be on the right side)
-  let accordionSection = null;
-  const slItems = element.querySelectorAll(':scope > div > div > div.sl-item');
-  for (const slItem of slItems) {
-    const section = slItem.querySelector('section.cm-accordion, section.cm.cm-accordion');
-    if (section) {
-      accordionSection = section;
-      break;
-    }
-  }
+  // Find the accordion section
+  const accordionSection = rightCol.querySelector('section.cm-accordion, section.cm.cm-accordion');
   if (!accordionSection) return;
 
-  // Find all accordion items (li elements)
+  // Find the accordion list
   const accordionList = accordionSection.querySelector('ul.accordion-list');
   if (!accordionList) return;
-  const rows = [['Accordion (accordion21)']]; // Header row as required
 
-  // Each accordion item: one row, two columns (title and content)
-  Array.from(accordionList.querySelectorAll(':scope > li')).forEach((li) => {
-    // Title cell: take the text content inside the <a class="accordion-item">
+  // Prepare table rows
+  const rows = [];
+  // Header row: must be exactly one column
+  rows.push(['Accordion (accordion21)']);
+
+  // Each <li> is an accordion item
+  const items = accordionList.querySelectorAll(':scope > li');
+  items.forEach((li) => {
+    // Title cell: the <a> with class 'accordion-item'
     const titleLink = li.querySelector('a.accordion-item');
-    let titleElem;
+    let titleCell = '';
     if (titleLink) {
-      // Create a span referencing the text content only (not the dropdown icon)
-      const span = document.createElement('span');
-      // Sometimes there are child nodes, first one is text
-      if (titleLink.childNodes.length) {
-        // Collect only text nodes up to the first <div class="ec">
-        for (let node of titleLink.childNodes) {
-          if (node.nodeType === 3) { // Text node
-            span.appendChild(document.createTextNode(node.textContent));
-          }
-          if (node.nodeType === 1 && node.classList.contains('ec')) {
-            break;
-          }
+      // Get the full HTML content of the link, minus trailing <div class="ec">
+      const clonedLink = document.createElement('div');
+      Array.from(titleLink.childNodes).forEach((node) => {
+        if (!(node.nodeType === 1 && node.classList.contains('ec'))) {
+          clonedLink.appendChild(node.cloneNode(true));
         }
-      } else {
-        span.textContent = titleLink.textContent;
-      }
-      titleElem = span;
+      });
+      titleCell = clonedLink;
     } else {
-      titleElem = document.createTextNode('');
+      titleCell = document.createTextNode(li.textContent.trim());
     }
 
-    // Content cell: reference the expandcollapse-content's main child (prefer .cm-rich-text)
+    // Content cell: the div with class 'expandcollapse-content'
     const contentDiv = li.querySelector('div.expandcollapse-content');
-    let contentElem;
+    let contentCell = '';
     if (contentDiv) {
-      // Prefer .cm-rich-text, but may be .cq-dd-paragraph or the whole contentDiv
-      let mainContent = contentDiv.querySelector('.cm-rich-text') ||
-                        contentDiv.querySelector('.cq-dd-paragraph') ||
-                        contentDiv.querySelector('.cm-content-panel-container');
-      contentElem = mainContent ? mainContent : contentDiv;
+      // Find the rich text content inside
+      const richContent = contentDiv.querySelector('.cm-rich-text, .cq-dd-paragraph');
+      if (richContent) {
+        contentCell = richContent.cloneNode(true);
+      } else {
+        contentCell = contentDiv.cloneNode(true);
+      }
     } else {
-      contentElem = document.createTextNode('');
+      contentCell = document.createElement('div');
     }
 
-    rows.push([titleElem, contentElem]);
+    rows.push([titleCell, contentCell]);
   });
 
-  // Handle extra content under the accordion (e.g. 'See more' link)
-  // These are NOT part of the accordion items, so add after as a single row, only if present
-  // In the input, this is a .cm-rich-text (with <h6><a>See more</a></h6>) after <li>s in ul.accordion-list
-  let extras = [];
-  let foundExtra = false;
-  Array.from(accordionList.children).forEach((child) => {
-    if (child.tagName !== 'LI') {
-      extras.push(child);
-      foundExtra = true;
-    }
-  });
-  if (foundExtra && extras.length) {
-    rows.push(['', extras]);
-  }
-
-  // Create the block table
-  const table = WebImporter.DOMUtils.createTable(rows, document);
-
-  // Replace the accordion block (right-side sl-item) with the new table
-  // Find the parent .sl-item containing accordionSection
-  const parentItem = accordionSection.closest('.sl-item');
-  if (parentItem) {
-    parentItem.replaceWith(table);
+  // Replace the original element with the table
+  const block = WebImporter.DOMUtils.createTable(rows, document);
+  if (block) {
+    element.replaceWith(block);
   }
 }

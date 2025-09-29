@@ -1,75 +1,73 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table header as in example
+  // Helper to extract card data from a .product-key-rate-item
+  function extractCard(cardEl) {
+    // Image/Icon (mandatory)
+    const img = cardEl.querySelector('img');
+
+    // Title (optional, from .key-value-text > span)
+    const titleSpan = cardEl.querySelector('.key-value-text span');
+    let titleEl = null;
+    if (titleSpan && titleSpan.textContent.trim()) {
+      titleEl = document.createElement('strong');
+      titleEl.textContent = titleSpan.textContent.trim();
+    }
+
+    // Description (optional, from .key-top-text)
+    const descDiv = cardEl.querySelector('.key-top-text');
+    let descNodes = [];
+    let ctaNode = null;
+    if (descDiv) {
+      // Find CTA (if any)
+      const cta = descDiv.querySelector('a');
+      if (cta) {
+        ctaNode = cta;
+        cta.parentNode.removeChild(cta);
+      }
+      // Collect description nodes, filter out empty <p> and empty text nodes
+      descNodes = Array.from(descDiv.childNodes).filter(n => {
+        if (n.nodeType === Node.ELEMENT_NODE && n.nodeName === 'P' && !n.textContent.trim()) {
+          return false;
+        }
+        if (n.nodeType === Node.TEXT_NODE && !n.textContent.trim()) {
+          return false;
+        }
+        return true;
+      });
+    }
+
+    // Compose text cell: title (if present), description, CTA (if present)
+    const textCell = [];
+    if (titleEl) textCell.push(titleEl, document.createElement('br'));
+    if (descNodes.length) {
+      descNodes.forEach((node, idx) => {
+        textCell.push(node);
+        // Add <br> between paragraphs if multiple <p>
+        if (node.nodeName === 'P' && idx < descNodes.length - 1) {
+          textCell.push(document.createElement('br'));
+        }
+      });
+    }
+    if (ctaNode) {
+      // Add a <br> before CTA if there is description
+      if (descNodes.length) textCell.push(document.createElement('br'));
+      textCell.push(ctaNode);
+    }
+
+    return [img, textCell];
+  }
+
+  // Build table rows
   const headerRow = ['Cards (cards2)'];
-  const cells = [headerRow];
+  const rows = [headerRow];
+
   // Find all card items
   const cardItems = element.querySelectorAll('.product-key-rate-item');
-  cardItems.forEach((item) => {
-    // First cell: the <img> element, referenced directly
-    const img = item.querySelector('img');
-    // Second cell: Title, description (with possible <p>, <sup>, <a>), and CTA (if present)
-    const textParts = [];
-    // Title
-    const titleSpan = item.querySelector('.key-value-text span');
-    if (titleSpan) {
-      // Bold the title (semantic: strong, like an <h3> in card)
-      const strong = document.createElement('strong');
-      strong.textContent = titleSpan.textContent.trim();
-      textParts.push(strong);
-    }
-    // Description and CTA(s)
-    const keyTop = item.querySelector('.key-top-text');
-    if (keyTop) {
-      // If first child is a <p> and there are multiple <p>, handle separately
-      const paragraphs = keyTop.querySelectorAll('p');
-      if (paragraphs.length > 0) {
-        // Add first paragraph (description)
-        textParts.push(document.createElement('br'));
-        textParts.push(paragraphs[0]);
-        // Add subsequent paragraphs (usually CTA)
-        for (let i = 1; i < paragraphs.length; i++) {
-          textParts.push(paragraphs[i]);
-        }
-        // Also add any text before the first paragraph
-        let node = keyTop.firstChild;
-        let beforeP = '';
-        while (node && node !== paragraphs[0]) {
-          if (node.nodeType === Node.TEXT_NODE) {
-            beforeP += node.textContent;
-          } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'SUP') {
-            beforeP += node.outerHTML;
-          }
-          node = node.nextSibling;
-        }
-        if (beforeP.trim()) {
-          const span = document.createElement('span');
-          span.innerHTML = beforeP;
-          // Insert before the first <p>
-          textParts.splice(1, 0, span);
-        }
-      } else {
-        // No paragraphs, just text and <sup>
-        textParts.push(document.createElement('br'));
-        Array.from(keyTop.childNodes).forEach((node) => {
-          if (node.nodeType === Node.ELEMENT_NODE && (node.tagName === 'SUP' || node.tagName === 'A')) {
-            textParts.push(node);
-          } else {
-            // text node
-            textParts.push(document.createTextNode(node.textContent));
-          }
-        });
-      }
-    }
-    // Remove empty <br> at the end if present
-    while (textParts.length && textParts[textParts.length - 1].tagName === 'BR') {
-      textParts.pop();
-    }
-    cells.push([
-      img,
-      textParts
-    ]);
+  cardItems.forEach(cardEl => {
+    rows.push(extractCard(cardEl));
   });
-  const table = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Create table and replace element
+  const table = WebImporter.DOMUtils.createTable(rows, document);
   element.replaceWith(table);
 }

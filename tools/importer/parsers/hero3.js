@@ -1,32 +1,27 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Table structure: 1 column, 3 rows
-  // Row 1: block name
-  // Row 2: background image (none in original HTML)
-  // Row 3: content (CTA link in a paragraph)
+  // Hero (hero3) block: 1 column, 3 rows
 
+  // 1. Header row
   const headerRow = ['Hero (hero3)'];
-  const imageRow = ['']; // No image present in the HTML
 
-  // Row 3: reference the existing content (the full cta paragraph)
-  // For resilience, place the single child paragraph (if present), or all children.
-  let contentCell;
-  // If the element only contains one child, just use it, else, collect all children
-  const children = Array.from(element.childNodes).filter((n) => n.nodeType === 1 || (n.nodeType === 3 && n.textContent.trim()));
-  if (children.length === 1) {
-    contentCell = children[0];
-  } else if (children.length > 1) {
-    contentCell = children;
-  } else {
-    // fallback: reference the element itself if no children
-    contentCell = element;
-  }
+  // 2. Background image row (always present, even if empty)
+  const imageRow = [''];
 
+  // 3. Content row: gather all text content from the element (not just children)
+  // Use textContent to ensure all text is included in the cell
+  const text = element.textContent.trim();
+  const contentRow = [text ? text : ''];
+
+  // Build table: must have 3 rows
   const cells = [
     headerRow,
     imageRow,
-    [contentCell]
+    contentRow,
   ];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+
+  const block = WebImporter.DOMUtils.createTable(cells, document);
+
+  // Replace original element with the block table
+  element.replaceWith(block);
 }

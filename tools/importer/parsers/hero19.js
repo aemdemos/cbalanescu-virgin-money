@@ -1,41 +1,45 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // 1. Table header row: must match exactly
+  // Table header row
   const headerRow = ['Hero (hero19)'];
 
-  // 2. Background image row (none in this HTML, so empty string)
-  const backgroundRow = [''];
+  // --- Row 2: Background image (optional) ---
+  // This source block does NOT have a background image element, so leave cell empty
+  const bgImageRow = [''];
 
-  // 3. Content row: collect all relevant children into a single cell
-  // The content is inside a child with class 'cm-rich-text', but the HTML might vary, so be resilient
-  let contentContainer = null;
+  // --- Row 3: Content (title, subheading, CTA) ---
+  // Find the rich text container
+  let contentDiv = null;
   const children = element.querySelectorAll(':scope > div');
   for (const child of children) {
     if (child.classList.contains('cm-rich-text')) {
-      contentContainer = child;
+      contentDiv = child;
       break;
     }
   }
-  if (!contentContainer) contentContainer = element;
+  // Defensive fallback: if not found, use the element itself
+  if (!contentDiv) contentDiv = element;
 
-  // Only immediate children that are visible/meaningful
-  // Filter out empty text nodes
-  const contentElements = Array.from(contentContainer.childNodes).filter(node => {
-    if (node.nodeType === 1) return true; // element node
-    if (node.nodeType === 3 && node.textContent.trim()) return true; // non-empty text
-    return false;
+  // Gather content elements: heading, paragraphs, links
+  // We'll preserve their order and structure for resilience
+  const contentEls = [];
+  Array.from(contentDiv.childNodes).forEach((node) => {
+    // Only include element nodes (skip text nodes)
+    if (node.nodeType === 1) {
+      contentEls.push(node);
+    }
   });
+  // Defensive fallback: if nothing found, use the whole contentDiv
+  const contentRow = [contentEls.length ? contentEls : [contentDiv]];
 
-  // Place all content elements in a single cell (array for createTable)
-  const contentRow = [contentElements];
-
-  // Create the table: 1 column, 3 rows
-  const table = WebImporter.DOMUtils.createTable([
+  // Build the table
+  const cells = [
     headerRow,
-    backgroundRow,
-    contentRow
-  ], document);
+    bgImageRow,
+    contentRow,
+  ];
+  const table = WebImporter.DOMUtils.createTable(cells, document);
 
-  // Replace the original element
+  // Replace original element with the block table
   element.replaceWith(table);
 }

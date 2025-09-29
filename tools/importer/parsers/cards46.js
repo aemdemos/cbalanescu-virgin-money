@@ -1,45 +1,56 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
+  // Table header row
   const headerRow = ['Cards (cards46)'];
 
-  // Locate the container holding the cards
-  const cardsContainer = element.querySelector('.product-key-rates');
-  if (!cardsContainer) return;
-  const cardItems = Array.from(cardsContainer.children);
+  // Defensive: find the container holding the cards
+  const rates = element.querySelector('.cc01-rates');
+  if (!rates) return;
+  const itemsContainer = rates.querySelector('.product-key-rates');
+  if (!itemsContainer) return;
 
+  // Get all card items
+  const cardItems = Array.from(itemsContainer.querySelectorAll(':scope > .product-key-rate-item'));
+
+  // Build table rows for each card
   const rows = cardItems.map((card) => {
-    // 1st cell: Icon/image (must reference the actual element)
+    // Image/Icon (always present)
     const img = card.querySelector('img');
-    // 2nd cell: Text content (Title and Description)
-    const textCell = [];
+
+    // Title (span inside .key-value-text)
     const titleSpan = card.querySelector('.key-value-text span');
+    let titleEl = null;
     if (titleSpan) {
-      // Preserve semantic meaning: in the example the title is bold, so use <strong>
-      const strong = document.createElement('strong');
-      strong.textContent = titleSpan.textContent.trim();
-      textCell.push(strong);
+      titleEl = document.createElement('strong');
+      titleEl.textContent = titleSpan.textContent;
     }
-    // Description (may be p, or just text, with <b>, <br>, etc)
-    const descDiv = card.querySelector('.key-top-text');
-    if (descDiv) {
-      // If there is a <p>, use it; else, push all child nodes (preserve <b>, <br>)
-      const p = descDiv.querySelector('p');
+
+    // Description (inside .key-top-text)
+    const descContainer = card.querySelector('.key-top-text');
+    let descEl = null;
+    if (descContainer) {
+      // If it contains a <p>, use the <p>
+      const p = descContainer.querySelector('p');
       if (p) {
-        textCell.push(p);
+        descEl = p;
       } else {
-        // Use all childNodes (including <b>, text, <br>, etc)
-        Array.from(descDiv.childNodes).forEach((node) => {
-          // Ignore empty text nodes
-          if (node.nodeType === 3 && !node.textContent.trim()) return;
-          textCell.push(node);
-        });
+        // Otherwise, use the whole .key-top-text div
+        descEl = descContainer;
       }
     }
-    // If textCell ends up empty, leave it as empty string
-    return [img || '', textCell.length ? textCell : ''];
+
+    // Compose the text cell
+    const textCellContent = [];
+    if (titleEl) textCellContent.push(titleEl);
+    if (descEl) textCellContent.push(descEl);
+
+    return [img, textCellContent];
   });
 
-  const cells = [headerRow, ...rows];
-  const table = WebImporter.DOMUtils.createTable(cells, document);
-  element.replaceWith(table);
+  // Compose the table data
+  const tableData = [headerRow, ...rows];
+  const block = WebImporter.DOMUtils.createTable(tableData, document);
+
+  // Replace the original element
+  element.replaceWith(block);
 }

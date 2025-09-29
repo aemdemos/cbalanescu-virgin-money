@@ -1,41 +1,57 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Identify the columns block structure
-  const columnContainer = element.querySelector('.column-container');
-  if (!columnContainer) return;
-  const sl = columnContainer.querySelector('.sl');
-  if (!sl) return;
-  const slList = sl.querySelector('.sl-list');
-  if (!slList) return;
-  const columns = Array.from(slList.querySelectorAll(':scope > .sl-item'));
-
-  // Table header (exactly as required)
+  // Always use the block name as the header row
   const headerRow = ['Columns (columns11)'];
 
-  // Build column cells
-  // Each column is a .sl-item. For resilience, include all its children (elements and non-empty text nodes)
-  const cellsRow = columns.map((col) => {
-    // Collect all meaningful children from each column
-    const children = Array.from(col.childNodes).filter(node => {
-      // Keep non-empty text nodes or element nodes
-      if (node.nodeType === 3) return node.textContent.trim();
-      if (node.nodeType === 1) return true;
-      return false;
-    });
-    // If only one child, use it directly; else, group all
-    if (children.length === 1) {
-      return children[0];
-    } else {
-      return children;
-    }
-  });
+  // Find the main column container
+  const columnContainer = element.querySelector('.column-container');
+  if (!columnContainer) return;
 
-  // Create a columns block table matching the example
+  // Find the .sl-list or fallback to direct children
+  let slList = columnContainer.querySelector('.sl-list');
+  let columnItems = [];
+  if (slList) {
+    columnItems = Array.from(slList.children).filter((el) => el.classList.contains('sl-item'));
+  } else {
+    columnItems = Array.from(columnContainer.children);
+  }
+  if (columnItems.length < 1) return;
+
+  // LEFT COLUMN: card title + image
+  const leftColParts = [];
+  const leftItem = columnItems[0];
+  if (leftItem) {
+    // Title (clone to preserve text)
+    const title = leftItem.querySelector('.cm-rich-text');
+    if (title) leftColParts.push(title.cloneNode(true));
+    // Image (clone to preserve alt and src)
+    const imgSection = leftItem.querySelector('section.cm-image');
+    if (imgSection) {
+      leftColParts.push(imgSection.cloneNode(true));
+    }
+  }
+
+  // RIGHT COLUMN: offer panel(s) + accordion(s)
+  const rightColParts = [];
+  const rightItem = columnItems[1];
+  if (rightItem) {
+    // All .cm-content-panel-container (may be more than one)
+    const panels = rightItem.querySelectorAll('.cm-content-panel-container');
+    panels.forEach(panel => rightColParts.push(panel.cloneNode(true)));
+    // All .cm-accordion (may be more than one)
+    const accordions = rightItem.querySelectorAll('.cm-accordion');
+    accordions.forEach(acc => rightColParts.push(acc.cloneNode(true)));
+  }
+
+  // Compose the main content row, ensuring all text content is included
+  const contentRow = [leftColParts, rightColParts];
+
+  // Build the table
   const table = WebImporter.DOMUtils.createTable([
     headerRow,
-    cellsRow
+    contentRow
   ], document);
 
-  // Replace the original element with the new block table
+  // Replace the original element
   element.replaceWith(table);
 }

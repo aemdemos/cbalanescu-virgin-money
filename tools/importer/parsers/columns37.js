@@ -1,29 +1,27 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Define header as per instructions
-  const headerRow = ['Columns (columns37)'];
-
-  // Find columns by immediate .sl-list > .sl-item
+  // Find the columns list
   const slList = element.querySelector('.sl-list');
-  const items = Array.from(slList ? slList.children : []);
-
-  // Defensive: if no columns found, abort
+  if (!slList) return;
+  // Get direct .sl-item children (each column)
+  const items = Array.from(slList.querySelectorAll(':scope > .sl-item'));
   if (items.length === 0) return;
 
-  // Each column is the full content panel (as per guidelines)
+  // For each column, reference the content panel container (preserves all markup)
   const columns = items.map(item => {
-    // Find the panel container (always present)
     const panel = item.querySelector('.cm-content-panel-container');
-    // Defensive: fallback to item if no panel
-    return panel || item;
+    // Defensive: if missing, create empty cell
+    return panel ? panel : document.createElement('div');
   });
 
-  // Build the cells array for the table
-  const cells = [headerRow, columns];
+  // Build the table: header row, then one row with all columns
+  const headerRow = ['Columns (columns37)'];
+  const contentRow = columns;
 
-  // Create the block table
-  const block = WebImporter.DOMUtils.createTable(cells, document);
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow,
+  ], document);
 
-  // Replace original element with the block table
-  element.replaceWith(block);
+  element.replaceWith(table);
 }

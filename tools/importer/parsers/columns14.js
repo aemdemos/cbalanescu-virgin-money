@@ -1,52 +1,58 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row must be a single cell (single column)
-  const headerRow = ['Columns (columns14)'];
+  // Helper to get direct children by tag name
+  function getDirectChildrenByTag(parent, tag) {
+    return Array.from(parent.children).filter(el => el.tagName.toLowerCase() === tag);
+  }
 
-  // Find the .sl-list container
-  const columnsRoot = element.querySelector('.sl-list');
-  if (!columnsRoot) return;
+  // Find the main content container (sl-list)
+  const slList = element.querySelector('.sl-list');
+  if (!slList) return;
 
-  // Get .sl-item children
-  const slItems = Array.from(columnsRoot.children);
+  // Get all immediate .sl-item children (should be 3)
+  const slItems = Array.from(slList.children).filter(child => child.classList.contains('sl-item'));
 
-  // First column: heading
-  let firstColContent = '';
-  if (slItems[0]) {
-    const heading = slItems[0].querySelector('.cm-rich-text');
-    if (heading) {
-      firstColContent = heading;
-    } else {
-      firstColContent = slItems[0];
+  // Defensive: If not enough items, fallback to replacing with block name only
+  if (slItems.length < 3) {
+    const fallback = WebImporter.DOMUtils.createTable([
+      ['Columns (columns14)'],
+      [element.innerHTML],
+    ], document);
+    element.replaceWith(fallback);
+    return;
+  }
+
+  // First column: the heading (first sl-item)
+  let firstColContent = slItems[0];
+
+  // Second and third columns: each has two icon-title sections
+  // We'll group the two sections in each column into a div for each cell
+  function groupSections(slItem) {
+    // Find all .cm-icon-title sections inside this sl-item
+    const sections = Array.from(slItem.querySelectorAll(':scope > section.cm-icon-title'));
+    if (sections.length === 1) return sections[0];
+    if (sections.length > 1) {
+      const wrapper = document.createElement('div');
+      sections.forEach(sec => wrapper.appendChild(sec));
+      return wrapper;
     }
+    // Defensive: if no section, return the slItem itself
+    return slItem;
   }
 
-  // Second and third columns: .cm-icon-title
-  let secondColSections = [];
-  let thirdColSections = [];
-  if (slItems[1]) {
-    secondColSections = Array.from(slItems[1].querySelectorAll('.cm-icon-title'));
-  }
-  if (slItems[2]) {
-    thirdColSections = Array.from(slItems[2].querySelectorAll('.cm-icon-title'));
-  }
+  const secondColContent = groupSections(slItems[1]);
+  const thirdColContent = groupSections(slItems[2]);
 
-  // Determine max columns for content rows
-  const columns = [firstColContent, secondColSections[0] || '', thirdColSections[0] || ''];
-  // Create the first content row with all three columns
-  const contentRows = [columns];
-  // If there are more icon-titles in second or third column, add another row
-  if (secondColSections[1] || thirdColSections[1]) {
-    contentRows.push([
-      '',
-      secondColSections[1] || '',
-      thirdColSections[1] || ''
-    ]);
-  }
+  // Build the table rows
+  const headerRow = ['Columns (columns14)'];
+  const contentRow = [firstColContent, secondColContent, thirdColContent];
 
-  // Now structure the table as per spec: first row is single cell, then n-column rows
-  const rows = [headerRow, ...contentRows];
+  // Create the table
+  const table = WebImporter.DOMUtils.createTable([
+    headerRow,
+    contentRow,
+  ], document);
 
-  const table = WebImporter.DOMUtils.createTable(rows, document);
+  // Replace the original element
   element.replaceWith(table);
 }

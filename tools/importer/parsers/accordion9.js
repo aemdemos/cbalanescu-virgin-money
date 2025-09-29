@@ -1,44 +1,89 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Accordion block header
+  // Helper to get direct children by tag name
+  function getDirectChildrenByTag(parent, tag) {
+    return Array.from(parent.children).filter(child => child.tagName.toLowerCase() === tag);
+  }
+
   const headerRow = ['Accordion (accordion9)'];
   const rows = [headerRow];
 
-  // Find accordion-list
-  const accordionList = element.querySelector('ul.accordion-list');
-  if (!accordionList) return;
-  
-  // Each immediate <li> in accordion-list is an item
-  const accordionItems = Array.from(accordionList.children).filter(child => child.tagName === 'LI');
+  // Find the main accordion list
+  const ul = element.querySelector('ul.accordion-list');
+  if (!ul) return;
 
-  accordionItems.forEach((item) => {
-    // Title: the clickable link (usually only one per <li>)
-    // Content: the corresponding expandcollapse div
-    const titleLink = item.querySelector('a');
-    const contentDiv = item.querySelector('div.expandcollapse-content');
+  // Only one <li> in this structure (the accordion block)
+  const li = ul.querySelector('li');
+  if (!li) return;
 
-    if (titleLink && contentDiv) {
-      // Only reference the existing elements from the DOM
+  // The clickable accordion title
+  const titleLink = li.querySelector('a.accordion-item');
+  let titleCell = '';
+  if (titleLink) {
+    // Remove any child divs (like the .ec color div)
+    const titleClone = titleLink.cloneNode(true);
+    Array.from(titleClone.querySelectorAll('div')).forEach(div => div.remove());
+    titleCell = titleClone.textContent.trim();
+  }
 
-      // For the title cell, remove aria attributes and classes just for block cleanliness
-      titleLink.removeAttribute('aria-controls');
-      titleLink.removeAttribute('aria-expanded');
-      titleLink.removeAttribute('target');
-      titleLink.removeAttribute('class');
-
-      // Content cell: find main <ol>, but if no <ol>, use the div (handles edge case)
-      let contentCell;
-      const contentOl = contentDiv.querySelector('ol');
-      if (contentOl) {
-        contentCell = contentOl;
-      } else {
-        contentCell = contentDiv;
-      }
-      rows.push([titleLink, contentCell]);
+  // The content div (expanded content)
+  const contentDiv = li.querySelector('div.expandcollapse-content');
+  if (contentDiv) {
+    const ol = contentDiv.querySelector('ol');
+    if (ol) {
+      // Each accordion item is a <li> (sometimes wrapped in .tcs-wrapper)
+      // We'll collect all <li> items, whether direct or wrapped
+      const items = [];
+      // Wrapped <li> items
+      getDirectChildrenByTag(ol, 'div').forEach(wrapper => {
+        const realLi = wrapper.querySelector('li');
+        if (realLi && realLi.textContent.trim()) {
+          realLi.removeAttribute('value');
+          items.push(realLi);
+        }
+      });
+      // Direct <li> children
+      getDirectChildrenByTag(ol, 'li').forEach(liItem => {
+        if (liItem.textContent.trim()) {
+          liItem.removeAttribute('value');
+          items.push(liItem);
+        }
+      });
+      // For each <li>, create a row: [title, content]
+      items.forEach(liItem => {
+        // Title: first sentence or bolded text, fallback to first text node
+        let itemTitle = '';
+        // Try to get bold or link text as title, else first sentence
+        const bold = liItem.querySelector('b, strong');
+        const link = liItem.querySelector('a');
+        if (bold && bold.textContent.trim()) {
+          itemTitle = bold.textContent.trim();
+        } else if (link && link.textContent.trim()) {
+          itemTitle = link.textContent.trim();
+        } else {
+          // Try to get first sentence
+          const text = liItem.textContent.trim();
+          const match = text.match(/^(.+?[\.\?\!])\s/);
+          itemTitle = match ? match[1] : text;
+        }
+        // Content: clone the li and remove the title part
+        const contentClone = liItem.cloneNode(true);
+        // Remove the bold/link from content if used as title
+        if (bold) bold.remove();
+        if (link) link.remove();
+        // Remove the first sentence if used as title
+        if (itemTitle && contentClone.childNodes.length > 0) {
+          const firstNode = contentClone.childNodes[0];
+          if (firstNode.nodeType === Node.TEXT_NODE && firstNode.textContent.trim().startsWith(itemTitle)) {
+            firstNode.textContent = firstNode.textContent.replace(itemTitle, '').trim();
+          }
+        }
+        rows.push([itemTitle, contentClone]);
+      });
     }
-  });
+  }
 
-  // Create the table and replace the original element
-  const block = WebImporter.DOMUtils.createTable(rows, document);
-  element.replaceWith(block);
+  // Create the table and replace the element
+  const table = WebImporter.DOMUtils.createTable(rows, document);
+  element.replaceWith(table);
 }

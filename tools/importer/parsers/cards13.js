@@ -1,39 +1,33 @@
 /* global WebImporter */
 export default function parse(element, { document }) {
-  // Header row for the block
-  const headerRow = ['Cards (cards13)'];
+  // Extract all card sections
+  const sections = Array.from(element.querySelectorAll('section.cm.cm-icon-title'));
+  const rows = [];
 
-  // Extract all card <section>'s in order from the element
-  const cardSections = element.querySelectorAll('section.cm.cm-icon-title');
-
-  // Build rows for each card
-  const rows = Array.from(cardSections).map(section => {
-    // Icon: first img in .header
-    const headerDiv = section.querySelector('.header');
-    const img = headerDiv ? headerDiv.querySelector('img') : null;
-
-    // Text column: Title (h2), Description (first p), CTA (a in second p)
-    const textContent = [];
-    if (headerDiv) {
-      const h2 = headerDiv.querySelector('h2');
-      if (h2) textContent.push(h2);
+  sections.forEach((section) => {
+    // First cell: icon image
+    const img = section.querySelector('.header img');
+    // Second cell: text content
+    const textDiv = document.createElement('div');
+    const title = section.querySelector('.header h2');
+    if (title) {
+      const h = document.createElement('h3');
+      h.textContent = title.textContent;
+      textDiv.appendChild(h);
     }
-    const contentDiv = section.querySelector('.content');
-    if (contentDiv) {
-      const ps = contentDiv.querySelectorAll('p');
-      if (ps[0]) textContent.push(ps[0]);
-      if (ps[1]) {
-        const a = ps[1].querySelector('a');
-        if (a) textContent.push(a);
-      }
+    const content = section.querySelector('.content');
+    if (content) {
+      const ps = content.querySelectorAll('p');
+      if (ps[0]) textDiv.appendChild(ps[0].cloneNode(true));
+      if (ps[1]) textDiv.appendChild(ps[1].cloneNode(true));
     }
-    return [img, textContent];
+    rows.push([img ? img : '', textDiv]);
   });
 
-  // Create table and replace element
-  const table = WebImporter.DOMUtils.createTable([
-    headerRow,
-    ...rows
-  ], document);
-  element.replaceWith(table);
+  // Header row: must be a single column (no colspan)
+  // Use WebImporter.DOMUtils.createTable to ensure correct structure
+  const headerRow = ['Cards (cards13)'];
+  const tableRows = [headerRow, ...rows];
+  const block = WebImporter.DOMUtils.createTable(tableRows, document);
+  element.replaceWith(block);
 }
