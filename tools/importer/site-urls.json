@@ -1,0 +1,39 @@
+{
+  "originUrl": "https://virginmoney.com.au",
+  "aborted": false,
+  "urls": [
+    {
+      "url": "https://virginmoney.com.au/",
+      "source": "MANUAL",
+      "targetPath": "/",
+      "id": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "source": "MANUAL",
+      "targetPath": "/bank-and-save",
+      "id": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "source": "MANUAL",
+      "targetPath": "/credit-card",
+      "id": "c8bcf026fdf90359448f304d08ad001f7d9461a7"
+    }
+  ],
+  "lastCrawled": "MANUAL",
+  "crawlOptions": {
+    "timeout": 10000,
+    "inclusionPatterns": [],
+    "exclusionPatterns": [],
+    "limit": 100,
+    "sameDomain": true,
+    "keepHash": false,
+    "strategy": "manual",
+    "strategiesAttempted": [
+      "MANUAL"
+    ]
+  },
+  "extractionErrors": [],
+  "errorCountMessage": "none"
+}
