@@ -1,0 +1,1665 @@
+{
+  "fragments": [
+    {
+      "name": "nav",
+      "path": "/nav",
+      "totalBoxes": 1,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-00-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]"
+        },
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-00-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-00-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]"
+        }
+      ],
+      "styles": {
+        "height": 90,
+        "background": "rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box"
+      }
+    },
+    {
+      "name": "footer",
+      "path": "/footer",
+      "totalBoxes": 1,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-35-6eaecc75367f81e565aca302ec4c45ef10df66ef",
+          "xpath": "/html[1]/body[1]/div[1]/footer[1]/div[1]/p[1]"
+        },
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-22-576870337abf0aa323a1fe75a33f2b359b589104",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/p[1]"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-34-6eaecc75367f81e565aca302ec4c45ef10df66ef",
+          "xpath": "/html[1]/body[1]/div[1]/footer[1]/div[1]/p[1]"
+        }
+      ],
+      "styles": {
+        "background": "rgb(72, 74, 80) none repeat scroll 0% 0% / auto padding-box border-box"
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Cards",
+      "cluster": 1,
+      "source": "Cards",
+      "target": "Cards (cards1)",
+      "key": "cards1",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-10-6ec3022caf75ee9e0bce8a8529eb9f6ce39c9248",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[8]"
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 2,
+      "source": "Cards",
+      "target": "Cards (cards2)",
+      "key": "cards2",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-21-b37f1a8eb75b2c984f082f65104d95910e372269",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[19]"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-22-b37f1a8eb75b2c984f082f65104d95910e372269",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[19]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 3,
+      "source": "Columns",
+      "target": "Columns (columns3)",
+      "key": "columns3",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-10-360c4fd78fcbbef85411ca356803989e2d10dcb2",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[8]"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-11-fa99877c9535650d09c3c7f240a2548f805398a2",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[9]"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-12-e42000e4dd30da86fe8f6b03b8fcc6286e08fe9c",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[10]"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-13-ed97e8a720dc9e1476bbdbc1ab3bc8a7b647bd46",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[11]"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-14-fe2cf5c76e0397396f402dcdad07193d1e69e774",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[12]"
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 4,
+      "source": "Hero",
+      "target": "Hero (hero4)",
+      "key": "hero4",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-02-c6e03a84787610d7ed1046ca3e094e790926fa61",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/section[1]",
+          "section": "section-2"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-02-c6e03a84787610d7ed1046ca3e094e790926fa61",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/section[1]",
+          "section": "section-2"
+        }
+      ]
+    },
+    {
+      "name": "header",
+      "cluster": 5,
+      "source": "Header",
+      "target": "Header (header5)",
+      "key": "header5",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-00-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]",
+          "section": "section-1"
+        },
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-00-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]",
+          "section": "section-1"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-00-3dad6f17c5ac52449dfbc495c4fa129caa1ae780",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/header[1]",
+          "section": "section-1"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 6,
+      "source": "Columns",
+      "target": "Columns (columns6)",
+      "key": "columns6",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-27-61b231e5fd493b5bb620cb48ff908996b31caf50",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[23]/div[2]"
+        }
+      ]
+    },
+    {
+      "name": "Accordion",
+      "cluster": 7,
+      "source": "Accordion",
+      "target": "Accordion (accordion7)",
+      "key": "accordion7",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-33-60735d0c821cb842371fb903046fb9ec475364b6",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/section[1]",
+          "section": "section-2"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-32-60735d0c821cb842371fb903046fb9ec475364b6",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/section[1]",
+          "section": "section-2"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 8,
+      "source": "Columns",
+      "target": "Columns (columns8)",
+      "key": "columns8",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-23-53e270553aa2bf7a31e8f8d7457b229fc4587012",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[20]"
+        }
+      ]
+    },
+    {
+      "name": "Accordion",
+      "cluster": 9,
+      "source": "Accordion",
+      "target": "Accordion (accordion9)",
+      "key": "accordion9",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-30-bfead0ca5d9d84879dc783e45f630fe9431831d4",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/section[2]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 10,
+      "source": "Columns",
+      "target": "Columns (columns10)",
+      "key": "columns10",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-13-ed97e8a720dc9e1476bbdbc1ab3bc8a7b647bd46",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[11]"
+        }
+      ]
+    },
+    {
+      "name": "Cards (no images)",
+      "cluster": 11,
+      "source": "Cards",
+      "target": "Cards (cardsNoImages11)",
+      "key": "cardsNoImages11",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-20-6aa372a9fd40a540f51d64ce5164a750e3c26edd",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[17]/div[2]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 12,
+      "source": "Columns",
+      "target": "Columns (columns12)",
+      "key": "columns12",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-28-79afb6d0801509ec85cb7d131a781f51f26836a2",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[26]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 13,
+      "source": "Columns",
+      "target": "Columns (columns13)",
+      "key": "columns13",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-10-360c4fd78fcbbef85411ca356803989e2d10dcb2",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[8]",
+          "section": "section-3"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 14,
+      "source": "Columns",
+      "target": "Columns (columns14)",
+      "key": "columns14",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-34-b558645ba738777ebc11daff269c55c6fbc6b0fa",
+          "xpath": "/html[1]/body[1]/div[1]/footer[1]/div[1]/nav[1]",
+          "section": "section-5"
+        },
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-21-16866aa8219f9dcf5aea51b466a22f474e07d972",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/nav[1]",
+          "section": "section-5"
+        },
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-33-b558645ba738777ebc11daff269c55c6fbc6b0fa",
+          "xpath": "/html[1]/body[1]/div[1]/footer[1]/div[1]/nav[1]",
+          "section": "section-5"
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 15,
+      "source": "Hero",
+      "target": "Hero (hero15)",
+      "key": "hero15",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-25-c44b299f91f662a53e55bb9cb5826c0a61bad8d7",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[23]",
+          "section": "section-2"
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 16,
+      "source": "Hero",
+      "target": "Hero (hero16)",
+      "key": "hero16",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-02-13e9b0ff22e7a510d4a82bbbb9c44b113300b6c6",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/section[1]/a[1]/div[2]",
+          "section": "section-2"
+        }
+      ]
+    },
+    {
+      "name": "unknown",
+      "cluster": 17,
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-18-2b1370f691e6a18c5bbf8098fc39fb7ee052a4de",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/section[1]/div[3]"
+        }
+      ],
+      "key": "unknown17"
+    },
+    {
+      "name": "Hero",
+      "cluster": 18,
+      "source": "Hero",
+      "target": "Hero (hero18)",
+      "key": "hero18",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-15-63bb0ef00c44d7825257266ee5b50051e211581f",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[13]",
+          "section": "section-7"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 19,
+      "source": "Columns",
+      "target": "Columns (columns19)",
+      "key": "columns19",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-07-3d406e1bdb4ec9082c164b4b9d777a5aae53196d",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[5]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 20,
+      "source": "Columns",
+      "target": "Columns (columns20)",
+      "key": "columns20",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-04-e519ba27f229bc8b3694ac90979a7f7c9a012d90",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[2]"
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 21,
+      "source": "Cards",
+      "target": "Cards (cards21)",
+      "key": "cards21",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-17-5ef26acf6c16ffdd5953370c03971a857771bafd",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/section[1]/div[2]"
+        }
+      ]
+    },
+    {
+      "name": "Hero",
+      "cluster": 22,
+      "source": "Hero",
+      "target": "Hero (hero22)",
+      "key": "hero22",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-01-47d0e0989ef02dcd1cad66b726d3915f522c7481",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/section[1]/a[1]/div[1]",
+          "section": "section-6"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 23,
+      "source": "Columns",
+      "target": "Columns (columns23)",
+      "key": "columns23",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-14-38de0148e509755b8f16e70c68f6c856bed9056d",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[12]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 24,
+      "source": "Columns",
+      "target": "Columns (columns24)",
+      "key": "columns24",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-23-f1d932b05e8fee5db7723d0406e4d042406f3788",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[21]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 25,
+      "source": "Columns",
+      "target": "Columns (columns25)",
+      "key": "columns25",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-17-4d492a21be34fb218041483a5abb12385554bc11",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[15]"
+        }
+      ]
+    },
+    {
+      "name": "Columns",
+      "cluster": 26,
+      "source": "Columns",
+      "target": "Columns (columns26)",
+      "key": "columns26",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-06-2bdd109677b9824b73c8bbb433a465629ed3544a",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[4]"
+        }
+      ]
+    },
+    {
+      "name": "Accordion",
+      "cluster": 27,
+      "source": "Accordion",
+      "target": "Accordion (accordion27)",
+      "key": "accordion27",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+          "uuid": "81eebf42-20-c2bf90ec311a9c27e708ac365393a0a2deb25ca0",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/section[2]/div[1]/div[1]/div[1]/div[1]/section[1]",
+          "section": "section-2"
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 28,
+      "source": "Cards",
+      "target": "Cards (cards28)",
+      "key": "cards28",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-05-7cf91dfb74948d1a7f438f66373bfaec53181a9b",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[3]"
+        }
+      ]
+    },
+    {
+      "name": "Accordion",
+      "cluster": 29,
+      "source": "Accordion",
+      "target": "Accordion (accordion29)",
+      "key": "accordion29",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+          "uuid": "2baf12b0-31-bfead0ca5d9d84879dc783e45f630fe9431831d4",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/section[2]"
+        }
+      ]
+    },
+    {
+      "name": "Cards",
+      "cluster": 30,
+      "source": "Cards",
+      "target": "Cards (cards30)",
+      "key": "cards30",
+      "instances": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+          "uuid": "c8bcf026-06-43a9a982c85a68cb22b1befab9d8ee6162087bb7",
+          "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[4]"
+        }
+      ]
+    }
+  ],
+  "outliers": [
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-01-d72caa907dc624342957e5b0bf1f3f76c63d7ee7",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-03-61573594fc462e703231a7f0b6e3cd56235d1d89",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[1]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-04-0d11eaa664f9551fc2e650a278b91281084adbb6",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[2]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-06-43a9a982c85a68cb22b1befab9d8ee6162087bb7",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[4]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-08-d5bb89749d8e10093ab92a3f262b237db70097c5",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[6]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-09-76ca48a7a0eb28464e90d76da22e9dd5f33f176d",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[7]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-11-fa99877c9535650d09c3c7f240a2548f805398a2",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[9]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-12-e42000e4dd30da86fe8f6b03b8fcc6286e08fe9c",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[10]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-14-fe2cf5c76e0397396f402dcdad07193d1e69e774",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[12]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-15-63bb0ef00c44d7825257266ee5b50051e211581f",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[13]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-16-97484fe18180d3f40069100ba11e39fc0b507055",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[14]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-18-849642e6f51e451c8358ffd1093ebe99d9a0bc6b",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[16]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-19-b957d89f863e93ba87310ef0eca5d975141928be",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[17]",
+      "section": "section-4"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-20-067e9194b45cf847c3b0829e43da8060dd3f1de3",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[18]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-22-53e270553aa2bf7a31e8f8d7457b229fc4587012",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[20]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-24-e38633bc51f957201a633fbe6587fad99227781c",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[22]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-26-53f21b367310ab27a323dcb0d03c16fc79536037",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[24]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-27-b9086716357e0c09f5f891f2397bbdfe83cb5c18",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[25]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-29-69fc208c72f47f904cb7e20390e84fbc33fd75f5",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[27]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-30-e31b6581eeb76f6d730d4cd493df2300c4c06e1e",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[28]"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-32-ee39ad4f30e650fc9bbb915304c728d856438de9",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]",
+      "section": "section-2"
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "urlHash": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e",
+      "uuid": "2baf12b0-35-6eaecc75367f81e565aca302ec4c45ef10df66ef",
+      "xpath": "/html[1]/body[1]/div[1]/footer[1]/div[1]/p[1]",
+      "section": "section-5"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-03-838d15dd249f977320b27f627f903a3c97af8c7e",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[1]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-05-59c59f8f95d4213705d9ce91b506e420a31c075d",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[3]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-07-0e4d9db2985bb834c9b8e607f061abc2b2943ad5",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[5]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-08-27aac4e046a1432c97b6624b417b60c46695389f",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[6]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-09-aba9873c7ff67d20e82e37541909d50540a1358f",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[7]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-11-76714cf79373ac42b0d0e0ca2aa30dddd12e6bb8",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[9]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-12-332f6b493446e710a2f3915bcd43ba0c674b3b9a",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[10]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-13-3e734fae2721f258fe1ba5eb3089d4a88a8e21d3",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[11]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-15-6c1aab22e023c3a7342cac3fa527a82ced467115",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[13]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-16-7ea9a8bbdcb67f22eb2d889379e4d24f712bdad4",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[1]/main[1]/div[14]"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-19-8cfe7fac050ce6af717fed242e7da52d2bd6133a",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]/section[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+      "section": "section-2"
+    },
+    {
+      "url": "https://virginmoney.com.au/",
+      "urlHash": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562",
+      "uuid": "81eebf42-22-576870337abf0aa323a1fe75a33f2b359b589104",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/footer[1]/div[1]/p[1]",
+      "section": "section-5"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-01-d72caa907dc624342957e5b0bf1f3f76c63d7ee7",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[3]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-03-61573594fc462e703231a7f0b6e3cd56235d1d89",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[1]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-04-0d11eaa664f9551fc2e650a278b91281084adbb6",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[2]",
+      "section": "section-7"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-05-7cf91dfb74948d1a7f438f66373bfaec53181a9b",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[3]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-07-3d406e1bdb4ec9082c164b4b9d777a5aae53196d",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[5]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-08-d5bb89749d8e10093ab92a3f262b237db70097c5",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[6]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-09-76ca48a7a0eb28464e90d76da22e9dd5f33f176d",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[7]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-16-97484fe18180d3f40069100ba11e39fc0b507055",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[14]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-17-4d492a21be34fb218041483a5abb12385554bc11",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[15]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-18-849642e6f51e451c8358ffd1093ebe99d9a0bc6b",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[16]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-19-f6eab1c50e1a09193e7003a05cddeed5a4a69a13",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[17]/div[1]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-21-067e9194b45cf847c3b0829e43da8060dd3f1de3",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[18]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-24-f1d932b05e8fee5db7723d0406e4d042406f3788",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[21]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-25-e38633bc51f957201a633fbe6587fad99227781c",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[22]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-26-3177b624e7ece07b1f753540f23e3544c2f77c15",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[23]/div[1]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-28-53f21b367310ab27a323dcb0d03c16fc79536037",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[24]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-29-b9086716357e0c09f5f891f2397bbdfe83cb5c18",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[4]/article[1]/main[1]/div[25]"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-31-ee39ad4f30e650fc9bbb915304c728d856438de9",
+      "xpath": "/html[1]/body[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]",
+      "section": "section-2"
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "urlHash": "c8bcf026fdf90359448f304d08ad001f7d9461a7",
+      "uuid": "c8bcf026-34-6eaecc75367f81e565aca302ec4c45ef10df66ef",
+      "xpath": "/html[1]/body[1]/div[1]/footer[1]/div[1]/p[1]",
+      "section": "section-5"
+    }
+  ],
+  "pages": [
+    {
+      "url": "https://virginmoney.com.au/",
+      "differences": [
+        {
+          "change_type": "deletion",
+          "text": "Jump to main navigation Jump to main content Search Type a minimum of three characters then press UP or DOWN on the keyboard to navigate the autocompleted search results Search button Search for \u2018 \u2019 Close navigation Bank & Save Credit Cards Home Loans Reward Home Loans Superannuation Customer Employer Car Insurance Home and Contents Insurance Manage Data Sharing VIrgin Money Go Account Bundled with a Boost Saver Account Virgin Money Australia Bank & Save Get rewarded for everyday banking, saving and spending, and earn Virgin Money Points on every purchase, direct debit and BPAY payment 1 when you open an Virgin Money Go Account and linked Boost Saver. That\u2019s more like it. Find out more Banking and beyond Bank & Save Transactions Boost Saver Grow Saver Credit Cards Compare credit cards Rewards & benefits Tools & calculators Home Loans NEW Compare home loans Refinance Interest rates & fees Insurance Home insurance Car insurance Life insurance Superannuation Individual super Employer super Fee comparison tool Help & Support Contact us Rate change hub FAQs"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Access"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Your"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Denied"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "5K Bonus Points bank-warming gift If receiving gifts is your love language, you\u2019re going to be very happy here. When you open a new Virgin Money Go Account with a linked Boost Saver, we\u2019ll welcome you with 5,000 bonus Virgin Money Points! 14 That equals a $20 gift voucher from one of our many retail partners, including JB HiFi, Amazon, Woolworths & Bunnings. Simply make (at least) one settled debit card purchase, direct debit or BPAY payment in the first 30 days. Offer ends 31/01/26. New customers only. Open an account The Directory Got a question? There\u2019s a good chance you\u2019ll find the answer here. Get the answers you need Stay up to date with all things interest rate related, including tips and tools to plan for rate rises. Find the latest information here All of our contact info by product so you can get directly to the right help. Find the details you need If your financial circumstances have changed or you\u2019re having difficulty managing your financial commitments, we can help. Read more about how we can support you Your one-stop destination for all money-related lifestyle content. Read the latest articles here If at any time you\u2019re not satisfied with our products, services, staff or our complaint handling process, we want you to tell us. Get in touch Bank on the fly Our easy-to-use app brings your Virgin Money everyday accounts, savings accounts and credit cards into your own hands, wherever you are. Download the app today. Read our most recent blogs Read more This information is of a general nature only and does not take into account your personal financial situation, needs or objectives. Before switching providers we recommend you compare all policy features and find out if cancellation fees apply. Exclusions and conditions apply. New approved customers only. Find information on our terms and conditions or about Virgin Money Target Market Determinations . As we"
+        },
+        {
+          "change_type": "insertion",
+          "text": "You"
+        },
+        {
+          "change_type": "equal",
+          "text": " don"
+        },
+        {
+          "change_type": "deletion",
+          "text": "\u2019t know your personal needs and objectives we can\u2019t advise if this insurance will suit you. Consider your needs and our Key Fact Sheets , Product Disclosure Statements , Target Market Determination and Financial Services Guide before deciding whether to buy our product. Prepared by Virgin Money Australia, a division of Bank of Queensland Limited ABN 32 009 656 740 Australian Credit Licence AFSL 244616, the issuer of the transaction and savings accounts. Information provided is of general nature only and does not take into account your personal financial situation, needs or objectives. As we don\u2019t know your financial needs, we can\u2019t advise whether the products will suit you and prior to making any decision you should obtain and consider the relevant terms and conditions of each product before making any decision about whether to acquire or continue to hold it. For full terms and conditions, including information on eligibility criteria and fees and charges click here . Virgin Money Australia, a division of Bank of Queensland Limited ABN 32 009 656 740, Australian Credit Licence 244616 (\u201cBOQ\u201d), promotes and distributes the Virgin Money Credit Cards (\"Credit Cards\"). National Australia Bank Limited ABN 12 004 044 937 Australian Credit Licence 230686 (\u201cNAB\u201d) is the credit provider and issuer of the Credit Cards. NAB has acquired the business relating to these products from Citigroup Pty Limited (ABN 88 004 325 080, AFSL and Australian Credit Licence 238098) (\u201cCiti\u201d) and has appointed Citi to assist to administer the Credit Cards. Our/us/we means NAB unless the context otherwise requires it. BOQ does not and will not guarantee or otherwise support NAB\u2019s obligations under the contracts or agreements connected with the Credit Cards. Prepared by Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869 (\u2018Virgin Money\u2019). Virgin Money Super is a plan in the Mercer Super Trust ABN 19 905 422 981. Virgin Money Super is issued by Mercer Superannuation (Australia) Limited (MSAL) ABN 79 004 717 533 AFSL 235906 as trustee of the Mercer Super Trust. For more information about Virgin Money Super, please refer to the PDS which is available free of charge on our website or by calling the Customer Care team on 1300 652 770. Home Loans: Virgin Money (Australia) Pty Limited ABN 75 103 478 897 promotes and distributes the companion account and the home loans as the authorised representative and credit representative of the issuer and credit provider, Bank of Queensland Limited ABN 32 009 656 740, Australian Credit Licence/AFSL 244 616 (the 'Lender'). The Lender"
+        },
+        {
+          "change_type": "equal",
+          "text": "'"
+        },
+        {
+          "change_type": "deletion",
+          "text": "s standard credit assessment criteria apply. See fees and charges that may be payable. Interest rates quoted are indicative only, and are subject to change without notice. Lifebroker comparison service: Virgin Money (Australia) Pty Limited ABN 75 103 478 897, authorised representative No 280884 of Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869 ( Virgin Money ) has partnered with Lifebroker Pty Ltd (AFS Licence number: 400209) to help you compare a range of Life and Income Protection Insurance policies. Virgin Money earns a commission from Lifebroker for each customer that purchases a policy through the website or contact centre. Lifebroker do not compare all life insurers or policies in the market. For more information about the services provided by Virgin Money (Australia) in relation to the Lifebroker comparison service, please see the Financial Services Guide Existing Virgin Life Insurance and Virgin Income Protection policyholders: From the 1st April 2021, TAL Life Limited ABN 70 050 109 450 AFSL 237848 of Level 16, 363 George Street, Sydney NSW 2000 (TAL Life) will no longer be issuing new Virgin Life Insurance and Virgin Income Protection benefits and Hallmark General Insurance Company Ltd ABN 82 008 477 647 AFSL 243478 of Level 5, 66 St Georges Terrace, Perth, WA, 6000 (Hallmark General Insurance) will no longer be issuing the Involuntary Unemployment Cover which is a benefit available within Virgin Income Protection. Existing policies and claims will continue to be administered under agreement with the insurers, TAL Life and for Involuntary Unemployment Cover, Hallmark General Insurance. Virgin Income Protection and Virgin Life Insurance are promoted by Virgin Money (Australia) Pty Limited ABN 75 103 478 897, authorised representative No 280884 of Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869, and distributed by TAL Direct Pty Limited ABN 39 084 666 017 AFSL 243260 (TAL Direct). TAL Direct has been authorised under an arrangement with the insurers to enter into, vary or cancel insurance cover on behalf of the insurers as if it were the insurers. For information about the services provided Virgin Money (Australia) and TAL Direct in relation to Virgin Life Insurance and Virgin Income Protection, please see the Financial Services Guide . Promoter: This information relates to Virgin Home and Contents Insurance policies, Car Insurance polices and Roadside Assistance membership issued by Auto and General Insurance Company Ltd purchased before 2 October 2025. Virgin Car Insurance and Virgin Home and Contents Insurance are promoted by Virgin Money (Australia) Pty Limited (\u201cVirgin Money\u201d) as the Authorised Representative No. 280884 of Virgin Money Financial Services Pty Ltd ABN 51 113 285 395 AFSL 286869. Car, Home and Contents: Auto & General Services Pty Ltd (ABN 61 003 617 909; AFSL 241411) arranges the insurance on behalf of the product issuer, Auto & General Insurance Company Limited (ABN 42 111 586 353; AFSL 285571). Virgin Money receives a commission which is a percentage of your premium \u2013 ask us for more details before we provide you with any services on this product. 14. Welcome Offer Criteria: The Virgin Money Go Account comes bundled with the Virgin Money Boost Saver. New Virgin Money Go Account customers will receive 5,000 Bonus Virgin Money Points when they make one (1) debit card purchase, direct debit or BPAY payment from their Virgin Money Go Account in the first 30 days from account opening. Debit card purchases must settle in the first 30 days from account opening (not pending). Cash withdrawals, deposits, refunds, reversals or credits to the Virgin Money Go Account, Pay Someone payments and internal transfers are excluded. For customers who open a Virgin Money Go Account jointly with another person, the Bonus Points will be split and evenly allocated to both joint account holders of that account once the Welcome Offer Criteria"
+        },
+        {
+          "change_type": "insertion",
+          "text": "t"
+        },
+        {
+          "change_type": "equal",
+          "text": " have "
+        },
+        {
+          "change_type": "deletion",
+          "text": "been met. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. A new customer is any person who does not currently or has not previously held a Virgin Money Go Account or Virgin Money Grow Saver. Offer ends 31 January 2026. For further information on the Virgin Money Rewards Program refer to our terms and conditions . Things you need to know You will earn 8 Virgin Money Points for any settled debit card purchases (not pending), direct debits and BPAY payments from your Virgin Money Go Account. For customers who open a Virgin Money Go Account jointly with another person, the points will be split and evenly allocated to both joint account holders of that account. For further information refer"
+        },
+        {
+          "change_type": "insertion",
+          "text": "permission"
+        },
+        {
+          "change_type": "equal",
+          "text": " to "
+        },
+        {
+          "change_type": "deletion",
+          "text": "our Virgin Money Rewards terms and conditions . The Virgin Money Boost Saver variable Base interest rate plus Bonus interest rate is made up of: \u2022 Base interest rate of 0"
+        },
+        {
+          "change_type": "insertion",
+          "text": "access \"http://virginmoney"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "05% p.a. and \u2022 Bonus interest rate of 5.00% p"
+        },
+        {
+          "change_type": "insertion",
+          "text": "com"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "a. if Monthly Criteria is met in the previous calendar month. The Bonus interest rate applies up to a combined balance of $250,000 "
+        },
+        {
+          "change_type": "insertion",
+          "text": "au/\" "
+        },
+        {
+          "change_type": "equal",
+          "text": "on "
+        },
+        {
+          "change_type": "deletion",
+          "text": "all your Boost Saver held in the same name as your Virgin Money Go"
+        },
+        {
+          "change_type": "insertion",
+          "text": "this"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Account"
+        },
+        {
+          "change_type": "insertion",
+          "text": "server"
+        },
+        {
+          "change_type": "equal",
+          "text": ". "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Monthly Criteria will be met when both the following conditions are met: \u2022Deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 Make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14-17 years of age. For more information, visit the Rates & Fees section. The Virgin Money Boost Saver Highest Variable Interest Rate is made up of: \u2022 Base Interest Rate of 0"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Reference #18.960c0317"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "05% p"
+        },
+        {
+          "change_type": "insertion",
+          "text": "1759214364"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "a.; \u2022 Bonus"
+        },
+        {
+          "change_type": "insertion",
+          "text": "d4fce63c"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "Interest Rate of 5"
+        },
+        {
+          "change_type": "insertion",
+          "text": "https://errors"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "00% p"
+        },
+        {
+          "change_type": "insertion",
+          "text": "edgesuite"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "a. if Monthly Criteria is met in the previous month; and \u2022 Notice Interest Rate of 0"
+        },
+        {
+          "change_type": "insertion",
+          "text": "net/18"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "30% p"
+        },
+        {
+          "change_type": "insertion",
+          "text": "960c0317"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "a. if the Lock Saver Feature is enabled. 32 days\u2019 advance notice period applies to access funds when the Lock Saver Feature is enabled. The Bonus Rate applies up to a combined total balance of $250,000 across all Boost Savers that are held in the same name. Monthly Criteria will be met when both the following conditions are met: \u2022 deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments on your Go Account that settle in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14 -17 years of age. For more information, visit the Rates & Fees section. Offer of 10,000 Velocity Frequent Flyer Points (Velocity Points) is available to eligible customers who purchase a new combined Virgin Home and Contents Insurance policy and have not previously received points for that same policy (not available for renewals). This offer is valid for new policy purchases from 1 March 2022 \u2013 26 March 2024 and is subject to change or removal at the discretion of Virgin Money. Offer is not valid to customers who purchased through Compare the Market, Choosi, iSelect, Finder, Canstar, Infochoice, Mozo or the Virgin Money app. A valid Velocity membership number must be provided at the time of application. If you\u2019re not a Velocity member you can join Velocity for free . Maximum of 10,000 Velocity Points per policy. In order to receive the Points, the policy holder\u2019s name must match the Velocity name and account number provided. Eligible policy holders will be entitled to up to 2 x 5,000 Velocity Points subject to the following conditions: the policy holder will be entitled to 5,000 Velocity Points if the insurance is held for at least 65 days (credited to the eligible Velocity Account up to 90 days after the policy has been purchased); the policy holder will be entitled to the remaining 5,000 Bonus Velocity points if the policy is still active 6 months after purchase (credited to the eligible Velocity Account up to 10 months after the policy was purchased). The Velocity Membership Terms and Conditions apply . This offer cannot be used in conjunction with any other Virgin Money Home and Contents Insurance offers, is not redeemable for cash and is not transferrable. Discount applies to the first year's premium paid for new Virgin Home and or Contents Insurance initiated online on or after 30 March 2017. The 30% discount applies to Combined Home & Contents Insurance, 15% discount applies to Home Insurance only or Contents Insurance only. We reserve the right to change the offer without notice. Base rate premiums subject to change. The discount does not apply to any renewal offer of insurance. Discount applies only to the insurance portion of the premium before any fees, charges or levies that may apply. This may impact the full extent of the discount. Up to 100,000 bonus Velocity Points offer is available to new approved Virgin Australia Velocity Flyer Card account holders who apply by 30 June 2022. 25,000 bonus Velocity Points will be awarded for every month $1,500 or more is spent on Eligible Transactions for the first 4 months from card approval. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, BPAY payments, purchases of foreign currency and travellers cheques, transactions made in operating a business, fees and charges such as interest and ATM charges and government related transactions. Government related transactions include transactions with government or semi-government entities, or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). See Velocity Rewards Program for High Flyer and Flyer Cardholders Terms and Conditions for full details and definition. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page or by calling 1300 771 634 and indicating that you would like the Flyer Card 100,000 Velocity Points offer. Points will be credited to the Primary Cardholders Velocity Account up to 60 days after the qualifying purchases. Velocity membership Terms and Conditions apply . This offer can't be used in conjunction with other Virgin Australia Velocity Flyer Point promotions or offers. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). Your total balance transfers may not exceed 80% of your credit limit. The balance transfer interest rate applies to balances transferred with this offer for the period shown, from the date the balance transfer is processed. At the end of the balance transfer period, the interest rate on any outstanding transferred balance will revert to the interest rate for cash advances, currently 21"
+        },
+        {
+          "change_type": "insertion",
+          "text": "1759214364"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "69% p.a. for the Virgin Money Low Rate Card. Interest rates are variable and subject to change. The interest rates are current as at 1 September 2022. This offer is valid until 30 November 2022. Please note that unless advertised otherwise, you are not entitled to any interest free days whilst you have a balance transfer. This means that all spend will be charged interest at the applicable ongoing purchase rate. If we approve your credit card application, the Balance Transfer offer will be available for up to 90 days from the date your application is approved. Velocity Points are not issued on balance transfers. View more information about balance transfers . Welcome Offer Criteria: The Virgin Money Go Account comes bundled with the Virgin Money Boost Saver. New Virgin Money Go Account customers will receive 5,000 Bonus Virgin Money Points when they make one (1) debit card purchase, direct debit or BPAY payment from their Virgin Money Go Account in the first 30 days from account opening. Debit card purchases must settle in the first 30 days from account opening (not pending). Cash withdrawals, deposits, refunds, reversals or credits to the Virgin Money Go Account, Pay Someone payments and internal transfers are excluded. For customers who open a Virgin Money Go Account jointly with another person, the Bonus Points will be split and evenly allocated to both joint account holders of that account once the Welcome Offer Criteria have been met. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. A new customer is any person who does not currently or has not previously held a Virgin Money Go Account or Virgin Money Grow Saver. Offer ends 31 January 2026. For further information on the Virgin Money Rewards Program refer to our terms and conditions ."
+        },
+        {
+          "change_type": "insertion",
+          "text": "d4fce63c"
+        }
+      ],
+      "similarity_score": 0.04972478450044728
+    },
+    {
+      "url": "https://virginmoney.com.au/bank-and-save",
+      "differences": [
+        {
+          "change_type": "deletion",
+          "text": "Jump to main navigation Jump to main content Search Type a minimum of three characters then press UP or DOWN on the keyboard to navigate the autocompleted search results Search button Search for \u2018 \u2019 Close navigation Bank & Save Credit Cards Home Loans Reward Home Loans Superannuation Customer Employer Car Insurance Home and Contents Insurance Manage Data Sharing Back to Home Home Bank & Save Bank and save accounts VIRGIN MONEY BANK ACCOUNTS From everyday accounts that earn you points on every purchase 1 to high-interest savings accounts that earn you extra interest when you lock funds away and bonus interest if you meet the Monthly Criteria, all managed with clever features in the Virgin Money app. Open an account Bank accounts for every money maker, spender & saver Standalone bank & save account Your everyday transaction account with no monthly account keeping fees and everyday points-earning ability. Apply now Learn more Bundled bank & save account Our high-achieving, highest interest-earning savings account. 34 Comes linked with a Go Account. Apply now Learn more Standalone saving account The \u2018serious about savings\u2019 account. All saving, no spending. Apply now Learn more Can\u2019t decide? Compare accounts Run the numbers See rates and fees Your 5K Bonus Points bank-warming gift If receiving gifts is your love language, you\u2019re going to be very happy here. Open a new Virgin Money Go Account and we\u2019ll welcome you with 5,000 bonus Virgin Money Points. Simply make a minimum of one settled debit card purchase, direct debit or BPAY payment in the first 30 days. 5 5K points = $20 gift voucher from one of our many retail partners, including JB HiFi, Amazon, Woolworths and Bunnings. Offer ends 31/01/26. New customers only. Open an account Get to the points Earn Virgin Money Points for spending, saving and sometimes just existing. Earn You\u2019ll earn Virgin Money Points in so many ways with your Virgin Money Go Account. Earn"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Access"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "8 points for every eligible purchase, direct debit and BPAY payment you make. 1"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Denied"
+        },
+        {
+          "change_type": "equal",
+          "text": " You "
+        },
+        {
+          "change_type": "deletion",
+          "text": "may get offers from brands such as Menulog or Pet Circle, to earn Bonus Points when you shop with our retail partners. Book your hotel stay via the Virgin Money app for a one-way trip to Bonus Points town. Bring a friend to the party and receive 5,000 bonus Virgin Money Points when they take out their first Virgin Money Go Account! 13 Learn more ways to earn Redeem Get to the really fun part \u2013 spending those points on sweet, sweet rewards. Convert a minimum of 500 points to money in your account. Choose an eligible purchase, direct debit and BPAY payment (made in the last 90 days) to be paid for with the points equivalent to the purchase value. Redeem points for flights with Virgin Airlines. 38 Or transfer points to our travel program partners like Velocity Frequent Flyer. 37 Gift points to other Virgin Money customers\u2019 Rewards accounts or redeem points for gift cards. Learn more ways to redeem We\u2019ve literally put banking into your hands Our banking app is half handheld Finance Bro and half cheerleader, encouraging you to build better money habits and save like a pro. Easily track and categorise your spending, stay on top of upcoming bills, and receive clever insights with real-time alerts to help you build good money habits. Open accounts right in the app and take control of your spending and bills with ease. Track, organise, and customise your finances \u2013 all in one place, all on your terms! Enable the Lock Saver Feature on your Boost Saver or Grow Saver to earn an additional 0.30% p.a. interest. 35 Perfect for long-term goals when you "
+        },
+        {
+          "change_type": "equal",
+          "text": "don't "
+        },
+        {
+          "change_type": "deletion",
+          "text": "need immediate access to your money. (Pssst. You\u2019ll need to give us a 32 days\u2019 heads up before you can access your funds once it\u2019s enabled.) Put saving on autopilot by switching on the Round Up feature 6 , which rounds every Go Account transaction up to the nearest dollar and deposits the difference into your Boost Saver or Grow Saver account. Set up your digital wallet in the Virgin Money app to pay with a tap of your compatible devices and wearables. Found a garage sale bargain or owe a mate for dinner? With Pay ID and Osko it\u2019s never been easier or faster to pay anyone on the spot. Download the Virgin Money app Passed the vibe check? Open your new bank accounts online in minutes Open an account Learn more about our accounts The everyday account that earns points for every purchase, direct debit and BPAY payment. 1 Learn more The \u2018serious about savings\u2019 account. Learn more Our high-achieving, highest interest-earning savings account when you switch on the Lock Saver Feature and meet our Monthly Criteria. 34 Learn more See our account rates, limits and charges in detail. Learn more Who\u2019s eligible for a Virgin Money bank account? To apply for an account you must: Be over 14 years of age Be an Australian resident with an Australian residential address Must "
+        },
+        {
+          "change_type": "equal",
+          "text": "have "
+        },
+        {
+          "change_type": "deletion",
+          "text": "an Australian mobile number Be the account holder and applying in your personal name(s) (the Account cannot be for a deceased estate, business, superannuation or trust and cannot be completed by an executor, administrator, attorney appointed under a power of attorney, or personal legal representative). Have at least one form of valid ID such as an Australian driver's licence. If we are unable to identify you, your application will need to be completed at Australia Post Ready for a new bank account? Download the Virgin Money app, or join online , and sign up in minutes. Literally. (Have your favourite type of Australian ID handy.) Want to chat? Call us For Go, Boost Saver or Grow Saver accounts you can call us on 13 81 51 In-app chat Profile > Help & Support > Contact Us If we are not available right away or it\u2019s after hours, we\u2019ll respond as soon as we\u2019re back on deck. Operating hours Monday to Friday: 8am \u2013 8pm AEST Saturday: 9am \u2013 5pm AEST FAQs Can I open a Virgin Money bank account online? Absolutely! You can apply for a new transaction or savings bank account easily through the app, or join online \u2013 it just takes six simple steps and you\u2019re done. If you\u2019ve opened a Go transaction account, we\u2019ll send you a Virgin Money Visa debit card in the mail, and you\u2019re ready to start earning points towards epic rewards. What do you need to open a bank account? To open a new bank account with us you\u2019ll need to be over 14 years of age, have an address in Australia, and send us at least one form of Australian ID \u2013 so we can confirm you are who you are. This could be something like your drivers\u2019 licence or passport. Then you\u2019re good to go. Join through the Virgin Money app, or open an account online . How do I open a joint bank account with Virgin Money? When you apply to open an account online or through the Virgin Money app, you can select if you\u2019re apply for a joint account. We\u2019ll then send a message to the person you want to open an account with, and the account will be opened once they\u2019ve provided their details, including identification details. We\u2019ll let you know when your account is open and ready to go. Can I open a bank account without going into the bank? Yes! You can apply for a bank account either through the Virgin Money mobile app or website without ever having to go to a physical bank. You will need to download our app to manage your bank account. What is Virgin Money Rewards? Virgin Money Rewards is our loyalty program designed with you in mind. Our goal is to recognise and reward you for who you are, and to help you create better money habits. It\u2019s about giving you a rewarding banking experience every day, not just someday. The Virgin Money Boost Saver variable interest rate is made up of a standard rate of 0.05% p.a. plus a bonus rate of 4.15% p.a. when the Monthly Criteria are met (outlined in the full terms and conditions ) on the Virgin Money Go Account in the previous month. The Virgin Money Grow Saver variable interest rate is made up of a standard rate of 0.05% p.a. plus a bonus rate of 1.95% p.a. that is applied when you make at least 1 deposit into your Grow Saver and make no more than 1 withdrawal during that month. The Virgin Money mobile app is compatible with Android\u2122 and iOS, minimum platform requirements apply. Android is a trademark of Google LLC. IOS is a trademark or registered trademark of Cisco in the U.S. and other countries and is used under license. Participation in the Virgin Money Rewards Program is subject to Virgin Money Rewards Terms and Conditions . Prepared by Virgin Money Australia, a division of Bank of Queensland Limited ABN 32009656740 Australian Credit Licence AFSL 244616, the issuer of the transaction and savings accounts. Information provided is of general nature only and does not take into account your personal financial situation, needs or objectives. As we don\u2019t know your financial needs, we can\u2019t advise whether the products will suit you and prior to making any decision you should obtain and consider the relevant terms and conditions of each product before making any decision about whether to acquire or continue to hold it. For full terms and conditions, including information on eligibility criteria and fees and charges visit forms-and-important-information . Things you need to know You will earn 8 Virgin Money Points for any settled debit card purchases (not pending), direct debits and BPAY payments from your Virgin Money Go Account. For customers who open a Virgin Money Go Account jointly with another person, the points will be split and evenly allocated to both joint account holders of that account. For further information refer to our Virgin Money Rewards terms and conditions . The Virgin Money Boost Saver variable Base interest rate plus Bonus interest rate is made up of: \u2022 Base interest rate of 0.05% p.a. and \u2022 Bonus interest rate of 4.15% p.a. if Monthly Criteria is met in the previous calendar month. The Bonus interest rate applies up to a combined balance of $250,000 on all your Boost Saver's held in the same name as your Virgin Money Go Account. Monthly Criteria will be met when both the following conditions are met: \u2022 Deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 Make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14-17 years of age. For more information visit the Rates & Fees section. Subject"
+        },
+        {
+          "change_type": "insertion",
+          "text": "permission"
+        },
+        {
+          "change_type": "equal",
+          "text": " to "
+        },
+        {
+          "change_type": "deletion",
+          "text": "the terms and conditions of the Virgin Money Rewards program available here . The Grow Saver Bonus Interest Rate is unlocked for any calendar month where the below criteria are met during that month: - Make at least 1 deposit into your Grow Saver; and - Make no more than 1 withdrawal (including any internal transfers or Pay Someone transfers) out of your Grow Saver Welcome Offer Criteria: The Virgin Money Go Account comes bundled with the Virgin Money Boost Saver. New Virgin Money Go Account customers will receive 5,000 Bonus Virgin Money Points when they make one (1) debit card purchase, direct debit or BPAY payment from their Virgin Money Go Account in the first 30 days from account opening. Debit card purchases must settle in the first 30 days from account opening (not pending). Cash withdrawals, deposits, refunds, reversals or credits to the Virgin Money Go Account, Pay Someone payments and internal transfers are excluded. For customers who open a Virgin Money Go Account jointly with another person, the Bonus Points will be split and evenly allocated to both joint account holders of that account once the Welcome Offer Criteria have been met. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. A new customer is any person who does not currently or has not previously held a Virgin Money Go Account or Virgin Money Grow Saver. Offer ends 31 January 2026. For further information on the Virgin Money Rewards Program refer to our terms and conditions . Round-ups are transfers that you can elect to activate on your Go Accounts. By enabling this feature on your Go Account, funds are transferred from the selected Go Account to your nominated savings account each time you make a debit card transaction. The amount of the transfer will be up to the nearest $1 of the amount that the transaction takes place. Round-up transactions will not take place if by making the transaction your account would be Overdrawn. You can disable the round-up feature through the Mobile app at any time. Visit Apple Support for a list of compatible Apple Pay devices. Samsung Pay is only compatible with selected Samsung devices. For full list of compatible devices visit Samsung . Google Pay is a trademark of Google LLC. Google Pay is currently only available on the Virgin Money Go account. It is not available on Virgin Money credit cards. For customers who open a Virgin Money Go Account jointly with another person, points earned on purchases, direct debits or BPAY payments will be split and evenly allocated to both joint account holders of that account. Any Bonus Points you earn through meeting conditions of a special offer that is made to you will not be split and the full amount of Bonus Points will be allocated to you. Virgin Money Australia is a division of Bank of Queensland Limited, the issuer of the transaction and savings accounts. Under the Australian Government\u2019s Financial Claims Scheme (FCS), the Financial Claims Scheme limit of $250,000 applies to the total sum of deposits held by an account holder under one banking licence. As part of the BOQ Group, deposits held with Virgin Money (Australia), Bank of Queensland, Me Bank and Bank of Queensland Specialist are covered by the FCS to the maximum limit of $250,000 per account holder. For example, if you have a VMA deposit account and a BOQ deposit account, the FCS applies to the combined value of these accounts to the maximum limit of $250,000. From time to time we may offer you the ability to earn Bonus Points or other benefits with selected partners. Specific offer terms will be set out individual conditions at the time the offer is made to you. Earn 5,000 Bonus Virgin Money Points when you introduce a Successful Referral who meets the Welcome Offer Criteria . Welcome Offer Criteria is subject to change. A successful referral must also: \u00b7 have not, at any time previously held a Virgin Money Go Account or Virgin Money Grow Saver; \u00b7 have used a unique referral link that is provided by Virgin Money as part of the Refer a Friend program which was shared by you. Bonus Points will be allocated within 5 business days to you and your friend once your friend meets the eligibility criteria. While there is no limit to the number of friends you can refer under our Refer-a-Friend program, you will only receive Bonus Points for the first five (5) successful referrals you made in any month. A successful referral only qualifies you to receive one lot of 5,000 Bonus Points, irrespective of whether the person opens a single or a joint account. This offer cannot be used in conjunction with any other offer codes. IMPORTANT: Please share your referral link responsibly and only refer close friends and family who might be genuinely interested in a Virgin Money Go Account. Specifically, you must not \u201cspam\u201d other individuals to open a Virgin Money Go Account via unsolicited email, direct mail, newsgroups, message boards, or any other means for purposes of referring a friend. You will only make direct referrals without using any merchant site, keyword bids, black hat SEO, paid advertisements (e.g., pay per click), or other similar methods. You must comply with all applicable laws and regulations, including without limitation those related to the Spam Act 2003 (Cth), trademark, and privacy laws. We reserve the right to disqualify you from participating in any referral promotions if, in our reasonable opinion, you violated any of these terms, and you will forfeit all Virgin Money Points that have been allocated to your Points balance. We reserve the right to amend or withdraw this offer at any time without notice, provided that any Points that you have earned prior to such change or withdrawal will be subject to the terms that were in effect at the time it was earned. You may redeem your points for a cash amount in AUD to be credited to your Virgin Money Go Account, Virgin Money Boost Saver or Virgin Money Grow Saver. Once the funds have been credited to an account they cannot be reversed to Points. Pay with points is available for eligible transactions made within the last 90 days. The full list of eligible transactions can be found in the Virgin Money Rewards Terms and Conditions . You must have sufficient points to be able to redeem the total value of the purchase through Pay with points. If you redeem your points, we will credit a cash amount equal to the selected transaction into your Virgin Money Go Account. Once the funds have been credited to an account, they cannot be reversed to points. Gift Cards or Vouchers are administered by Ascenda Australia Pty Ltd and are subject to the Ascenda Terms and Conditions . Requested Gift Cards are subject to separate terms and conditions made available at the time of requesting the Gift Card. Once points have been redeemed for a Gift Card, the Gift Card cannot be returned. Expiry dates will apply. Subject to any conditions we may specify from time to time, you can transfer any Virgin Money Points that you hold in your Rewards Account to another person's Reward Account, provided they have registered for the Virgin Money app. Offer available while stocks last and limited to one case per household. Valid for new Virgin Wines customers only. Cannot be used in conjunction with any other Virgin Wines offer. $138 savings and free delivery applies to mixed case only \u2013 worth $258. RRP of the reds case is $ 249 with savings of $129. RRP of the whites case is $251.97 with savings of $131.97. RRP is as provided by the wineries at time of printing this offer. If a wine becomes unavailable, a similar wine of equal or greater value will be supplied. If you are unhappy with the substitute you can request a refund. Wine chiller bag is available until sold out. All wines are covered by our guarantee - If you don\u2019t like a wine for any reason Virgin Wines will refund you in accordance with our terms and arrange to collect the wine at our cost. No sale contract is formed, and your order is not accepted until we dispatch the product(s) to you. You must be 18 years of age or over to order wine from this site. Wine will not be delivered to persons under the age of 18 years. We do not deliver to parcel lockers and unfortunately, due to rising delivery costs and current liquor laws we are unable to deliver to the Northern Territory. Most orders are fulfilled within a week, but please allow a few extra days if you live in a remote area. Our full terms and Conditions of sale apply to this offer and are available here: www.virginwines.com.au/terms or call us on 1300 712 870. \u00a9 2021 Wine People Pty Ltd. LIQP770016550. Level 2, 407 Elizabeth Street, Surry Hills, NSW 2010. All rights reserved. Standard 12 month membership prices start from $1,872 (more information on memberships is available on Virgin Active\u2019s website ). Partner terms and condition apply. To view terms and conditions relating to this corporate offer, and Virgin Active\u2019s standard 12 month membership term . Earn 5,000 bonus Virgin Money Points when you open your first Virgin Money Go Account and meet the Welcome Bonus criteria: (2) make at least one debit card transaction that is settled (not pending), direct debit or BPAY payment on your Virgin Money Go Account in the first 30 days of account opening; and (3) you must a person who does not currently or has not previously held a Virgin Money Go Account or Virgin Money Grow Saver By opening an a new Virgin Money Go Account and using the unique referral link that was shared by the referrer as part of the Refer a Friend program, and provided you meet the Welcome Bonus Criteria, the person who referred you may be eligible to earn a referral bonus of 5,000 Virgin Money Points. If you already have the Virgin Money app, you can open a new Go Account via the app and manually enter the referral code shared by the referrer. For customers who open a Virgin Money Go Account jointly with another person under the Refer a Friend program, we will only award one lot of 5,000 Bonus Points and the points will be split and evenly allocated to both joint account holders of that account once the successful referral criteria have been met. This offer cannot be used in conjunction with any other offer codes. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. Hotel booking made through the Virgin Money Rewards Program are operated by Ascenda Australia Pty Ltd and subject to Ascenda\u2019s additional Booking and Travel Terms . Individual hotel bookings may be subject to further terms and conditions stipulated by Ascenda\u2019s travel partners. These additional terms will be made available to you by Ascenda at the time the relevant booking is made. Points earned from making a Hotel Booking will be credited to your account within 24 hours after the completion of your hotel stay. Virgin Money Australia is a division of Bank of Queensland Limited, the issuer of the transaction and savings accounts. Under the Australian Government\u2019s Financial Claims Scheme (FCS), the Financial Claims Scheme limit of $250,000 applies to the total sum of deposits held by an account holder under one banking licence. As part of the BOQ Group, deposits held with Virgin Money (Australia), Bank of Queensland, Me Bank and Bank of Queensland Specialist are covered by the FCS to the maximum limit of $250,000 per account holder. For example, if you have a VMA deposit account and a BOQ deposit account, the FCS applies to the combined value of these accounts to the maximum limit of $250,000. Virgin Money reserves the right to amend or withdraw these offers at any time without notice. To be eligible for points you must "
+        },
+        {
+          "change_type": "equal",
+          "text": "access"
+        },
+        {
+          "change_type": "deletion",
+          "text": " the partner site through the link provided in the application. GST, delivery costs and products that are returned do not contribute to the purchase amount that is eligible for points. These offers cannot be used on conjunction with any other offer. Excludes voucher codes, gift cards, cashback and coupon deals. Gift Card value correct as at 30 September 2022 and subject to change without notice. Gift Cards or Vouchers are administered by Ascenda Australia Pty Ltd and are subject to the Ascenda Terms and Conditions. Requested Gift Cards are subject to separate terms and conditions made available at the time of requesting the Gift Card. Once points have been redeemed for a Gift Card, the Gift Card cannot be returned. Expiry dates will apply. Welcome Offer Criteria: Offer ends 31 May 2022. New Virgin Money Go Account customers will receive 20,000 bonus Virgin Money Points when they spend $100 or more in the first 30 days on their debit card (settled transactions, not pending) from account opening. Excludes direct debits and BPAY payments. For customers who open a Virgin Money Go Account jointly with another person, we will only allocate one lot of 20,000 bonus points and the points will be split and evenly allocated to both joint account holders of that account once the Criteria have been met. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. Offer cannot be used in conjunction with any other offer. For further information on the Virgin Money Rewards Program refer to our terms and conditions . New Referees will receive 5,000 Bonus Virgin Money Points when they open their first Virgin Money Go Account before 31 January 2026 and meet the Welcome Offer Criteria: (1) Make one (1) debit card purchase, direct debit or BPAY payment from their Virgin Money Go Account in the first 30 days from account opening. Purchases must settle in the first 30 days from account opening (not pending); and (2) Must not currently or have not previously held a Virgin Money Go Account or Virgin Money Grow Saver (3) Cash withdrawals, deposits, refunds, reversals or credits to the Virgin Money Go Account, Pay Someone payments and internal transfers are excluded. By opening an a new Virgin Money Go Account and using the unique referral link that was shared by the referrer as part of the Refer a Friend program, and provided you met the Welcome Offer Criteria, the person who referred you may be eligible to earn a referral bonus of 5,000 Virgin Money Points. If you already have the Virgin Money app, you can open a new Go Account via the app and manually enter the referral code shared by the referrer. For customers who open a Virgin Money Go Account jointly with another person under the Refer a Friend program, we will only award one lot of 5,000 Bonus Points and the points will be split and evenly allocated to both joint account holders of that account once the successful referral criteria have been met. This offer cannot be used in conjunction with any other offer codes. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. For further information on the Virgin Money Rewards Program refer to our terms and conditions at https"
+        },
+        {
+          "change_type": "insertion",
+          "text": " \"http"
+        },
+        {
+          "change_type": "equal",
+          "text": "://virginmoney.com.au/"
+        },
+        {
+          "change_type": "deletion",
+          "text": "virgin-money-app/in-app/terms"
+        },
+        {
+          "change_type": "insertion",
+          "text": "bank"
+        },
+        {
+          "change_type": "equal",
+          "text": "-and-"
+        },
+        {
+          "change_type": "deletion",
+          "text": "conditions. ATM access is free via the Redi Teller Network, Bank Of Queensland and the 4 major retail banks. Although Virgin Money doesn\u2019t charge domestic ATM withdrawals fees, some financial institutions or independent ATM operators may charge fees for using their ATMs and there are fees for balance enquiries and international ATMs. Other Fees and Charges apply, refer to Deposit Account Limits, Fees and Charges Redemption value is correct as at 1 August 2022 and subject to change without notice. Gift Cards or Vouchers are administered by Ascenda Australia Pty Ltd and are subject to the Ascenda Terms and Conditions . Requested Gift Cards are subject to separate terms and conditions made available at the time of requesting the Gift Card. Once points have been redeemed for a Gift Card, the Gift Card cannot be returned. Expiry dates will apply. The Virgin Money Grow Saver highest Variable Interest Rate of 2.30% p.a. is made up of \u2022 a Base Interest Rate of 0.05% p.a.; \u2022 a Bonus Interest Rate of 1.95% p.a. if Monthly Criteria is met in that month; plus \u2022 a Notice Interest Rate of 0.30% p.a. if the Lock Saver Feature is enabled. Monthly Criteria is met if you: \u2022 Make at least 1 deposit into your Grow Saver Account in that month; and \u2022 Make no more than 1 withdrawal (including any internal transfers or Pay Someone"
+        },
+        {
+          "change_type": "insertion",
+          "text": "save\" on"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "transfers) out"
+        },
+        {
+          "change_type": "insertion",
+          "text": "this"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "of your Grow Saver"
+        },
+        {
+          "change_type": "insertion",
+          "text": "server"
+        },
+        {
+          "change_type": "equal",
+          "text": ". "
+        },
+        {
+          "change_type": "deletion",
+          "text": "For more information visit the Rates & Fees section. The Virgin Money Boost Saver Highest Variable Interest Rate is made up of: \u2022 Base Interest Rate of 0.05%p.a.; \u2022 Bonus Interest Rate of 4"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Reference #18"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "15%p"
+        },
+        {
+          "change_type": "insertion",
+          "text": "960c0317"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "a. if Monthly Criteria is met in the previous month; and \u2022 Notice Interest Rate of 0"
+        },
+        {
+          "change_type": "insertion",
+          "text": "1759214366"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "30%p.a if the Lock Saver Feature is enabled. 32 days\u2019 advance notice period applies to access funds when the Lock Saver Feature is enabled. The Bonus Rate applies up to a combined total balance of $250,000 across all Boost Saver's that are held in the same name. Monthly Criteria will be met when both the following conditions are met: \u2022 Deposit at least $1,000 into your Go Account from another financial institution in the previous calendar month; and \u2022 Make at least 5 settled debit card purchases (not pending), direct debits or BPAY payments on your Go Account"
+        },
+        {
+          "change_type": "insertion",
+          "text": "d4fcf021"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "that settle in the previous calendar month from your Go Account. Monthly Criteria is waived for customers between 14-17 years of age. For more information visit the Rates & Fees section . TBC 32 day notice disclaimer Transferring points into a travel program is subject to the Virgin Money Rewards terms and Conditions found here . You can transfer and convert your Virgin Money Points to a Travel Loyalty Program participant that you are an active member of. Points cannot be transferred to another person or to an account held jointly with another person. Travel Loyalty Program\u2019s loyalty points cannot be converted to Virgin Money Points. Minimum and maximum redemption rates are set by us and vary across each program. Points transferred to a Travel Loyalty Program will be governed and subject to the Travel Loyalty Program terms and conditions and once transferred cannot be reversed. You can redeem points for flights and hotels available in the Rewards Hub. Flight and Hotel bookings made through the Virgin Money Rewards Program are operated by Ascenda Australia Pty Ltd and subject to Ascenda\u2019s additional Booking and Travel Terms. Individual flight and hotel bookings may be subject to further terms and conditions stipulated by Ascenda\u2019s travel partners. These additional terms will be made available to you by Ascenda at the time the relevant booking is made. Cancellations and changes to bookings may not be possible and additional fees may apply which are disclosed in the Rewards Hub. Under the Australian Government\u2019s Financial Claims Scheme (FCS), certain deposits are protected up to a limit of $250,000 for each account holder. The FCS limit of $250,000 applies to the total sum of all Virgin Money Australia bank accounts, including accounts you hold with BOQ, ME Bank, and BOQ Specialist. Visit this website ( "
+        },
+        {
+          "change_type": "equal",
+          "text": "https://"
+        },
+        {
+          "change_type": "deletion",
+          "text": "www.apra"
+        },
+        {
+          "change_type": "insertion",
+          "text": "errors"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "gov"
+        },
+        {
+          "change_type": "insertion",
+          "text": "edgesuite"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "au"
+        },
+        {
+          "change_type": "insertion",
+          "text": "net"
+        },
+        {
+          "change_type": "equal",
+          "text": "/"
+        },
+        {
+          "change_type": "deletion",
+          "text": "financial-claims-scheme-0 ) for further information on the institutions and types of accounts covered"
+        },
+        {
+          "change_type": "insertion",
+          "text": "18"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "insertion",
+          "text": "960c0317.1759214366.d4fcf021"
+        }
+      ],
+      "similarity_score": 0.10978506871806291
+    },
+    {
+      "url": "https://virginmoney.com.au/credit-card",
+      "differences": [
+        {
+          "change_type": "deletion",
+          "text": "Jump to main navigation Jump to main content Search Type a minimum of three characters then press UP or DOWN on the keyboard to navigate the autocompleted search results Search button Search for \u2018 \u2019 Close navigation Bank & Save Credit Cards Home Loans Reward Home Loans Superannuation Customer Employer Car Insurance Home and Contents Insurance Manage Data Sharing Back to Home Home Credit Cards Virgin Money Credit Cards - Imagine the possibilities Credit Cards Virgin Money Australia Credit Cards Points. Rewards. Perks. Low rates. No annual fees. Check out our credit cards today (with balance transfer options available too). Apply for a credit card Applications for a new Virgin Money Credit Card will be temporarily unavailable from 26 October 2025. Please check back 24 November 2025. Any new or saved applications need to be submitted before 26 October 2025 and any incomplete applications will be cancelled. Please review the Terms and Conditions before applying. Meet our credit cards Our fastest Velocity Points earning card, with the highest flying perks. Apply now Learn more Keep your interest rate low, but your expectations high. Apply now Learn more Turn everyday spending into someday holidaying, by earning Velocity Points. Apply now Learn more Save on interest and pay no annual fee \u2013 ever. Apply now Learn more Rewards and more, anytime and anywhere, with Virgin Money Points. Apply now Learn more Our latest credit card offers Select your Virgin Money card based on which offer takes your fancy \u2013 or learn more about each card below. Virgin Australia Velocity High Flyer Credit Card Bonus Velocity Points offer Up to 100k bonus Velocity Points Earn up to 100,000 bonus Velocity Points 20 40,000 bonus Velocity Points will be awarded for each month $3,500 or more is spent on eligible purchases for the first 2 months from approval and 20,000 Velocity Points awarded when you keep your card open for over 12 months. New and approved customers only. Up to 100 Bonus Status Credits each year when you purchase and fly on eligible Virgin Australia flights. 5 A $129 Virgin Australia Gift Voucher each year. 17 Apply now Find out more Virgin Australia Velocity High Flyer Credit Card details Annual Fee $329 Annual fees are subject to change. Balance Transfer Rate 1 0% p.a. for 12 months with a 2% balance transfer fee. Reverts to cash advance rate. You will be charged interest on retail purchases while you have a balance transfer. Interest Free Days 8 Up to 44 days on retail purchases You will be charged interest on retail purchases while you have a balance transfer. Purchase Rate 20.74% p.a. Cash Advance Rate 20.99% p.a. Points Earn 10 Earn 1 Velocity Point per $1 spent on Eligible Transactions up to $8,000 each statement period, 0.5 Points per $1 spent thereafter. Earn 2 extra Velocity Points per $1 spent directly with Virgin Australia. 41 Bonus Points Earn up to 100,000 bonus Velocity Points 20 40,000 bonus Velocity Points will be awarded for each month $3,500 or more is spent on eligible purchases for the first 2 months from approval and 20,000 Velocity Points awarded when you keep your card open for over 12 months. New and approved customers only. Flight Benefit Up to 100 Bonus Status Credits 5 each year when you purchase and fly on an eligible Virgin Australia flight. $129 Virgin Australia Gift Voucher, each year 17 , when you make a retail purchase in the 2 months prior to requesting the voucher. 2 complimentary Single Entry Lounge passes each year. 33 Visa Privileges 15 Visa Signature Credit Limit Range $15,000 to $100,000 Minimum Income $75,000 You must pay your balance in full each month (including balances transferred) to receive interest free days. More about rates and fees More about balance transfers Virgin Australia Velocity Flyer Credit Card Bonus Velocity Points offer Up to 70k bonus Velocity Points + more Earn up to 70,000 bonus Velocity Points 16 25,000 bonus Velocity Points will be awarded for each month $1,500 or more is spent on eligible purchases for the first 2 months from approval and 20,000 Velocity Points awarded when you keep your card open for over 12 months. New and approved customers"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Access"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "only. 0% p.a. for 12 months on balance transfers with 2% balance transfer fee. 1 Reverts"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Denied"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "to cash advance rate. "
+        },
+        {
+          "change_type": "equal",
+          "text": "You "
+        },
+        {
+          "change_type": "deletion",
+          "text": "will be charged interest on retail purchases while you have a balance transfer. $129 Virgin Australia Gift Voucher, each year 17 Apply now Find out more Virgin Australia Velocity Flyer Credit Card details \u2013 Bonus Velocity Points offer Annual Fee $149. Annual fees are subject to change. Balance Transfer Rate 1 0% p.a. for 12 months with a 2% balance transfer fee. Reverts to cash advance rate. You will be charged interest on retail purchases while you have a balance transfer. Interest Free Days 8 Up to 44 days on retail purchases You will be charged interest on retail purchases while you have a balance transfer. Purchase Rate 20.74% p.a. Cash Advance Rate 20.99% p.a. Points Earn 10 Earn 0.66 Velocity Points per $1 spent on Eligible Transactions up to $1,500 each statement period, 0.5 Points per $1 spent thereafter. Earn 1 extra Velocity Point for every $1 spent directly with Virgin Australia. 41 Bonus Points Earn up to 70,000 bonus Velocity Points 16 25,000 bonus Velocity Points will be awarded for each month $1,500 or more is spent on eligible purchases for the first 2 months from approval and 20,000 Velocity Points awarded when you keep your card open for over 12 months. New and approved customers only. Flight Benefit $129 Virgin Australia Gift Voucher, each year 17 ,when you make a retail purchase in the 2 months prior to requesting the voucher. Visa Privileges 15 Visa Platinum Credit Limit Range $6,000 to $100,000 Minimum Income $35,000 You must pay your balance in full each month (including balances transferred) to receive interest free days. More about rates and fees More about balance transfers Balance Transfer offer 0% p.a. for 24 months on balance transfers witha 1% balance transfer fee. 1 Reverts to cash advance rate. You will be charged interest on retail purchases while you have a balance transfer. $129 Virgin Australia Gift Voucher, each year 17 Apply now Find out more Virgin Australia Velocity Flyer Credit Card details \u2013 Balance Transfer offer Annual Fee $149. Annual fees are subject to change. Balance Transfer Rate 1 0% p.a. for up to 24 months with a 1% balance transfer fee. Reverts to cash advance rate. You will be charged interest on retail purchases while you have a balance transfer. Interest Free Days 8 Up to 44 days on retail purchases You will be charged interest on retail purchases while you have a balance transfer. Purchase Rate 20.74% p.a. Cash Advance Rate 20.99% p.a. Points Earn 10 Earn 0.66 Velocity Points per $1 spent on Eligible Transactions up to $1,500 each statement period, 0.5 Points per $1 spent thereafter. Flight Benefit $129 Virgin Australia Gift Voucher, each year 17 ,when you make a retail purchase in the 2 months prior to requesting the voucher. Visa Privileges 15 Visa Platinum Credit Limit Range $6,000 to $100,000 Minimum Income $35,000 You must pay your balance in full each month (including balances transferred) to receive interest free days. More about rates and fees More about balance transfers Virgin Money Anytime Rewards Credit Card Bonus Virgin Money Points offer Up to 80k bonus Virgin Money Points + more Earn up to 80,000 bonus Virgin Money Points 13 (when you spend $3,000 or more in the first 3 months from card approval). 0% p.a. for 12 months on balance transfers. 1 Reverts to cash advance rate. You will be charged interest on retail purchases while you have a balance transfer. Apply now Find out more Virgin Money Anytime Rewards Credit Card details \u2013 Bonus Virgin Money Points offer Annual Fee $149 Balance Transfer Rate 1 0% p.a. for 12 months. Reverts to cash advance rate. Please note, you will be charged interest on retail purchases while you have a balance transfer. Interest Free Days 8 Up to 55 days on retail purchases Please note, you will be charged interest on retail purchases while you have a balance transfer. Purchase Rate 19.99% p.a. Cash Advance Rate 20.99% p.a. Points Earn 29 1 Virgin Money Point per $1 spent on Eligible Transactions, uncapped Bonus Points Receive 80,000 bonus Virgin Money Points 13 when you spend $3,000 or more on eligible purchases in your first 3 months from card approval. Visa Privileges 15 Visa Platinum Credit Limit Range $6,000 to $100,000 Minimum Income $35,000 You must pay your balance in full each month (including balances transferred) to receive interest free days. More about rates and fees More about balance transfers Balance Transfer Offer 0%p.a. for 24 months on balance transfers 1 with a 1% balance transfer fee. Apply now Find out more Virgin Money Anytime Rewards Credit Card details \u2013 Balance Transfer offer Annual Fee $149 Balance Transfer Rate 1 0% p.a. for 24 months with a 1% balance transfer fee. Reverts to cash advance rate. Please note, you will be charged interest on retail purchases while you have a balance transfer. Interest Free Days 8 Up to 55 days on retail purchases Please note, you will be charged interest on retail purchases while you have a balance transfer. Purchase Rate 19.99% p.a. Cash Advance Rate 20.99% p.a. Points Earn 29 1 Virgin Money Point per $1 spent on Eligible Transactions, uncapped Visa Privileges 15 Visa Platinum Credit Limit Range $6,000 to $100,000 Minimum Income $35,000 You must pay your balance in full each month (including balances transferred) to receive interest free days. More about rates and fees More about balance transfers Low Rate Credit Card Balance Transfer offer 0% p.a. interest for 15 months + more 0% p.a. for 15 months on balance transfers 1 . Reverts to cash advance rate. You will be charged interest on retail purchases while you have a balance transfer. Low ongoing variable purchase rate of 12.99% p.a. Apply now Find out more Low Rate Credit Card details Annual Fee $99 Balance Transfer Rate 1 0% p.a. for 15 months on balance transfers with no balance transfer fees. 1 Reverts to cash advance rate. Please note, you will be charged interest on retail purchases while you have a balance transfer. Interest Free Days 8 Up to 55 days on retail purchases Please note, you will be charged interest on retail purchases while you have a balance transfer. Purchase Rate 12.99% p.a. Cash Advance Rate 21.69% p.a. Credit Limit Range $2,000 to $100,000 Minimum Income $35,000 You must pay your balance in full each month (including balances transferred) to receive interest free days. More about rates and fees More about balance transfers No Annual Fee Credit Card Purchase Rate Offer 0% p.a. interest for 6 months on purchases + more 0% p.a. for 6 months on purchases. 2 Reverts to ongoing purchase rate. Earn Virgin Money Bonus Points 4 via the Virgin Money app and partner offers. Apply now Find out more No Annual Fee Credit Card details Annual Fee $0 Interest Free Days 8 Up to 55 days on retail purchases. Please note, you will be charged interest on retail purchases while you have a balance transfer. Purchase Rate 0% p.a. for 6 months on purchases. 2 Reverts to 19.99% p.a. Cash Advance Rate 20.99% p.a. Credit Limit Range $2,000 to $100,000 Minimum Income $25,000 You must pay your balance in full each month (including balances transferred) to receive interest free days. More about rates and fees More about balance transfers Still can\u2019t decide which credit card is right for you? Take our credit card quiz to find the card with the features that best suit your lifestyle. Take the quiz More about Virgin Money Credit Cards The Virgin Money app keeps you in the know, with a spend tracker, alerts and clever insights into your credit card spend \u2013 and more. Use your phone or wearable to pay from your credit card account, with Apple Pay 36 , Samsung Pay 37 or Google Pay. 40 Take advantage of round-the-clock access to the Visa Platinum Concierge Service. 14 It's the next best thing to having your very own personal assistant and all it takes is a phone call or a mouse click, anytime, anywhere in the world. Pay for anything from coffee to a set of monogrammed bath towels with a simple wave of your Virgin Money Credit Card anywhere with a Visa payWave sensor. 9 Enjoy first choice of seats to some of the most sought-after events in Australia. No queuing, no waiting, no disappointment. Go to some of the biggest concerts, hottest shows and most exciting sports events, before pre-sales and before they go on sale to the general public. Learn more Want to know more? Everything you need to know to set up and use your Virgin Money Credit Card. Sorted. Learn more Take advantage of all the perks of your Virgin Money Credit Card. Learn more How a balance transfer can help manage credit card repayments. Learn more See what you could save on interest by transferring your balance. Learn more Quick links Manage your application Compare offers Rates & fees FAQs Contact us Forms & important information Target Market Determinations Want to chat? Call us Call us on 13 37 39 Operating hours Monday to Friday: 8am - 8pm AEST Saturday: 9am \u2013 5pm AEST FAQs What is a credit card? A credit card is a way to get \u2018credit\u2019 from a bank, or in more simple terms borrow money from a bank up to a set limit. You can use a credit card the same way you would use a debit card, but you\u2019ll need to remember to pay off the minimum amount each month by the set due date. With many credit cards you can also earn rewards or cashback on accepted purchases. How do credit cards work? A credit card gives you access to money (or \u2018credit\u2019) up to an agreed limit with your bank. You will receive a bill each month for what you have spent. As long as you pay the minimum amount required off before the due date each month, you will always have access up to your agreed credit limit. How does credit card interest work? The interest incurred on your credit card is charged when you "
+        },
+        {
+          "change_type": "equal",
+          "text": "don"
+        },
+        {
+          "change_type": "deletion",
+          "text": "\u2019t pay off your full balance by the set due date you can find on your credit card statements. How much interest you\u2019ll pay will depend on the type of card you have, how much you have spent and when you make your repayments. Most credit cards also have an annual charge which is separate to credit card interest. What is a good credit score? Generally a score between 670-739 is considered \u2018good\u2019. 740-800 is considered very good and 800+ is considered excellent. We will determine your credit limit when we apply our credit assessment criteria to your individual financial situation. What is a credit limit? A credit limit is the maximum amount you can spend with a month on your credit card as agreed with your bank. The minimum & maximum credit limits vary for each credit card. The credit limits for the Virgin Money Credit cards are: No Annual Fee and Low Rate cards the maximum credit limit is $100,000 and the minimum credit limit is $2,000. For Flyer cards the maximum credit limit is $100,000 and the minimum credit limit is $6,000. For High Flyer cards the maximum credit limit is $100,000 and the minimum credit limit is $15,000. For the Anytime Reward card, the maximum credit limit is $100,000 and the minimum credit limit is $6,000 How do I apply for a credit card? The first step is to compare our credit cards. Decide which product suits your needs, then once you have decided which card you would like to apply for, click \u2018Apply now\u2019. It should take less than 10 minutes to complete if you have all your info on hand, and once approved we"
+        },
+        {
+          "change_type": "equal",
+          "text": "'"
+        },
+        {
+          "change_type": "deletion",
+          "text": "ll have your Card out to you within 10 working days. We'll need to know your age, Australian residency status, your driver\u2019s license if you have one and your current financial details including employment and monthly expense and income details. What is a balance transfer? A balance transfer involves transferring the balance(s) of your credit cards or loans from other banks or financial institutions to a Virgin Money Credit Card. The balances transferred will receive a promotional interest rate for a set period of time and can be a great way to save on interest charges. Once your balance(s) has been transferred, you\u2019ll need to close the other credit facilities you transferred balances from if you choose, as this doesn\u2019"
+        },
+        {
+          "change_type": "equal",
+          "text": "t "
+        },
+        {
+          "change_type": "deletion",
+          "text": "happen automatically. It\u2019s important to note that there is no interest-free period for retail purchases when you "
+        },
+        {
+          "change_type": "equal",
+          "text": "have "
+        },
+        {
+          "change_type": "deletion",
+          "text": "a Balance Transfer. This means any purchases you make on your new Virgin Money credit card will be charged interest at the interest rate of the card you chose. When considering a balance transfer promotion, it\u2019s easy"
+        },
+        {
+          "change_type": "insertion",
+          "text": "permission"
+        },
+        {
+          "change_type": "equal",
+          "text": " to "
+        },
+        {
+          "change_type": "deletion",
+          "text": "focus on the low, or zero, interest rate being offered, however don\u2019t forget to consider the other features of the card and any applicable terms and conditions of the promotion. Learn more about balance transfers How does a balance transfer affect the interest charge on my account? Once a balance transfer is processed on your Virgin Money Credit Card, here\u2019s what you need to know about interest rate charges: Many people choose to transfer their balance to take advantage of a 0% balance transfer interest rate \u2013 which means you don\u2019t pay any interest on that balance for a set period of time. But you should always check what the balance transfer interest rate is at the time you accept the offer. Keep in mind that you will still be charged interest on retail purchases while you have a balance transfer. This means any purchases you make will be charged interest at the purchase interest rate of the card you chose. At the end of the balance transfer period, the interest rate on any outstanding transferred balance and balance transfer fee will revert to the Annual Percentage Rate for Cash Advances. For example, if your balance transfer rate is 0 % p.a. for 12 months, during that 12 months all additional purchases will be charged interest at the Annual Percentage Rate for retail purchases. At the end of the 12 months, any outstanding balances from the Balance Transfer will revert to the Annual Percentage Rate for Cash Advances. Learn more about balance transfers How are my Velocity Points earned and transferred into my Velocity Frequent Flyer Account? At the end of your statement cycle, the number of Points earned from retail purchases are calculated using the conversion rate that\u2019s applicable to your Virgin Money Credit Card. The Velocity Points earned will be automatically transferred into your Velocity Frequent Flyer Account within 15 business days after the close of the statement cycle. What can Velocity Points be redeemed for? You can redeem your Velocity Points for all kinds of adventurous things. Here are just a couple: Domestic and international flights with Virgin Australia, Virgin Samoa, Etihad Airways, Virgin Atlantic, Virgin America, Delta and more. A range of great hotels, car rentals and products including gift cards and vouchers. Head to velocityfrequentflyer.com to see the full range of what's on offer or give the Velocity Team a call on 13 18 75. How are my Virgin Money Reward Points earned? Check out the Rewards Hub , you\u2019ll be able to earn Bonus Points through a huge range of partner offers and book hotels through the Virgin Money Rewards Hub. Not to mention, you\u2019ll get "
+        },
+        {
+          "change_type": "equal",
+          "text": "access"
+        },
+        {
+          "change_type": "deletion",
+          "text": " to other epic perks and experiences along the way.\u200b \u200bWe might just decide to say thanks or well done with points, for doing a bunch of good things for you (not us). And when it comes to using your points, we\u2019ll give you plenty of ways that work for you too. \u200b What can my Virgin Money Rewards Points be used for? Turn your points into cash and send it straight into your chosen Virgin Money account, EPIC! Put a big line through that purchase like it never happened. Simply use your points to pay for an item you've already bought - and poof! - the value will be credited back to your account. That's not banking, that's points magic. Got a special something (or someone) in mind? Swap your points for a gift card from brands like Amazon, Bunnings or JB Hi-Fi and instantly use in store or online. Want to pay it forward? We\u2019re all about sharing the love. With Virgin Money you can gift your points to anyone you want, as long as they bank with us. Fees, charges, and credit criteria apply. New cards customers only and cannot be used in conjunction with any other offers. See our full terms and conditions here . A credit check is performed each time you apply for a credit card. Credit reporting bodies make a record of these enquiries and this information may be used and disclosed for the purposes of assessing your credit worthiness, including your credit score and credit rating. For example, making multiple credit applications over a short period of time could have a negative effect on your credit score, as this may reduce your chances of approval. All interest rates shown are variable. This information is correct at 14 March 2025. You must be at least 18 years of age to apply for a credit card. If you are a permanent resident you must earn at least $25,000 p.a. for the Virgin Money No Annual Fee Card, $35,000 p.a. for the Virgin Money Low Rate Card, Virgin Australia Velocity Flyer Card and Virgin Money Anytime Rewards Card or $75,000 p.a. for the Virgin Australia Velocity High Flyer Card. Approval is subject to our credit criteria. All offers are non-transferrable, not redeemable for cash, and subject to change or withdrawal without notice at the discretion of Virgin Money. Please note that to read our PDF forms, you will need to have Adobe Reader installed on your computer. Virgin Money Australia, a division of Bank of Queensland Limited ABN 32 009 656 740, Australian Credit Licence 244616 (\u201cBOQ\u201d), promotes and distributes the Virgin Money Credit Cards (\"Credit Cards\"). National Australia Bank Limited ABN 12 004 044 937 Australian Credit Licence 230686 (\u201cNAB\u201d) is the credit provider and issuer of the Credit Cards. NAB has acquired the business relating to these products from Citigroup Pty Limited (ABN 88 004 325 080, AFSL and Australian Credit Licence 238098) (\u201cCiti\u201d) and has appointed Citi to assist to administer the Credit Cards. Our/us/we means NAB unless the context otherwise requires it. BOQ does not and will not guarantee or otherwise support NAB\u2019s obligations under the contracts or agreements connected with the Credit Cards. To obtain a copy of the Target Market Determination (TMD) related to this product. Things you need to know Offer ends 30 September 2025 . Any credit card applications for this offer must be submitted on or before this date. Post this advertised date; we reserve the right to continue, withdraw or change the offer at any time without notice. To receive this offer: (a) your credit card application must be approved by 10 October 2025. We reserve the right to cancel any applications if we are unable to assess it within a reasonable time frame required to approve your application prior to this date (b) your credit card must be activated by 28 October 2025 (c) any Balance Transfer request must be processed (balance transferred) by 30 October 2025 . We reserve the right not to process any Balance Transfer requests if they are not received within a reasonable time frame required to process the Balance Transfer prior to this date. Your total Balance Transfers may not exceed 80% of your credit limit. The Balance Transfer interest rate applies to balances transferred with this offer within 20 days from card approval, and the balance transfer fee (if applicable) for the period shown, commencing from the date the Balance Transfer is processed. At the end of the balance transfer period, the interest rate on any outstanding transferred balance will revert to the interest rate for cash advances, currently 20.99% p.a. on the Virgin Money Anytime Rewards Card, Virgin Australia Velocity Flyer Card, Virgin Australia Velocity High Flyer Card and Virgin Money No Annual Fee Card, and 21.69% p.a. for the Virgin Money Low Rate Card. Interest rates are variable and subject to change. The interest rates are current as at 14 October 2024. Please note that unless advertised otherwise, you are not entitled to any interest free days whilst you have a balance transfer. This means that all spend will be charged interest at the applicable ongoing purchase rate. Both Velocity Points and Virgin Money Points are not issued on balance transfers. Offer may be varied or withdrawn at any time. If a balance transfer fee applies the fee will be debited from your account on the day or the day after your balance transfer is processed. View more information about Balance Transfers . Purchase Rate offer: Offer commenced 5 March 2024. Interest rates are variable and subject to change. The interest rates are current as at 14 October 2024.Offer may be varied or withdrawn at any time. The promotional rate of 0% p.a. applies to retail purchases for the promotional period advertised from the date your account is approved. At the end of the promotional period, the variable annual percentage rate for retail purchases, currently 19.99% p.a. on the Virgin Money No Annual Fee Card will apply to any outstanding retail purchases and any new retail purchases. Please note you will not be entitled to any interest-free days on retail purchases at the end of the promotional period whilst you have a balance transfer. This means that all spend will be charged interest at the applicable annual percentage rate. Minimum monthly payments required. Payments will be applied to your account as per the Credit Card Terms and Conditions and Other Important Information . The example is approximate and for illustrative purposes. Estimated savings assume minimum payment is made by payment due date each month with no other transactions during the promotional period and the entire balance is paid at the expiration of the promotional period. Excludes annual fees and other charges. The promotional period is the period of the balance transfer offer shown. The rate, balance, interest and potential savings calculations in the table above are examples only. The estimate savings amount is based on a $7,000 balance transfer at an interest rate of 20% p.a. when compared to the balance transfer offer shown. Your personal circumstances may differ. It does not include interest accrued on the Virgin Money Credit Card at the standard interest rate. You can earn Bonus Points through offers from selected partners when you shop online at participating retailers through the Partner Offers in the Rewards Hub or make a settled debit card purchase with selected merchants described in the Partner Offers in the Rewards Hub. Online Only Offers are facilitated by Ascenda and are subject to Ascenda\u2019s additional Ascenda Terms and Conditions . Individual offers may also be subject to relevant merchants\u2019 terms and conditions. The Virgin Australia Velocity High Flyer Card Bonus Status Credits Benefit is a Special Feature available to Primary Cardholders only. An additional 20% Bonus Status Credits will be awarded when you fly on an Eligible Virgin Australia Flight and meet eligibility criteria being: a) a flight purchased using your Virgin Australia Velocity High Flyer Card directly with Virgin Australia (via Virgin Australia website, Virgin Australia Call Centre or Virgin Australia App); b) the Virgin Australia flight is eligible to earn Status Credits; c) your Velocity membership number was provided against the booking at the time of purchase or before your date of travel; d) at the time of booking, purchasing and taking the flight, your credit card account must be open and in good standing. The amount of Bonus Status Credits is capped at 100 Bonus Status Credits each credit card anniversary year. Status Credit earn is subject to the fare type and distance travelled. We will allocate Bonus Status Credits within 60 days of the allocation of your base Status Credits to your Velocity Program account. See Virgin Australia Velocity High Flyer Card Bonus Status Credits Benefit Terms & Conditions for full details and definitions. Complimentary insurance covers are subject to eligibility requirements: AWP Australia Pty Ltd ABN 52 097 227 177 AFSL 245631 (trading as Allianz Global Assistance) under a binder from the underwriter, Allianz Australia Insurance Limited ABN 15 000 122 850 AFSL 234708 (Allianz) has issued a Complimentary insurance group policy to National Australia Bank Limited (ABN 12 004 044 937, AFSL and Australian Credit Licence 230686) (\u201cNAB\u201d) which allows eligible NAB account holders and cardholders to claim under it as third party beneficiaries by operation of s48 of the Insurance Contracts Act 1984 (Cth). NAB is the credit provider and issuer of Virgin Money Australia (VMA) branded credit cards. NAB has acquired the business relating to these products from Citigroup Pty Limited (ABN 88 004 325 080, AFSL and Australian Credit Licence 238098) (\u201cCiti\u201d). Citi has agreed with NAB to provide transitional services in relation to the transferred business. Any advice on insurance is general advice only and not based on any consideration of your objectives, financial situation or needs. The terms, conditions, exclusions, limits and applicable sub-limits of the group policy are set out in the Virgin Money Credit Cards Complimentary Insurance Policy Information Booklet effective 1 July 2025 which may be amended from time to time. For insurable events that occurred prior to 1 July 2025, please refer to the Virgin Money Credit Cards Complimentary Insurance Policy Information Booklet effective 1 November 2023. Neither NAB nor Citi nor any of its related corporations guarantee this insurance. Complimentary international travel insurance is limited to the primary cardholder only. Unless advertised otherwise, the interest free period applies when you pay your full closing balance from your last statement of account by the payment due date (excluding any Fixed Payment Option balance which isn\u2019t due for payment by that payment due date). No interest free period is available on Cash Advances or Balance Transfers. Whilst you have a Balance Transfer you will be charged interest on your daily unpaid balance. Withdrawal limits, fees and charges may apply. Velocity membership Terms and Conditions , apply. Velocity Points are earned on Eligible Transactions only. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, BPAY payments, purchases of foreign currency and travellers cheques, transactions made in operating a business, bank fees and charges such as interest and ATM charges and government related transactions. Government related transactions include transactions with government or semi-government entities, or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). See Velocity Rewards Program for High Flyer and Flyer Cardholders Terms and Conditions for full details and definition Annual Additional cardholder fees may apply unless otherwise specified under the promotion. Primary cardholders are responsible for additional cardholder transactions and payments. Visa's Zero Liability policy covers Australian and New Zealand-issued cards and does not apply to ATM transactions, transactions not processed by Visa or certain commercial card transactions. Cardholders should notify their issuer promptly of any unauthorised Visa use. For more details and terms and conditions click here . Offer commenced 4 September 2024. 80,000 bonus Virgin Money Points will be awarded to new and approved Virgin Money Anytime Rewards Credit Card account holders when $3,000 or more is spent on eligible purchases within 3 months from account approval. An eligible purchase means any purchase excluding Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, and fees and charges such as interest and ATM charges. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page. Points will be credited to the Primary Cardholders Virgin Money Account up to 2 months after the qualifying purchases. Offer may be varied or withdrawn at any time. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). Exclusive Visa Platinum 24/7 concierge service supplied by a third party supplier. Visit www.concierge-asia.visa.com for details. A valid Visa Platinum card must be used to make a purchase. Offers are subject to terms and conditions of the participating merchants providing the offers. Participating merchants are solely responsible for offer redemption and fulfilment, Visa does not provide any of the goods and services relating to the offers, nor make any representations or warranties in respect of the offers or such goods and services. Visa may modify or remove any of the merchants and/or their offers at any time without prior notice. Information about the offers is correct at the time of publication. You may wish to check with the participating merchant immediately before utilising an offer. Offer commenced 1 July 2025. Up to 70,000 bonus Velocity Points offer is available to new and approved Virgin Australia Velocity Flyer Card account holders. 25,000 bonus Velocity Points will be awarded for each month $1,500 or more is spent on eligible purchases for the first 2 months from account approval. The first month begins on the date your account is approved. Please allow up to 1 week for your card to be mailed to you, leaving you about 3 weeks to meet the spend hurdle for the first month. The second month will commence one month from the date your account is approved. Purchases must be processed and charged to your account in the relevant month to count toward your monthly spend. An eligible purchase means any purchase excluding Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, and fees and charges such as interest and ATM charges. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page. Points will be credited to the Primary Cardholders Velocity Account up to 2 months after the qualifying purchases. An additional 20,000 Velocity Points will be credited within 3 months of your anniversary when you keep your card open for over 12 months, provided it has been activated by you. To earn and redeem Velocity Points there must be an active Velocity Frequent Flyer membership linked to the Virgin Australia Velocity Flyer Card account. Velocity membership Terms and Conditions apply . This offer can't be used in conjunction with other Virgin Australia Velocity High Flyer Point promotions or offers. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). Velocity membership, Status Credits earn and Points earn and redemption are subject to the Velocity membership Terms and Conditions , as amended from time to time. This offer is not applicable or valid in conjunction with any other advertised or promotional offer. The Virgin Australia Gift Voucher is available to Primary Cardholders only and provides one Virgin Australia Gift Voucher to the value of $129 (AUD) each year, in the form of a $129 travel credit in a Virgin Australia Travel Bank. You will become eligible for your $129 Virgin Australia Gift Voucher 30 days after card approval in your first year and 30 days after your card anniversary thereafter provided you have made a retail purchase as the Primary Cardholder in the 2 months prior to requesting your voucher online at online at https"
+        },
+        {
+          "change_type": "insertion",
+          "text": " \"http"
+        },
+        {
+          "change_type": "equal",
+          "text": "://virginmoney.com.au/"
+        },
+        {
+          "change_type": "deletion",
+          "text": "products/"
+        },
+        {
+          "change_type": "equal",
+          "text": "credit-card"
+        },
+        {
+          "change_type": "deletion",
+          "text": "/gift-voucher , your account is active and in good standing and you are a Velocity Frequent Flyer member. Gift voucher is not redeemable for cash and is not reloadable. See Virgin Australia Gift Voucher Benefit Terms & Conditions and Terms of use for full details. Offer ends 30 September 2025 . Any credit card applications for this offer must be submitted "
+        },
+        {
+          "change_type": "insertion",
+          "text": "\" "
+        },
+        {
+          "change_type": "equal",
+          "text": "on"
+        },
+        {
+          "change_type": "deletion",
+          "text": " or before this date. Post this advertised date; we reserve the right to continue, withdraw or change the offer at any time without notice. To receive"
+        },
+        {
+          "change_type": "equal",
+          "text": " this "
+        },
+        {
+          "change_type": "deletion",
+          "text": "offer: (a) your credit card application must be approved by 10 October 2025. We reserve the right to cancel any applications if we are unable to assess it within a reasonable time frame required to approve your application prior to this date (b) any Balance Transfer request must be processed (balance transferred) by 30 October 2025 . We reserve the right not to process any Balance Transfer requests if they are not received within a reasonable time frame required to process the Balance Transfer prior to this date. Your total Balance Transfers may not exceed 80% of your credit limit. The Balance Transfer interest rate applies to balances transferred with this offer within 20 days from card approval, and the balance transfer fee (if applicable) for the period shown, commencing from the date the Balance Transfer is processed"
+        },
+        {
+          "change_type": "insertion",
+          "text": "server"
+        },
+        {
+          "change_type": "equal",
+          "text": ". "
+        },
+        {
+          "change_type": "deletion",
+          "text": "At the end of the balance transfer period, the interest rate on any outstanding transferred balance will revert to the interest rate for cash advances, currently 20"
+        },
+        {
+          "change_type": "insertion",
+          "text": "Reference #18"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "99% p.a. on the Virgin Money Anytime Rewards Card, Virgin Australia Velocity Flyer Card, Virgin Australia Velocity High Flyer Card and Virgin Money No Annual Fee Card, and 21"
+        },
+        {
+          "change_type": "insertion",
+          "text": "960c0317"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "69% p"
+        },
+        {
+          "change_type": "insertion",
+          "text": "1759214368"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "a. for"
+        },
+        {
+          "change_type": "insertion",
+          "text": "d4fcf85d"
+        },
+        {
+          "change_type": "equal",
+          "text": " "
+        },
+        {
+          "change_type": "deletion",
+          "text": "the Virgin Money Low Rate Card. Interest rates are variable and subject to change. The interest rates are current as at 14 October 2024. Please note that unless advertised otherwise, you are not entitled to any interest free days whilst you have a balance transfer. This means that all spend will be charged interest at the applicable ongoing purchase rate. Both Velocity Points and Virgin Money Points are not issued on balance transfers. Offer may be varied or withdrawn at any time. If a balance transfer fee applies the fee will be debited from your account on the day or the day after your balance transfer is processed. View more information about Balance Transfers . Gift Cards or Vouchers are administered by Ascenda Australia Pty Ltd and are subject to the Ascenda Terms and Conditions . Requested Gift Cards are subject to separate terms and conditions made available at the time of requesting the Gift Card. Once points have been redeemed for a Gift Card, the Gift Card cannot be returned. Expiry dates will apply. Offer commenced 1 July 2025. Up to 100,000 bonus Velocity Points offer is available to newly approved Virgin Australia Velocity High Flyer Card account holders. 40,000 bonus Velocity Points will be awarded each month $3,500 or more is spent on eligible purchases for first 2 months from card approval (spend period). The first month begins on the date your account is approved. Please allow up to 1 week for your card to be mailed to you, leaving you about 3 weeks to meet the spend hurdle for the first month. The second month will commence one month from the date your account is approved. Purchases must be processed and charged to your account in the relevant month to count toward your monthly spend. An eligible purchase means any purchase excluding Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, and fees and charges such as interest and ATM charges. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page. Points will be credited to the Primary Cardholder's Velocity account up to 2 months after the qualifying purchases. An additional 20,000 Velocity Points will be credited within 3 months of your anniversary when you keep your card open for over 12 months, provided it has been activated by you. To earn and redeem Velocity Points there must be an active Velocity Frequent Flyer membership linked to the Virgin Australia Velocity High Flyer Card account. Velocity membership Terms and Conditions apply . This offer can't be used in conjunction with other Virgin Australia Velocity High Flyer Point promotions or offers. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). Velocity membership, Status Credits earn and Points earn and redemption are subject to the Velocity membership Terms and Conditions , as amended from time to time. This offer is not applicable or valid in conjunction with any other advertised or promotional offer. Hotel bookings made through the Virgin Money Rewards Program are operated by Ascenda Australia Pty Ltd and subject to Ascenda\u2019s additional Booking and Travel Terms . Individual hotel bookings may be subject to further terms and conditions stipulated by Ascenda\u2019s travel partners. These additional terms will be made available to you by Ascenda at the time the relevant booking is made. Points earned from making a Hotel Booking will be credited to your account within 24 hours after the completion of your hotel stay. Virgin Money Rewards is the Virgin Money Rewards Program referred to in the Credit Card Rewards Program for Virgin Money Anytime Rewards Terms and Conditions (Credit Card Rewards T&Cs). All rewards are subject to the Credit Card Rewards T&Cs. For further information on program participation, see Virgin Money Rewards Terms and Conditions . Fixed Payment Option offers are subject to eligibility and only available if your account is and remains in good standing (for example \u2013 your account is not in default, suspended or closed). Your Fixed Payment Option amount uses part of your existing credit limit. As you pay off your Fixed Payment Option amount, the amount you pay off will become available for you to use again as part of your credit limit at the standard Annual Percentage Rate applicable to your account. If you fail to pay the Monthly Instalment by the Payment Due Date that Monthly Instalment will be charged interest at the retail purchase rate from the Payment Due Date. We also reserve the right to cancel your Fixed Payment Option. If your Fixed Payment Option is cancelled, the full outstanding balance of your Fixed Payment Option will also revert to the standard Annual Percentage Rate applicable (the retail purchases rate is applicable for transaction instalment plans and statement instalment plans and the cash advance rate is applicable for cash instalment plans). For the full terms and conditions of your Fixed Payment Option, please refer to the Credit Card Terms and Conditions and Other Important Information . The quoted redemption fares are correct as at 16 January 2020 and are subject to change. Fares are subject to availability, and seats are limited and may not be available at peak times or on all flights. Price is based on a one way economy or return Reward Seat fare or business Reward seat fare as specified, and must be booked on the Velocity website . Taxes, fees and surcharges are payable in addition to Velocity Points redeemed. Any taxes or fee components are not eligible for Points earn. Price may vary until ticketed. All payments made on the internet or on the phone via debit/credit card are subject to a payment surcharge between 0"
+        },
+        {
+          "change_type": "insertion",
+          "text": "https://errors"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "6% to 1"
+        },
+        {
+          "change_type": "insertion",
+          "text": "edgesuite"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "3% of the total value of the card transaction (capped at $40 for domestic and $70 for international, per passenger per booking). For Rewards Seat bookings on Etihad Airways operated flights, an Etihad Airways Carrier Charge will apply, view more information here . You may also be entitled to a refund under the Australian Consumer Law in certain circumstances. Add $40 or 5,200 Points for domestic and international short haul bookings or $70 or 8,800 Points for international long haul booking per person for bookings made on the phone. A checked baggage allowance is included in your fare, view Reward Seat Baggage Allowances for details . Name changes are not permitted. Other changes, refunds and cancellation are permitted prior to travel and may incur a fee and any applicable fare difference. View the Velocity Rewards Seat fare rules for more information. Some flights may be operated by a partner airline. Different baggage allowances and conditions may apply to these flights. Full terms and conditions at velocityfrequentflyer.com . Offer commenced 12 September 2024. The bonus Velocity Points offer is available for new and approved Virgin Australia Velocity High Flyer and Flyer credit card customers. For High Flyer: up to 40,000 bonus Velocity points offer: 20,000 bonus Velocity points will be awarded for every month $3,500 or more is spent on eligible purchases for the first 2 months from account approval (spend period). For Flyer up to 20,000 bonus Velocity points offer: 10,000 bonus Velocity points will be awarded for each month $1,500 or more is spend on eligible purchases for the first 2 months from account approval (spend period). The first month begins on the date your account is approved. Please allow up to 1 week for your card to be mailed to you, leaving you about 3 weeks to meet the spend hurdle for the first month. The second month will commence one month from the date your account is approved. Purchases must be processed and charged to your account in the relevant month to count toward your monthly spend. An eligible purchase means any purchase excluding Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, and fees and charges such as interest and ATM charges. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page. Points will be credited to the Primary Cardholders Velocity Account up to 2 months after the qualifying purchases. Velocity membership Terms and Conditions apply. This offer can't be used in conjunction with other Virgin Australia Velocity Flyer Point promotions or offers. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). Offer commenced 4 September 2024. $50 cash back is available for new and approved Virgin Money Low Rate and No Annual Fee credit card customers who spend $1,500 or more on eligible purchases in the first 3 months of account approval date (spend period). Purchases must be processed and charged to your account in the relevant month to count toward your monthly spend. An eligible purchase means any purchase excluding Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, and fees and charges such as interest and ATM charges. The cash back of $50 will be credited to the Primary Cardholder\u2019s account up to 10 weeks after the end of the 3 month qualifying period. The cash back credit will be applied once per account and does not contribute to your monthly minimum repayment. Offer may be varied or withdrawn at any time and is non-transferrable and can\u2019t be used in conjunction with any other promotions or offers. Please note that if you have a balance transfer, you will be charged interest on any spend that you make. Earn 1 Virgin Money Point for every $1 spent on Eligible Transactions. There is no limit to the amount of points you can earn. Points will be transferred to your Virgin Money Rewards account within 15 Business Days after an Eligible Transaction has been processed by us. To earn and redeem Virgin Money Points, you must hold a Virgin Money Anytime Rewards Credit Card and add your credit card to your account profile in the Virgin Money app. Points earn and redemption are subject to the Virgin Money Rewards Terms and Conditions and the Credit Card Rewards Program for Anytime Rewards Cardholders Terms and Conditions. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, BPAY payments, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, bank fees and charges such as interest and ATM charges, and government related transactions. Government related transactions include transactions with government or semi-government entities, or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). See Credit Card Rewards Program for Anytime Rewards Cardholders Terms and Conditions for full details and definitions. Pay with Virgin Money Points is available on select purchases to allow you to pay for your purchase with Virgin Money Points. Pay with Virgin Money Points is not available to additional cardholders of Virgin Money Credit Cards. The purchases available for Pay with Virgin Money Points are Eligible Transactions and BPAY transactions on your Virgin Money Credit Card made in the last 3 months. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, payments to other Citi Accounts, bank fees and charges such as interest and ATM charges, transactions made using Virgin Money Rewards Points and government related transactions. Government related transactions include transactions with government or semi-government entities or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). You must have sufficient points to be able to redeem the total value of the purchase through Pay with Points. If you redeem your points with Pay with Points we will credit a cash amount equal to the selected transaction into your Credit Card. Once we credit the amount you cannot reverse the redemption. Pay with Points will reduce the outstanding balance of your account but won't count towards your next monthly repayment obligation. You must still pay the minimum payment on your monthly card statement. Any credit to your credit card account is non-refundable. You may redeem your Virgin Money Points for a cash amount in AUD to be credited. Once funds have been credited to your Account they cannot be reversed to Virgin Money Points. The amount of Virgin Money Points required for a specific cashback amount is set out on the Rewards Hub, may vary from time to time and is subject to any minimum redemption amount specified. The complimentary Lounge pass benefit is available to Primary Virgin Australia Velocity High Flyer Cardholders only and provides two Single-Entry Virgin Australia domestic Lounge passes each year. You will become eligible for your two Single-Entry Virgin Australia domestic Lounge passes upon card activation in your first year and then each anniversary thereafter. See Virgin Australia Lounge Pass Benefit Terms & Conditions for full details. Get the latest information on Virgin Australia lounge access . The Virgin Australia lounge is operated by Virgin Australia Airlines Pty Ltd in selected domestic airports in accordance with the Virgin Australia Lounge Terms and Conditions , and as amended from time to time. You can redeem your Virgin Money Points for a credit amount to your nominated Virgin Money Account. Once funds have been credited to your account they cannot be reversed to points. The amount of Virgin Money Points required for a specific cashback amount is set out in the Rewards Hub, may vary from time to time and is subject to any minimum redemption amount specified. For a list of compatible Apple Pay devices, see support.apple.com"
+        },
+        {
+          "change_type": "insertion",
+          "text": "net"
+        },
+        {
+          "change_type": "equal",
+          "text": "/"
+        },
+        {
+          "change_type": "deletion",
+          "text": "en-us/102896 Samsung Pay is only compatible with selected Samsung devices. For full list of compatible devices, please visit www.samsung.com/au/apps/samsungpay/ Offer commenced 4 September 2024. Virgin Australia Velocity Flyer Card half annual fee offer is available to new customers. The annual card fee is $74 for the first year, then $149 will be charged on the anniversary of your card account being opened with Virgin Money. Annual fees are subject to change. Offer commenced 4 September 2024. Virgin Australia Velocity Flyer Card no annual fee offer is available to new customers. The annual card fee is $0 for the first year, then $149 will be charged on the anniversary of your card account being opened with Virgin Money. Offer may be varied or withdrawn at any time. Annual fees are subject to change. Google, Android, Google Pay and Google Wallet are trademarks of Google LLC. Terms and Conditions are available here . Google Pay is available on compatible Android mobile devices. The Accelerated Velocity Points Earn Benefit is a Special Feature available to Primary Cardholders only. Earn an additional 1 Velocity Point with your Virgin Australia Velocity Flyer Card, or 2 Velocity Points with your Virgin Australia Velocity High Flyer Card per $1 spent on eligible Virgin Australia Purchases. Virgin Australia Purchase means the purchase of a Virgin Australia flight, product or service via the Virgin Australia website at virginaustralia.com, Virgin Australia App or via the Virgin Australia Contact Centre using your Virgin Australia Velocity Flyer or High Flyer Credit Card. Your Account must be in good standing at the time of the Virgin Australia Purchase. To receive Velocity Points you must supply your Velocity membership Account Information. See Velocity Rewards Program for High Flyer and Flyer Cardholders Terms and Conditions for full details and definitions. From time to time we may offer you the ability to earn Bonus Points or other benefits with selected partners. Specific offer terms will be set out individual conditions at the time the offer is made to you. Subject to the terms and conditions of the Virgin Money Rewards program available here . Earn 1 Velocity Point per $1 spent on Eligible Transactions up to $8,000 each statement period, 0.5 Velocity Points per $1 spent on Eligible Transactions per statement period thereafter. To earn and redeem Velocity Points, you must be a Velocity member. Velocity membership and Points earn and redemption are subject to the Velocity membership Terms and Conditions, available at velocityfrequentflyer.com, as amended from time to time. Velocity Points are earned on Eligible Transactions only. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, BPAY payments, purchases of foreign currency and travellers cheques, transactions made in operating a business, bank fees and charges such as interest and ATM charges and government related transactions. Government related transactions include transactions with government or semi-government entities, or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). See Velocity Rewards Program for High Flyer and Flyer Cardholders Terms and Conditions for full details and definition. Earn 0.66 Velocity Points per $1 spent on Eligible Transactions up to $1,500 each statement period, 0.5 Points per $1 spent on Eligible Transactions per statement period thereafter. To earn and redeem Velocity Points, you must be a Velocity member. Velocity membership and Points earn and redemption are subject to the Velocity membership Terms and Conditions, available at velocityfrequentflyer.com, as amended from time to time. Velocity Points are earned on Eligible Transactions only. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, BPAY payments, purchases of foreign currency and travellers cheques, transactions made in operating a business, bank fees and charges such as interest and ATM charges and government related transactions. Government related transactions include transactions with government or semi-government entities or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). See Velocity Rewards Program for High Flyer and Flyer Cardholders Terms and Conditions for full details and definition. Pay with points is available on select purchases to allow you to pay for your purchase with Points. Pay with points is not available to additional cardholders of Virgin Money Credit Cards. The purchases available for pay with points are Eligible Transactions and BPAY transactions on your Virgin Money Credit Card made in the last 3 months. Eligible Transaction means any purchase excluding (but not limited to) Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, payments to other Citi Accounts, bank fees and charges such as interest and ATM charges, transactions made using Rewards Points and government related transactions. Government related transactions include transactions with government or semi-government entities, or relating to services provided by or in connection with government (for example but not limited to transactions made at Australia Post, payments to the Australian Taxation Office, council rates, motor registries, tolls, parking stations and meters, fares on public transport, fines and court related costs). You must have sufficient points to be able to redeem the total value of the purchase through Paid Pay with points. If you redeem your points with Pay with points we will credit a cash amount equal to the selected transaction into your Credit Card. Once we credit the amount you cannot reverse the redemption. Pay with Points will reduce the outstanding balance of your account but won't count towards your next monthly repayment obligation. You must still pay the minimum payment on your monthly card statement. Any credit to your credit card account is non-refundable. You can redeem your points for a credit amount to your nominated Virgin Money Account. Once funds have been credited to your account they cannot be reversed to points. The amount of Points required for a specific cashback amount is set out in the Rewards Hub, may vary from time to time and is subject to any minimum redemption amount specified. Gift Cards or Vouchers are administered by Ascenda Australia Pty Ltd and are subject to the. Ascenda Terms and Conditions Requested Gift Cards are subject to separate terms and conditions made available at the time of requesting the Gift Card. Once points have been redeemed for a Gift Card, the Gift Card cannot be returned. Expiry dates will apply. Hotel and flight bookings made through the Virgin Money Rewards Program are operated by Ascenda Australia Pty Ltd and subject to Ascenda\u2019s additional Booking and Travel Terms. Individual hotel and/or flight bookings may be subject to further terms and conditions stipulated by Ascenda\u2019s travel partners. These additional terms will be made available to you by Ascenda at the time the relevant booking is made. Points earned from making a hotel booking will be credited to your account within 24 hours after the completion of your hotel stay. A 2% balance transfer fee applies. Your total Balance Transfers may not exceed 80% of your credit limit. The Balance Transfer interest rate applies to balances transferred with this offer for the period shown, from the date the Balance Transfer is processed. At the end of the balance transfer period, the interest rate on any outstanding transferred balance will revert to the interest rate for cash advances, currently 20"
+        },
+        {
+          "change_type": "insertion",
+          "text": "18"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "99% p"
+        },
+        {
+          "change_type": "insertion",
+          "text": "960c0317"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "a. on the Virgin Australia Velocity Flyer Card and Virgin Australia Velocity High Flyer Card. Interest rates are variable and subject to change. The interest rates are current as at 14 October 2024. Post this advertised date; Virgin Money reserve the right to continue, withdraw or change the offer at any time without notice. Please note that unless advertised otherwise, you are not entitled to any interest free days whilst you have a balance transfer. This means that all spend will be charged interest at the applicable ongoing purchase rate. Velocity Points are not issued on Balance Transfers. View more information about Balance Transfers . Virgin Money Low Rate Card no annual fee offer is available to new customers only. The annual card fee is $0 for the first 2 years, then $99 will be charged each year thereafter on each subsequent anniversary of your card account being opened with Virgin Money. Other fees and charges are also payable. Offer may be varied or withdrawn at any time. Fees and charges are subject to change. Credit Card Terms and Conditions and Other Important Information . Menulog: Virgin Money reserves the right to amend or withdraw this offer at any time without notice. Points offer expires midnight 31/05/2024 AEST. To be eligible for points, you must pay using your Virgin Money Visa Debit Card at the checkout. Maximum of 3,000 points earned per calendar month per cardholder. Orders that are cancelled or refunded will not be eligible for points. This offer cannot be used in conjunction with any other offer. Excludes voucher codes, gift cards, cash back and coupon deals. You must click on the Menulog offer within the Virgin Money app and pay with your Virgin Money Visa Debit card at the checkout. HERTZ: Virgin Money reserves the right to amend or withdraw this offer at any time without notice. Offer expires midnight 31/06/2026 AEST. To be eligible, shop at participating venues with your eligible Virgin Money card. EFTPOS transactions where you have selected savings or EFTPOS at the terminal or in your digital wallet will not be eligible to qualify for the offer. The purchase must be settled (not pending). Allow up to 5 business days from the date of the settled transaction for the points to be credited to your account. Eligible cards are a Virgin Money Visa Debit Card linked to a Virgin Money Go Account, Anytime Rewards Credit Card, No Annual Fee Credit Card or Low Rate Credit Card. If you are an additional credit cardholder, the Virgin Money Bonus Points that you earn using your credit card with this partner will be credited back to the primary card holder's account, provided that the primary cardholder has enrolled in the Virgin Money Rewards program before the additional cardholder made the transaction. Virgin Money reserves the right to amend or withdraw this offer at any time without notice. To be eligible for points you must shop at participating venues. Orders that are cancelled or refunded will not be eligible for points. This offer cannot be used in conjunction with any other offer. Participating Stores include: Hertz Adelaide, Hertz Alice Springs Princes HiWay, Hertz Alice Springs Teresa Rd, Hertz Arncliffe, Hertz Brisbane, Hertz Brookvale, Hertz Broome, Hertz Cairns Lake St, Hertz Cairns Square, Hertz Cambridge, Hertz Caringbah, Hertz Coolangatta Gold Coast, Hertz Coolangatta Queensbury, Hertz Cygnet River, Hertz Darwin, Hertz Devonport Airport, Hertz Devonport Oldaker St, Hertz Fyshwick, Hertz Hendra, Hertz Hobart, Hertz Launceston, Hertz Mackay, Hertz Mascot, Hertz Melbourne, Hertz Penneshaw, Hertz Perth Murray, Hertz Pialligo Canberra Airport, Hertz Rockhampton Canoona Road, Hertz South Melbourne, Hertz Tullamarine, Hertz Williamtown, Hertz Yulara Coote Rd This offer is subject to the Virgin Money Rewards Terms and Conditions which can be found at https://virginmoney"
+        },
+        {
+          "change_type": "insertion",
+          "text": "1759214368"
+        },
+        {
+          "change_type": "equal",
+          "text": "."
+        },
+        {
+          "change_type": "deletion",
+          "text": "com.au/bank-and-save/forms-and-important-information. OVO Energy: Virgin Money reserves the right to amend or withdraw this offer at any time without notice. Offer expires midnight 31/05/2025 AEST. To be eligible for points you must access the partner site through the link provided in this application and pay using your Virgin Money Visa Debit Card. You will earn your bonus 20,000 points within 15 business days of your first bill cycle payment. From your second bill cycle payment onwards, you will earn 10 Virgin Money Points for every $1 spent once you pay using your Virgin Money Debit Visa Card. Allow up to 5 business days from the date of transaction for the points to be credited to your account. You will earn points for one billing cycle post the termination date if your payment falls within the month before the offer expiry date. If you have set up a direct debit and your payment period falls after this period, you will no longer earn points. You are unable to claim the 20,000 bonus points offer if you are an existing OVO Energy customer, however you can still access the ongoing points offer simply by updating your billing details directly with OVO Energy. Applications are subject to credit clearance and the availability of service in your area. This offer cannot be used in conjunction with any other offer. Excludes voucher codes, gift cards, cashback and coupon deals. This offer is subject to the Virgin Money Rewards Terms and Conditions . A reduced annual fee of $74 will apply while you hold an eligible Virgin Money product. Eligible Virgin Money products are Virgin Money Go Accounts and Virgin Money Go and Boost Saver bundles. The standard annual fee, currently $149, will be charged when you stop holding an eligible Virgin Money product. All applications must meet eligibility criteria on all products to qualify including NAB\u2019s standard credit assessment criteria. This offer can\u2019t be used in conjunction with other Virgin Money Anytime Rewards credit card promotion or offers. Offer is not available to existing Virgin Money Credit Card holders. Offer commenced 14 May 2025. 40,000 bonus Virgin Money Points will be awarded to new and approved Virgin Money Anytime Rewards Credit Card account holders when $3,000 or more is spent on eligible purchases within 3 months from account approval. An eligible purchase means any purchase excluding Cash Advances, Balance Transfers, Special Promotions, refunds and chargebacks, purchases of foreign currency and travellers cheques, transactions made in operating a business, and fees and charges such as interest and ATM charges. Please note that if you have a balance transfer, you will be charged interest on any spend you make. Credit Card application must be submitted through this page. Points will be credited to the Primary Cardholders Virgin Money Account up to 2 months after the qualifying purchases. Offer may be varied or withdrawn at any time. Offer is not available to existing Virgin Money Credit Card holders (including upgrades). 'The estimated gift card value is based on current redemption rates as at 14 May 2025 and is subject to change Half annual fee while you are a BOQ Group employee. The current annual fee is $329 for the Virgin Australia Velocity High Flyer Card, $149 for the Virgin Australia Velocity Flyer Card and $149 for the Anytime Rewards Card. Annual fees are subject to change."
+        },
+        {
+          "change_type": "insertion",
+          "text": "d4fcf85d"
+        }
+      ],
+      "similarity_score": 0.11885042039485652
+    }
+  ]
+}
