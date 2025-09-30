@@ -1,0 +1,28 @@
+{
+  "templates": [
+    {
+      "name": "Dashboard Template",
+      "cluster": 1,
+      "pages": [
+        {
+          "url": "https://virginmoney.com.au/credit-card",
+          "uuid": "c8bcf026fdf90359448f304d08ad001f7d9461a7"
+        },
+        {
+          "url": "https://virginmoney.com.au/bank-and-save",
+          "uuid": "2baf12b0cc4b9c30e7ae025b3ccfa1f272af9c9e"
+        }
+      ]
+    },
+    {
+      "name": "E-commerce Product Listing Page",
+      "cluster": 2,
+      "pages": [
+        {
+          "url": "https://virginmoney.com.au/",
+          "uuid": "81eebf42e2bc1caa12eb87888ff6dfdf7f314562"
+        }
+      ]
+    }
+  ]
+}
